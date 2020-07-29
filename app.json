@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "sdkVersion": "38.0.0",
+    "name": "EHisaab",
+    "slug": "EHisaab",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#3e8aad"
+    },
+    "splash": {
+      "image": "./assets/splashScreen.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FAFCFF"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "description": "",
+    "android": {
+      "package": "com.pinetechnologies.ehisaab",
+      "versionCode": 1
+    }
+  }
+}
