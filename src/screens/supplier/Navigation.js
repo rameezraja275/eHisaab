@@ -21,7 +21,7 @@ const Suppliers_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -38,7 +38,7 @@ const Suppliers_StackNavigator = createStackNavigator({
         headerStyle: {
           backgroundColor: colors.darkColor,
         },
-        headerStatusBarHeight: 0,
+
         headerTintColor: colors.white,
         headerTitleStyle: {
           width: 250,
@@ -50,7 +50,7 @@ const Suppliers_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="ADD_SUPPLIER" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -61,7 +61,7 @@ const Suppliers_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="UPDATE_SUPPLIER" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -76,7 +76,7 @@ const Suppliers_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -88,7 +88,7 @@ const Suppliers_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -97,7 +97,7 @@ const Suppliers_StackNavigator = createStackNavigator({
     screen: SupplierPayment,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PAYMENTS" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },

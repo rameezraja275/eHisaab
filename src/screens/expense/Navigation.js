@@ -21,7 +21,7 @@ const Expense_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -32,7 +32,7 @@ const Expense_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -43,7 +43,7 @@ const Expense_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -56,7 +56,7 @@ const Expense_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -64,7 +64,7 @@ const Expense_StackNavigator = createStackNavigator({
     screen: AddEditCategories,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="ADD_EXPENSE_CATEGORY" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -76,7 +76,7 @@ const Expense_StackNavigator = createStackNavigator({
     screen: AddEditCategories,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="UPDATE_EXPENSE_CATEGORY" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -93,7 +93,7 @@ const Expense_StackNavigator = createStackNavigator({
             {props.navigation.state.params.expenseCategory.expense_name}{" "}
           </Text>
         ),
-        headerStatusBarHeight: 0,
+
         headerRight: () => <HeaderOptions navigationProps={props.navigation} />,
         headerStyle: {
           backgroundColor: colors.darkColor,

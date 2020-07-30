@@ -15,7 +15,7 @@ const Prodcuts_StackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PRODUCTS_SERVICES" />,
       headerLeft: () => <HamBurger navigationProps={navigation} />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -31,7 +31,7 @@ const Prodcuts_StackNavigator = createStackNavigator({
             {props.navigation.state.params.product.product_name}{" "}
           </Text>
         ),
-        headerStatusBarHeight: 0,
+
         headerRight: () => <HeaderOptions navigationProps={props.navigation} />,
         headerStyle: {
           backgroundColor: colors.darkColor,
@@ -47,7 +47,7 @@ const Prodcuts_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="ADD_Product_Service" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -58,7 +58,7 @@ const Prodcuts_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="UPDATE_PRODUCT_SERVICE" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },

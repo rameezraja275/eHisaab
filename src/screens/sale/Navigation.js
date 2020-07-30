@@ -27,7 +27,6 @@ const Sale_StackNavigator = createStackNavigator({
         headerStyle: {
           backgroundColor: colors.darkColor,
         },
-        headerStatusBarHeight: 0,
         headerTintColor: colors.white,
       };
     },
@@ -40,7 +39,7 @@ const Sale_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -53,7 +52,7 @@ const Sale_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -62,7 +61,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: TransactionsScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="SALE_TRANSACTIONS" />,
-      headerStatusBarHeight: 0,
+
       headerLeft: () => (
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
@@ -89,7 +88,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: CheckOutScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="CHECKOUT" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -105,14 +104,13 @@ const Sale_StackNavigator = createStackNavigator({
         backgroundColor: colors.darkColor,
       },
       headerTintColor: colors.white,
-      headerStatusBarHeight: 0,
     }),
   },
   Bill: {
     screen: BillScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="BILL" />,
-      headerStatusBarHeight: 0,
+
       headerLeft: () => (
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
@@ -138,7 +136,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: QuotationScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="QUOTATION" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -149,7 +147,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="ADD_CUSTOMER" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },

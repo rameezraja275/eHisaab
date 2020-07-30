@@ -17,13 +17,12 @@ const AuthNavigation = createStackNavigator({
       title: <HeaderTitle title="EHisaab" />,
       headerTintColor: colors.white,
       headerStyle: { backgroundColor: colors.darkColor },
-      headerStatusBarHeight: 0,
+      //
     }),
   },
   Verfication: {
     screen: VerficationScreen,
     navigationOptions: ({ navigation }) => ({
-      headerStatusBarHeight: 0,
       title: <HeaderTitle title="VERFICATION" />,
       headerLeft: () => (
         <View style={{ flexDirection: "row" }}>
@@ -43,7 +42,6 @@ const AuthNavigation = createStackNavigator({
   ChangePassword: {
     screen: ChangePasswordScreen,
     navigationOptions: ({ navigation }) => ({
-      headerStatusBarHeight: 0,
       title: <HeaderTitle title="CHANGE_PASSWORD" />,
       headerTintColor: colors.white,
       headerStyle: { backgroundColor: colors.darkColor },
@@ -52,7 +50,6 @@ const AuthNavigation = createStackNavigator({
   ForgotPassword: {
     screen: ForgotPasswordScreen,
     navigationOptions: ({ navigation }) => ({
-      headerStatusBarHeight: 0,
       title: <HeaderTitle title="FORGOT_PASSWORD" />,
       headerTintColor: colors.white,
       headerStyle: { backgroundColor: colors.darkColor },
@@ -61,7 +58,6 @@ const AuthNavigation = createStackNavigator({
   Signup: {
     screen: SignupScreen,
     navigationOptions: ({ navigation }) => ({
-      headerStatusBarHeight: 0,
       title: <HeaderTitle title="SIGN_UP" />,
       headerTintColor: colors.white,
       headerStyle: { backgroundColor: colors.darkColor },

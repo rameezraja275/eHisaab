@@ -22,7 +22,7 @@ const Employee_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -34,7 +34,7 @@ const Employee_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },
@@ -51,7 +51,7 @@ const Employee_StackNavigator = createStackNavigator({
         headerStyle: {
           backgroundColor: colors.darkColor,
         },
-        headerStatusBarHeight: 0,
+
         headerTintColor: colors.white,
         headerTitleStyle: {
           width: 250,
@@ -63,7 +63,7 @@ const Employee_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="ADD_EMPLOYEE" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -74,7 +74,7 @@ const Employee_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="UPDATE_EMPLOYEE" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -85,7 +85,7 @@ const Employee_StackNavigator = createStackNavigator({
     screen: AddEditTransactionForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="ADD_TRANSACTION" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -96,7 +96,7 @@ const Employee_StackNavigator = createStackNavigator({
     screen: Salaries,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PROCESS_SALARIES" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -111,7 +111,7 @@ const Employee_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
-      headerStatusBarHeight: 0,
+
       headerTintColor: colors.white,
     }),
   },

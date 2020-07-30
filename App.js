@@ -14,13 +14,12 @@ const App = () => {
   const loadFont = async () => {
     try {
       await Font.loadAsync({
-        PrimaryFont: require("./assets/font/fatura/futura_light_bt.ttf"),
-        // PrimaryFont: require("./assets/font/Avenir-Light.ttf"),
+        // PrimaryFont: require("./assets/font/fatura/futura_light_bt.ttf"),
+        PrimaryFont: require("./assets/font/Avenir-Light.ttf"),
       });
-
       setFontStatus(true);
     } catch (e) {
-      console.log("font error", e);
+      console.log("error", e);
     }
   };
 
@@ -28,6 +27,7 @@ const App = () => {
     loadFont();
   }, []);
 
+  console.log(fontStatus);
   return (
     <Provider store={store}>
       <PersistGate persistor={persistedStore} loading={null}>

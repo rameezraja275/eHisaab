@@ -4,17 +4,12 @@
     "name": "EHisaab",
     "slug": "EHisaab",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "androidStatusBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#3e8aad"
+      "barStyle": "light-content"
     },
     "splash": {
       "image": "./assets/splashScreen.png",
@@ -24,9 +19,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },

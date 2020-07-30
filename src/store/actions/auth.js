@@ -14,6 +14,7 @@ const navigation = (user_status, dispatch) => {
   } else if (user_status == PAYMENT_DUE_USER) {
     navigate("ChangePassword");
   } else if (user_status == ACTIVE_USER) {
+    console.log("reched");
     dispatch(productGet(0));
     navigate("Drawer");
   }

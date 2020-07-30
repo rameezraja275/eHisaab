@@ -18,7 +18,7 @@ const Purchase_StackNavigator = createStackNavigator({
       title: <HeaderTitle title="PURCHASE" />,
       headerLeft: () => <HamBurger navigationProps={navigation} />,
       headerRight: () => <HeaderOptions navigationProps={navigation} />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -29,7 +29,7 @@ const Purchase_StackNavigator = createStackNavigator({
     screen: TransactionsScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PURCHASE_TRANSACTIONS" />,
-      headerStatusBarHeight: 0,
+
       headerLeft: () => (
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity
@@ -55,7 +55,7 @@ const Purchase_StackNavigator = createStackNavigator({
     screen: Detail,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PURCHASE_DETAILS" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -66,7 +66,7 @@ const Purchase_StackNavigator = createStackNavigator({
     screen: Detail,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PURCHASE_RETURN" />,
-      headerStatusBarHeight: 0,
+
       headerRight: () => <HeaderOptions navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: colors.darkColor,
@@ -78,7 +78,7 @@ const Purchase_StackNavigator = createStackNavigator({
     screen: CheckOut,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="CHECKOUT" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },

@@ -19,7 +19,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: ReportsList,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="REPORTS" />,
-      headerStatusBarHeight: 0,
+
       headerLeft: () => <HamBurger navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: colors.darkColor,
@@ -31,7 +31,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: Sale,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="SALE_REPORT" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -42,7 +42,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: Purchase,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PURCHASE_REPORT" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -53,7 +53,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: PurchaseDetails,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PURCHASE_DETAIL" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -64,7 +64,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: SaleDetails,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="SALE_DETAIL" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -75,7 +75,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: Expense,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="EXPENSE_REPORT" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -86,7 +86,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: Employee,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="EMPLOYEE_REPORT" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -97,7 +97,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: ProfitAndLoss,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="PROFIT_LOSS_STATEMENT" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -108,7 +108,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: Daybook,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="DAYBOOK" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -119,7 +119,7 @@ const Report_StackNavigator = createStackNavigator({
     screen: Cashbook,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="CASHBOOK" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },

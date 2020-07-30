@@ -16,7 +16,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: Settings,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="SETTINGS" />,
-      headerStatusBarHeight: 0,
+
       headerLeft: () => <HamBurger navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: colors.darkColor,
@@ -28,7 +28,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: Bussiness,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="BUSINESS" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -39,7 +39,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: ProfileScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="OWNER" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -50,7 +50,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: Users,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="USERS" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -61,7 +61,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="ADD_USER" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -72,7 +72,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: AddEditForm,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="UPDATE_USER" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -83,7 +83,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: ChangePasswordScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="CHANGE_PASSWORD" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -94,7 +94,7 @@ const Sale_StackNavigator = createStackNavigator({
     screen: TutorialsScreen,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="TUTORIAL" />,
-      headerStatusBarHeight: 0,
+
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
