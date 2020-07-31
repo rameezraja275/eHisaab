@@ -46,28 +46,27 @@ const AddnonInventoryItem = (props) => {
     } else if (product_sale_price < product_cost_price) {
       ShowFlash("SALE_PRICE_SHOULD_BE_GREATER", "danger", props.language);
     } else {
-      props.addItemToSale({ ...formData, id });
+      props.addItemToSale({ ...formData, id }, true);
       props.navigation.navigate("List");
       setFormData({
         product_name: null,
         product_sale_price: null,
         product_cost_price: null,
-        is_service: null,
         current_stock: 100,
       });
     }
   };
 
-  const type = [
-    {
-      id: constants.PRODUCT,
-      is_service: getTranslation("PRODUCT", props.language),
-    },
-    {
-      id: constants.SERVICE,
-      is_service: getTranslation("SERVICE", props.language),
-    },
-  ];
+  // const type = [
+  //   {
+  //     id: constants.PRODUCT,
+  //     is_service: getTranslation("PRODUCT", props.language),
+  //   },
+  //   {
+  //     id: constants.SERVICE,
+  //     is_service: getTranslation("SERVICE", props.language),
+  //   },
+  // ];
 
   return (
     <KeyboardAvoidingView
@@ -92,7 +91,7 @@ const AddnonInventoryItem = (props) => {
               required
               autoCapitalize="sentences"
             />
-            <Picker
+            {/* <Picker
               placeholder="TYPE"
               options={type}
               value={formData.is_service}
@@ -101,7 +100,7 @@ const AddnonInventoryItem = (props) => {
               onChange={(text) =>
                 setFormData({ ...formData, is_service: text })
               }
-            />
+            /> */}
             <TextInput
               value={formData.product_cost_price}
               onChange={(text) =>

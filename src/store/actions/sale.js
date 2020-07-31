@@ -47,6 +47,7 @@ export function getSaleTransactions(
       .get(url, { headers })
       .then((res) => {
         if (id > 0) {
+          console.log(res.data.data[0]);
           const {
             sale_date,
             paid_amount,
@@ -308,7 +309,7 @@ export function resetCart() {
   };
 }
 
-export function addItemToSale(item) {
+export function addItemToSale(item, is_noninventory = false) {
   return (dispatch, getState) => {
     const store = getState();
     const { saleCart } = store.sale;
@@ -324,6 +325,7 @@ export function addItemToSale(item) {
 
     const cartitem = {
       ...item,
+      non_inventory_item: is_noninventory ? "1" : "0",
       qty: newItem ? newItem.qty + 1 : 1,
     };
 
