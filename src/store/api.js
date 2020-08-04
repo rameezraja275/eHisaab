@@ -91,4 +91,6 @@ export default API = {
   PROFIT_LOSS: "report/profit_loss.php",
   DAYBOOK: "report/daybook.php",
   CASHBOOK: "report/cashbook.php",
+
+  GET_NONINVENTORYITEMS: "product/get_noninventory_product.php",
 };

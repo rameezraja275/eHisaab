@@ -3,7 +3,7 @@ import ACTION from "../types";
 import API from "../api";
 import { ShowFlash } from "../../utils/helper";
 import { navigate } from "../../utils/navigationRef";
-import { productGet } from "../actions/product";
+import { productGet, getNonInventoryItems } from "../actions/product";
 import constants from "../../utils/constants";
 
 const navigation = (user_status, dispatch) => {
@@ -14,8 +14,9 @@ const navigation = (user_status, dispatch) => {
   } else if (user_status == PAYMENT_DUE_USER) {
     navigate("ChangePassword");
   } else if (user_status == ACTIVE_USER) {
-    console.log("reched");
+    console.log("yoo1 2");
     dispatch(productGet(0));
+    dispatch(getNonInventoryItems());
     navigate("Drawer");
   }
 };

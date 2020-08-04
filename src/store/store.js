@@ -19,6 +19,7 @@ import paymentReducer from "./reducers/paymentReducer";
 import receiptReducer from "./reducers/receiptReducer";
 import employeeReducer from "./reducers/employeeReducer";
 import reportsReducer from "./reducers/reportsReducer";
+import nonInventoryReducer from "./reducers/nonInventoryReducer";
 import { AsyncStorage } from "react-native";
 import createSecureStorage from "../utils/secureStorage";
 
@@ -32,6 +33,11 @@ const configureStore = () => {
 
   const mainPersistConfig = {
     key: "main",
+    storage: AsyncStorage,
+  };
+
+  const nonInventoryPersistConfig = {
+    key: "noninventory",
     storage: AsyncStorage,
   };
 
@@ -49,6 +55,10 @@ const configureStore = () => {
     receipt: receiptReducer,
     employee: employeeReducer,
     reports: reportsReducer,
+    nonInventoryItems: persistReducer(
+      nonInventoryPersistConfig,
+      nonInventoryReducer
+    ),
   });
 
   const store = createStore(rootReducer, applyMiddleware(thunk));

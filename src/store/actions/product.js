@@ -325,3 +325,27 @@ export function getProductStock(productId, limit) {
       });
   };
 }
+
+export function getNonInventoryItems() {
+  return (dispatch, getState) => {
+    console.log("yoooo");
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const token = getState().user.token;
+
+    let url = `${API.BASE_URL}${API.GET_NONINVENTORYITEMS}?token=${token}`;
+
+    axios
+      .get(url, { headers })
+      .then((res) => {
+        dispatch({
+          payload: res.data.data,
+          type: ACTION.NON_INVENTORY_PRODUCT,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}

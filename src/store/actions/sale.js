@@ -329,6 +329,20 @@ export function addItemToSale(item, is_noninventory = false) {
       qty: newItem ? newItem.qty + 1 : 1,
     };
 
+    if (is_noninventory) {
+      const non_inventory_item = store.nonInventoryItems.nonInventoryItems;
+      const is_avalible = non_inventory_item.find((nonitem) => {
+        nonitem.id == item.product_id;
+      });
+      if (!is_avalible) {
+        non_inventory_item.push(item);
+        dispatch({
+          payload: non_inventory_item,
+          type: ACTION.NON_INVENTORY_PRODUCT,
+        });
+      }
+    }
+
     if (item.is_service == constants.SERVICE && cartitem.qty == 1) {
       updatedCart.unshift(cartitem);
 

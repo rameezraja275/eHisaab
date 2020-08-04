@@ -17,20 +17,22 @@ import { createUniqueID } from "../../utils/helper";
 import { getTranslation } from "../../utils/language";
 import constants from "../../utils/constants";
 import Picker from "../../Components/Picker";
+import AutoComplete from "../../Components/AutoComplete";
 
 const AddnonInventoryItem = (props) => {
   const [formData, setFormData] = useState({
     current_stock: 100,
-    product_name: null,
+    product_name: "",
     product_sale_price: null,
     product_cost_price: null,
     opening_stock: null,
   });
 
+  console.log("in component", props.nonInventoryItems);
   const onSubmit = () => {
     let { product_name, product_sale_price, product_cost_price } = formData;
 
-    const id = createUniqueID();
+    const product_id = createUniqueID();
 
     product_sale_price = Number(product_sale_price);
     product_cost_price = Number(product_cost_price);
@@ -46,7 +48,7 @@ const AddnonInventoryItem = (props) => {
     } else if (product_sale_price < product_cost_price) {
       ShowFlash("SALE_PRICE_SHOULD_BE_GREATER", "danger", props.language);
     } else {
-      props.addItemToSale({ ...formData, id }, true);
+      props.addItemToSale({ ...formData, product_id }, true);
       props.navigation.navigate("List");
       setFormData({
         product_name: null,
@@ -82,7 +84,16 @@ const AddnonInventoryItem = (props) => {
           keyboardShouldPersistTaps={"handled"}
         >
           <View style={styles.Form}>
-            <TextInput
+            <AutoComplete
+              value={formData.product_name}
+              data={props.nonInventoryItems}
+              onChange={(text) =>
+                setFormData({ ...formData, product_name: text })
+              }
+              placeholder="NAME"
+              required
+            />
+            {/* <TextInput
               value={formData.product_name}
               onChange={(text) =>
                 setFormData({ ...formData, product_name: text })
@@ -90,7 +101,7 @@ const AddnonInventoryItem = (props) => {
               placeholder="NAME"
               required
               autoCapitalize="sentences"
-            />
+            /> */}
             {/* <Picker
               placeholder="TYPE"
               options={type}
@@ -150,10 +161,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ common }) => {
+const mapStateToProps = ({ common, nonInventoryItems }) => {
   return {
     loading: common.loading,
     language: common.language,
+    nonInventoryItems: nonInventoryItems.nonInventoryItems,
   };
 };
 
