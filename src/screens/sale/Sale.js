@@ -25,17 +25,33 @@ import Notifications from "../../Components/Notifications";
 import Overlay from "../../Components/Overlay";
 import constants from "../../utils/constants";
 import { newUserMessages } from "../../utils/newUserMessage";
+import RadioButtons from "../../Components/RadioButtons";
 
 const Sale = (props) => {
   const {
     productGet,
-    products,
+    productsData,
     resetCart,
     notifications,
     removeNotifications,
     newUser,
     removeNewUserStatus,
+    nonInventoryItems,
   } = props;
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  let products = productsData;
+  useEffect(() => {
+    console.log("id", selectedIndex);
+
+    console.log("non", nonInventoryItems);
+    console.log(selectedIndex);
+    products = productsData;
+    if (selectedIndex == 1) {
+      products = nonInventoryItems;
+    }
+  }, [selectedIndex]);
+
   const [options, showOptions] = useState(false);
 
   const [state, setState] = useState({
@@ -149,6 +165,11 @@ const Sale = (props) => {
             </Overlay>
           )}
 
+          <RadioButtons
+            selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex}
+          />
+
           <FlatList
             ListEmptyComponent={<EmptyList message="No Products." />}
             data={state.filteredData}
@@ -160,7 +181,7 @@ const Sale = (props) => {
               <TouchableOpacity
                 style={{ flex: 1 }}
                 onPress={() => {
-                  props.addItemToSale(item);
+                  props.addItemToSale(item, selectedIndex == 1 ? true : false);
                 }}
               >
                 <View style={styles.ListItem}>
@@ -226,14 +247,21 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ product, common, sale, user }) => {
+const mapStateToProps = ({
+  nonInventoryItems,
+  product,
+  common,
+  sale,
+  user,
+}) => {
   return {
     loading: common.loading,
-    products: product.products,
+    productsData: product.products,
     cartStatus: sale.cartStatus,
     language: common.language,
     notifications: user.notifications,
     newUser: user.newUser,
+    nonInventoryItems: nonInventoryItems.nonInventoryItems,
   };
 };
 

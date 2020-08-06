@@ -84,7 +84,7 @@ const AddnonInventoryItem = (props) => {
           keyboardShouldPersistTaps={"handled"}
         >
           <View style={styles.Form}>
-            <AutoComplete
+            {/* <AutoComplete
               value={formData.product_name}
               data={props.nonInventoryItems}
               onChange={(text) =>
@@ -92,8 +92,8 @@ const AddnonInventoryItem = (props) => {
               }
               placeholder="NAME"
               required
-            />
-            {/* <TextInput
+            /> */}
+            <TextInput
               value={formData.product_name}
               onChange={(text) =>
                 setFormData({ ...formData, product_name: text })
@@ -101,7 +101,7 @@ const AddnonInventoryItem = (props) => {
               placeholder="NAME"
               required
               autoCapitalize="sentences"
-            /> */}
+            />
             {/* <Picker
               placeholder="TYPE"
               options={type}
