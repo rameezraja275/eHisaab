@@ -36,11 +36,6 @@ const configureStore = () => {
     storage: AsyncStorage,
   };
 
-  const nonInventoryPersistConfig = {
-    key: "noninventory",
-    storage: AsyncStorage,
-  };
-
   const rootReducer = combineReducers({
     user: persistReducer(securePersistConfig, userReducer),
     product: productReducer,
@@ -55,10 +50,7 @@ const configureStore = () => {
     receipt: receiptReducer,
     employee: employeeReducer,
     reports: reportsReducer,
-    nonInventoryItems: persistReducer(
-      nonInventoryPersistConfig,
-      nonInventoryReducer
-    ),
+    nonInventoryItems: nonInventoryReducer,
   });
 
   const store = createStore(rootReducer, applyMiddleware(thunk));

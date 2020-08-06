@@ -335,16 +335,19 @@ export function getNonInventoryItems() {
     const token = getState().user.token;
 
     let url = `${API.BASE_URL}${API.GET_NONINVENTORYITEMS}?token=${token}`;
-
+    console.log("start");
     axios
       .get(url, { headers })
       .then((res) => {
+        console.log("end", res.data.data);
         dispatch({
           payload: res.data.data,
           type: ACTION.NON_INVENTORY_PRODUCT,
         });
       })
       .catch((err) => {
+        console.log("end fail", err);
+
         console.log(err);
       });
   };

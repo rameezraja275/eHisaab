@@ -32,7 +32,7 @@ const AddnonInventoryItem = (props) => {
   const onSubmit = () => {
     let { product_name, product_sale_price, product_cost_price } = formData;
 
-    const product_id = createUniqueID();
+    const id = "noninv_" + createUniqueID();
 
     product_sale_price = Number(product_sale_price);
     product_cost_price = Number(product_cost_price);
@@ -48,7 +48,7 @@ const AddnonInventoryItem = (props) => {
     } else if (product_sale_price < product_cost_price) {
       ShowFlash("SALE_PRICE_SHOULD_BE_GREATER", "danger", props.language);
     } else {
-      props.addItemToSale({ ...formData, product_id }, true);
+      props.addItemToSale({ ...formData, id }, true);
       props.navigation.navigate("List");
       setFormData({
         product_name: null,

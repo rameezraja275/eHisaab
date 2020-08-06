@@ -63,7 +63,7 @@ const Details = (props) => {
       <FlatList
         style={{ flex: 1, backgroundColor: colors.lightColor }}
         data={props.cart}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <CheckOutListItem
             item={{ ...item, price: item.product_sale_price }}

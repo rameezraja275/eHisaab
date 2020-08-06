@@ -146,6 +146,7 @@ const CashBook = (props) => {
           value={totalCredit}
           language={language}
         />
+
         <ReportFooter
           label="CLOSING_BALANCE"
           value={closingBalance}

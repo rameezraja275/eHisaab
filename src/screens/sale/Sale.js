@@ -15,7 +15,7 @@ import {
 import SearchBar from "../../Components/SearchBar";
 import FloatingButton from "../../Components/FloatingButton";
 import Loader from "../../Components/Loader";
-import { productGet } from "../../store/actions/product";
+import { productGet, getNonInventoryItems } from "../../store/actions/product";
 import colors from "../../utils/colors";
 import OptionsAction from "../../Components/Options";
 import { FormatPrice } from "../../utils/helper";
@@ -37,21 +37,27 @@ const Sale = (props) => {
     newUser,
     removeNewUserStatus,
     nonInventoryItems,
+    getNonInventoryItems,
   } = props;
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  let products = productsData;
-  useEffect(() => {
-    console.log("id", selectedIndex);
+  let products;
+  products = productsData;
+  if (selectedIndex == 1) {
+    products = nonInventoryItems;
+  }
+  // useEffect(() => {
+  //   console.log("id", selectedIndex);
 
-    console.log("non", nonInventoryItems);
-    console.log(selectedIndex);
-    products = productsData;
-    if (selectedIndex == 1) {
-      products = nonInventoryItems;
-    }
-  }, [selectedIndex]);
+  //   console.log("non", nonInventoryItems);
+  //   console.log(selectedIndex);
+  // }, [selectedIndex]);
 
+  // console.log("pro", productsData);
+
+  // console.log("non", nonInventoryItems);
+
+  console.log("cart", props.cart);
   const [options, showOptions] = useState(false);
 
   const [state, setState] = useState({
@@ -85,6 +91,7 @@ const Sale = (props) => {
 
   const reload = () => {
     productGet(0);
+    getNonInventoryItems();
     resetCart();
   };
 
@@ -116,6 +123,8 @@ const Sale = (props) => {
     setState({ ...state, showOverlay: false });
     removeNotifications();
   };
+
+  console.log("data", props.cart);
 
   return (
     <View style={styles.MainContainer}>
@@ -173,7 +182,7 @@ const Sale = (props) => {
           <FlatList
             ListEmptyComponent={<EmptyList message="No Products." />}
             data={state.filteredData}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item.id}
             refreshControl={
               <RefreshControl refreshing={false} onRefresh={reload} />
             }
@@ -195,13 +204,14 @@ const Sale = (props) => {
                       "PRICE",
                       props.language
                     )} : ${FormatPrice(item.product_sale_price)}`}</Text>
-                    {item.is_service == constants.PRODUCT && (
-                      <Text style={{ fontFamily: "PrimaryFont" }}>
-                        {`${getTranslation("STOCK", props.language)} : ${
-                          item.current_stock
-                        }`}{" "}
-                      </Text>
-                    )}
+                    {item.current_stock &&
+                      item.is_service == constants.PRODUCT && (
+                        <Text style={{ fontFamily: "PrimaryFont" }}>
+                          {`${getTranslation("STOCK", props.language)} : ${
+                            item.current_stock
+                          }`}{" "}
+                        </Text>
+                      )}
                   </View>
                 </View>
               </TouchableOpacity>
@@ -258,6 +268,7 @@ const mapStateToProps = ({
     loading: common.loading,
     productsData: product.products,
     cartStatus: sale.cartStatus,
+    cart: sale.saleCart,
     language: common.language,
     notifications: user.notifications,
     newUser: user.newUser,
@@ -271,4 +282,5 @@ export default connect(mapStateToProps, {
   resetCart,
   removeNotifications,
   removeNewUserStatus,
+  getNonInventoryItems,
 })(Sale);
