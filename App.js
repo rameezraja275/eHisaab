@@ -16,8 +16,12 @@ const App = () => {
       await Font.loadAsync({
         // PrimaryFont: require("./assets/font/fatura/futura_light_bt.ttf"),
         PrimaryFont: require("./assets/font/Avenir-Light.ttf"),
-      });
-      setFontStatus(true);
+      }); 
+      
+       
+            setFontStatus(true);
+
+ 
     } catch (e) {
       console.log("error", e);
     }

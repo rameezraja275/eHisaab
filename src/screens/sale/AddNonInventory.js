@@ -14,10 +14,10 @@ import { ShowFlash } from "../../utils/helper";
 import colors from "../../utils/colors";
 import Loader from "../../Components/Loader";
 import { createUniqueID } from "../../utils/helper";
-import { getTranslation } from "../../utils/language";
-import constants from "../../utils/constants";
-import Picker from "../../Components/Picker";
-import AutoComplete from "../../Components/AutoComplete";
+// import { getTranslation } from "../../utils/language";
+// import constants from "../../utils/constants";
+// import Picker from "../../Components/Picker";
+// import AutoComplete from "../../Components/AutoComplete";
 
 const AddnonInventoryItem = (props) => {
   const [formData, setFormData] = useState({

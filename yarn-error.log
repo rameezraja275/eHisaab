@@ -1,20 +1,21 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js add react-native-autocomplete-input
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js
 
 PATH: 
-  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rameez/Android/Sdk/emulator:/home/rameez/Android/Sdk/tools:/home/rameez/Android/Sdk/tools/bin:/home/rameez/Android/Sdk/platform-tools
+  C:\Users\Rameez Raja\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Rameez Raja\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files (x86)\Yarn\bin;%NVM_HOME%;%NVM_SYMLINK%;C:\Users\Rameez Raja\AppData\Local\Microsoft\WindowsApps;C:\Users\Rameez Raja\AppData\Roaming\npm;C:\Users\Rameez Raja\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Rameez Raja\AppData\Local\Yarn\bin;C:\Users\Rameez Raja\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
 
 Yarn version: 
   1.22.4
 
 Node version: 
-  12.16.3
+  12.18.3
 
 Platform: 
-  linux x64
+  win32 x64
 
 Trace: 
-  Error: EACCES: permission denied, open '/home/rameez/Desktop/projects/backup-ehissab/yarn.lock'
+  Error: https://registry.yarnpkg.com/jsc-android/-/jsc-android-245459.0.0.tgz: unexpected end of file
+      at Zlib.zlibOnError [as onerror] (zlib.js:180:17)
 
 npm manifest: 
   {
@@ -11061,6 +11062,11 @@ Lockfile:
       fbemitter "^2.1.1"
       invariant "^2.2.4"
       use-subscription "^1.0.0"
+  
+  react-native-autocomplete-input@^4.2.0:
+    version "4.2.0"
+    resolved "https://registry.yarnpkg.com/react-native-autocomplete-input/-/react-native-autocomplete-input-4.2.0.tgz#fcfc3d2f19134d4c3394a4e6a5aae13d8c4c9129"
+    integrity sha512-bLZ9FO3NwcqYY3r6hefEEC4VW45L97kXuCyAqKXW1SJkkG/pGcen6zLq3SMFgoQuG3ryrO/ohz7gme7hFwzjoQ==
   
   react-native-elements@1.2.7:
     version "1.2.7"
