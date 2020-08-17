@@ -57,7 +57,6 @@ const Sale = (props) => {
 
   // console.log("non", nonInventoryItems);
 
-  console.log("cart", props.cart);
   const [options, showOptions] = useState(false);
 
   const [state, setState] = useState({
@@ -90,8 +89,11 @@ const Sale = (props) => {
   };
 
   const reload = () => {
+    console.log("callinh products");
     productGet(0);
+    console.log("callinh non inventory ");
     getNonInventoryItems();
+    console.log("resetting cart");
     resetCart();
   };
 
@@ -123,8 +125,6 @@ const Sale = (props) => {
     setState({ ...state, showOverlay: false });
     removeNotifications();
   };
-
-  console.log("data", props.cart);
 
   return (
     <View style={styles.MainContainer}>

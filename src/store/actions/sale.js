@@ -3,7 +3,7 @@ import ACTION from "../types";
 import API from "../api";
 import { ShowFlash } from "../../utils/helper";
 import { navigate } from "../../utils/navigationRef";
-import { productGet } from "./product";
+import { productGet, getNonInventoryItems } from "./product";
 import { customerGet } from "./customer";
 import constants from "../../utils/constants";
 
@@ -203,6 +203,7 @@ export function makeSale(data) {
         ShowFlash("ADD_SUCCESS", "success", language);
         customer_id && dispatch(customerGet(customer_id));
         dispatch(productGet(0));
+        dispatch(getNonInventoryItems());
 
         setTimeout(() => {
           navigate("Bill", { duplicate: saleID ? true : false });

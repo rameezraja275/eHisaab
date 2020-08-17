@@ -131,6 +131,7 @@ export function signin(body) {
     });
     const language = getState().common.language;
 
+    console.log(body);
     axios
       .post(`${API.BASE_URL}${API.LOGIN_URL}`, body, { headers })
       .then(async (res) => {
@@ -179,6 +180,7 @@ export function signin(body) {
         navigation(userStatus, dispatch);
       })
       .catch((err) => {
+        console.log("error", err);
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

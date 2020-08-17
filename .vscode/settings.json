@@ -1,14 +1,14 @@
 {
-    "launch": {
-        
-
-        "configurations": [],
-        "compounds": []
-    },
-
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
-
+    "editor.formatOnSave": true,
+    "editor.snippetSuggestions": "top"
+  },
+  "php.validate.executablePath": ""
 }
