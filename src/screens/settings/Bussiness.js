@@ -33,7 +33,6 @@ const Bussiness = (props) => {
     });
   }, []);
 
-  // console.log(bussiness);
 
   const onSubmit = () => {
     const { name } = formData;
@@ -52,56 +51,56 @@ const Bussiness = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <ScrollView
-          style={{ flex: 1 }}
-          keyboardDismissMode={"on-drag"}
-          keyboardShouldPersistTaps={"handled"}
-        >
-          <View style={styles.Form}>
-            <TextInput
-              value={formData.name}
-              onChange={(text) => setFormData({ ...formData, name: text })}
-              placeholder="NAME"
-              required
-              autoCapitalize="words"
-            />
+          <ScrollView
+            style={{ flex: 1 }}
+            keyboardDismissMode={"on-drag"}
+            keyboardShouldPersistTaps={"handled"}
+          >
+            <View style={styles.Form}>
+              <TextInput
+                value={formData.name}
+                onChange={(text) => setFormData({ ...formData, name: text })}
+                placeholder="NAME"
+                required
+                autoCapitalize="words"
+              />
 
-            <TextInput
-              value={formData.phone}
-              onChange={(text) => setFormData({ ...formData, phone: text })}
-              placeholder="PHONE_NUMBER"
-              keyboardType={"phone-pad"}
-            />
+              <TextInput
+                value={formData.phone}
+                onChange={(text) => setFormData({ ...formData, phone: text })}
+                placeholder="PHONE_NUMBER"
+                keyboardType={"phone-pad"}
+              />
 
-            <TextInput
-              value={formData.address}
-              onChange={(text) => setFormData({ ...formData, address: text })}
-              placeholder="ADDRESS"
-            />
-            <TextInput
-              keyboardType={"number-pad"}
-              value={formData.opening_cash}
-              onChange={(text) =>
-                setFormData({ ...formData, opening_cash: text })
-              }
-              placeholder="OPENING_CASH"
-            />
+              <TextInput
+                value={formData.address}
+                onChange={(text) => setFormData({ ...formData, address: text })}
+                placeholder="ADDRESS"
+              />
+              <TextInput
+                keyboardType={"number-pad"}
+                value={formData.opening_cash}
+                onChange={(text) =>
+                  setFormData({ ...formData, opening_cash: text })
+                }
+                placeholder="OPENING_CASH"
+              />
 
-            <ImagerPicker
-              onChangeImage={(logo) =>
-                setFormData({ ...formData, logo: logo.base64 })
-              }
-              placeholder="LOGO"
-              image={formData.logo}
-            />
-          </View>
-          <View style={styles.Button}>
-            <View style={{ flex: 1 }}>
-              <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+              <ImagerPicker
+                onChangeImage={(logo) =>
+                  setFormData({ ...formData, logo: logo.base64 })
+                }
+                placeholder="LOGO"
+                image={formData.logo}
+              />
             </View>
-          </View>
-        </ScrollView>
-      )}
+            <View style={styles.Button}>
+              <View style={{ flex: 1 }}>
+                <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+              </View>
+            </View>
+          </ScrollView>
+        )}
     </KeyboardAvoidingView>
   );
 };

@@ -452,7 +452,6 @@ export function getDayBook(filter) {
     let date = filter.date.toISOString().split("T")[0];
 
     let url = `${API.BASE_URL}${API.DAYBOOK}?token=${token}&date=${date}`;
-    // console.log(url);
     axios
       .get(url, { headers })
       .then((res) => {

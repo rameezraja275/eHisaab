@@ -65,7 +65,6 @@ const CheckOut = (props) => {
     }
   }, [formData.customer_id]);
 
-  // console.log(" checkout paids ", formData.paid_amount);
 
   return (
     <KeyboardAvoidingView
@@ -75,96 +74,96 @@ const CheckOut = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <ScrollView
-          style={{ flex: 1 }}
-          keyboardDismissMode={"on-drag"}
-          keyboardShouldPersistTaps={"handled"}
-        >
-          <View style={styles.infobox}>
-            <InfoCard
-              title="TOTAL_AMOUNT"
-              value={FormatPrice(props.cartStatus.totalPrice)}
-            />
-            {props.discount > 0 && (
-              <InfoCard title="DISCOUNT" value={FormatPrice(props.discount)} />
-            )}
-            {props.discount > 0 && (
+          <ScrollView
+            style={{ flex: 1 }}
+            keyboardDismissMode={"on-drag"}
+            keyboardShouldPersistTaps={"handled"}
+          >
+            <View style={styles.infobox}>
               <InfoCard
-                title="NET_AMOUNT"
-                value={FormatPrice(
-                  netAmount
-                  // props.cartStatus.totalPrice - props.discount
-                )}
+                title="TOTAL_AMOUNT"
+                value={FormatPrice(props.cartStatus.totalPrice)}
               />
-            )}
-          </View>
+              {props.discount > 0 && (
+                <InfoCard title="DISCOUNT" value={FormatPrice(props.discount)} />
+              )}
+              {props.discount > 0 && (
+                <InfoCard
+                  title="NET_AMOUNT"
+                  value={FormatPrice(
+                    netAmount
+                    // props.cartStatus.totalPrice - props.discount
+                  )}
+                />
+              )}
+            </View>
 
-          <View style={styles.Form}>
-            <DatePicker
-              placeholder="DATE"
-              required
-              date={formData.date}
-              setDate={(text) => setFormData({ ...formData, date: text })}
-            />
-            <Picker
-              placeholder="CUSTOMER"
-              options={props.customers}
-              value={formData.customer_id}
-              type="customer_name"
-              onChange={(text) =>
-                setFormData({ ...formData, customer_id: text })
-              }
-            />
-            <TextInput
-              value={formData.paid_amount}
-              onChange={(text) =>
-                setFormData({ ...formData, paid_amount: text })
-              }
-              keyboardType={"number-pad"}
-              placeholder="AMOUNT_PAID"
-              required
-            />
-            <TextInput
-              value={formData.narration}
-              onChange={(text) => setFormData({ ...formData, narration: text })}
-              placeholder="DESCRIPTION"
-              autoCapitalize="sentences"
-            />
-          </View>
-          <View style={styles.Button}>
-            <View style={{ flex: 1 }}>
-              <Button
-                title={"NEW_CUSTOMER"}
-                icon="plus"
-                onClick={() => props.navigation.navigate("AddCustomer")}
+            <View style={styles.Form}>
+              <DatePicker
+                placeholder="DATE"
+                required
+                date={formData.date}
+                setDate={(text) => setFormData({ ...formData, date: text })}
+              />
+              <Picker
+                placeholder="CUSTOMER"
+                options={props.customers}
+                value={formData.customer_id}
+                type="customer_name"
+                onChange={(text) =>
+                  setFormData({ ...formData, customer_id: text })
+                }
+              />
+              <TextInput
+                value={formData.paid_amount}
+                onChange={(text) =>
+                  setFormData({ ...formData, paid_amount: text })
+                }
+                keyboardType={"number-pad"}
+                placeholder="AMOUNT_PAID"
+                required
+              />
+              <TextInput
+                value={formData.narration}
+                onChange={(text) => setFormData({ ...formData, narration: text })}
+                placeholder="DESCRIPTION"
+                autoCapitalize="sentences"
               />
             </View>
-            <View style={{ flex: 1, marginLeft: 10 }}>
-              <Button title={"SALE"} onClick={onSubmit} icon="save" />
+            <View style={styles.Button}>
+              <View style={{ flex: 1 }}>
+                <Button
+                  title={"NEW_CUSTOMER"}
+                  icon="plus"
+                  onClick={() => props.navigation.navigate("AddCustomer")}
+                />
+              </View>
+              <View style={{ flex: 1, marginLeft: 10 }}>
+                <Button title={"SALE"} onClick={onSubmit} icon="save" />
+              </View>
             </View>
-          </View>
-          <View style={{ flex: 1, margin: 15 }}>
-            <Button
-              title={"GENRATE_QUOTATION"}
-              onClick={() => {
-                props.navigation.navigate("Quotation");
-              }}
-              icon="file1"
-            />
-          </View>
-          {props.saleData.sale_id && (
-            <View style={{ flex: 1, marginHorizontal: 15 }}>
+            <View style={{ flex: 1, margin: 15 }}>
               <Button
-                title={"GENRATE_BILL"}
+                title={"GENRATE_QUOTATION"}
                 onClick={() => {
-                  props.navigation.navigate("Bill", { duplicate: true });
+                  props.navigation.navigate("Quotation");
                 }}
-                icon="pdffile1"
+                icon="file1"
               />
             </View>
-          )}
-        </ScrollView>
-      )}
+            {props.saleData.sale_id && (
+              <View style={{ flex: 1, marginHorizontal: 15 }}>
+                <Button
+                  title={"GENRATE_BILL"}
+                  onClick={() => {
+                    props.navigation.navigate("Bill", { duplicate: true });
+                  }}
+                  icon="pdffile1"
+                />
+              </View>
+            )}
+          </ScrollView>
+        )}
     </KeyboardAvoidingView>
   );
 };

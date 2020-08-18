@@ -11,7 +11,6 @@ export function businessModify(body) {
       "Content-Type": "application/json",
     };
 
-    // console.log(body);
 
     const store = getState();
     const token = store.user.token;

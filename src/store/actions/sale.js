@@ -27,7 +27,6 @@ export function getSaleTransactions(
   }
 ) {
   return (dispatch, getState) => {
-    console.log("calling");
     const headers = {
       "Content-Type": "application/json",
     };
@@ -48,7 +47,6 @@ export function getSaleTransactions(
       .get(url, { headers })
       .then((res) => {
         if (id > 0) {
-          // console.log(res.data.data[0]);
           const {
             sale_date,
             paid_amount,
@@ -58,7 +56,6 @@ export function getSaleTransactions(
             sale_amount,
           } = res.data.data[0];
           const { products } = res.data.data[1];
-          // console.log("paod", paid_amount);
           dispatch({
             type: ACTION.ADD_ITEM_SALE_CART,
             payload: products,
@@ -106,7 +103,6 @@ export function getSaleTransactions(
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
-          console.log("calling error", err);
           ShowFlash("SERVER_ERROR", "danger", language);
         }
         dispatch({
@@ -333,12 +329,10 @@ export function addItemToSale(item, is_noninventory = false) {
     };
 
     if (is_noninventory) {
-      console.log("items", item);
       const non_inventory_item = store.nonInventoryItems.nonInventoryItems;
       const is_avalible = non_inventory_item.find(
         (nonitem) => nonitem.id == item.id && true
       );
-      console.log("ac", is_avalible);
       if (!is_avalible) {
         non_inventory_item.push(item);
         dispatch({

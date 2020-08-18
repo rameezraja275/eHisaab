@@ -101,6 +101,7 @@ const Sale_StackNavigator = createStackNavigator({
       headerTintColor: colors.white,
     }),
   },
+
 });
 
 export default Sale_StackNavigator;

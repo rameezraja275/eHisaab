@@ -27,7 +27,6 @@ const App = () => {
     loadFont();
   }, []);
 
-  console.log(fontStatus);
   return (
     <Provider store={store}>
       <PersistGate persistor={persistedStore} loading={null}>

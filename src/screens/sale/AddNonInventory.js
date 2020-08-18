@@ -28,7 +28,6 @@ const AddnonInventoryItem = (props) => {
     opening_stock: null,
   });
 
-  console.log("in component", props.nonInventoryItems);
   const onSubmit = () => {
     let { product_name, product_sale_price, product_cost_price } = formData;
 
@@ -78,13 +77,13 @@ const AddnonInventoryItem = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <ScrollView
-          style={{ flex: 1 }}
-          keyboardDismissMode={"on-drag"}
-          keyboardShouldPersistTaps={"handled"}
-        >
-          <View style={styles.Form}>
-            {/* <AutoComplete
+          <ScrollView
+            style={{ flex: 1 }}
+            keyboardDismissMode={"on-drag"}
+            keyboardShouldPersistTaps={"handled"}
+          >
+            <View style={styles.Form}>
+              {/* <AutoComplete
               value={formData.product_name}
               data={props.nonInventoryItems}
               onChange={(text) =>
@@ -93,16 +92,16 @@ const AddnonInventoryItem = (props) => {
               placeholder="NAME"
               required
             /> */}
-            <TextInput
-              value={formData.product_name}
-              onChange={(text) =>
-                setFormData({ ...formData, product_name: text })
-              }
-              placeholder="NAME"
-              required
-              autoCapitalize="sentences"
-            />
-            {/* <Picker
+              <TextInput
+                value={formData.product_name}
+                onChange={(text) =>
+                  setFormData({ ...formData, product_name: text })
+                }
+                placeholder="NAME"
+                required
+                autoCapitalize="sentences"
+              />
+              {/* <Picker
               placeholder="TYPE"
               options={type}
               value={formData.is_service}
@@ -112,32 +111,32 @@ const AddnonInventoryItem = (props) => {
                 setFormData({ ...formData, is_service: text })
               }
             /> */}
-            <TextInput
-              value={formData.product_cost_price}
-              onChange={(text) =>
-                setFormData({ ...formData, product_cost_price: text })
-              }
-              keyboardType={"number-pad"}
-              placeholder="COST_PRICE"
-              required
-            />
-            <TextInput
-              value={formData.product_sale_price}
-              onChange={(text) =>
-                setFormData({ ...formData, product_sale_price: text })
-              }
-              keyboardType={"number-pad"}
-              placeholder="SALE_PRICE"
-              required
-            />
-          </View>
-          <View style={styles.Button}>
-            <View style={{ flex: 1 }}>
-              <Button title={"ADD_TO_CART"} onClick={onSubmit} icon="save" />
+              <TextInput
+                value={formData.product_cost_price}
+                onChange={(text) =>
+                  setFormData({ ...formData, product_cost_price: text })
+                }
+                keyboardType={"number-pad"}
+                placeholder="COST_PRICE"
+                required
+              />
+              <TextInput
+                value={formData.product_sale_price}
+                onChange={(text) =>
+                  setFormData({ ...formData, product_sale_price: text })
+                }
+                keyboardType={"number-pad"}
+                placeholder="SALE_PRICE"
+                required
+              />
             </View>
-          </View>
-        </ScrollView>
-      )}
+            <View style={styles.Button}>
+              <View style={{ flex: 1 }}>
+                <Button title={"ADD_TO_CART"} onClick={onSubmit} icon="save" />
+              </View>
+            </View>
+          </ScrollView>
+        )}
     </KeyboardAvoidingView>
   );
 };

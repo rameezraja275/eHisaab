@@ -19,7 +19,6 @@ const Sale_StackNavigator = createStackNavigator({
   List: {
     screen: SaleScreen,
     navigationOptions: ({ navigation }) => {
-      // console.log(navigation);
       return {
         title: <HeaderTitle title="SALE" />,
         headerLeft: () => <HamBurger navigationProps={navigation} />,

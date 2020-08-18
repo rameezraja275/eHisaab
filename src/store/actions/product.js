@@ -22,8 +22,8 @@ export function productCreate(body) {
         body.is_service == constants.SERVICE
           ? "0"
           : body.opening_stock == null
-          ? "0"
-          : body.opening_stock,
+            ? "0"
+            : body.opening_stock,
       is_service: body.is_service,
     };
 
@@ -92,8 +92,8 @@ export function productModify(body) {
         body.is_service == constants.SERVICE
           ? "0"
           : body.opening_stock == null
-          ? "0"
-          : body.opening_stock,
+            ? "0"
+            : body.opening_stock,
       is_service: body.is_service,
     };
 
@@ -235,7 +235,6 @@ export function productGet(productId) {
 
     let url = `${API.BASE_URL}${API.PRODUCT_GET_URL}?token=${token}&product_id=${productId}`;
 
-    // console.log(url);
     axios
       .get(url, { headers })
       .then((res) => {
@@ -253,7 +252,6 @@ export function productGet(productId) {
         });
       })
       .catch((err) => {
-        console.log(err);
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
@@ -328,27 +326,21 @@ export function getProductStock(productId, limit) {
 
 export function getNonInventoryItems() {
   return (dispatch, getState) => {
-    console.log("yoooo");
     const headers = {
       "Content-Type": "application/json",
     };
     const token = getState().user.token;
 
     let url = `${API.BASE_URL}${API.GET_NONINVENTORYITEMS}?token=${token}`;
-    console.log("start");
     axios
       .get(url, { headers })
       .then((res) => {
-        console.log("end", res.data.data);
         dispatch({
           payload: res.data.data,
           type: ACTION.NON_INVENTORY_PRODUCT,
         });
       })
       .catch((err) => {
-        console.log("end fail", err);
-
-        console.log(err);
       });
   };
 }

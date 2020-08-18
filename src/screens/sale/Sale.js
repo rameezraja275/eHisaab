@@ -89,11 +89,8 @@ const Sale = (props) => {
   };
 
   const reload = () => {
-    console.log("callinh products");
     productGet(0);
-    console.log("callinh non inventory ");
     getNonInventoryItems();
-    console.log("resetting cart");
     resetCart();
   };
 
@@ -131,102 +128,102 @@ const Sale = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <React.Fragment>
-          <SearchBar
-            onChange={onSearch}
-            {...props}
-            toggleFilter={() =>
-              props.navigation.navigate("AddNonInventoryItem")
-            }
-            icon="plus"
-          />
-
-          <OptionsAction
-            status={options}
-            close={showOptions}
-            title="TRANSACTIONS"
-            onSelect={() => props.navigation.navigate("ListTransactions")}
-          />
-
-          {state.showOverlay && (
-            <Overlay
-              toggleFilter={() => setState({ ...state, showOverlay: false })}
-              title="NOTIFICATION"
-              backDropClose={false}
-            >
-              <Notifications
-                notifications={notifications}
-                onClose={closeNotifications}
-              />
-            </Overlay>
-          )}
-
-          {newUser && (
-            <Overlay
-              toggleFilter={removeNewUserStatus}
-              title="Get Started :)"
-              backDropClose={false}
-            >
-              <Notifications
-                notifications={newUserMessages}
-                onClose={removeNewUserStatus}
-              />
-            </Overlay>
-          )}
-
-          <RadioButtons
-            selectedIndex={selectedIndex}
-            setSelectedIndex={setSelectedIndex}
-          />
-
-          <FlatList
-            ListEmptyComponent={<EmptyList message="No Products." />}
-            data={state.filteredData}
-            keyExtractor={(item) => item.id}
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={reload} />
-            }
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={{ flex: 1 }}
-                onPress={() => {
-                  props.addItemToSale(item, selectedIndex == 1 ? true : false);
-                }}
-              >
-                <View style={styles.ListItem}>
-                  <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                    {item.product_name}
-                  </Text>
-                  <View style={{ flex: 0.4 }}>
-                    <Text
-                      style={{ fontFamily: "PrimaryFont" }}
-                    >{`${getTranslation(
-                      "PRICE",
-                      props.language
-                    )} : ${FormatPrice(item.product_sale_price)}`}</Text>
-                    {item.current_stock &&
-                      item.is_service == constants.PRODUCT && (
-                        <Text style={{ fontFamily: "PrimaryFont" }}>
-                          {`${getTranslation("STOCK", props.language)} : ${
-                            item.current_stock
-                          }`}{" "}
-                        </Text>
-                      )}
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-
-          {totalItem > 0 && (
-            <FloatingButton
-              onClick={() => props.navigation.navigate("Details")}
-              title={`TOTAL_ITEM`}
-              value={`${totalItem} = ${FormatPrice(totalPrice)}`}
+          <React.Fragment>
+            <SearchBar
+              onChange={onSearch}
+              {...props}
+              toggleFilter={() =>
+                props.navigation.navigate("AddNonInventoryItem")
+              }
+              icon="plus"
             />
-          )}
-        </React.Fragment>
-      )}
+
+            <OptionsAction
+              status={options}
+              close={showOptions}
+              title="TRANSACTIONS"
+              onSelect={() => props.navigation.navigate("ListTransactions")}
+            />
+
+            {state.showOverlay && (
+              <Overlay
+                toggleFilter={() => setState({ ...state, showOverlay: false })}
+                title="NOTIFICATION"
+                backDropClose={false}
+              >
+                <Notifications
+                  notifications={notifications}
+                  onClose={closeNotifications}
+                />
+              </Overlay>
+            )}
+
+            {newUser && (
+              <Overlay
+                toggleFilter={removeNewUserStatus}
+                title="Get Started :)"
+                backDropClose={false}
+              >
+                <Notifications
+                  notifications={newUserMessages}
+                  onClose={removeNewUserStatus}
+                />
+              </Overlay>
+            )}
+
+            <RadioButtons
+              selectedIndex={selectedIndex}
+              setSelectedIndex={setSelectedIndex}
+            />
+
+            <FlatList
+              ListEmptyComponent={<EmptyList message="No Products." />}
+              data={state.filteredData}
+              keyExtractor={(item) => item.id}
+              refreshControl={
+                <RefreshControl refreshing={false} onRefresh={reload} />
+              }
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={{ flex: 1 }}
+                  onPress={() => {
+                    props.addItemToSale(item, selectedIndex == 1 ? true : false);
+                  }}
+                >
+                  <View style={styles.ListItem}>
+                    <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
+                      {item.product_name}
+                    </Text>
+                    <View style={{ flex: 0.4 }}>
+                      <Text
+                        style={{ fontFamily: "PrimaryFont" }}
+                      >{`${getTranslation(
+                        "PRICE",
+                        props.language
+                      )} : ${FormatPrice(item.product_sale_price)}`}</Text>
+                      {item.current_stock &&
+                        item.is_service == constants.PRODUCT && (
+                          <Text style={{ fontFamily: "PrimaryFont" }}>
+                            {`${getTranslation("STOCK", props.language)} : ${
+                              item.current_stock
+                              }`}{" "}
+                          </Text>
+                        )}
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+
+            {totalItem > 0 && (
+              <FloatingButton
+                onClick={() => props.navigation.navigate("Details")}
+                title={`TOTAL_ITEM`}
+                value={`${totalItem} = ${FormatPrice(totalPrice)}`}
+              />
+            )}
+          </React.Fragment>
+        )}
     </View>
   );
 };
