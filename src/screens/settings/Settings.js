@@ -68,8 +68,8 @@ const SettingItem = ({
           {getTranslation(title, language)}{" "}
         </Text>
       ) : (
-        <Text style={styles.title}> {getTranslation(title, language)} </Text>
-      )}
+          <Text style={styles.title}> {getTranslation(title, language)} </Text>
+        )}
     </TouchableOpacity>
   );
 };
@@ -156,12 +156,12 @@ const Setting = (props) => {
         access={access}
         language={language}
       />
-      <SettingItem
+      {/* <SettingItem
         title="PAYMENT"
         onClick={() => props.navigation.navigate("")}
         iconName="creditcard"
         language={language}
-      />
+      /> */}
 
       <View style={styles.pickeritem}>
         <Picker
@@ -173,12 +173,12 @@ const Setting = (props) => {
         />
       </View>
 
-      <SettingItem
+      {/* <SettingItem
         title="TUTORIAL"
         onClick={() => props.navigation.navigate("Tutorials")}
         iconName="videocamera"
         language={language}
-      />
+      /> */}
       <SettingItem
         title="CUSTOMER_CARE"
         onClick={() => setOverflow(true)}
