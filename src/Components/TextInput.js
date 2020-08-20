@@ -18,7 +18,7 @@ const Input = (props) => {
     position: "relative",
     // top: 0,
     // top: !focus ? -2 : 0,
-    height: focus ? 30 : 26,
+    height: focus ? 28 : 26,
     fontSize: 14,
     color: "#000",
     // borderBottomColor: !focus ? colors.lightGrey : colors.primaryColor,

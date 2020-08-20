@@ -6,6 +6,8 @@ import { setNavigator } from "./src/utils/navigationRef";
 import FlashMessage from "react-native-flash-message";
 import { PersistGate } from "redux-persist/integration/react";
 import * as Font from "expo-font";
+import { StatusBar } from "react-native"
+import colors from "./src/utils/colors";
 
 const { persistedStore, store } = configureStore();
 
@@ -27,9 +29,12 @@ const App = () => {
     loadFont();
   }, []);
 
+
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistedStore} loading={null}>
+        <StatusBar backgroundColor={colors.darkColor} barStyle={'light-content'} />
         {fontStatus && (
           <AppContainer
             ref={(navigator) => {

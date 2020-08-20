@@ -13,19 +13,16 @@ const ImageLoader = (props) => {
 
   const pickImage = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    console.log("status", status)
     if (status !== "granted") {
       ShowFlash(getTranslation("NO_PERMISSION", language), "danger");
     } else {
       let result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
+        allowsEditing: false,
         aspect: [4, 4],
         base64: true,
         quality: 1,
       });
-
-      console.log("result", result)
       if (!result.cancelled) {
         let imageLength =
           result && (Math.ceil(result.base64.length / 4) * 3 - 2) / 1000;

@@ -46,16 +46,7 @@ const Sale = (props) => {
   if (selectedIndex == 1) {
     products = nonInventoryItems;
   }
-  // useEffect(() => {
-  //   console.log("id", selectedIndex);
 
-  //   console.log("non", nonInventoryItems);
-  //   console.log(selectedIndex);
-  // }, [selectedIndex]);
-
-  // console.log("pro", productsData);
-
-  // console.log("non", nonInventoryItems);
 
   const [options, showOptions] = useState(false);
 

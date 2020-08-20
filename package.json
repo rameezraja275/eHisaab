@@ -8,12 +8,13 @@
     "build": "expo build:android",
     "publish": "expo publish",
     "build-app-bundle": "expo build:android -t app-bundle",
-    "release": "cd android && ./gradlew assembleRelease"
+    "release": "cd android && ./gradlew assembleRelease",
+    "bundlerelease": "cd android && ./gradlew bundleRelease",
+    "androidrelease": "react-native run-android --variant=release"
   },
   "dependencies": {
     "expo": "38.0.8",
     "expo-splash-screen": "^0.5.0",
-    "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.10",
     "react": "~16.11.0",
     "react-dom": "16.13.1",
@@ -29,7 +30,6 @@
     "@use-expo/font": "2.0.0",
     "axios": "0.19.2",
     "expo-cli": "3.22.3",
-    "expo-file-system": "~9.0.1",
     "expo-font": "8.2.2",
     "expo-image-picker": "8.4.0",
     "expo-permissions": "9.0.1",
