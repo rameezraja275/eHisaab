@@ -16,7 +16,7 @@ const Input = (props) => {
 
   const TextFieldStyles = {
     position: "relative",
-    top: 0,
+    // top: 0,
     // top: !focus ? -2 : 0,
     height: focus ? 30 : 26,
     fontSize: 14,
@@ -24,8 +24,9 @@ const Input = (props) => {
     // borderBottomColor: !focus ? colors.lightGrey : colors.primaryColor,
     paddingLeft: 10,
     borderBottomWidth: 0,
-    paddingBottom: 10,
     fontFamily: "PrimaryFont",
+    // backgroundColor: "green",
+    padding: 0
   };
 
   const labelStyle = {
@@ -42,6 +43,7 @@ const Input = (props) => {
     // width: focus ? 110 : 180,
     fontFamily: "PrimaryFont",
     alignSelf: "flex-start",
+    // backgroundColor: "red"
   };
 
   useEffect(() => {
@@ -79,7 +81,7 @@ const Input = (props) => {
         autoCapitalize={props.autoCapitalize}
         editable={props.disabled ? false : true}
         maxLength={props.maxLength}
-        // autoCorrect={false}
+      // autoCorrect={false}
       />
     </View>
   );

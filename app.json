@@ -4,29 +4,34 @@
     "name": "eHisaab",
     "slug": "eHisaab",
     "privacy": "public",
-    "platforms": ["ios", "android", "web"],
-    "version": "1.0.0",
-    "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "androidStatusBar": {
-      "barStyle": "light-content"
-    },
     "splash": {
       "image": "./assets/splashScreen.png",
       "resizeMode": "cover",
       "backgroundColor": "#FAFCFF"
     },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pinetechnologies.ehisaab"
     },
     "description": "",
     "android": {
       "package": "com.pinetechnologies.ehisaab",
       "versionCode": 1
-    }
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
