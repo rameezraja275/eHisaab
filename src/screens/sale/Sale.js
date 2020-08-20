@@ -165,6 +165,7 @@ const Sale = (props) => {
             <RadioButtons
               selectedIndex={selectedIndex}
               setSelectedIndex={setSelectedIndex}
+              language={props.language}
             />
 
             <FlatList

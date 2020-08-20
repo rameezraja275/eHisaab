@@ -227,6 +227,8 @@ const urdu = {
   OPENING_BALANCE_TYPE: "بیلنس کھولنے کی قسم",
   SALE_DISCOUNT: "فروخت چھوٹ",
   PURCHASE_DISCOUNT: "خریداری چھوٹ",
+  INVENTORY_ITEMS: "انوینٹری آئٹمز",
+  NON_INVENTORY_ITEMS: "غیر انوینٹری اشیاء"
 };
 
 const english = {
@@ -452,6 +454,8 @@ const english = {
   OPENING_BALANCE_TYPE: "Opening Balance Type",
   SALE_DISCOUNT: "Sale Discount",
   PURCHASE_DISCOUNT: "Purchase Discount",
+  INVENTORY_ITEMS: "Inventory Items",
+  NON_INVENTORY_ITEMS: "Non Inventory Items"
 };
 
 export const getTranslation = (label, language) => {

@@ -5,8 +5,10 @@ import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { ButtonGroup } from "react-native-elements";
 import colors from "../utils/colors";
 
-const RadioButtons = ({ selectedIndex, setSelectedIndex }) => {
-  const buttons = ["Inventory Items", "Non Inventory Items"];
+import { getTranslation } from "../utils/language";
+
+const RadioButtons = ({ selectedIndex, setSelectedIndex, language }) => {
+  const buttons = [getTranslation("INVENTORY_ITEMS", language), getTranslation("NON_INVENTORY_ITEMS", language)];
 
   return (
     <ButtonGroup
