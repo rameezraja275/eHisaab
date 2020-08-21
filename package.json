@@ -10,7 +10,7 @@
     "build-app-bundle": "expo build:android -t app-bundle",
     "release": "cd android && ./gradlew assembleRelease",
     "bundlerelease": "cd android && ./gradlew bundleRelease",
-    "androidrelease": "react-native run-android --variant=release"
+    "runrelease": "react-native run-android --variant=release"
   },
   "dependencies": {
     "expo": "38.0.8",

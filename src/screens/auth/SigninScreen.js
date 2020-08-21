@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
-  Text,
+  Dimensions,
   Image,
   KeyboardAvoidingView,
   Platform,
@@ -34,10 +34,11 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
     }
   };
 
+  const { width } = Dimensions.get("window")
+  console.log(width)
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <DismissKeyboard>
       <KeyboardAvoidingView
         behavior={Platform.Os == "ios" ? "padding" : "height"}
         style={styles.container}
@@ -47,11 +48,12 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
             justifyContent: "center",
             flexDirection: "row",
             marginBottom: 80,
-            marginTop: 80,
             // backgroundColor: "red",
           }}
         >
           <Image
+            resizeMode={"cover"}
+            // style={{ width: width * 0.5, height: 100, overflow: "visible" }}
             style={{ width: 130, height: 100 }}
             source={images.icon_transparent}
           />
@@ -92,14 +94,15 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
           </View>
         </View>
       </KeyboardAvoidingView>
-    </DismissKeyboard>
-  );
+
+    );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    justifyContent: "center",
     backgroundColor: colors.lightColor,
   },
   Button: {

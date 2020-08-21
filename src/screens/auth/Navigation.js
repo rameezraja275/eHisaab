@@ -14,7 +14,7 @@ const AuthNavigation = createStackNavigator({
   Signin: {
     screen: SigninScreen,
     navigationOptions: ({ navigation }) => ({
-      title: <HeaderTitle title="EHisaab" />,
+      title: <HeaderTitle title="eHisaab" />,
       headerTintColor: colors.white,
       headerStyle: { backgroundColor: colors.darkColor },
       //

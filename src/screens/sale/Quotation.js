@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { FormatPrice, FormatDate } from "../../utils/helper";
 import { resetCart } from "../../store/actions/sale";
 
+import constants from "../../utils/constants";
+
 const Quotation = (props) => {
   const { saleDetails, bussiness, customers, navigation } = props;
   const { saleCart, cartStatus, discount, saleData } = saleDetails;
@@ -39,8 +41,8 @@ const Quotation = (props) => {
         <td width="40%"> ${item.product_name} </td>
         <td width="20%"> ${FormatPrice(item.product_sale_price)} </td>
         <td width="20%"> ${FormatPrice(
-          item.product_sale_price * item.qty
-        )} </td></tr>`;
+      item.product_sale_price * item.qty
+    )} </td></tr>`;
   }
 
   const QuotationHTML = `<html lang="en"> <head> <meta charset="UTF-8">
@@ -56,28 +58,30 @@ const Quotation = (props) => {
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
             ${
-              bussiness.logo &&
-              `<img src="data:image/png;base64,${bussiness.logo}" width=70 />`
-            } <h4 class="title"> Quotation </h4> </div> 
+    bussiness.logo
+      ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
+      : `<div></div>`
+    } 
+    } <h4 class="title"> Quotation </h4> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${
-                      bussiness.name ? bussiness.name : ""
-                    } </p> <p> Adress: ${
+    bussiness.name ? bussiness.name : ""
+    } </p> <p> Adress: ${
     bussiness.address ? bussiness.address : ""
-  } </p>
+    } </p>
                     <p> Phone: ${
-                      bussiness.phone ? bussiness.phone : ""
-                    } </p></div> 
+    bussiness.phone ? bussiness.phone : ""
+    } </p></div> 
                     <div> <p> Date: ${saleData.date.toDateString()} </p> <p> Customer: ${
     customer ? customer.customer_name : ""
-  }  </p>
+    }  </p>
                     <p> Adress: ${
-                      customer ? customer.customer_address : ""
-                    }  </p>
+    customer ? customer.customer_address : ""
+    }  </p>
                     <p> Phone: ${
-                      customer ? customer.customer_phone : ""
-                    } </p> </div> </div>
+    customer ? customer.customer_phone : ""
+    } </p> </div> </div>
                     <hr class="mb-25"/>
                     <table class="mb-20 "> <tr> <th>S#</th> <th>Qty</th> <th>Description</th> <th>Unit Price</th> <th>Total</th> </tr>
                     ${htmlTable}
@@ -95,10 +99,10 @@ const Quotation = (props) => {
             </div>
             <hr class="mb-20"/>
             <div class="footer"> 
-                <p> Powered By Ehissab </p>
-                <p> Suit 206 ZS Plaza Jutial </p>
-                <p> 0340-2042304 </p>
-                <p> Product (Pvt) Ltd </p>
+                <p> Powered By ${constants.APP_NAME} </p>
+                <p> ${constants.OFFICE_ADDRESS} </p>
+                <p> ${constants.CUSTOMER_CARE_NUMBER} </p>
+                <p> Product By ${constants.POWERED_BY} </p>
             </div>
         </div>
     </body></html>`;
