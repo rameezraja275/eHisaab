@@ -99,11 +99,10 @@ const Quotation = (props) => {
             </div>
             <hr class="mb-20"/>
             <div class="footer"> 
-                <p> Powered By ${constants.APP_NAME} </p>
-                <p> ${constants.OFFICE_ADDRESS} </p>
-                <p> ${constants.CUSTOMER_CARE_NUMBER} </p>
-                <p> Product By ${constants.POWERED_BY} </p>
-            </div>
+            <p> Powered By ${constants.APP_NAME} </p>
+            <p> ${constants.EHISAAB_URL} </p>
+            <p> Product By ${constants.POWERED_BY} </p>
+        </div>
         </div>
     </body></html>`;
 

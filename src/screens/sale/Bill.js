@@ -47,8 +47,8 @@ const Bill = (props) => {
         <td width="40%"> ${item.product_name} </td>
         <td width="20%"> ${FormatPrice(item.product_sale_price)} </td>
         <td width="20%"> ${FormatPrice(
-          item.product_sale_price * item.qty
-        )} </td></tr>`;
+      item.product_sale_price * item.qty
+    )} </td></tr>`;
   }
 
   const BillHTML = `<html lang="en"> <head> <meta charset="UTF-8">
@@ -64,31 +64,31 @@ const Bill = (props) => {
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
             ${
-              bussiness.logo
-                ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
-                : `<div></div>`
-            } 
+    bussiness.logo
+      ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
+      : `<div></div>`
+    } 
             <div><h4 class="title"> Sale Invoice </h4>
             <strong>Invoice # ${saleData.sale_id} </strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${
-                      bussiness.name ? bussiness.name : ""
-                    } </p> <p> Adress: ${
+    bussiness.name ? bussiness.name : ""
+    } </p> <p> Adress: ${
     bussiness.address ? bussiness.address : ""
-  } </p>
+    } </p>
                     <p> Phone: ${
-                      bussiness.phone ? bussiness.phone : ""
-                    } </p></div> 
+    bussiness.phone ? bussiness.phone : ""
+    } </p></div> 
                     <div> <p> Date: ${saleData.date.toDateString()} </p> <p> Customer: ${
     customer ? customer.customer_name : ""
-  }  </p>
+    }  </p>
                     <p> Adress: ${
-                      customer ? customer.customer_address : ""
-                    }  </p>
+    customer ? customer.customer_address : ""
+    }  </p>
                     <p> Phone: ${
-                      customer ? customer.customer_phone : ""
-                    } </p> </div> </div>
+    customer ? customer.customer_phone : ""
+    } </p> </div> </div>
                     <hr class="mb-25"/>
                     <table class="mb-20 "> <tr> <th>S#</th> <th>Qty</th> <th>Description</th> <th>Unit Price</th> <th>Total</th> </tr>
                     ${htmlTable}
@@ -106,8 +106,8 @@ const Bill = (props) => {
                     <div class="flex mb-5">
                         <span class="flex1"> Discount :  </span> 
                         <span> ${
-                          discount ? FormatPrice(discount) : "0 Rs"
-                        } </span> 
+    discount ? FormatPrice(discount) : "0 Rs"
+    } </span> 
                     </div> 
                     <div class="flex mb-5">
                         <span class="flex1"> Total Amount :  </span>
@@ -123,34 +123,33 @@ const Bill = (props) => {
                         <span> ${FormatPrice(remainingAmount)} </span> 
                     </div>
                     ${
-                      !duplicate
-                        ? `<div class="flex mb-5">
+    !duplicate
+      ? `<div class="flex mb-5">
                         <span class="flex1"> Previous Balance :  </span>
                         <span> <strong> ${
-                          currentBalance > 0 ? "(" : ""
-                        }  ${FormatPrice(previousBalance)} ${
-                            currentBalance > 0 ? ")" : ""
-                          }</strong>  </span>
+      currentBalance > 0 ? "(" : ""
+      }  ${FormatPrice(previousBalance)} ${
+      currentBalance > 0 ? ")" : ""
+      }</strong>  </span>
                     </div>`
-                        : ""
-                    }
+      : ""
+    }
 
                     <hr />
                     <div class="flex mb-5">
                         <span class="flex1"> <strong>Current Balance : </strong>  </span>
                         <span> <strong> ${
-                          currentBalance > 0 ? "(" : ""
-                        }  ${FormatPrice(currentBalance)} ${
+    currentBalance > 0 ? "(" : ""
+    }  ${FormatPrice(currentBalance)} ${
     currentBalance > 0 ? ")" : ""
-  }</strong>  </span>
+    }</strong>  </span>
                     </div>
                 </div>    
             </div>
             <hr class="mb-20"/>
             <div class="footer"> 
                 <p> Powered By ${constants.APP_NAME} </p>
-                <p> ${constants.OFFICE_ADDRESS} </p>
-                <p> ${constants.CUSTOMER_CARE_NUMBER} </p>
+                <p> ${constants.EHISAAB_URL} </p>
                 <p> Product By ${constants.POWERED_BY} </p>
             </div>
         </div>

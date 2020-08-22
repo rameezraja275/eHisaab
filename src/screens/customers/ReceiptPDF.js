@@ -34,31 +34,31 @@ const Bill = (props) => {
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
             ${
-              bussiness.logo
-                ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
-                : `<div></div>`
-            } 
+    bussiness.logo
+      ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
+      : `<div></div>`
+    } 
             <div><h4 class="title"> Receipt </h4>
             <strong>Receipt # ${receipt.receipt_id} </strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${
-                      bussiness.name ? bussiness.name : ""
-                    } </p> <p> Adress: ${
+    bussiness.name ? bussiness.name : ""
+    } </p> <p> Adress: ${
     bussiness.address ? bussiness.address : ""
-  } </p>
+    } </p>
                     <p> Phone: ${
-                      bussiness.phone ? bussiness.phone : ""
-                    } </p></div> 
+    bussiness.phone ? bussiness.phone : ""
+    } </p></div> 
                     <div> <p> Date: ${receipt.date.toDateString()} </p> <p> Customer: ${
     customer ? customer.customer_name : ""
-  }  </p>
+    }  </p>
                     <p> Adress: ${
-                      customer ? customer.customer_address : ""
-                    }  </p>
+    customer ? customer.customer_address : ""
+    }  </p>
                     <p> Phone: ${
-                      customer ? customer.customer_phone : ""
-                    } </p> </div> </div>
+    customer ? customer.customer_phone : ""
+    } </p> </div> </div>
                     <hr class="mb-25"/>
             <div class="flex-fe mb-20"> 
                 <div style="display: flex; align-items: center;">
@@ -66,17 +66,17 @@ const Bill = (props) => {
                 </div>
                 <div class="width40"> 
                     ${
-                      !duplicate
-                        ? `<div class="flex mb-5">
+    !duplicate
+      ? `<div class="flex mb-5">
                         <span class="flex1"> Balance :  </span>
                         <span>  ${
-                          receipt.previousBalance > 0 ? "(" : ""
-                        }  ${FormatPrice(receipt.previousBalance)} ${
-                            receipt.previousBalance > 0 ? ")" : ""
-                          }  </span>
+      receipt.previousBalance > 0 ? "(" : ""
+      }  ${FormatPrice(receipt.previousBalance)} ${
+      receipt.previousBalance > 0 ? ")" : ""
+      }  </span>
                     </div>`
-                        : ""
-                    }
+      : ""
+    }
                    
                     <div class="flex mb-5">
                         <span class="flex1"> Received Amount :  </span>
@@ -87,20 +87,19 @@ const Bill = (props) => {
                     <div class="flex mb-5">
                         <span class="flex1"> <strong>Current Balance : </strong>  </span>
                         <span> <strong> ${
-                          currentBalance > 0 ? "(" : ""
-                        }  ${FormatPrice(currentBalance)} ${
+    currentBalance > 0 ? "(" : ""
+    }  ${FormatPrice(currentBalance)} ${
     currentBalance > 0 ? ")" : ""
-  }</strong>  </span>
+    }</strong>  </span>
                     </div>
                 </div>    
             </div>
             <hr class="mb-20"/>
             <div class="footer"> 
-                <p> Powered By ${constants.APP_NAME} </p>
-                <p> ${constants.OFFICE_ADDRESS} </p>
-                <p> ${constants.CUSTOMER_CARE_NUMBER} </p>
-                <p> Product By ${constants.POWERED_BY} </p>
-            </div>
+            <p> Powered By ${constants.APP_NAME} </p>
+            <p> ${constants.EHISAAB_URL} </p>
+            <p> Product By ${constants.POWERED_BY} </p>
+        </div>
         </div>
     </body></html>`;
 

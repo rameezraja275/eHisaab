@@ -1,11 +1,12 @@
 export default {
-  VERSION: "1.0.0",
+  VERSION: "1.0.1",
   APP_NAME: "eHisaab",
   OFFICE_ADDRESS: "Top Floor ZS Plaza Jutial Gilgit",
   POWERED_BY: "Pine Technologies (Pvt) Ltd",
   CUSTOMER_CARE_NUMBER: "+923489913964",
   CUSTOMER_CARE_EMAIL: "ehisaab@-technologies.com",
   PLAY_STORE_LINK: "ehisaab",
+  EHISAAB_URL: "https://www.pine-technologies.com/ehisaab/",
   TERMS_URL: "https://www.pine-technologies.com/ehisaab/terms-of-use",
   PAYMENT_URL: "https://www.pine-technologies.com/ehisaab/payments/",
 
