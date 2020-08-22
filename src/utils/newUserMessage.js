@@ -1,8 +1,14 @@
 export const newUserMessages = [
   {
     notification_text:
-      "Welcome to EHisaab. By siging up, you've taken first step towards a successfull bussiness operation and Growth" +
-      "We'll do everthing we can to help you manage your accounts with EHisaab" +
-      "You can Enjoy EHisaab Services Free for 1 Month",
+      "Welcome to eHisaab. By signing up, you've taken the first step towards a successful business"
+  },
+  {
+    notification_text:
+      "eHisaab is a complete POS Mobile App. eHisaab automates all your business transactions. With eHisaab you can manage Sale, Purchase, Expenses, Invoices, Reporting, Inventory, Open Sale and much more."
+  },
+  {
+    notification_text:
+      "You can Enjoy eHisaab Services Free for 1 Month after that's its only Rs500 per month"
   },
 ];

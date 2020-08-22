@@ -384,38 +384,42 @@ export const ValidateToken = () => {
       token,
     };
 
-    axios
-      .post(`${API.BASE_URL}${API.VALIDATE_TOKEN}`, body, { headers })
-      .then(async (res) => {
-        const response = res.data.data;
-        token &&
+    if (token) {
+      axios
+        .post(`${API.BASE_URL}${API.VALIDATE_TOKEN}`, body, { headers })
+        .then(async (res) => {
+          const response = res.data.data;
+          token &&
+            dispatch({
+              type: ACTION.TOKEN,
+              payload: token,
+            });
+
           dispatch({
-            type: ACTION.TOKEN,
-            payload: token,
+            type: ACTION.USER_STATUS,
+            payload: response[3],
           });
 
-        dispatch({
-          type: ACTION.USER_STATUS,
-          payload: response[3],
-        });
+          dispatch({
+            type: ACTION.NOTIFICATIONS,
+            payload: response.notifications,
+          });
 
-        dispatch({
-          type: ACTION.NOTIFICATIONS,
-          payload: response.notifications,
+          navigation(response[3], dispatch);
+        })
+        .catch((err) => {
+          // dispatch({
+          //   type: ACTION.TOKEN_STATUS,
+          //   payload: false,
+          // });
+          // dispatch({
+          //   payload: null,
+          //   type: ACTION.RESET_STATE,
+          // });
+          navigate("Auth");
         });
-
-        navigation(response[3], dispatch);
-      })
-      .catch((err) => {
-        // dispatch({
-        //   type: ACTION.TOKEN_STATUS,
-        //   payload: false,
-        // });
-        // dispatch({
-        //   payload: null,
-        //   type: ACTION.RESET_STATE,
-        // });
-        navigate("Auth");
-      });
+    } else {
+      navigate("Auth");
+    }
   };
 };

@@ -34,8 +34,6 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
     }
   };
 
-  const { width } = Dimensions.get("window")
-  console.log(width)
   return loading.status ? (
     <Loader size={10} />
   ) : (
