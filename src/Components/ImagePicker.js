@@ -21,18 +21,18 @@ const ImageLoader = (props) => {
         allowsEditing: false,
         aspect: [4, 4],
         base64: true,
-        quality: 1,
+        quality: 0.1
       });
       if (!result.cancelled) {
         let imageLength =
           result && (Math.ceil(result.base64.length / 4) * 3 - 2) / 1000;
-
         if (Number(imageLength) < 1024) {
           onChangeImage(result);
         } else {
           ShowFlash(getTranslation("FILE_TOO_LARGE", language), "danger");
         }
       } else {
+
         ShowFlash(getTranslation("SERVER_ERROR", language), "danger");
       }
     }

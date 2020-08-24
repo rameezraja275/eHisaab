@@ -7,8 +7,8 @@ import AddEditForm from "./AddEditSupplier";
 import colors from "../../utils/colors";
 import ViewSuppliers from "./View";
 import HeaderOptions from "../../Components/HeaderOptions";
-import SupplierPayment from "./Payments";
-import AddEditPayment from "./AddEditPayment";
+// import SupplierPayment from "./Payments";
+// import AddEditPayment from "../payments/AddEditPayment";
 import HeaderTitle from "../../Components/HeaderTitle";
 
 const Suppliers_StackNavigator = createStackNavigator({
@@ -17,7 +17,7 @@ const Suppliers_StackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="SUPPLIERS" />,
       headerLeft: () => <HamBurger navigationProps={navigation} />,
-      headerRight: () => <HeaderOptions navigationProps={navigation} />,
+      // headerRight: () => <HeaderOptions navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
@@ -69,41 +69,41 @@ const Suppliers_StackNavigator = createStackNavigator({
     }),
   },
 
-  AddPayment: {
-    screen: AddEditPayment,
-    navigationOptions: ({ navigation }) => ({
-      title: <HeaderTitle title="ADD_PAYMENT" />,
-      headerStyle: {
-        backgroundColor: colors.darkColor,
-      },
+  // AddPayment: {
+  //   screen: AddEditPayment,
+  //   navigationOptions: ({ navigation }) => ({
+  //     title: <HeaderTitle title="ADD_PAYMENT" />,
+  //     headerStyle: {
+  //       backgroundColor: colors.darkColor,
+  //     },
 
-      headerTintColor: colors.white,
-    }),
-  },
-  EditPayment: {
-    screen: AddEditPayment,
-    navigationOptions: ({ navigation }) => ({
-      title: <HeaderTitle title="UPDATE_PAYMENT" />,
-      headerRight: () => <HeaderOptions navigationProps={navigation} />,
-      headerStyle: {
-        backgroundColor: colors.darkColor,
-      },
+  //     headerTintColor: colors.white,
+  //   }),
+  // },
+  // EditPayment: {
+  //   screen: AddEditPayment,
+  //   navigationOptions: ({ navigation }) => ({
+  //     title: <HeaderTitle title="UPDATE_PAYMENT" />,
+  //     headerRight: () => <HeaderOptions navigationProps={navigation} />,
+  //     headerStyle: {
+  //       backgroundColor: colors.darkColor,
+  //     },
 
-      headerTintColor: colors.white,
-    }),
-  },
+  //     headerTintColor: colors.white,
+  //   }),
+  // },
 
-  PaymentSupplier: {
-    screen: SupplierPayment,
-    navigationOptions: ({ navigation }) => ({
-      title: <HeaderTitle title="PAYMENTS" />,
+  // PaymentSupplier: {
+  //   screen: SupplierPayment,
+  //   navigationOptions: ({ navigation }) => ({
+  //     title: <HeaderTitle title="PAYMENTS" />,
 
-      headerStyle: {
-        backgroundColor: colors.darkColor,
-      },
-      headerTintColor: colors.white,
-    }),
-  },
+  //     headerStyle: {
+  //       backgroundColor: colors.darkColor,
+  //     },
+  //     headerTintColor: colors.white,
+  //   }),
+  // },
 });
 
 export default Suppliers_StackNavigator;

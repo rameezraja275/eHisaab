@@ -59,6 +59,7 @@ export function businessModify(body) {
         setTimeout(() => navigate("Business"), 2000);
       })
       .catch((err) => {
+        console.log(err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

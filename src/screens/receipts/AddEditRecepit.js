@@ -43,7 +43,7 @@ const AddEditReceipt = (props) => {
     props.navigation.state.routeName == "EditReceipt" ? "edit" : "add";
 
   useEffect(() => {
-    // props.customerGet(0)
+    props.customerGet(0)
     props.navigation.setParams({
       showOptions: showOptions,
     });
@@ -107,82 +107,82 @@ const AddEditReceipt = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <React.Fragment>
-          <OptionsAction
-            status={options}
-            close={showOptions}
-            title="DELETE"
-            onSelect={onDelete}
-            danger={true}
-          />
+          <React.Fragment>
+            <OptionsAction
+              status={options}
+              close={showOptions}
+              title="DELETE"
+              onSelect={onDelete}
+              danger={true}
+            />
 
-          <ScrollView
-            style={{ flex: 1 }}
-            keyboardDismissMode={"on-drag"}
-            keyboardShouldPersistTaps={"handled"}
-          >
-            <View style={styles.infobox}>
-              <InfoCard
-                title="AMOUNT"
-                value={FormatPrice(amount)}
-                color={amount >= 0 ? colors.success : colors.danger}
-              />
-            </View>
-            <View style={styles.Form}>
-              <DatePicker
-                placeholder="DATE"
-                required
-                date={formData.date}
-                setDate={(text) => setFormData({ ...formData, date: text })}
-              />
-              <Picker
-                placeholder="CUSTOMER"
-                options={props.customers}
-                value={formData.customer_id}
-                type="customer_name"
-                onChange={(text) =>
-                  setFormData({ ...formData, customer_id: text })
-                }
-                required
-              />
-              <TextInput
-                keyboardType={"number-pad"}
-                placeholder="AMOUNT"
-                value={formData.cr}
-                onChange={(text) => setFormData({ ...formData, cr: text })}
-                required
-              />
-
-              <TextInput
-                value={formData.narration}
-                onChange={(text) =>
-                  setFormData({ ...formData, narration: text })
-                }
-                placeholder="DESCRIPTION"
-                autoCapitalize="sentences"
-              />
-            </View>
-            <View style={styles.Button}>
-              <View style={{ flex: 1 }}>
-                <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+            <ScrollView
+              style={{ flex: 1 }}
+              keyboardDismissMode={"on-drag"}
+              keyboardShouldPersistTaps={"handled"}
+            >
+              <View style={styles.infobox}>
+                <InfoCard
+                  title="AMOUNT"
+                  value={FormatPrice(amount)}
+                  color={amount >= 0 ? colors.success : colors.danger}
+                />
               </View>
-            </View>
-            {formData.id && (
+              <View style={styles.Form}>
+                <DatePicker
+                  placeholder="DATE"
+                  required
+                  date={formData.date}
+                  setDate={(text) => setFormData({ ...formData, date: text })}
+                />
+                <Picker
+                  placeholder="CUSTOMER"
+                  options={props.customers}
+                  value={formData.customer_id}
+                  type="customer_name"
+                  onChange={(text) =>
+                    setFormData({ ...formData, customer_id: text })
+                  }
+                  required
+                />
+                <TextInput
+                  keyboardType={"number-pad"}
+                  placeholder="AMOUNT"
+                  value={formData.cr}
+                  onChange={(text) => setFormData({ ...formData, cr: text })}
+                  required
+                />
+
+                <TextInput
+                  value={formData.narration}
+                  onChange={(text) =>
+                    setFormData({ ...formData, narration: text })
+                  }
+                  placeholder="DESCRIPTION"
+                  autoCapitalize="sentences"
+                />
+              </View>
               <View style={styles.Button}>
-                <View style={{ flex: 1, marginTop: 5 }}>
-                  <Button
-                    title={"GENERATE_RECEIPT"}
-                    onClick={() => {
-                      props.setReceiptData(formData);
-                    }}
-                    icon="pdffile1"
-                  />
+                <View style={{ flex: 1 }}>
+                  <Button title={"SAVE"} onClick={onSubmit} icon="save" />
                 </View>
               </View>
-            )}
-          </ScrollView>
-        </React.Fragment>
-      )}
+              {formData.id && (
+                <View style={styles.Button}>
+                  <View style={{ flex: 1, marginTop: 5 }}>
+                    <Button
+                      title={"GENERATE_RECEIPT"}
+                      onClick={() => {
+                        props.setReceiptData(formData);
+                      }}
+                      icon="pdffile1"
+                    />
+                  </View>
+                </View>
+              )}
+            </ScrollView>
+          </React.Fragment>
+        )}
     </KeyboardAvoidingView>
   );
 };

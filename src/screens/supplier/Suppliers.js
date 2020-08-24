@@ -9,7 +9,7 @@ import Filters from "./Filters";
 import FloatingButton from "../../Components/FloatingButton";
 import { FormatPrice } from "../../utils/helper";
 import colors from "../../utils/colors";
-import OptionsAction from "../../Components/Options";
+// import OptionsAction from "../../Components/Options";
 import EmptyList from "../../Components/EmptyList";
 import ListItemContainer from "../../Components/ListItemContainer";
 import FloatingInfoCard from "../../Components/FloatingInfoCard";
@@ -24,13 +24,13 @@ const Suppliers = (props) => {
     filterType: null,
   });
 
-  const [options, showOptions] = useState(false);
+  // const [options, showOptions] = useState(false);
 
   useEffect(() => {
     supplierGet(0);
-    props.navigation.setParams({
-      showOptions: showOptions,
-    });
+    // props.navigation.setParams({
+    //   showOptions: showOptions,
+    // });
   }, []);
 
   useEffect(() => {
@@ -84,83 +84,83 @@ const Suppliers = (props) => {
           <Loader size={10} />
         </View>
       ) : (
-        <React.Fragment>
-          <SearchBar
-            {...props}
-            onChange={onSearch}
-            toggleFilter={() => setState({ ...state, showOverlay: true })}
-          />
+          <React.Fragment>
+            <SearchBar
+              {...props}
+              onChange={onSearch}
+              toggleFilter={() => setState({ ...state, showOverlay: true })}
+            />
 
-          <OptionsAction
+            {/* <OptionsAction
             status={options}
             close={showOptions}
             title="PAYMENTS"
             onSelect={() => props.navigation.navigate("PaymentSupplier")}
-          />
+          /> */}
 
-          {state.showOverlay && (
-            <Overlay
-              toggleFilter={() => setState({ ...state, showOverlay: false })}
-              title="FILTERS"
-            >
-              <Filters
-                onPress={(text) => {
-                  setState({ ...state, showOverlay: false, filterType: text });
-                }}
-                filterType={state.filterType}
-              />
-            </Overlay>
-          )}
+            {state.showOverlay && (
+              <Overlay
+                toggleFilter={() => setState({ ...state, showOverlay: false })}
+                title="FILTERS"
+              >
+                <Filters
+                  onPress={(text) => {
+                    setState({ ...state, showOverlay: false, filterType: text });
+                  }}
+                  filterType={state.filterType}
+                />
+              </Overlay>
+            )}
 
-          <FlatList
-            ListEmptyComponent={<EmptyList message="Nothing to Show." />}
-            data={state.filteredData}
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={reload} />
-            }
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => {
-              const color =
-                item.current_balance <= 0 ? colors.success : colors.danger;
-              return (
-                <ListItemContainer
-                  onClick={() =>
-                    props.navigation.navigate("ViewSupplier", {
-                      color: color,
-                      supplier: item,
-                      id: item.id,
-                    })
-                  }
-                >
-                  <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                    {item.supplier_name}
-                  </Text>
-                  <View style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
-                    <Text style={{ color: color, fontFamily: "PrimaryFont" }}>
-                      {FormatPrice(item.current_balance)}
+            <FlatList
+              ListEmptyComponent={<EmptyList message="Nothing to Show." />}
+              data={state.filteredData}
+              refreshControl={
+                <RefreshControl refreshing={false} onRefresh={reload} />
+              }
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => {
+                const color =
+                  item.current_balance <= 0 ? colors.success : colors.danger;
+                return (
+                  <ListItemContainer
+                    onClick={() =>
+                      props.navigation.navigate("ViewSupplier", {
+                        color: color,
+                        supplier: item,
+                        id: item.id,
+                      })
+                    }
+                  >
+                    <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
+                      {item.supplier_name}
                     </Text>
-                  </View>
-                </ListItemContainer>
-              );
-            }}
-          />
-          <FloatingInfoCard
-            title="TOTAL"
-            value={total}
-            color={
-              total == 0
-                ? colors.darkColor
-                : total < 0
-                ? colors.success
-                : colors.danger
-            }
-          />
-          <FloatingButton
-            onClick={() => props.navigation.navigate("AddSupplier")}
-            icon="plus"
-          />
-        </React.Fragment>
-      )}
+                    <View style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
+                      <Text style={{ color: color, fontFamily: "PrimaryFont" }}>
+                        {FormatPrice(item.current_balance)}
+                      </Text>
+                    </View>
+                  </ListItemContainer>
+                );
+              }}
+            />
+            <FloatingInfoCard
+              title="TOTAL"
+              value={total}
+              color={
+                total == 0
+                  ? colors.darkColor
+                  : total < 0
+                    ? colors.success
+                    : colors.danger
+              }
+            />
+            <FloatingButton
+              onClick={() => props.navigation.navigate("AddSupplier")}
+              icon="plus"
+            />
+          </React.Fragment>
+        )}
     </View>
   );
 };

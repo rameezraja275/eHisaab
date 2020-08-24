@@ -80,8 +80,7 @@ const Sale = (props) => {
   };
 
   const reload = () => {
-    productGet(0);
-    getNonInventoryItems();
+    selectedIndex == 1 ? getNonInventoryItems() : productGet(0);
     resetCart();
   };
 

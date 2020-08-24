@@ -11,8 +11,6 @@ const navigation = (user_status, dispatch) => {
 
   if (user_status == UNVERIFED_USER) {
     navigate("Verfication");
-  } else if (user_status == PAYMENT_DUE_USER) {
-    navigate("Payment");
   } else if (user_status == ACTIVE_USER) {
     dispatch(productGet(0));
     dispatch(getNonInventoryItems());

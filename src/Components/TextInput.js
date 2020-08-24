@@ -26,12 +26,13 @@ const Input = (props) => {
     borderBottomWidth: 0,
     fontFamily: "PrimaryFont",
     // backgroundColor: "green",
-    padding: 0
+    padding: 0,
   };
 
   const labelStyle = {
     position: "relative",
     left: 0,
+    height: focus ? 10 : 15,
     top: !focus ? 14 : -8,
     fontSize: !focus ? 14 : 10,
     color: !focus ? colors.lightGrey : colors.darkColor,

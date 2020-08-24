@@ -220,6 +220,7 @@ export function productDelete(id) {
 
 export function productGet(productId) {
   return (dispatch, getState) => {
+
     const headers = {
       "Content-Type": "application/json",
     };

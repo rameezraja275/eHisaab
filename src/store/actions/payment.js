@@ -20,7 +20,7 @@ export function paymentCreate(body) {
       id: body.id,
       date: `${body.date.getFullYear()}-${
         body.date.getMonth() + 1
-      }-${body.date.getDate()}`,
+        }-${body.date.getDate()}`,
       supplier_id: body.supplier_id,
       narration: body.narration,
       dr: body.dr,
@@ -40,7 +40,7 @@ export function paymentCreate(body) {
       .post(`${API.BASE_URL}${API.PAYMENT_CREATE_URL}`, data, { headers })
       .then((res) => {
         payments.unshift(res.data.data[0]);
-        dispatch(supplierGet(body.supplier_id));
+        // dispatch(supplierGet(body.supplier_id));
         dispatch({
           payload: payments,
           type: ACTION.PAYMENT_GET_SUCCESS,
@@ -86,7 +86,7 @@ export function paymentModify(body) {
       payment_id: body.id,
       date: `${body.date.getFullYear()}-${
         body.date.getMonth() + 1
-      }-${body.date.getDate()}`,
+        }-${body.date.getDate()}`,
       supplier_id: body.supplier_id,
       dr: body.dr,
       cr: "0",
@@ -110,7 +110,7 @@ export function paymentModify(body) {
           }
         }
 
-        body.supplier_id && dispatch(supplierGet(body.supplier_id));
+        // body.supplier_id && dispatch(supplierGet(body.supplier_id));
 
         dispatch({
           payload: payments,
@@ -186,7 +186,7 @@ export function paymentDelete(id) {
           type: ACTION.PAYMENT_GET_SUCCESS,
         });
 
-        dispatch(supplierGet(supplier_id));
+        // dispatch(supplierGet(supplier_id));
         dispatch({
           payload: {
             status: false,
