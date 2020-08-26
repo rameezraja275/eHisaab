@@ -87,7 +87,7 @@ export const FormatDate = (date, splitOn = " ") => {
   ];
   const formatedDate = `${DateObj.getDate()}-${
     months[DateObj.getMonth()]
-  }-${DateObj.getFullYear().toString().substr(-2)}`;
+    }-${DateObj.getFullYear().toString().substr(-2)}`;
 
   return formatedDate;
 };
@@ -117,7 +117,7 @@ export const employeeTransactionType = (typeCode, language = "0") => {
 export const whatsapp = (phone) => {
   let url = "whatsapp://send?phone=" + phone;
   Linking.openURL(url)
-    .then((data) => {})
+    .then((data) => { })
     .catch((err) => {
       ShowFlash("PHONE_INVALID", "danger");
     });
@@ -131,7 +131,7 @@ export const email = (emailID) => {
 export const rateApp = () => {
   if (Platform.OS != "ios") {
     // GOOGLE_PACKAGE_NAME
-    Linking.openURL(`market://details?id=${"expo"}`).catch((err) =>
+    Linking.openURL(`market://details?id=${constants.PLAY_STORE_LINK}`).catch((err) =>
       ShowFlash("Google Play Store not avalible", "danger")
     );
   } else {
@@ -155,7 +155,7 @@ export const call = (phone) => {
         return Linking.openURL(phoneNumber);
       }
     })
-    .catch((err) => {});
+    .catch((err) => { });
 };
 
 export const sms = (phone, message) => {
@@ -171,5 +171,5 @@ export const sms = (phone, message) => {
         return Linking.openURL(phoneNumber);
       }
     })
-    .catch((err) => {});
+    .catch((err) => { });
 };

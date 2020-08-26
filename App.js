@@ -21,7 +21,7 @@ const App = () => {
       });
       setFontStatus(true);
     } catch (e) {
-      console.log("error", e);
+
     }
   };
 

@@ -3,7 +3,7 @@ import ACTION from "../types";
 import API from "../api";
 import { ShowFlash } from "../../utils/helper";
 import { navigate } from "../../utils/navigationRef";
-// import { customerGet } from "../actions/customer";
+import { customerGet } from "../actions/customer";
 
 export function receiptCreate(body) {
   return (dispatch, getState) => {
@@ -49,7 +49,7 @@ export function receiptCreate(body) {
       .then((res) => {
         receipts.unshift(res.data.data[0]);
 
-        // dispatch(customerGet(data.customer_id));
+        dispatch(customerGet(data.customer_id));
 
         dispatch({
           payload: receipts,
@@ -145,7 +145,7 @@ export function receiptModify(body) {
           type: ACTION.RECEIPT_GET,
         });
 
-        // dispatch(customerGet(body.customer_id));
+        dispatch(customerGet(body.customer_id));
 
         dispatch({
           payload: receipts,
@@ -223,7 +223,7 @@ export function receiptDelete(id) {
         });
 
         // dispatch(receiptGet(0))
-        // dispatch(customerGet(customer_id));
+        dispatch(customerGet(customer_id));
         dispatch({
           payload: {
             status: false,
