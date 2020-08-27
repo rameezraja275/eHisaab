@@ -39,7 +39,7 @@ const SignupScreen = ({
   }
 
   const openInBrowser = (link) => {
-    Linking.openURL(`https:${link}`);
+    Linking.openURL(`${link}`);
   };
 
   const DoSignUp = () => {
@@ -69,12 +69,12 @@ const SignupScreen = ({
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <DismissKeyboard>
-      <KeyboardAvoidingView
-        behavior={Platform.Os == "ios" ? "padding" : "height"}
-        style={styles.container}
-      >
-        {/* <View
+      <DismissKeyboard>
+        <KeyboardAvoidingView
+          behavior={Platform.Os == "ios" ? "padding" : "height"}
+          style={styles.container}
+        >
+          {/* <View
           style={{
             justifyContent: "center",
             flexDirection: "row",
@@ -86,53 +86,53 @@ const SignupScreen = ({
             source={images.logo_vertical}
           />
         </View> */}
-        <View>
-          {/* <Picker placeholder="Country" options={countryList} value={ country } type="value"
+          <View>
+            {/* <Picker placeholder="Country" options={countryList} value={ country } type="value"
                             	onChange={ (text) => setCountry(text) } required/> */}
-          <TextInput
-            style={{ flex: 1 }}
-            value={email}
-            onChange={setEmail}
-            placeholder="EMAIL"
-            keyboardType="email-address"
-            required
-          />
-          <TextInput
-            value={full_name}
-            onChange={setName}
-            placeholder="USER_NAME"
-            required
-          />
-          <TextInput
-            style={{ flex: 1 }}
-            value={password}
-            onChange={setPassword}
-            placeholder="PASSWORD"
-            required
-            secureTextEntry={true}
-          />
-          <TextInput
-            style={{ flex: 1 }}
-            value={cpassword}
-            onChange={setCPassword}
-            placeholder="CONFIRM_PASSWORD"
-            required
-            secureTextEntry={true}
-          />
-          <View style={{ marginBottom: 10, alignItems: "center" }}>
-            <Link
-              onPress={() => openInBrowser(constants.TERMS_URL)}
-              text="POLICY"
-              language={language}
+            <TextInput
+              style={{ flex: 1 }}
+              value={email}
+              onChange={setEmail}
+              placeholder="EMAIL"
+              keyboardType="email-address"
+              required
             />
+            <TextInput
+              value={full_name}
+              onChange={setName}
+              placeholder="USER_NAME"
+              required
+            />
+            <TextInput
+              style={{ flex: 1 }}
+              value={password}
+              onChange={setPassword}
+              placeholder="PASSWORD"
+              required
+              secureTextEntry={true}
+            />
+            <TextInput
+              style={{ flex: 1 }}
+              value={cpassword}
+              onChange={setCPassword}
+              placeholder="CONFIRM_PASSWORD"
+              required
+              secureTextEntry={true}
+            />
+            <View style={{ marginBottom: 10, alignItems: "center" }}>
+              <Link
+                onPress={() => { console.log(constants.TERMS_URL); openInBrowser(constants.TERMS_URL) }}
+                text="POLICY"
+                language={language}
+              />
+            </View>
           </View>
-        </View>
-        <View>
-          <Button style={styles.Button} title="SIGN_UP" onClick={DoSignUp} />
-        </View>
-      </KeyboardAvoidingView>
-    </DismissKeyboard>
-  );
+          <View>
+            <Button style={styles.Button} title="SIGN_UP" onClick={DoSignUp} />
+          </View>
+        </KeyboardAvoidingView>
+      </DismissKeyboard>
+    );
 };
 
 const styles = StyleSheet.create({

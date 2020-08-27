@@ -4,7 +4,7 @@ export default {
   OFFICE_ADDRESS: "Top Floor ZS Plaza Jutial Gilgit",
   POWERED_BY: "Pine Technologies (Pvt) Ltd",
   CUSTOMER_CARE_NUMBER: "+923489913964",
-  CUSTOMER_CARE_EMAIL: "ehisaab@-technologies.com",
+  CUSTOMER_CARE_EMAIL: "ehisaab@pine-technologies.com",
   PLAY_STORE_LINK: "com.pinetechnologies.ehisaab",
   EHISAAB_URL: "https://www.pine-technologies.com/ehisaab/",
   TERMS_URL: "https://www.pine-technologies.com/ehisaab/terms-of-use",

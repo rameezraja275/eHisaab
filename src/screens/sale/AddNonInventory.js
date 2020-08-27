@@ -39,7 +39,7 @@ const AddnonInventoryItem = (props) => {
       product_cost_price == null ||
       product_sale_price == null ||
       product_name == null ||
-      product_cost_price == "" ||
+      product_cost_price == null ||
       product_sale_price == "" ||
       product_name == ""
     ) {

@@ -62,7 +62,7 @@ const Drawer = createDrawerNavigator(
     ReceiptScreen: {
       screen: Receipt_StackNavigator,
       navigationOptions: {
-        drawerLabel: <DrawerLable title="RECEIPT" />,
+        drawerLabel: <DrawerLable title="RECEIPTS" />,
         drawerIcon: ({ tintColor }) => (
           <FontAwesome5 name="receipt" size={20} color={tintColor} />
         ),
