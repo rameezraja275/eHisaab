@@ -14,6 +14,7 @@ import { ShowFlash } from "../../utils/helper";
 import colors from "../../utils/colors";
 import Loader from "../../Components/Loader";
 import { createUniqueID } from "../../utils/helper";
+import constants from "../../utils/constants";
 // import { getTranslation } from "../../utils/language";
 // import constants from "../../utils/constants";
 // import Picker from "../../Components/Picker";
@@ -26,6 +27,7 @@ const AddnonInventoryItem = (props) => {
     product_sale_price: null,
     product_cost_price: null,
     opening_stock: null,
+    is_service: constants.PRODUCT
   });
 
   const onSubmit = () => {
