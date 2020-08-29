@@ -313,6 +313,8 @@ export function getCustomerTransactionHistory(
           payload: res.data.data,
           type: ACTION.CUSTOMER_HISTORY,
         });
+
+
       })
       .catch((err) => {
         if (err.response) {
@@ -331,6 +333,248 @@ export function getCustomerTransactionHistory(
         setTimeout(() => {
           navigate("List");
         }, 1000);
+      });
+  };
+}
+
+
+
+
+
+export function loanDelete(id) {
+  return (dispatch, getState) => {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const store = getState();
+    const token = store.user.token;
+    // const receipts = store.receipt.receipts;
+    const language = store.common.language;
+    const data = {
+      token,
+      receipt_id: id,
+    };
+
+    dispatch({
+      payload: {
+        status: true,
+        type: "del",
+      },
+      type: ACTION.LOADING,
+    });
+
+    axios
+      .post(`${API.BASE_URL}${API.LOAN_DELETE_URL}`, data, { headers })
+      .then((res) => {
+        // let customer_id = null;
+        // const updatedReceipts = receipts.filter((item) => {
+        //   if (item.id == id) {
+        //     customer_id = item.customer_id;
+        //     return false;
+        //   }
+        //   return true;
+        // });
+
+        // dispatch({
+        //   payload: updatedReceipts,
+        //   type: ACTION.RECEIPT_GET_SUCCESS,
+        // });
+
+        // dispatch(receiptGet(0))
+        dispatch(customerGet());
+        dispatch({
+          payload: {
+            status: false,
+            type: "del",
+          },
+          type: ACTION.LOADING,
+        });
+
+        ShowFlash("Deleted Successfully", "success", language);
+
+        setTimeout(() => {
+          navigate("List");
+        }, 1000);
+      })
+      .catch((err) => {
+        if (err.response) {
+          ShowFlash(err.response.data.message, "danger", language);
+        } else {
+          ShowFlash("SERVER_ERROR", "danger", language);
+        }
+        dispatch({
+          payload: {
+            status: false,
+            type: "add",
+          },
+          type: ACTION.LOADING,
+        });
+      });
+  };
+}
+
+
+
+
+
+
+
+
+export function loanModify(body) {
+  return (dispatch, getState) => {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const store = getState();
+    const token = store.user.token; getCustomerTransactionHistory
+
+    console.log("djfgasui", body)
+    // const receipts = [...store.receipt.receipts];
+    const language = store.common.language;
+    const data = {
+      token,
+      receipt_id: body.id,
+      date: `${body.date.getFullYear()}-${
+        body.date.getMonth() + 1
+        }-${body.date.getDate()}`,
+      customer_id: body.customer_id,
+      narration: body.narration,
+      loan_amount: body.amount
+    };
+
+    dispatch({
+      payload: {
+        status: true,
+        type: "modify",
+      },
+      type: ACTION.LOADING,
+    });
+
+    axios
+      .post(`${API.BASE_URL}${API.CUSTOMER_LOAN_MODIFY_URL}`, data, { headers })
+      .then((res) => {
+        // for (let i = 0; i < receipts.length; i++) {
+        //   if (receipts[i].id == body.id) {
+        //     receipts[i] = res.data.data[0];
+        //   }
+        // }
+
+        // dispatch({
+        //   payload: {
+        //     date: body.date,
+        //     customer_id: data.customer_id,
+        //     paid_amount: data.cr,
+        //     receipt_id: res.data.data[0].id,
+        //   },
+        //   type: ACTION.RECEIPT_GET,
+        // });
+
+        dispatch(customerGet(body.customer_id));
+
+        // dispatch({
+        //   payload: receipts,
+        //   type: ACTION.RECEIPT_GET_SUCCESS,
+        // });
+
+        dispatch({
+          payload: {
+            status: false,
+            type: "modify",
+          },
+          type: ACTION.LOADING,
+        });
+
+        ShowFlash("UPDATE_SUCCESS", "success", language);
+
+        setTimeout(() => {
+          navigate("List");
+        }, 1000);
+
+        // setTimeout(() => {
+        //   navigate("receiptPDF", { duplicate: true });
+        // }, 1000);
+      })
+      .catch((err) => {
+        if (err.response) {
+          ShowFlash(err.response.data.message, "danger", language);
+        } else {
+          ShowFlash("SERVER_ERROR", "danger", language);
+        }
+        dispatch({
+          payload: {
+            status: false,
+            type: "add",
+          },
+          type: ACTION.LOADING,
+        });
+      });
+  };
+}
+
+
+
+export function loanCreate(body) {
+  return (dispatch, getState) => {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const store = getState();
+    const token = store.user.token;
+    const language = store.common.language;
+    const data = {
+      token,
+      loan_id: body.id,
+      date: `${body.date.getFullYear()}-${
+        body.date.getMonth() + 1
+        }-${body.date.getDate()}`,
+      customer_id: body.customer_id,
+      narration: body.narration,
+      loan_amount: body.amount
+    };
+
+    dispatch({
+      payload: {
+        status: true,
+        type: "add",
+      },
+      type: ACTION.LOADING,
+    });
+    axios
+      .post(`${API.BASE_URL}${API.ADD_CUSTOMER_LOAN}`, data, { headers })
+      .then((res) => {
+
+        dispatch(customerGet(data.customer_id));
+
+        dispatch({
+          payload: {
+            status: false,
+            type: "add",
+          },
+          type: ACTION.LOADING,
+        });
+
+        ShowFlash("ADD_SUCCESS", "success", language);
+
+        setTimeout(() => {
+          navigate("List");
+        }, 1000);
+      })
+      .catch((err) => {
+
+        console.log(err)
+        if (err.response) {
+          ShowFlash(err.response.data.message, "danger", language);
+        } else {
+          ShowFlash("SERVER_ERROR", "danger", language);
+        }
+        dispatch({
+          payload: {
+            status: false,
+            type: "add",
+          },
+          type: ACTION.LOADING,
+        });
       });
   };
 }

@@ -12,6 +12,7 @@ import HeaderOptions from "../../Components/HeaderOptions";
 // import PDFScreen from "./ReceiptPDF";
 // import Icon from "react-native-vector-icons/AntDesign";
 import HeaderTitle from "../../Components/HeaderTitle";
+import CustomerLoan from "./CustomerLoan";
 
 const Customers_StackNavigator = createStackNavigator({
   List: {
@@ -65,6 +66,30 @@ const Customers_StackNavigator = createStackNavigator({
       headerStyle: {
         backgroundColor: colors.darkColor,
       },
+      headerTintColor: colors.white,
+    }),
+  },
+
+  AddCustomerLoan: {
+    screen: CustomerLoan,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="ADD_LOAN" />,
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+
+      headerTintColor: colors.white,
+    }),
+  },
+  EditCustomerLoan: {
+    screen: CustomerLoan,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="EDIT_LOAN" />,
+      headerRight: () => <HeaderOptions navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+
       headerTintColor: colors.white,
     }),
   },

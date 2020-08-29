@@ -1,5 +1,5 @@
 export default {
-  VERSION: "1.0.2",
+  VERSION: "1.1.0",
   APP_NAME: "eHisaab",
   OFFICE_ADDRESS: "Top Floor ZS Plaza Jutial Gilgit",
   POWERED_BY: "Pine Technologies (Pvt) Ltd",
@@ -34,4 +34,7 @@ export default {
 
   RECEIVABLE: "2",
   PAYABLE: "1",
+
+  AMOUNT_RECEVIED: 0,
+  AMOUNT_GAVE: 1
 };

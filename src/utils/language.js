@@ -228,7 +228,11 @@ const urdu = {
   SALE_DISCOUNT: "فروخت چھوٹ",
   PURCHASE_DISCOUNT: "خریداری چھوٹ",
   INVENTORY_ITEMS: "انوینٹری آئٹمز",
-  NON_INVENTORY_ITEMS: "غیر انوینٹری اشیاء"
+  NON_INVENTORY_ITEMS: "غیر انوینٹری اشیاء",
+
+  ADD_LOAN: "اودھر شامل کریں",
+  EDIT_LOAN: "اودھر کو اپ ڈیٹ کریں"
+
 };
 
 const english = {
@@ -455,7 +459,9 @@ const english = {
   SALE_DISCOUNT: "Sale Discount",
   PURCHASE_DISCOUNT: "Purchase Discount",
   INVENTORY_ITEMS: "Inventory Items",
-  NON_INVENTORY_ITEMS: "Non Inventory Items"
+  NON_INVENTORY_ITEMS: "Non Inventory Items",
+  ADD_LOAN: "Add Loan",
+  EDIT_LOAN: "Edit Loan"
 };
 
 export const getTranslation = (label, language) => {

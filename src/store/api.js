@@ -94,4 +94,8 @@ export default API = {
   CASHBOOK: "report/cashbook.php",
 
   GET_NONINVENTORYITEMS: "product/get_noninventory_product.php",
+
+  ADD_CUSTOMER_LOAN: "customer/create_loan.php",
+  CUSTOMER_LOAN_MODIFY_URL: "customer/modify_loan.php",
+  LOAN_DELETE_URL: "customer/delete_loan.php"
 };

@@ -34,8 +34,8 @@ const Card = (props) => {
                 {props.date}
               </Text>
             ) : (
-              <View></View>
-            )}
+                <View></View>
+              )}
             <Icon
               style={{ margin: 10, color: colors.white }}
               name="filter"
@@ -44,8 +44,23 @@ const Card = (props) => {
           </TouchableOpacity>
         )}
 
-        {props.phoneNumber ? (
-          <View style={{ flexDirection: "row" }}>
+
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            style={{
+              marginRight: 10,
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            onPress={props.openAdjustAmount}
+          >
+            <Icon
+              style={{ margin: 10, color: colors.white }}
+              name="adjust"
+              size={20}
+            />
+          </TouchableOpacity>
+          {props.phoneNumber ? (<>
             <TouchableOpacity
               onPress={() => call(props.phoneNumber)}
               style={{ marginRight: 10 }}
@@ -65,16 +80,17 @@ const Card = (props) => {
                 name="envelope"
                 size={20}
               />
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View></View>
-        )}
+            </TouchableOpacity></>
+          ) : (
+              <View></View>
+            )}
+        </View>
+
       </View>
     </View>
   ) : (
-    <View></View>
-  );
+      <View></View>
+    );
 };
 
 export default Card;
