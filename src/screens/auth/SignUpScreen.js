@@ -121,7 +121,7 @@ const SignupScreen = ({
             />
             <View style={{ marginBottom: 10, alignItems: "center" }}>
               <Link
-                onPress={() => { console.log(constants.TERMS_URL); openInBrowser(constants.TERMS_URL) }}
+                onPress={() => { openInBrowser(constants.TERMS_URL) }}
                 text="POLICY"
                 language={language}
               />

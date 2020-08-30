@@ -8,6 +8,7 @@ const initialState = {
   token: "",
   newUser: false,
   notifications: [],
+  index: 0
 };
 
 const userReducer = (state = initialState, { payload, type }) => {
@@ -47,6 +48,11 @@ const userReducer = (state = initialState, { payload, type }) => {
         ...state,
         newUser: payload,
       };
+    case ACTION.SALE_LIST_INDEX:
+      return {
+        ...state,
+        index: payload
+      }
     case ACTION.RESET_STATE:
       return initialState;
     default:

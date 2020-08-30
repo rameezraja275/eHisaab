@@ -46,7 +46,7 @@ const Card = (props) => {
 
 
         <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity
+          {props.openAdjustAmount && <TouchableOpacity
             style={{
               marginRight: 10,
               flexDirection: "row",
@@ -56,10 +56,10 @@ const Card = (props) => {
           >
             <Icon
               style={{ margin: 10, color: colors.white }}
-              name="adjust"
+              name="credit-card"
               size={20}
             />
-          </TouchableOpacity>
+          </TouchableOpacity>}
           {props.phoneNumber ? (<>
             <TouchableOpacity
               onPress={() => call(props.phoneNumber)}

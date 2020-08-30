@@ -52,8 +52,6 @@ const ViewCustomer = (props) => {
 
   const Transaction = props.transaction;
 
-  console.log("pdfasdhfa", Transaction)
-
   return props.loading.status ? (
     <Loader size={10} />
   ) : (

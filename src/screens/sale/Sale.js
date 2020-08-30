@@ -26,6 +26,8 @@ import Overlay from "../../Components/Overlay";
 import constants from "../../utils/constants";
 import { newUserMessages } from "../../utils/newUserMessage";
 import RadioButtons from "../../Components/RadioButtons";
+import { setIndexForSaleList } from '../../store/actions/user'
+
 
 const Sale = (props) => {
   const {
@@ -39,15 +41,14 @@ const Sale = (props) => {
     nonInventoryItems,
     getNonInventoryItems,
   } = props;
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  // const [selectedIndex, setIndexForSaleList] = useState(0);
+  const { selectedIndex, setIndexForSaleList } = props
 
   let products;
   products = productsData;
   if (selectedIndex == 1) {
     products = nonInventoryItems;
   }
-
-
   const [options, showOptions] = useState(false);
 
   const [state, setState] = useState({
@@ -163,7 +164,7 @@ const Sale = (props) => {
 
             <RadioButtons
               selectedIndex={selectedIndex}
-              setSelectedIndex={setSelectedIndex}
+              setIndexForSaleList={setIndexForSaleList}
               language={props.language}
             />
 
@@ -261,6 +262,7 @@ const mapStateToProps = ({
     notifications: user.notifications,
     newUser: user.newUser,
     nonInventoryItems: nonInventoryItems.nonInventoryItems,
+    selectedIndex: user.index
   };
 };
 
@@ -271,4 +273,5 @@ export default connect(mapStateToProps, {
   removeNotifications,
   removeNewUserStatus,
   getNonInventoryItems,
+  setIndexForSaleList
 })(Sale);

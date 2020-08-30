@@ -399,3 +399,13 @@ export const removeNewUserStatus = () => {
     });
   };
 };
+
+export const setIndexForSaleList = (type) => {
+  return async (dispatch, getState) => {
+
+    dispatch({
+      payload: type,
+      type: ACTION.SALE_LIST_INDEX,
+    });
+  };
+}

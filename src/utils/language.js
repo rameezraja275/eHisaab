@@ -460,8 +460,8 @@ const english = {
   PURCHASE_DISCOUNT: "Purchase Discount",
   INVENTORY_ITEMS: "Inventory Items",
   NON_INVENTORY_ITEMS: "Non Inventory Items",
-  ADD_LOAN: "Add Loan",
-  EDIT_LOAN: "Edit Loan"
+  ADD_LOAN: "Add Customer Payment",
+  EDIT_LOAN: "Edit Customer Payment"
 };
 
 export const getTranslation = (label, language) => {

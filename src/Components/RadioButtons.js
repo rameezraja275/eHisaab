@@ -7,12 +7,12 @@ import colors from "../utils/colors";
 
 import { getTranslation } from "../utils/language";
 
-const RadioButtons = ({ selectedIndex, setSelectedIndex, language }) => {
+const RadioButtons = ({ selectedIndex, setIndexForSaleList, language }) => {
   const buttons = [getTranslation("INVENTORY_ITEMS", language), getTranslation("NON_INVENTORY_ITEMS", language)];
 
   return (
     <ButtonGroup
-      onPress={setSelectedIndex}
+      onPress={setIndexForSaleList}
       selectedIndex={selectedIndex}
       buttons={buttons}
       containerStyle={{ height: 40, backgroundColor: colors.lightColor }}

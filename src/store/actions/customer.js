@@ -428,7 +428,6 @@ export function loanModify(body) {
     const store = getState();
     const token = store.user.token; getCustomerTransactionHistory
 
-    console.log("djfgasui", body)
     // const receipts = [...store.receipt.receipts];
     const language = store.common.language;
     const data = {

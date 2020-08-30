@@ -43,8 +43,6 @@ const CustomerLoan = (props) => {
     useEffect(() => {
         // props.customerGet(0)
 
-        console.log("parafgvu6y", props.navigation.state.params.transaction)
-
         setFormData({
             ...formData,
             customer_id: props.navigation.state.params.customer.id
@@ -74,7 +72,6 @@ const CustomerLoan = (props) => {
     const onSubmit = () => {
         const { date, amount } = formData;
 
-        console.log(date, amount)
         if (
             date == null ||
             date == "" ||
