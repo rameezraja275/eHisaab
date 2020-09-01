@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { FormatPrice, FormatDate } from "../../utils/helper";
 import { resetCart } from "../../store/actions/sale";
 import constants from "../../utils/constants";
+import Loader from "../../Components/Loader";
 
 const Bill = (props) => {
   const { saleDetails, bussiness, customers, navigation, language } = props;
@@ -155,7 +156,10 @@ const Bill = (props) => {
         </div>
     </body></html>`;
 
-  return <PDF html={BillHTML} language={language} />;
+  return (<React.Fragment>{props.loading.status ?
+    <Loader size={10} /> :
+    <PDF html={BillHTML} />}
+  </React.Fragment>);
 };
 
 const mapStateToProps = (props) => {
@@ -165,6 +169,7 @@ const mapStateToProps = (props) => {
     bussiness: bussiness.bussiness,
     customers: customer.customers,
     language: common.language,
+    loading: common.loading
   };
 };
 
