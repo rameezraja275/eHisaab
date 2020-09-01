@@ -53,7 +53,7 @@ const Drawer = createDrawerNavigator(
     CustomersScreen: {
       screen: Customers_StackNavigator,
       navigationOptions: {
-        drawerLabel: <DrawerLable title="CUSTOMERS" />,
+        drawerLabel: <DrawerLable title="CUSTOMER" />,
         drawerIcon: ({ tintColor }) => (
           <Icon name="idcard" size={20} color={tintColor} />
         ),
@@ -80,7 +80,7 @@ const Drawer = createDrawerNavigator(
     PayementScreen: {
       screen: Payments_StackNavigator,
       navigationOptions: {
-        drawerLabel: <DrawerLable title="Payments" />,
+        drawerLabel: <DrawerLable title="PAYMENTS" />,
         drawerIcon: ({ tintColor }) => (
           <Icon name="creditcard" size={20} color={tintColor} />
         ),

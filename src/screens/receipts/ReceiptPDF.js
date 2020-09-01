@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { FormatPrice, FormatDate } from "../../utils/helper";
 import { resetCart } from "../../store/actions/sale";
 import constants from "../../utils/constants";
+import Loader from "../../Components/Loader";
 
 const Bill = (props) => {
   const { bussiness, customers, receipt } = props;
@@ -44,7 +45,7 @@ const Bill = (props) => {
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${
     bussiness.name ? bussiness.name : ""
-    } </p> <p> Adress: ${
+    } </p> <p> Address: ${
     bussiness.address ? bussiness.address : ""
     } </p>
                     <p> Phone: ${
@@ -53,7 +54,7 @@ const Bill = (props) => {
                     <div> <p> Date: ${receipt.date.toDateString()} </p> <p> Customer: ${
     customer ? customer.customer_name : ""
     }  </p>
-                    <p> Adress: ${
+                    <p> Address: ${
     customer ? customer.customer_address : ""
     }  </p>
                     <p> Phone: ${
@@ -103,15 +104,21 @@ const Bill = (props) => {
         </div>
     </body></html>`;
 
-  return <PDF html={BillHTML} />;
-};
+  console.log("loading", props.loading)
+
+  return (<React.Fragment>{props.loading.status ?
+    <Loader size={10} /> :
+    <PDF html={BillHTML} />}
+  </React.Fragment>);
+}
 
 const mapStateToProps = (props) => {
-  const { receipt, customer, bussiness } = props;
+  const { receipt, customer, bussiness, common } = props;
   return {
     receipt: receipt.receipt,
     bussiness: bussiness.bussiness,
     customers: customer.customers,
+    loading: common.loading,
   };
 };
 

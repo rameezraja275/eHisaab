@@ -74,7 +74,7 @@ const Bill = (props) => {
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${
     bussiness.name ? bussiness.name : ""
-    } </p> <p> Adress: ${
+    } </p> <p> Address: ${
     bussiness.address ? bussiness.address : ""
     } </p>
                     <p> Phone: ${
@@ -83,7 +83,7 @@ const Bill = (props) => {
                     <div> <p> Date: ${saleData.date.toDateString()} </p> <p> Customer: ${
     customer ? customer.customer_name : ""
     }  </p>
-                    <p> Adress: ${
+                    <p> Address: ${
     customer ? customer.customer_address : ""
     }  </p>
                     <p> Phone: ${

@@ -42,7 +42,7 @@ const urdu = {
   RECEIPTS: "رسیدیں",
   FILTERS: "فلٹرز",
   RECEIVABLE: "قابل وصول",
-  ALL: "سب",
+  ALL: "تمام",
   PAYABLE: "قابل ادائیگی",
   BALANCE: "بقیہ",
   CUSTOMERS: "گاہکوں",
@@ -65,7 +65,7 @@ const urdu = {
 
   LOGO: "لوگو",
   ENGLISH: "انگریزی",
-  URDU: "ارود",
+  URDU: "اردو",
   BUSINESS: "کاروبار",
   USERS: "صارفین",
   OWNER: "مالک",

@@ -177,7 +177,10 @@ android {
             // debuggable debuggableBuild
             // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-
+            
+            debuggable false
+            shrinkResources enableProguardInReleaseBuilds
+            zipAlignEnabled enableProguardInReleaseBuilds
  
         }
         
