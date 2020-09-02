@@ -52,109 +52,111 @@ const ViewSupplier = (props) => {
   return props.loading.status ? (
     <Loader size={10} />
   ) : (
-    <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
-        <InfoCard
-          title="BALANCE"
-          color={balanceColor}
-          value={FormatPrice(supplier.current_balance)}
-        />
-        <InfoCard title="ADDRESS" value={supplier.supplier_address} />
-        <InfoCard title="PHONE_NUMBER" value={supplier.supplier_phone} />
-        <ActionCard
-          messageText={
-            supplier.current_balance > 0
-              ? `Hey! Please pay your dues. you have to pay ${FormatPrice(
-                  supplier.current_balance
-                )}`
-              : "Hello!"
-          }
-          phoneNumber={supplier.supplier_phone}
-          toggleFilter={() => setOverlay(true)}
-          date={
-            filter.filter_type == "1"
-              ? filter.date.toDateString()
-              : `${filter.date.getMonth() + 1} / ${filter.date.getFullYear()}`
-          }
-        />
-      </View>
-
-      {overlayStatus && (
-        <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
-          <Filters
-            data={filter}
-            setDate={(text) => {
-              setFilter({ ...filter, date: text });
-            }}
-            onSubmit={() => {
-              setOverlay(false);
-              props.getSupplierTransactionHistory(supplier.id, filter);
-            }}
-            setType={(text) => setFilter({ ...filter, filter_type: text })}
+      <View style={styles.MainContainer}>
+        <View style={styles.infobox}>
+          <InfoCard
+            title="BALANCE"
+            color={balanceColor}
+            value={FormatPrice(supplier.current_balance)}
           />
-        </Overlay>
-      )}
-
-      <OptionsAction
-        status={options}
-        close={showOptions}
-        title="DELETE"
-        onSelect={onDelete}
-        danger={true}
-      />
-
-      <View style={styles.table}>
-        <View style={styles.head}>
-          <Text style={[styles.col, styles.alignText]}>
-            {getTranslation("DATE", props.language)}
-          </Text>
-          <Text style={[styles.col, styles.alignText, { flex: 0.4 }]}>
-            {getTranslation("DESCRIPTION", props.language)}
-          </Text>
-          <Text style={[styles.col, styles.alignText]}>
-            {getTranslation("BALANCE", props.language)}
-          </Text>
+          <InfoCard title="ADDRESS" value={supplier.supplier_address} />
+          <InfoCard title="PHONE_NUMBER" value={supplier.supplier_phone} />
+          <ActionCard
+            messageText={
+              supplier.current_balance < 0
+                ? `Hi ${supplier.supplier_name}, ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
+                `Your payment of ${FormatPrice(supplier.current_balance)} is due, Please make a payment.${String.fromCharCode(10)}` +
+                `Thank you. ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
+                `Powered by eHisaab.${String.fromCharCode(10)}` +
+                `Product by Pine Technologies`
+                : "Hello!"
+            }
+            phoneNumber={supplier.supplier_phone}
+            toggleFilter={() => setOverlay(true)}
+            date={
+              filter.filter_type == "1"
+                ? filter.date.toDateString()
+                : `${filter.date.getMonth() + 1} / ${filter.date.getFullYear()}`
+            }
+          />
         </View>
 
-        <FlatList
-          ListEmptyComponent={<EmptyList message="Nothing to Show." />}
-          data={Transaction}
-          keyExtractor={(item) => item.id}
-          refreshControl={
-            <RefreshControl refreshing={false} onRefresh={reload} />
-          }
-          renderItem={({ item }) => {
-            const { dr, cr } = item;
-            const Balance = dr == "0" ? (cr == "0" ? 0 : cr) : dr;
-            const color =
-              dr == "0"
-                ? cr == "0"
-                  ? colors.success
-                  : colors.danger
-                : colors.success;
-            return (
-              <View style={styles.item}>
-                <Text style={styles.col}>
-                  {FormatDate(item.transaction_date)}
-                </Text>
-                <Text style={[styles.col, { flex: 0.4 }]}>
-                  {item.narration}
-                </Text>
-                <Text style={[styles.col, { color }]}>
-                  {FormatPrice(Balance)}
-                </Text>
-              </View>
-            );
-          }}
+        {overlayStatus && (
+          <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
+            <Filters
+              data={filter}
+              setDate={(text) => {
+                setFilter({ ...filter, date: text });
+              }}
+              onSubmit={() => {
+                setOverlay(false);
+                props.getSupplierTransactionHistory(supplier.id, filter);
+              }}
+              setType={(text) => setFilter({ ...filter, filter_type: text })}
+            />
+          </Overlay>
+        )}
+
+        <OptionsAction
+          status={options}
+          close={showOptions}
+          title="DELETE"
+          onSelect={onDelete}
+          danger={true}
+        />
+
+        <View style={styles.table}>
+          <View style={styles.head}>
+            <Text style={[styles.col, styles.alignText]}>
+              {getTranslation("DATE", props.language)}
+            </Text>
+            <Text style={[styles.col, styles.alignText, { flex: 0.4 }]}>
+              {getTranslation("DESCRIPTION", props.language)}
+            </Text>
+            <Text style={[styles.col, styles.alignText]}>
+              {getTranslation("BALANCE", props.language)}
+            </Text>
+          </View>
+
+          <FlatList
+            ListEmptyComponent={<EmptyList message="Nothing to Show." />}
+            data={Transaction}
+            keyExtractor={(item) => item.id}
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={reload} />
+            }
+            renderItem={({ item }) => {
+              const { dr, cr } = item;
+              const Balance = dr == "0" ? (cr == "0" ? 0 : cr) : dr;
+              const color =
+                dr == "0"
+                  ? cr == "0"
+                    ? colors.success
+                    : colors.danger
+                  : colors.success;
+              return (
+                <View style={styles.item}>
+                  <Text style={styles.col}>
+                    {FormatDate(item.transaction_date)}
+                  </Text>
+                  <Text style={[styles.col, { flex: 0.4 }]}>
+                    {item.narration}
+                  </Text>
+                  <Text style={[styles.col, { color }]}>
+                    {FormatPrice(Balance)}
+                  </Text>
+                </View>
+              );
+            }}
+          />
+        </View>
+
+        <FloatingButton
+          onClick={() => props.navigation.navigate("EditSupplier", { supplier })}
+          icon="edit"
         />
       </View>
-
-      <FloatingButton
-        onClick={() => props.navigation.navigate("EditSupplier", { supplier })}
-        icon="edit"
-      />
-    </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({

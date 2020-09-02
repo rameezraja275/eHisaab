@@ -67,10 +67,13 @@ const ViewCustomer = (props) => {
           <ActionCard
             openAdjustAmount={() => { props.navigation.navigate("AddCustomerLoan", { customer }) }}
             messageText={
-              customer.current_balance < 0
-                ? `Hey! Please pay your dues. you have to pay ${FormatPrice(
-                  customer.current_balance
-                )}`
+              customer.current_balance > 0
+                ?
+                `Hi ${customer.customer_name}, ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
+                `Your payment of ${FormatPrice(customer.current_balance)} is due, Please make a payment.${String.fromCharCode(10)}` +
+                `Thank you. ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
+                `Powered by eHisaab.${String.fromCharCode(10)}` +
+                `Product by Pine Technologies`
                 : "Hello!"
             }
             phoneNumber={customer.customer_phone}
