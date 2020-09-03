@@ -12,6 +12,7 @@ const Input = (props) => {
     borderWidth: focus ? 1 : 0.5,
     borderRadius: 5,
     marginVertical: 10,
+    height: 42
   };
 
   const TextFieldStyles = {

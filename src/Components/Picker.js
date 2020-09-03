@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, Picker } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
+import { Picker } from '@react-native-community/picker';
 import colors from "../utils/colors";
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/language";
@@ -49,7 +50,7 @@ const Selector = ({
         <Text style={styles.labelStyle}>
           {getTranslation(placeholder, language)}
           {required && (
-            <Text style={{ color: colors.danger, fontFamily: "PrimaryFont" }}>
+            <Text style={{ color: colors.danger, }}>
               {" "}
               *{" "}
             </Text>
@@ -62,9 +63,10 @@ const Selector = ({
         style={{
           height: 50,
           width: "100%",
-          fontSize: 14,
-          color: value ? colors.black : colors.lightGrey,
-          fontFamily: "PrimaryFont",
+          // fontSize: 14,
+          // color: value ? colors.black : colors.lightGrey,
+          // color: "#FF0000",
+          // fontFamily: "PrimaryFont",
         }}
         onValueChange={(itemValue, itemIndex) => {
           if (required) {
