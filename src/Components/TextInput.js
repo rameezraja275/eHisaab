@@ -83,7 +83,6 @@ const Input = (props) => {
         autoCapitalize={props.autoCapitalize}
         editable={props.disabled ? false : true}
         maxLength={props.maxLength}
-      // autoCorrect={false}
       />
     </View>
   );
