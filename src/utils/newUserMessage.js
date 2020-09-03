@@ -9,6 +9,6 @@ export const newUserMessages = [
   },
   {
     notification_text:
-      "You can Enjoy eHisaab Services Free for 1 Month after that's its only Rs500 per month"
+      "eHisaab is totolay free with ads. and charges 500RS/M for ad free version"
   },
 ];
