@@ -36,7 +36,7 @@ const CheckOut = (props) => {
     } else if (
       (paid_amount != props.cartStatus.totalPrice - props.discount &&
         customer_id == null) ||
-      customer_id == ""
+      customer_id == "" || customer_id == 0
     ) {
       ShowFlash("PAID_TOTAL_AMOUNT_SHOULD_EQUAL", "danger", props.language);
     } else {
@@ -56,6 +56,8 @@ const CheckOut = (props) => {
   }, []);
 
   const netAmount = props.cartStatus.totalPrice - props.discount;
+
+  console.log("this is it ", formData.customer_id)
 
   useEffect(() => {
     if (!editAble) {

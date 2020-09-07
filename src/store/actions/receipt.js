@@ -63,6 +63,8 @@ export function receiptCreate(body) {
             paid_amount: data.cr,
             previousBalance,
             receipt_id: res.data.data[0].id,
+            receipt_counter: res.data.data[0].receipt_counter
+
           },
           type: ACTION.RECEIPT_GET,
         });
@@ -109,6 +111,7 @@ export function receiptModify(body) {
     const data = {
       token,
       receipt_id: body.id,
+      receipt_counter: body.receipt_counter,
       date: `${body.date.getFullYear()}-${
         body.date.getMonth() + 1
         }-${body.date.getDate()}`,
@@ -141,6 +144,7 @@ export function receiptModify(body) {
             customer_id: data.customer_id,
             paid_amount: data.cr,
             receipt_id: res.data.data[0].id,
+            receipt_counter: res.data.data[0].receipt_counter
           },
           type: ACTION.RECEIPT_GET,
         });
@@ -263,6 +267,7 @@ export function setReceiptData(body) {
         customer_id: body.customer_id,
         paid_amount: body.cr,
         receipt_id: body.id,
+        receipt_counter: body.receipt_counter,
       },
       type: ACTION.RECEIPT_GET,
     });

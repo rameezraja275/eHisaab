@@ -54,6 +54,7 @@ export function getSaleTransactions(
             narration,
             id,
             sale_amount,
+            invoice_id
           } = res.data.data[0];
           const { products } = res.data.data[1];
           dispatch({
@@ -77,6 +78,7 @@ export function getSaleTransactions(
               customer_id,
               narration,
               sale_id: id,
+              invoice_id: invoice_id
             },
           });
 
@@ -134,6 +136,7 @@ export function makeSale(data) {
     const token = store.user.token;
     const language = store.common.language;
     const saleID = store.sale.saleData.sale_id;
+    const invoiceID = store.sale.saleData.invoice_id;
     const customers = getState().customer.customers;
 
     const { saleCart, discount, cartStatus } = store.sale;
@@ -141,6 +144,7 @@ export function makeSale(data) {
 
     const body = {
       sale_id: saleID,
+      invoice_id: invoiceID,
       token,
       date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
       paid_amount,
@@ -173,15 +177,19 @@ export function makeSale(data) {
     axios
       .post(url, body, { headers })
       .then((res) => {
+
+        console.log(res.data.data)
         let details = {
           ...data,
           sale_id: saleID,
+          invoice_id: invoiceID,
           previousBalance: previousBalance,
         };
 
         details = {
           ...details,
-          sale_id: res.data.data,
+          sale_id: res.data.data.sale_id,
+          invoice_id: res.data.data.bill_serial
         };
         dispatch({
           payload: details,
@@ -197,6 +205,7 @@ export function makeSale(data) {
         });
 
         ShowFlash("ADD_SUCCESS", "success", language);
+        console.log("asd", customer_id)
         customer_id && dispatch(customerGet(customer_id));
         dispatch(productGet(0));
         dispatch(getNonInventoryItems());

@@ -70,7 +70,7 @@ const Bill = (props) => {
       : `<div></div>`
     } 
             <div><h4 class="title"> Sale Invoice </h4>
-            <strong>Invoice # ${saleData.sale_id} </strong></div> </div> 
+            <strong>Invoice # ${saleData.invoice_id} </strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${

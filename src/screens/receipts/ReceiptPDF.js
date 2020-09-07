@@ -40,7 +40,7 @@ const Bill = (props) => {
       : `<div></div>`
     } 
             <div><h4 class="title"> Receipt </h4>
-            <strong>Receipt # ${receipt.receipt_id} </strong></div> </div> 
+            <strong>Receipt # ${receipt.receipt_counter} </strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${

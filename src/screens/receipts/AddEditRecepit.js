@@ -36,6 +36,7 @@ const AddEditReceipt = (props) => {
     dr: null,
     cr: null,
     narration: null,
+    receipt_counter: null
   });
   const [options, showOptions] = useState(false);
   const [amount, setAmount] = useState(0);
@@ -77,6 +78,7 @@ const AddEditReceipt = (props) => {
     if (
       customer_id == null ||
       customer_id == "" ||
+      customer_id == 0 ||
       date == null ||
       date == "" ||
       cr == null ||

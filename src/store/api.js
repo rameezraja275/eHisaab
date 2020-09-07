@@ -1,6 +1,7 @@
 export default API = {
   // BASE_URL: "https://ehisaab.pine-technologies.com/api/",
-  BASE_URL: "https://www.pine-technologies.com/ehisaab/v1/api/",
+  // BASE_URL: "https://www.pine-technologies.com/ehisaab/v1/api/",
+  BASE_URL: "https://www.pine-technologies.com/ehisaab/v2/api/",
   // BASE_URL: "http://192.168.43.16/bizsolAPI/api/",
   SIGNUP_URL: "user/signup.php",
   LOGIN_URL: "user/login.php",
