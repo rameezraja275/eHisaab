@@ -33,8 +33,8 @@ const Profile = (props) => {
   }, [owner]);
 
   const onSubmit = () => {
-    const { email } = formData;
-    if (email == null || email == "") {
+    const { email, full_name, phone_no } = formData;
+    if (email == null || email == "" || full_name == null || full_name == "" || phone_no == "" || phone_no == null) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else {
       props.profileModify(formData);
@@ -49,41 +49,43 @@ const Profile = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <ScrollView
-          style={{ flex: 1 }}
-          keyboardDismissMode={"on-drag"}
-          keyboardShouldPersistTaps={"handled"}
-        >
-          <View style={styles.Form}>
-            <TextInput
-              value={formData.email}
-              onChange={(text) => setFormData({ ...formData, email: text })}
-              placeholder="EMAIL"
-              required
-              disabled
-            />
+          <ScrollView
+            style={{ flex: 1 }}
+            keyboardDismissMode={"on-drag"}
+            keyboardShouldPersistTaps={"handled"}
+          >
+            <View style={styles.Form}>
+              <TextInput
+                value={formData.email}
+                onChange={(text) => setFormData({ ...formData, email: text })}
+                placeholder="EMAIL"
+                required
+                disabled
+              />
 
-            <TextInput
-              value={formData.full_name}
-              onChange={(text) => setFormData({ ...formData, full_name: text })}
-              placeholder="FULL_NAME"
-              autoCapitalize="words"
-            />
+              <TextInput
+                value={formData.full_name}
+                onChange={(text) => setFormData({ ...formData, full_name: text })}
+                placeholder="FULL_NAME"
+                autoCapitalize="words"
+                required
+              />
 
-            <TextInput
-              value={formData.phone_no}
-              onChange={(text) => setFormData({ ...formData, phone_no: text })}
-              placeholder="PHONE_NUMBER"
-              keyboardType={"phone-pad"}
-            />
-          </View>
-          <View style={styles.Button}>
-            <View style={{ flex: 1 }}>
-              <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+              <TextInput
+                value={formData.phone_no}
+                onChange={(text) => setFormData({ ...formData, phone_no: text })}
+                placeholder="PHONE_NUMBER"
+                required
+                keyboardType={"phone-pad"}
+              />
             </View>
-          </View>
-        </ScrollView>
-      )}
+            <View style={styles.Button}>
+              <View style={{ flex: 1 }}>
+                <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+              </View>
+            </View>
+          </ScrollView>
+        )}
     </KeyboardAvoidingView>
   );
 };

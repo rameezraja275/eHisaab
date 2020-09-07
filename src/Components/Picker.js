@@ -63,10 +63,10 @@ const Selector = ({
         style={{
           height: 50,
           width: "100%",
-          // fontSize: 14,
-          // color: value ? colors.black : colors.lightGrey,
+          fontSize: 14,
+          color: value ? colors.black : colors.lightGrey,
           // color: "#FF0000",
-          // fontFamily: "PrimaryFont",
+          fontFamily: "PrimaryFont",
         }}
         onValueChange={(itemValue, itemIndex) => {
           if (required) {

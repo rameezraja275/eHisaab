@@ -9,6 +9,6 @@ export const newUserMessages = [
   },
   {
     notification_text:
-      "eHisaab is totolay free with ads. and charges 500RS/M for ad free version"
+      "eHisaab is totally free with ads. and charges 500Rs/Month for ads free version"
   },
 ];

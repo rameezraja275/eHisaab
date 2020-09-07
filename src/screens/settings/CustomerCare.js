@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Linking } from "react-native";
 import colors from "../../utils/colors";
 import { getTranslation } from "../../utils/language";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -26,7 +26,9 @@ const CustomerCare = ({ language }) => {
     <View style={{ width: 250, paddingBottom: 5 }}>
       {renderItem("whatsapp", "WHATSAPP", "green", () => whatsapp(phoneNumber))}
       {renderItem("comments-o", "SMS", "#1aa3ff", () => sms(phoneNumber, ""))}
-      {/* { renderItem("phone","PHONE","black", () => call(phoneNumber) ) } */}
+      {renderItem("facebook", "Facebook", "#3b5998", () => Linking.openURL('fb://page/108017437694515/'))}
+      {renderItem("instagram", "Instagram", "#C13584", () => Linking.openURL('https://instagram.com/_u/eHisaab'))}
+      {renderItem("globe", "eHisaab Web", "#3e8aad", () => Linking.openURL('https://www.pine-technologies.com/ehisaab/'))}
       {renderItem("envelope-o", "EMAIL", "#D44638", () => email(emailID))}
     </View>
   );

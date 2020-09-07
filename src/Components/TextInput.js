@@ -12,13 +12,13 @@ const Input = (props) => {
     borderWidth: focus ? 1 : 0.5,
     borderRadius: 5,
     marginVertical: 10,
-    height: 42
+    // height: 42,
   };
 
   const TextFieldStyles = {
     position: "relative",
     // top: 0,
-    // top: !focus ? -2 : 0,
+    top: -5,
     height: focus ? 28 : 26,
     fontSize: 14,
     color: "#000",
@@ -33,7 +33,8 @@ const Input = (props) => {
   const labelStyle = {
     position: "relative",
     left: 0,
-    height: focus ? 10 : 15,
+    // height: focus ? 10 : 20,
+
     top: !focus ? 14 : -8,
     fontSize: !focus ? 14 : 10,
     color: !focus ? colors.lightGrey : colors.darkColor,
@@ -42,6 +43,7 @@ const Input = (props) => {
     marginLeft: focus ? 10 : 0,
     marginRight: focus ? 10 : 0,
     backgroundColor: colors.lightColor,
+    // backgroundColor: "red",
     // width: focus ? 110 : 180,
     fontFamily: "PrimaryFont",
     alignSelf: "flex-start",
