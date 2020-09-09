@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  Linking
 } from "react-native";
 import colors from "../../utils/colors";
 import { logout } from "../../store/actions/auth";
@@ -173,12 +174,12 @@ const Setting = (props) => {
         />
       </View>
 
-      {/* <SettingItem
+      <SettingItem
         title="TUTORIAL"
-        onClick={() => props.navigation.navigate("Tutorials")}
+        onClick={() => Linking.openURL(`https://www.youtube.com/channel/UCEm5duOZZ2zoTiMVeJ8NW5g`)}
         iconName="videocamera"
         language={language}
-      /> */}
+      />
       <SettingItem
         title="CUSTOMER_CARE"
         onClick={() => setOverflow(true)}
