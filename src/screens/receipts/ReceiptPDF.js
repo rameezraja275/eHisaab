@@ -18,7 +18,7 @@ const Bill = (props) => {
     props.navigation.setParams({
       navigate: () => props.navigation.navigate("ReceiptCustomer"),
     });
-  }, [props.receipt]);
+  }, [props.receipt, customers]);
 
   let currentBalance = customer && customer.current_balance;
   const duplicate = props.navigation.state.params.duplicate;

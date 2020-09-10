@@ -22,7 +22,7 @@ const Bill = (props) => {
     props.navigation.setParams({
       resetSaleCart: resetCartnNaviagte,
     });
-  }, [saleData]);
+  }, [saleData, customers]);
 
   // <span> ${FormatPrice(previousBalance)} </span>
 
@@ -121,16 +121,21 @@ const Bill = (props) => {
 
                     <div class="flex mb-5">
                         <span class="flex1"> Remaining Amount :  </span>
-                        <span> ${FormatPrice(remainingAmount)} </span> 
+
+                        <span> ${
+    remainingAmount < 0 ? "(" : ""
+    }  ${FormatPrice(remainingAmount)} ${
+    remainingAmount < 0 ? ")" : ""
+    } </span>
                     </div>
                     ${
     !duplicate
       ? `<div class="flex mb-5">
                         <span class="flex1"> Previous Balance :  </span>
                         <span> <strong> ${
-      currentBalance > 0 ? "(" : ""
+      previousBalance > 0 ? "(" : ""
       }  ${FormatPrice(previousBalance)} ${
-      currentBalance > 0 ? ")" : ""
+      previousBalance > 0 ? ")" : ""
       }</strong>  </span>
                     </div>`
       : ""

@@ -178,7 +178,6 @@ export function makeSale(data) {
       .post(url, body, { headers })
       .then((res) => {
 
-        console.log(res.data.data)
         let details = {
           ...data,
           sale_id: saleID,
@@ -205,7 +204,7 @@ export function makeSale(data) {
         });
 
         ShowFlash("ADD_SUCCESS", "success", language);
-        console.log("asd", customer_id)
+
         customer_id && dispatch(customerGet(customer_id));
         dispatch(productGet(0));
         dispatch(getNonInventoryItems());

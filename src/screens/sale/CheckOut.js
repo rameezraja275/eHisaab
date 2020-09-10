@@ -45,7 +45,6 @@ const CheckOut = (props) => {
   };
 
   useEffect(() => {
-    props.customerGet(0);
     const { date, paid_amount, customer_id, narration } = props.saleData;
     setFormData({
       date,
@@ -56,8 +55,6 @@ const CheckOut = (props) => {
   }, []);
 
   const netAmount = props.cartStatus.totalPrice - props.discount;
-
-  console.log("this is it ", formData.customer_id)
 
   useEffect(() => {
     if (!editAble) {

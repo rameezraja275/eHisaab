@@ -77,7 +77,6 @@ export function receiptCreate(body) {
           type: ACTION.LOADING,
         });
         ShowFlash("ADD_SUCCESS", "success", language);
-
         setTimeout(() => {
           navigate("receiptPDF", { duplicate: false });
         }, 1000);

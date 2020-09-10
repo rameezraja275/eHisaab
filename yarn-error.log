@@ -2,7 +2,7 @@ Arguments:
   /home/rameez/.nvm/versions/node/v10.22.0/bin/node /usr/bin/yarn add react-native@0.63.2 react@16.13.1
 
 PATH: 
-  /home/rameez/Desktop/Projects/eHisaab-native/node_modules/.bin:/home/rameez/Desktop/Projects/node_modules/.bin:/home/rameez/Desktop/node_modules/.bin:/home/rameez/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/home/rameez/.nvm/versions/node/v10.22.0/bin:/home/rameez/Desktop/Projects/eHisaab-native/node_modules/.bin:/home/rameez/.nvm/versions/node/v10.22.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rameez/Android/Sdk/emulator:/home/rameez/Android/Sdk/tools:/home/rameez/Android/Sdk/tools/bin:/home/rameez/Android/Sdk/platform-tools
+  /home/rameez/.nvm/versions/node/v10.22.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rameez/Android/Sdk/emulator:/home/rameez/Android/Sdk/tools:/home/rameez/Android/Sdk/tools/bin:/home/rameez/Android/Sdk/platform-tools
 
 Yarn version: 
   1.22.4

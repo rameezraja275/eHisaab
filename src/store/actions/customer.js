@@ -225,7 +225,7 @@ export function customerGet(customerId) {
     });
 
     let url = `${API.BASE_URL}${API.CUSTOMER_GET_URL}?token=${token}&customer_id=${customerId}`;
-    console.log("loadd true")
+
     axios
       .get(url, { headers })
       .then((res) => {
@@ -235,6 +235,7 @@ export function customerGet(customerId) {
               customers[i] = res.data.data[0];
             }
           }
+
           dispatch({
             payload: customers,
             type: ACTION.CUSTOMER_GET_SUCCESS,
@@ -245,8 +246,6 @@ export function customerGet(customerId) {
             type: ACTION.CUSTOMER_GET_SUCCESS,
           });
         }
-
-        console.log("loadd fasle")
 
         dispatch({
           payload: {
@@ -562,8 +561,6 @@ export function loanCreate(body) {
         }, 1000);
       })
       .catch((err) => {
-
-        console.log(err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
