@@ -419,6 +419,7 @@ export function getCashBook(filter) {
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
+          // console.log(err)
           ShowFlash("SERVER_ERROR", "danger", language);
         }
         dispatch({

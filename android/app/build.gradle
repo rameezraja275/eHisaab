@@ -135,8 +135,8 @@ android {
         applicationId 'com.pinetechnologies.ehisaab'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "1.2.1"
+        versionCode 9
+        versionName "1.2.2"
     }
     signingConfigs {
         release {
@@ -177,7 +177,7 @@ android {
             // debuggable debuggableBuild
             // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            useProguard enableProguardInReleaseBuilds
+            // useProguard enableProguardInReleaseBuilds
             debuggable false
             shrinkResources false
             zipAlignEnabled enableProguardInReleaseBuilds

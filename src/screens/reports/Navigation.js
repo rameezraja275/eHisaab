@@ -12,7 +12,8 @@ import Expense from "./Expense";
 import Employee from "./Employee";
 import ProfitAndLoss from "./ProfitAndLoss";
 import Daybook from "./DayBook";
-import Cashbook from "./CashBook";
+import Cashbook from "./CashBook"
+import CashbookPDF from './PdfReports/CashBook'
 
 const Report_StackNavigator = createStackNavigator({
   ReportsList: {
@@ -117,6 +118,17 @@ const Report_StackNavigator = createStackNavigator({
   },
   CashBook: {
     screen: Cashbook,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="CASHBOOK" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  CashBookPDF: {
+    screen: CashbookPDF,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="CASHBOOK" />,
 

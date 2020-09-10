@@ -85,77 +85,79 @@ const CashBook = (props) => {
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
-        <ActionCard
-          toggleFilter={() => setOverlay(true)}
-          date={filter.date.toDateString()}
-        />
-      </View>
-
-      {overlayStatus && (
-        <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
-          <Filters
-            data={filter}
-            setDate={(text) => {
-              setFilter({ ...filter, date: text });
-            }}
-            onSubmit={() => {
-              setOverlay(false);
-              getCashBook(filter);
-            }}
+      <View style={styles.MainContainer}>
+        <View style={styles.infobox}>
+          <ActionCard
+            toggleFilter={() => setOverlay(true)}
+            date={filter.date.toDateString()}
           />
-        </Overlay>
-      )}
+          {/* <Button /> */}
 
-      <View style={styles.table}>
-        <View style={styles.head}>
-          <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
-            {getTranslation("DESCRIPTION", language)}
-          </Text>
-          <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
-            {getTranslation("DEBIT", language)}
-          </Text>
-          <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
-            {getTranslation("CREDIT", language)}
-          </Text>
         </View>
 
-        <ScrollView
-          refreshControl={
-            <RefreshControl refreshing={false} onRefresh={reload} />
-          }
-        >
-          {/* debit 0 , credit 1 */}
+        {overlayStatus && (
+          <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
+            <Filters
+              data={filter}
+              setDate={(text) => {
+                setFilter({ ...filter, date: text });
+              }}
+              onSubmit={() => {
+                setOverlay(false);
+                getCashBook(filter);
+              }}
+            />
+          </Overlay>
+        )}
 
-          {renderItem("OPENING_BALANCE", opening_cash, DEBIT, true)}
-          {renderItem("SALE", sale, DEBIT)}
-          {renderItem("RECEIPT", receipt, DEBIT)}
-          {renderItem("EXPENSE", expense, CREDIT)}
-          {renderItem("PURCHASE", purchase, CREDIT)}
-          {renderItem("PAYMENTS", payment, CREDIT)}
-        </ScrollView>
+        <View style={styles.table}>
+          <View style={styles.head}>
+            <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
+              {getTranslation("DESCRIPTION", language)}
+            </Text>
+            <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
+              {getTranslation("DEBIT", language)}
+            </Text>
+            <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
+              {getTranslation("CREDIT", language)}
+            </Text>
+          </View>
 
-        <ReportFooter
-          label="TOTAL_DEBIT"
-          value={totalDebit}
-          language={language}
-        />
-        <ReportFooter
-          label="TOTAL_CREDIT"
-          value={totalCredit}
-          language={language}
-        />
+          <ScrollView
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={reload} />
+            }
+          >
+            {/* debit 0 , credit 1 */}
 
-        <ReportFooter
-          label="CLOSING_BALANCE"
-          value={closingBalance}
-          language={language}
-          colorSensitive={true}
-        />
+            {renderItem("OPENING_BALANCE", opening_cash, DEBIT, true)}
+            {renderItem("SALE", sale, DEBIT)}
+            {renderItem("RECEIPT", receipt, DEBIT)}
+            {renderItem("EXPENSE", expense, CREDIT)}
+            {renderItem("PURCHASE", purchase, CREDIT)}
+            {renderItem("PAYMENTS", payment, CREDIT)}
+          </ScrollView>
+
+          <ReportFooter
+            label="TOTAL_DEBIT"
+            value={totalDebit}
+            language={language}
+          />
+          <ReportFooter
+            label="TOTAL_CREDIT"
+            value={totalCredit}
+            language={language}
+          />
+
+          <ReportFooter
+            label="CLOSING_BALANCE"
+            value={closingBalance}
+            language={language}
+            colorSensitive={true}
+          />
+        </View>
       </View>
-    </View>
-  );
+    );
 };
 
 const getStyles = ({ language, URDU }) => {

@@ -20,6 +20,18 @@ const Card = (props) => {
           justifyContent: "space-between",
         }}
       >
+
+        {/* <TouchableOpacity
+          onPress={() => props.navigation.navigate("CashBookPDF")}
+        >
+          <Icon
+            style={{ margin: 10, color: colors.white }}
+            name="envelope"
+            size={20}
+          />
+        </TouchableOpacity> */}
+
+
         {props.toggleFilter && (
           <TouchableOpacity
             style={{

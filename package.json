@@ -10,7 +10,8 @@
     "build-app-bundle": "expo build:android -t app-bundle",
     "release": "cd android && ./gradlew assembleRelease",
     "bundlerelease": "cd android && ./gradlew bundleRelease",
-    "runrelease": "react-native run-android --variant=release"
+    "runrelease": "react-native run-android --variant=release",
+    "clean": "cd android && ./gradlew clean"
   },
   "dependencies": {
     "expo": "38.0.8",
@@ -59,5 +60,5 @@
   },
   "private": true,
   "name": "eHisaab",
-  "version": "1.2.1"
+  "version": "1.2.2"
 }
