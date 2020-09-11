@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import colors from "../utils/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import IconFA from "react-native-vector-icons/FontAwesome5";
 import { sms, call } from "../utils/helper";
 
 const Card = (props) => {
@@ -20,17 +21,6 @@ const Card = (props) => {
           justifyContent: "space-between",
         }}
       >
-
-        {/* <TouchableOpacity
-          onPress={() => props.navigation.navigate("CashBookPDF")}
-        >
-          <Icon
-            style={{ margin: 10, color: colors.white }}
-            name="envelope"
-            size={20}
-          />
-        </TouchableOpacity> */}
-
 
         {props.toggleFilter && (
           <TouchableOpacity
@@ -55,7 +45,6 @@ const Card = (props) => {
             />
           </TouchableOpacity>
         )}
-
 
         <View style={{ flexDirection: "row" }}>
           {props.openAdjustAmount && <TouchableOpacity
@@ -98,11 +87,23 @@ const Card = (props) => {
             )}
         </View>
 
+        {props.pdfexport && <TouchableOpacity
+          onPress={() => props.navigation.navigate(props.pdfInfo.screen, { ...props.pdfInfo })}
+        >
+          <IconFA
+            style={{ margin: 10, color: colors.white }}
+            name="file-export"
+            size={20}
+          />
+        </TouchableOpacity>}
+
       </View>
     </View>
   ) : (
       <View></View>
     );
+
+
 };
 
 export default Card;

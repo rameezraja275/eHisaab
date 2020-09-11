@@ -14,6 +14,11 @@ import ProfitAndLoss from "./ProfitAndLoss";
 import Daybook from "./DayBook";
 import Cashbook from "./CashBook"
 import CashbookPDF from './PdfReports/CashBook'
+import DaybookPDF from './PdfReports/DayBook'
+import ProfitLossPDF from './PdfReports/ProfitLoss'
+import ExpensePDF from './PdfReports/ExpenseReport'
+import PurchasePDF from './PdfReports/Purchase'
+import SalePDF from './PdfReports/Sale'
 
 const Report_StackNavigator = createStackNavigator({
   ReportsList: {
@@ -131,6 +136,61 @@ const Report_StackNavigator = createStackNavigator({
     screen: CashbookPDF,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="CASHBOOK" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  DayBookPDF: {
+    screen: DaybookPDF,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="DAYBOOK" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  PLSPDF: {
+    screen: ProfitLossPDF,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="PROFIT_LOSS_STATEMENT" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  ExpensePDF: {
+    screen: ExpensePDF,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="EXPENSE_REPORT" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  PurchasePDF: {
+    screen: PurchasePDF,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="PURCHASE_REPORT" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  SalePDF: {
+    screen: SalePDF,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="SALE_REPORT" />,
 
       headerStyle: {
         backgroundColor: colors.darkColor,

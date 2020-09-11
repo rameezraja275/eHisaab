@@ -57,97 +57,106 @@ const ExpenseReport = (props) => {
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
-        <ActionCard
-          toggleFilter={() => setOverlay(true)}
-          date={
-            filter.startDate.toDateString() +
-            " - " +
-            filter.endDate.toDateString()
-          }
-        />
-      </View>
+      <View style={styles.MainContainer}>
+        <View style={styles.infobox}>
+          <ActionCard
+            toggleFilter={() => setOverlay(true)}
+            date={
+              filter.startDate.toDateString() +
+              " - " +
+              filter.endDate.toDateString()
+            }
+            navigation={navigation}
+            pdfexport={true}
+            pdfInfo={
+              {
+                date: filter.startDate.toDateString() + " - " + filter.endDate.toDateString(),
+                screen: "ExpensePDF",
+                total_expense: total.total_expense
+              }
+            }
+          />
+        </View>
 
-      {overlayStatus && (
-        <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
-          <Filters
-            data={filter}
-            setStartDate={(text) => {
-              setFilter({ ...filter, endDate: new Date(), startDate: text });
-            }}
-            onSubmit={() => {
-              setOverlay(false);
-              expenseReport(filter, 0);
-            }}
-            setEndDate={(text) => {
-              setFilter({ ...filter, endDate: text });
+        {overlayStatus && (
+          <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
+            <Filters
+              data={filter}
+              setStartDate={(text) => {
+                setFilter({ ...filter, endDate: new Date(), startDate: text });
+              }}
+              onSubmit={() => {
+                setOverlay(false);
+                expenseReport(filter, 0);
+              }}
+              setEndDate={(text) => {
+                setFilter({ ...filter, endDate: text });
+              }}
+            />
+          </Overlay>
+        )}
+
+        <View style={styles.table}>
+          <View style={styles.head}>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+              {getTranslation("DATE", language)}
+            </Text>
+            <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
+              {getTranslation("NAME", language)}
+            </Text>
+            <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
+              {getTranslation("EXPENSE", language)}
+            </Text>
+          </View>
+          <FlatList
+            ListEmptyComponent={<EmptyList />}
+            data={transaction}
+            keyExtractor={(item) => item.id}
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={reload} />
+            }
+            renderItem={({ item }) => {
+              return (
+                <View style={styles.item}>
+                  <Text
+                    style={{
+                      flex: 0.2,
+                      fontFamily: "PrimaryFont",
+                      textAlign: language == URDU ? "right" : "left",
+                    }}
+                  >
+                    {FormatDate(item.expense_date)}
+                  </Text>
+                  <Text
+                    style={{
+                      flex: 0.4,
+                      fontFamily: "PrimaryFont",
+                      textAlign: language == URDU ? "right" : "left",
+                    }}
+                  >
+                    {item.expense_name}
+                  </Text>
+                  <Text
+                    style={{
+                      flex: 0.4,
+                      fontFamily: "PrimaryFont",
+                      textAlign: language == URDU ? "right" : "left",
+                    }}
+                  >
+                    {FormatPrice(item.dr)}
+                  </Text>
+                </View>
+              );
             }}
           />
-        </Overlay>
-      )}
-
-      <View style={styles.table}>
-        <View style={styles.head}>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
-            {getTranslation("DATE", language)}
-          </Text>
-          <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
-            {getTranslation("NAME", language)}
-          </Text>
-          <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
-            {getTranslation("EXPENSE", language)}
-          </Text>
+          <ReportFooter
+            label="TOTAL_EXPENSE"
+            value={total.total_expense}
+            language={language}
+          />
         </View>
-        <FlatList
-          ListEmptyComponent={<EmptyList />}
-          data={transaction}
-          keyExtractor={(item) => item.id}
-          refreshControl={
-            <RefreshControl refreshing={false} onRefresh={reload} />
-          }
-          renderItem={({ item }) => {
-            return (
-              <View style={styles.item}>
-                <Text
-                  style={{
-                    flex: 0.2,
-                    fontFamily: "PrimaryFont",
-                    textAlign: language == URDU ? "right" : "left",
-                  }}
-                >
-                  {FormatDate(item.expense_date)}
-                </Text>
-                <Text
-                  style={{
-                    flex: 0.4,
-                    fontFamily: "PrimaryFont",
-                    textAlign: language == URDU ? "right" : "left",
-                  }}
-                >
-                  {item.expense_name}
-                </Text>
-                <Text
-                  style={{
-                    flex: 0.4,
-                    fontFamily: "PrimaryFont",
-                    textAlign: language == URDU ? "right" : "left",
-                  }}
-                >
-                  {FormatPrice(item.dr)}
-                </Text>
-              </View>
-            );
-          }}
-        />
-        <ReportFooter
-          label="TOTAL_EXPENSE"
-          value={total.total_expense}
-          language={language}
-        />
       </View>
-    </View>
-  );
+    );
 };
 
 const styles = StyleSheet.create({

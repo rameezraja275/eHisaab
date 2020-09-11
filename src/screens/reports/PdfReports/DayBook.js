@@ -9,10 +9,21 @@ import Loader from "../../../Components/Loader";
 
 const Bill = (props) => {
 
-    const { cashbook, bussiness, navigation } = props
-    const { date, totalDebit,
-        totalCredit,
-        closingBalance } = navigation.state.params
+    const { daybook, bussiness, navigation } = props
+    const { date } = navigation.state.params
+    const {
+        purchase_total,
+        purchase_cash,
+        purchase_discount,
+        purchase_credit,
+        sale_total,
+        sale_discount,
+        sale_cash,
+        sale_credit,
+        payments,
+        receipts,
+        expense,
+    } = daybook
 
     const BillHTML = `<html lang="en"> <head> <meta charset="UTF-8">
     <style> body { font-family: "Noto Sans", sans-serif; font-size: 10px; display: flex; justify-content: center; }
@@ -31,7 +42,7 @@ const Bill = (props) => {
             ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
             : `<div></div>`
         } 
-            <div><h4 class="title"> Cash Book </h4>
+            <div><h4 class="title"> Day Book </h4>
             <strong>${ date}</strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
@@ -48,78 +59,71 @@ const Bill = (props) => {
                     <table class="mb-20 "> 
                         <tr> 
                             <th>Description</th> 
-                            <th>Debit</th> 
-                            <th>Credit</th>  
+                            <th>Amount</th> 
                         </tr>
 
                         <tr> 
-                            <th>Opening Balance</th> 
-                            <th> ${
-        cashbook.opening_cash < 0 ? "(" : ""
-        } ${FormatPrice(cashbook.opening_cash)} 
-                                ${
-        cashbook.opening_cash < 0 ? ")" : ""}
-                            </th> 
-                            <th>${"-"}</th>  
+                            <th>Purcahse Cash</th> 
+                            <th> ${FormatPrice(purchase_cash)}</th> 
+                              
                         </tr>
 
                         <tr> 
-                            <th>Sale</th> 
-                            <th>${FormatPrice(cashbook.sale)}</th> 
-                            <th>${"-"}</th>  
+                            <th>Purchase Credit</th> 
+                            <th>${FormatPrice(purchase_credit)}</th> 
+                              
                         </tr>
 
                         <tr> 
-                            <th>Receipt</th> 
-                            <th>${FormatPrice(cashbook.receipt)}</th> 
-                            <th>${"-"}</th>  
+                            <th>Purchase Discount</th> 
+                            <th>${FormatPrice(purchase_discount)}</th> 
+                              
                         </tr>
 
                         <tr> 
-                            <th>Expense</th> 
-                            <th>${"-"}</th> 
-                            <th>${FormatPrice(cashbook.expense)}</th>  
+                            <th>Purchase Total</th> 
+                             
+                            <th>${FormatPrice(purchase_total)}</th>  
                         </tr>
 
                         <tr> 
-                            <th>Purchase</th> 
-                            <th>${"-"}</th> 
-                            <th>${FormatPrice(cashbook.purchase)}</th>  
+                            <th>Sale Cash</th> 
+                             
+                            <th>${FormatPrice(sale_cash)}</th>  
                         </tr>
                    
                         <tr> 
+                            <th>Sale Credit</th> 
+                            <th>${FormatPrice(sale_credit)}</th>  
+                        </tr>
+
+                        <tr> 
+                            <th>Sale Discount</th> 
+                            <th>${FormatPrice(sale_discount)}</th>  
+                        </tr>
+
+                        <tr> 
+                            <th>Sale Total</th> 
+                            <th>${FormatPrice(sale_total)}</th>  
+                        </tr>
+
+                        <tr> 
                             <th>Payments</th> 
-                            <th>${"-"}</th> 
-                            <th>${FormatPrice(cashbook.payment)}</th>  
+                            <th>${FormatPrice(payments)}</th>  
+                        </tr>
+
+                        <tr> 
+                            <th>Receipts</th> 
+                            <th>${FormatPrice(receipts)}</th>  
+                        </tr>
+
+                        <tr> 
+                            <th>Expenses</th> 
+                            <th>${FormatPrice(expense)}</th>  
                         </tr>
                 </table>
                 
-                <div class="flex-fe mb-20"> 
-                <div style="display: flex; align-items: center;">
-                <p> This is Computer Generated Invoice No Signature Required. </p>
-                </div>
-                <div class="width40"> 
-                    <div class="flex mb-5">
-                        <span class="flex1"> Total Debit : </span> 
-                        <span> ${FormatPrice(totalDebit)} </span> 
-                    </div>
-                   
-                    <div class="flex mb-5">
-                        <span class="flex1"> Total Credit :  </span>
-                        <span> ${FormatPrice(totalCredit)} </span> 
-                    </div>
-            
-                    <div class="flex mb-5">
-                        <span class="flex1"> <strong>Closing Balance : </strong>  </span>
-                        <span> <strong> ${
-        closingBalance < 0 ? "(" : ""
-        }  ${FormatPrice(closingBalance)} ${
-        closingBalance < 0 ? ")" : ""
-        }</strong>  </span>
-                    </div>
-                </div>    
-            </div>
-
+        
             <hr class="mb-20"/>
             <div class="footer"> 
                 <p> Powered By ${constants.APP_NAME} </p>
@@ -138,7 +142,7 @@ const Bill = (props) => {
 const mapStateToProps = (props) => {
     const { reports, bussiness, common } = props;
     return {
-        cashbook: reports.cashbook,
+        daybook: reports.daybook,
         bussiness: bussiness.bussiness,
         loading: common.loading,
     };

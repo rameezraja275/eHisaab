@@ -9,10 +9,23 @@ import Loader from "../../../Components/Loader";
 
 const Bill = (props) => {
 
-    const { cashbook, bussiness, navigation } = props
-    const { date, totalDebit,
-        totalCredit,
-        closingBalance } = navigation.state.params
+    const { purchaseReport, bussiness, navigation } = props
+    const { date, total_purchase, total_discount, total_paid } = navigation.state.params
+    console.log(purchaseReport)
+    console.log(navigation.state.params)
+
+    let htmlTable = "";
+    for (let i = 0; i < purchaseReport.length; i++) {
+        const item = purchaseReport[i];
+        htmlTable += `<tr>
+
+        <td > ${item.purchase_date} </td>
+        <td > ${item.supplier_name} </td>
+        <td > ${FormatPrice(item.purchase_amount)} </td>
+        <td > ${FormatPrice(item.purchase_discount)} </td>
+        <td > ${FormatPrice(item.paid_amount)} </td>
+       </tr>`;
+    }
 
     const BillHTML = `<html lang="en"> <head> <meta charset="UTF-8">
     <style> body { font-family: "Noto Sans", sans-serif; font-size: 10px; display: flex; justify-content: center; }
@@ -31,8 +44,8 @@ const Bill = (props) => {
             ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
             : `<div></div>`
         } 
-            <div><h4 class="title"> Cash Book </h4>
-            <strong>${ date}</strong></div> </div> 
+            <div><h4 class="title"> Purchase Report </h4>
+            <strong>${date}</strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
                     <p class="comapnyname"> ${
@@ -47,76 +60,36 @@ const Bill = (props) => {
                     <hr class="mb-25"/>
                     <table class="mb-20 "> 
                         <tr> 
-                            <th>Description</th> 
-                            <th>Debit</th> 
-                            <th>Credit</th>  
+                            <th>Date</th> 
+                            <th>Supplier Name</th> 
+                            <th>Purchase Amount</th>
+                            <th>Discount</th>
+                            <th>Paid Amount</th>  
                         </tr>
-
-                        <tr> 
-                            <th>Opening Balance</th> 
-                            <th> ${
-        cashbook.opening_cash < 0 ? "(" : ""
-        } ${FormatPrice(cashbook.opening_cash)} 
-                                ${
-        cashbook.opening_cash < 0 ? ")" : ""}
-                            </th> 
-                            <th>${"-"}</th>  
-                        </tr>
-
-                        <tr> 
-                            <th>Sale</th> 
-                            <th>${FormatPrice(cashbook.sale)}</th> 
-                            <th>${"-"}</th>  
-                        </tr>
-
-                        <tr> 
-                            <th>Receipt</th> 
-                            <th>${FormatPrice(cashbook.receipt)}</th> 
-                            <th>${"-"}</th>  
-                        </tr>
-
-                        <tr> 
-                            <th>Expense</th> 
-                            <th>${"-"}</th> 
-                            <th>${FormatPrice(cashbook.expense)}</th>  
-                        </tr>
-
-                        <tr> 
-                            <th>Purchase</th> 
-                            <th>${"-"}</th> 
-                            <th>${FormatPrice(cashbook.purchase)}</th>  
-                        </tr>
-                   
-                        <tr> 
-                            <th>Payments</th> 
-                            <th>${"-"}</th> 
-                            <th>${FormatPrice(cashbook.payment)}</th>  
-                        </tr>
-                </table>
+                        ${htmlTable}
+                    </table>
                 
                 <div class="flex-fe mb-20"> 
                 <div style="display: flex; align-items: center;">
                 <p> This is Computer Generated Invoice No Signature Required. </p>
                 </div>
                 <div class="width40"> 
+              
                     <div class="flex mb-5">
-                        <span class="flex1"> Total Debit : </span> 
-                        <span> ${FormatPrice(totalDebit)} </span> 
+                        <span class="flex1"> Total Purchase : </span> 
+                        <span> ${FormatPrice(total_purchase)} </span> 
                     </div>
-                   
+
                     <div class="flex mb-5">
-                        <span class="flex1"> Total Credit :  </span>
-                        <span> ${FormatPrice(totalCredit)} </span> 
+                        <span class="flex1"> Total Discount : </span> 
+                        <span> ${FormatPrice(total_discount)} </span> 
                     </div>
-            
+
                     <div class="flex mb-5">
-                        <span class="flex1"> <strong>Closing Balance : </strong>  </span>
-                        <span> <strong> ${
-        closingBalance < 0 ? "(" : ""
-        }  ${FormatPrice(closingBalance)} ${
-        closingBalance < 0 ? ")" : ""
-        }</strong>  </span>
+                        <span class="flex1"> Total Paid : </span> 
+                        <span> ${FormatPrice(total_paid)} </span> 
                     </div>
+
                 </div>    
             </div>
 
@@ -138,7 +111,7 @@ const Bill = (props) => {
 const mapStateToProps = (props) => {
     const { reports, bussiness, common } = props;
     return {
-        cashbook: reports.cashbook,
+        purchaseReport: reports.purchaseReport,
         bussiness: bussiness.bussiness,
         loading: common.loading,
     };

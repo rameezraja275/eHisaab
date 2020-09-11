@@ -67,104 +67,115 @@ const PurchaseReport = (props) => {
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
-        <ActionCard
-          toggleFilter={() => setOverlay(true)}
-          date={
-            filter.startDate.toDateString() +
-            " - " +
-            filter.endDate.toDateString()
-          }
-        />
-      </View>
+      <View style={styles.MainContainer}>
+        <View style={styles.infobox}>
+          <ActionCard
+            toggleFilter={() => setOverlay(true)}
+            date={
+              filter.startDate.toDateString() +
+              " - " +
+              filter.endDate.toDateString()
+            }
+            navigation={navigation}
+            pdfexport={true}
+            pdfInfo={
+              {
+                date: filter.startDate.toDateString() + " - " + filter.endDate.toDateString(),
+                screen: "PurchasePDF",
+                total_purchase: total.total_purchase,
+                total_discount: total.total_discount,
+                total_paid: total.total_paid,
+              }
+            }
+          />
+        </View>
 
-      {overlayStatus && (
-        <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
-          <Filters
-            data={filter}
-            setStartDate={(text) => {
-              setFilter({ ...filter, endDate: new Date(), startDate: text });
-            }}
-            onSubmit={() => {
-              setOverlay(false);
-              purchaseReport(filter);
-            }}
-            setEndDate={(text) => {
-              setFilter({ ...filter, endDate: text });
+        {overlayStatus && (
+          <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
+            <Filters
+              data={filter}
+              setStartDate={(text) => {
+                setFilter({ ...filter, endDate: new Date(), startDate: text });
+              }}
+              onSubmit={() => {
+                setOverlay(false);
+                purchaseReport(filter);
+              }}
+              setEndDate={(text) => {
+                setFilter({ ...filter, endDate: text });
+              }}
+            />
+          </Overlay>
+        )}
+
+        <View style={styles.table}>
+          <View style={styles.head}>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+              {getTranslation("DATE", language)}
+            </Text>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+              {getTranslation("NAME", language)}
+            </Text>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+              {getTranslation("PURCHASE", language)}
+            </Text>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+              {getTranslation("DISCOUNT", language)}
+            </Text>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+              {getTranslation("PAID", language)}
+            </Text>
+          </View>
+          <FlatList
+            ListEmptyComponent={<EmptyList />}
+            data={transaction}
+            keyExtractor={(item) => item.id}
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={reload} />
+            }
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  style={styles.item}
+                  onPress={() =>
+                    navigation.navigate("PurchaseDetailedReport", {
+                      purchase: item,
+                    })
+                  }
+                >
+                  <Text style={styles.itemCol}>
+                    {FormatDate(item.purchase_date)}
+                  </Text>
+                  <Text style={styles.itemCol}>{item.supplier_name}</Text>
+                  <Text style={styles.itemCol}>
+                    {FormatPrice(item.purchase_amount)}
+                  </Text>
+                  <Text style={styles.itemCol}>
+                    {FormatPrice(item.purchase_discount)}
+                  </Text>
+                  <Text style={styles.itemCol}>
+                    {FormatPrice(item.paid_amount)}
+                  </Text>
+                </TouchableOpacity>
+              );
             }}
           />
-        </Overlay>
-      )}
 
-      <View style={styles.table}>
-        <View style={styles.head}>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
-            {getTranslation("DATE", language)}
-          </Text>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
-            {getTranslation("NAME", language)}
-          </Text>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
-            {getTranslation("PURCHASE", language)}
-          </Text>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
-            {getTranslation("DISCOUNT", language)}
-          </Text>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
-            {getTranslation("PAID", language)}
-          </Text>
-        </View>
-        <FlatList
-          ListEmptyComponent={<EmptyList />}
-          data={transaction}
-          keyExtractor={(item) => item.id}
-          refreshControl={
-            <RefreshControl refreshing={false} onRefresh={reload} />
-          }
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                style={styles.item}
-                onPress={() =>
-                  navigation.navigate("PurchaseDetailedReport", {
-                    purchase: item,
-                  })
-                }
-              >
-                <Text style={styles.itemCol}>
-                  {FormatDate(item.purchase_date)}
-                </Text>
-                <Text style={styles.itemCol}>{item.supplier_name}</Text>
-                <Text style={styles.itemCol}>
-                  {FormatPrice(item.purchase_amount)}
-                </Text>
-                <Text style={styles.itemCol}>
-                  {FormatPrice(item.purchase_discount)}
-                </Text>
-                <Text style={styles.itemCol}>
-                  {FormatPrice(item.paid_amount)}
-                </Text>
-              </TouchableOpacity>
-            );
-          }}
-        />
-
-        <View style={styles.footer}>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}> Total </Text>
-          <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
-            {FormatPrice(total.total_purchase)}
-          </Text>
-          <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
-            {FormatPrice(total.total_discount)}
-          </Text>
-          <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
-            {FormatPrice(total.total_paid)}
-          </Text>
+          <View style={styles.footer}>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}> Total </Text>
+            <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
+              {FormatPrice(total.total_purchase)}
+            </Text>
+            <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
+              {FormatPrice(total.total_discount)}
+            </Text>
+            <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+              {FormatPrice(total.total_paid)}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
 };
 
 const getStyles = ({ language, URDU }) =>

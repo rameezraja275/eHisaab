@@ -85,52 +85,60 @@ const ProfitAndLossReport = (props) => {
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
-        <ActionCard
-          toggleFilter={() => setOverlay(true)}
-          date={
-            filter.startDate.toDateString() +
-            " - " +
-            filter.endDate.toDateString()
-          }
-        />
-      </View>
-
-      {overlayStatus && (
-        <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
-          <Filters
-            data={filter}
-            setStartDate={(text) => {
-              setFilter({ ...filter, endDate: new Date(), startDate: text });
-            }}
-            onSubmit={() => {
-              setOverlay(false);
-              profitNlossStatement(filter, 0);
-            }}
-            setEndDate={(text) => {
-              setFilter({ ...filter, endDate: text });
-            }}
+      <View style={styles.MainContainer}>
+        <View style={styles.infobox}>
+          <ActionCard
+            toggleFilter={() => setOverlay(true)}
+            date={
+              filter.startDate.toDateString() +
+              " - " +
+              filter.endDate.toDateString()
+            }
+            navigation={navigation}
+            pdfexport={true}
+            pdfInfo={
+              {
+                date: filter.startDate.toDateString() + " - " + filter.endDate.toDateString(),
+                screen: "PLSPDF"
+              }
+            }
           />
-        </Overlay>
-      )}
+        </View>
 
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={reload} />
-        }
-      >
-        {renderRow("SALE", sale)}
-        {renderRow("COST_OF_GOODS", costing)}
-        <View style={styles.line}></View>
-        {renderRow("GROSS_PROFIT", gross_profit, true)}
-        {renderRow("EXPENSES", expense)}
-        {renderRow("SALE_DISCOUNT", expense_sale_discount)}
-        <View style={styles.line}></View>
-        {renderRow("NET_PROFIT", net_profit, true)}
-      </ScrollView>
-    </View>
-  );
+        {overlayStatus && (
+          <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
+            <Filters
+              data={filter}
+              setStartDate={(text) => {
+                setFilter({ ...filter, endDate: new Date(), startDate: text });
+              }}
+              onSubmit={() => {
+                setOverlay(false);
+                profitNlossStatement(filter, 0);
+              }}
+              setEndDate={(text) => {
+                setFilter({ ...filter, endDate: text });
+              }}
+            />
+          </Overlay>
+        )}
+
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={reload} />
+          }
+        >
+          {renderRow("SALE", sale)}
+          {renderRow("COST_OF_GOODS", costing)}
+          <View style={styles.line}></View>
+          {renderRow("GROSS_PROFIT", gross_profit, true)}
+          {renderRow("EXPENSES", expense)}
+          {renderRow("SALE_DISCOUNT", expense_sale_discount)}
+          <View style={styles.line}></View>
+          {renderRow("NET_PROFIT", net_profit, true)}
+        </ScrollView>
+      </View>
+    );
 };
 
 const getStyles = ({ language, URDU }) =>

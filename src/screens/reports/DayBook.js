@@ -73,51 +73,59 @@ const DayBook = (props) => {
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
-        <ActionCard
-          toggleFilter={() => setOverlay(true)}
-          date={filter.date.toDateString()}
-        />
-      </View>
-
-      {overlayStatus && (
-        <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
-          <Filters
-            data={filter}
-            setDate={(text) => {
-              setFilter({ ...filter, date: text });
-            }}
-            onSubmit={() => {
-              setOverlay(false);
-              getDayBook(filter);
-            }}
+      <View style={styles.MainContainer}>
+        <View style={styles.infobox}>
+          <ActionCard
+            toggleFilter={() => setOverlay(true)}
+            date={filter.date.toDateString()}
+            navigation={navigation}
+            pdfexport={true}
+            pdfInfo={
+              {
+                date: filter.date.toDateString(),
+                screen: "DayBookPDF"
+              }
+            }
           />
-        </Overlay>
-      )}
+        </View>
 
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={reload} />
-        }
-      >
-        {renderRow("PURCHASE_CASH", purchase_cash)}
-        {renderRow("PURCHASE_CREDIT", purchase_credit)}
-        {renderRow("PURCHASE_DISCOUNT", purchase_discount)}
-        {renderRow("PURCHASE_TOTAL", purchase_total)}
-        <View style={styles.line}></View>
-        {renderRow("SALE_CASH", sale_cash)}
-        {renderRow("SALE_CREDIT", sale_credit)}
-        {renderRow("SALE_DISCOUNT", sale_discount)}
-        {renderRow("SALE_TOTAL", sale_total)}
-        <View style={styles.line}></View>
-        {renderRow("PAYMENTS", payments)}
-        {renderRow("RECEIPTS", receipts)}
-        <View style={styles.line}></View>
-        {renderRow("EXPENSES", expense)}
-      </ScrollView>
-    </View>
-  );
+        {overlayStatus && (
+          <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
+            <Filters
+              data={filter}
+              setDate={(text) => {
+                setFilter({ ...filter, date: text });
+              }}
+              onSubmit={() => {
+                setOverlay(false);
+                getDayBook(filter);
+              }}
+            />
+          </Overlay>
+        )}
+
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={reload} />
+          }
+        >
+          {renderRow("PURCHASE_CASH", purchase_cash)}
+          {renderRow("PURCHASE_CREDIT", purchase_credit)}
+          {renderRow("PURCHASE_DISCOUNT", purchase_discount)}
+          {renderRow("PURCHASE_TOTAL", purchase_total)}
+          <View style={styles.line}></View>
+          {renderRow("SALE_CASH", sale_cash)}
+          {renderRow("SALE_CREDIT", sale_credit)}
+          {renderRow("SALE_DISCOUNT", sale_discount)}
+          {renderRow("SALE_TOTAL", sale_total)}
+          <View style={styles.line}></View>
+          {renderRow("PAYMENTS", payments)}
+          {renderRow("RECEIPTS", receipts)}
+          <View style={styles.line}></View>
+          {renderRow("EXPENSES", expense)}
+        </ScrollView>
+      </View>
+    );
 };
 
 const getStyles = ({ language, URDU }) =>

@@ -90,6 +90,17 @@ const CashBook = (props) => {
           <ActionCard
             toggleFilter={() => setOverlay(true)}
             date={filter.date.toDateString()}
+            navigation={navigation}
+            pdfInfo={
+              {
+                date: filter.date.toDateString(),
+                totalDebit,
+                totalCredit,
+                closingBalance,
+                screen: "CashBookPDF"
+              }
+            }
+            pdfexport={true}
           />
           {/* <Button /> */}
 
