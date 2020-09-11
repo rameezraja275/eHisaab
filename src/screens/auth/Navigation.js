@@ -20,6 +20,7 @@ const AuthNavigation = createStackNavigator({
       //
     }),
   },
+
   Verfication: {
     screen: VerficationScreen,
     navigationOptions: ({ navigation }) => ({

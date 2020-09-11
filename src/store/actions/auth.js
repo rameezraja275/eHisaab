@@ -6,7 +6,7 @@ import { navigate } from "../../utils/navigationRef";
 import { productGet, getNonInventoryItems } from "../actions/product";
 import constants from "../../utils/constants";
 
-const navigation = (user_status, dispatch) => {
+const navigation = (user_status, dispatch, newUser = false) => {
   const { UNVERIFED_USER, PAYMENT_DUE_USER, ACTIVE_USER } = constants;
 
   if (user_status == UNVERIFED_USER) {
@@ -14,7 +14,7 @@ const navigation = (user_status, dispatch) => {
   } else if (user_status == ACTIVE_USER) {
     dispatch(productGet(0));
     dispatch(getNonInventoryItems());
-    navigate("Drawer");
+    navigate(newUser ? "BussinessAuth" : "Drawer");
   }
 };
 
@@ -298,7 +298,7 @@ export const verifyUser = (code) => {
           type: ACTION.NEW_USER,
         });
 
-        navigation(constants.ACTIVE_USER, dispatch);
+        navigation(constants.ACTIVE_USER, dispatch, true);
       })
       .catch((err) => {
         if (err.response) {

@@ -15,6 +15,8 @@ import AddEditForm from "../customers/AddEditCustomer";
 import QuotationScreen from "./Quotation";
 import HeaderTitle from "../../Components/HeaderTitle";
 
+import Bussiness from '../../screens/settings/Bussiness'
+
 const Sale_StackNavigator = createStackNavigator({
   List: {
     screen: SaleScreen,
@@ -29,6 +31,18 @@ const Sale_StackNavigator = createStackNavigator({
         headerTintColor: colors.white,
       };
     },
+  },
+
+  BussinessAuth: {
+    screen: Bussiness,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="BUSINESS" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
   },
 
   Details: {
