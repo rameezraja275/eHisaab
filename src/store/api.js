@@ -1,8 +1,8 @@
 export default API = {
   // BASE_URL: "https://ehisaab.pine-technologies.com/api/",
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v1/api/",
-  BASE_URL: "https://www.pine-technologies.com/ehisaab/v2/api/",
-  // BASE_URL: "http://192.168.43.16/bizsolAPI/api/",
+  // BASE_URL: "https://www.pine-technologies.com/ehisaab/v2/api/",
+  BASE_URL: "http://192.168.43.16/bizsolAPI/api/",
   SIGNUP_URL: "user/signup.php",
   LOGIN_URL: "user/login.php",
   VALIDATE_TOKEN: "user/token.php",
@@ -98,5 +98,15 @@ export default API = {
 
   ADD_CUSTOMER_LOAN: "customer/create_loan.php",
   CUSTOMER_LOAN_MODIFY_URL: "customer/modify_loan.php",
-  LOAN_DELETE_URL: "customer/delete_loan.php"
+  LOAN_DELETE_URL: "customer/delete_loan.php",
+
+  ADD_BANK: "bank/create.php",
+  UPDATE_BANK: "bank/modify.php",
+  GET_BANK: "bank/get.php",
+  DELETE_BANK: "bank/delete.php",
+
+  ADD_BANK_TRANSACTION: "bank/create_transaction.php",
+  UPDATE_BANK_TRANSACTION: "bank/modify_transaction.php",
+  GET_BANK_TRANSACTION: "bank/get_transaction.php",
+  DELETE_BANK_TRANSACTION: "bank/delete_transaction.php"
 };

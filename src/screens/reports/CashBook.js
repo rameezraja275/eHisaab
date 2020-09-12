@@ -77,9 +77,11 @@ const CashBook = (props) => {
     purchase,
     payment,
     expense,
+    bank_withdrawal,
+    bank_deposit
   } = transaction;
-  const totalDebit = Number(opening_cash) + Number(sale) + Number(receipt);
-  const totalCredit = Number(purchase) + Number(payment) + Number(expense);
+  const totalDebit = Number(opening_cash) + Number(sale) + Number(receipt) + Number(bank_deposit);
+  const totalCredit = Number(purchase) + Number(payment) + Number(expense) + Number(bank_withdrawal);
   const closingBalance = totalDebit - totalCredit;
 
   return loading.status ? (
@@ -144,9 +146,12 @@ const CashBook = (props) => {
             {renderItem("OPENING_BALANCE", opening_cash, DEBIT, true)}
             {renderItem("SALE", sale, DEBIT)}
             {renderItem("RECEIPT", receipt, DEBIT)}
+            {renderItem("BANK_DEPOSIT", bank_deposit, DEBIT)}
+
             {renderItem("EXPENSE", expense, CREDIT)}
             {renderItem("PURCHASE", purchase, CREDIT)}
             {renderItem("PAYMENTS", payment, CREDIT)}
+            {renderItem("BANK_WITHDRAW", bank_withdrawal, CREDIT)}
           </ScrollView>
 
           <ReportFooter

@@ -461,7 +461,19 @@ const english = {
   INVENTORY_ITEMS: "Inventory Items",
   NON_INVENTORY_ITEMS: "Non Inventory Items",
   ADD_LOAN: "Add Customer Payment",
-  EDIT_LOAN: "Edit Customer Payment"
+  EDIT_LOAN: "Edit Customer Payment",
+
+  BANK: "Bank",
+  BANKS: "Banks",
+  ADD_BANK: "Add Bank",
+  ACCOUNT_NUMBER: "Account Number",
+  UPDATE_BANK: "Update Bank",
+  BANK_TRANSACTIONS: "Bank Transactions",
+  TRANSACTION_TYPE: "Transaction Type",
+  WITHDRAW: "Withdraw",
+  DEPOSIT: "Deposit",
+  BANK_DEPOSIT: "Bank Deposit",
+  BANK_WITHDRAW: "Bank Withdrawal"
 };
 
 export const getTranslation = (label, language) => {

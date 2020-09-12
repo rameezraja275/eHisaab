@@ -36,5 +36,8 @@ export default {
   PAYABLE: "1",
 
   AMOUNT_RECEVIED: 0,
-  AMOUNT_GAVE: 1
+  AMOUNT_GAVE: 1,
+
+  DEPOSIT: "1",
+  WITHDRAW: "2"
 };

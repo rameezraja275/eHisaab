@@ -51,9 +51,21 @@ const Reports = ({ language, navigation }) => {
         <Text style={styles.title}>{getTranslation("DAYBOOK", language)} </Text>
       </ListItemContainer>
 
-      <ListItemContainer onClick={() => navigation.navigate("CashBook")}>
+      <ListItemContainer onClick={() => navigation.navigate("CashBook")} >
         <Text style={styles.title}>
           {getTranslation("CASHBOOK", language)}{" "}
+        </Text>
+      </ListItemContainer>
+
+      <ListItemContainer onClick={() => { }} commingSoon={true}>
+        <Text style={styles.title}>
+          {getTranslation("CUSTOMER_REPORT", language)}{" "}
+        </Text>
+      </ListItemContainer>
+
+      <ListItemContainer onClick={() => { }} commingSoon={true}>
+        <Text style={styles.title}>
+          {getTranslation("SUPPLIER_REPORT", language)}{" "}
         </Text>
       </ListItemContainer>
     </ScrollView>

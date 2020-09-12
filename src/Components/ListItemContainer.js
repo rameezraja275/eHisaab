@@ -1,11 +1,13 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import colors from "../utils/colors";
 
-const ListItemContainer = ({ children, onClick }) => {
+const ListItemContainer = ({ children, onClick, commingSoon }) => {
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={onClick}>
-      <View style={styles.ListItem}>{children}</View>
+      <View style={styles.ListItem}>{children}
+        {commingSoon && <Text style={styles.tag}>Comming Soon</Text>}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -21,6 +23,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: colors.lightColor,
   },
+  tag: {
+    fontSize: 10,
+    backgroundColor: colors.primaryColor,
+    color: colors.white,
+    padding: 5
+  }
 });
 
 export default ListItemContainer;

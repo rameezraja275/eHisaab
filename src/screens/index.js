@@ -19,6 +19,7 @@ import DrawerLable from "../Components/DraweLabel";
 import Reports_StackNavigator from "./reports/Navigation";
 import Receipt_StackNavigator from "./receipts/Navigation";
 import Payments_StackNavigator from "./payments/Navigation";
+import Bank_StackNavigator from './bank/Navigation'
 
 const Drawer = createDrawerNavigator(
   {
@@ -104,6 +105,17 @@ const Drawer = createDrawerNavigator(
         ),
       },
     },
+
+    BankScreen: {
+      screen: Bank_StackNavigator,
+      navigationOptions: {
+        drawerLabel: <DrawerLable title="BANKS" />,
+        drawerIcon: ({ tintColor }) => (
+          <Icon name="barschart" size={20} color={tintColor} />
+        ),
+      },
+    },
+
     ReportsScreen: {
       screen: Reports_StackNavigator,
       navigationOptions: {
