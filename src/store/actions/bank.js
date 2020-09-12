@@ -293,6 +293,7 @@ export function getBankLedger(
         });
 
         let date = filter.date.toISOString().split("T")[0];
+        console.log(`${API.BASE_URL}${API.GET_BANK_TRANSACTION}?token=${token}&bank_id=${bankId}&transaction_date=${date}&filter_type=${filter.filter_type}`)
 
         axios
             .get(

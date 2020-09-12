@@ -51,7 +51,7 @@ const BankLedger = (props) => {
 
   const Transaction = props.bankTransactions;
 
-  console.log("yooooooooooo", Transaction)
+  console.log("yooooooooooo", bank)
 
   return props.loading.status ? (
     <Loader size={10} />
@@ -103,7 +103,7 @@ const BankLedger = (props) => {
               {getTranslation("DESCRIPTION", language)}
             </Text>
             <Text style={[styles.col, styles.alignText]}>
-              {getTranslation("PRICE", language)}
+              {getTranslation("AMOUNT", language)}
             </Text>
           </View>
 

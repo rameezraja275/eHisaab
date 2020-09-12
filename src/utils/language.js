@@ -466,7 +466,7 @@ const english = {
   BANK: "Bank",
   BANKS: "Banks",
   ADD_BANK: "Add Bank",
-  ACCOUNT_NUMBER: "Account Number",
+  ACCOUNT_NUMBER: "A/c Number",
   UPDATE_BANK: "Update Bank",
   BANK_TRANSACTIONS: "Bank Transactions",
   TRANSACTION_TYPE: "Transaction Type",

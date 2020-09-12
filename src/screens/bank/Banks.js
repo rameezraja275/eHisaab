@@ -45,6 +45,8 @@ const Banks = (props) => {
     getBank(0);
   };
 
+  console.log("fuisdyfmh", banks)
+
   return (
     <View style={styles.MainContainer}>
       {props.loading.status ? (
