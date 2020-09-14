@@ -65,6 +65,26 @@ const BankTransactions = (props) => {
     getBankLedger(0, filter);
   };
 
+  const getAmount = (dr, cr, type) => {
+    if (type == constants.CASH_TO_BANK || type == constants.DEPOSIT) {
+      return dr
+    }
+    return cr
+  }
+
+  const getTypeString = (type) => {
+    if (type == constants.CASH_TO_BANK) {
+      return getTranslation("TRANSFER_CASH_TO_BANK", props.language)
+    } else if (type == constants.BANK_TO_CASH) {
+      return getTranslation("TRANSFER_BANK_TO_CASH", props.language)
+    } else if (type == constants.WITHDRAW) {
+      return getTranslation("REDUCE_BANK", props.language)
+    } else {
+      return getTranslation("INCREASE_BANK", props.language)
+    }
+
+  }
+
   return (
     <View style={styles.MainContainer}>
       {props.loading.status ? (
@@ -119,7 +139,7 @@ const BankTransactions = (props) => {
                     <Text style={{ fontFamily: "PrimaryFont" }}>
                       {getTranslation("AMOUNT", props.language) +
                         " : " +
-                        FormatPrice(item.transaction_type == constants.WITHDRAW ? item.cr : item.dr)}
+                        FormatPrice(getAmount(item.dr, item.cr, item.transaction_type))}
                     </Text>
                     <Text style={{ fontFamily: "PrimaryFont" }}>
                       {getTranslation("DATE", props.language) +
@@ -127,7 +147,7 @@ const BankTransactions = (props) => {
                         FormatDate(item.transaction_date)}
                     </Text>
                     <Text style={{ fontFamily: "PrimaryFont" }}>
-                      {item.transaction_type == constants.WITHDRAW ? "Withdraw" : "Deposit"}
+                      {getTypeString(item.transaction_type)}
                     </Text>
                   </View>
                 </ListItemContainer>

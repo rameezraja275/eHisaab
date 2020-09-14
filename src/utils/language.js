@@ -477,7 +477,8 @@ const english = {
   BANK_DEPOSIT: "Bank Deposit",
   BANK_WITHDRAW: "Bank Withdrawal",
   TRANSFER_CASH_TO_BANK: "Transfer from cash to bank",
-  TRANSFER_BANK_TO_CASH: "Transfer from bank to cash"
+  TRANSFER_BANK_TO_CASH: "Transfer from bank to cash",
+  BANK_BALANCE: "Bank Balance"
 };
 
 export const getTranslation = (label, language) => {

@@ -23,8 +23,9 @@ import Picker from "../../Components/Picker";
 import { showAlert } from "../../utils/helper";
 import OptionsAction from "../../Components/Options";
 import { getTranslation } from "../../utils/language";
-
+import InfoCard from '../../Components/InfoCard'
 import constants from "../../utils/constants";
+import { FormatPrice } from '../../utils/helper'
 
 const AddEditBankTransaction = (props) => {
   const [formData, setFormData] = useState({
@@ -41,6 +42,26 @@ const AddEditBankTransaction = (props) => {
       ? "edit"
       : "add";
 
+  const getAmount = (dr, cr, type) => {
+    if (type == constants.CASH_TO_BANK || type == constants.DEPOSIT) {
+      return dr
+    }
+    return cr
+  }
+
+  const [bankBalance, setBankBalance] = useState(0)
+
+  useEffect(() => {
+
+    props.banks.map((bank) => {
+      console.log(bank)
+      if (bank.id == formData.bank_id) {
+        setBankBalance(bank.current_balance)
+      }
+    })
+
+  }, [formData.bank_id])
+
   useEffect(() => {
     props.getBank(0);
     props.navigation.setParams({
@@ -51,7 +72,7 @@ const AddEditBankTransaction = (props) => {
       const { bankTransaction } = props.navigation.state.params
       setFormData({
         ...bankTransaction,
-        amount: bankTransaction.transaction_type == constants.WITHDRAW ? bankTransaction.cr : bankTransaction.dr,
+        amount: getAmount(bankTransaction.dr, bankTransaction.cr, bankTransaction.transaction_type),
         transaction_date: new Date(
           bankTransaction.transaction_date
         ),
@@ -147,6 +168,13 @@ const AddEditBankTransaction = (props) => {
               keyboardDismissMode={"on-amountag"}
               keyboardShouldPersistTaps={"handled"}
             >
+              <View style={styles.infobox}>
+                <InfoCard
+                  title="BANK_BALANCE"
+                  value={FormatPrice(bankBalance)}
+                  color={bankBalance >= 0 ? colors.success : colors.danger}
+                />
+              </View>
               <View style={styles.Form}>
                 <Picker
                   placeholder="BANK"
@@ -226,6 +254,12 @@ const styles = StyleSheet.create({
   margintop: {
     marginTop: 15,
     fontSize: 15,
+  },
+  infobox: {
+    backgroundColor: colors.darkColor,
+    borderBottomColor: "grey",
+    borderBottomWidth: 0.5,
+    paddingBottom: 15,
   },
 });
 
