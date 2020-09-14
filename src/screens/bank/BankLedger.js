@@ -51,7 +51,19 @@ const BankLedger = (props) => {
 
   const Transaction = props.bankTransactions;
 
-  console.log("yooooooooooo", bank)
+
+  const getTypeString = (type) => {
+    if (type == constants.CASH_TO_BANK) {
+      return getTranslation("TRANSFER_CASH_TO_BANK", props.language)
+    } else if (type == constants.BANK_TO_CASH) {
+      return getTranslation("TRANSFER_BANK_TO_CASH", props.language)
+    } else if (type == constants.WITHDRAW) {
+      return getTranslation("REDUCE_BANK", props.language)
+    } else {
+      return getTranslation("INCREASE_BANK", props.language)
+    }
+
+  }
 
   return props.loading.status ? (
     <Loader size={10} />
@@ -100,7 +112,7 @@ const BankLedger = (props) => {
               {getTranslation("DATE", language)}
             </Text>
             <Text style={[styles.col, styles.alignText, { flex: 0.5 }]}>
-              {getTranslation("DESCRIPTION", language)}
+              {getTranslation("TRANSACTION_TYPE", language)}
             </Text>
             <Text style={[styles.col, styles.alignText]}>
               {getTranslation("AMOUNT", language)}
@@ -121,7 +133,7 @@ const BankLedger = (props) => {
                     {FormatDate(item.transaction_date)}
                   </Text>
                   <Text style={[styles.col, { flex: 0.5 }]}>
-                    {item.narration}
+                    {getTypeString(item.transaction_type)}
                   </Text>
                   <Text style={styles.col}>{FormatPrice(item.transaction_type == constants.WITHDRAW ? item.cr : item.dr)}</Text>
                 </View>

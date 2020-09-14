@@ -231,7 +231,27 @@ const urdu = {
   NON_INVENTORY_ITEMS: "غیر انوینٹری اشیاء",
 
   ADD_LOAN: "اودھر شامل کریں",
-  EDIT_LOAN: "اودھر کو اپ ڈیٹ کریں"
+  EDIT_LOAN: "اودھر کو اپ ڈیٹ کریں",
+
+  BANK: "بینک",
+  BANKS: "بینک",
+  ADD_BANK: "بینک شامل کریں",
+  ACCOUNT_NUMBER: "اکاؤنٹ نمبر",
+  UPDATE_BANK: "بینک کو اپ ڈیٹ کریں",
+  BANK_TRANSACTIONS: "بینک ٹرانزیکشن",
+  TRANSACTION_TYPE: "ٹرانزیکشن کی قسم",
+  REDUCE_BANK: "بینک بیلنس کو کم کریں",
+  INCREASE_BANK: "بینک بیلنس میں اضافہ کریں",
+  BANK_DEPOSIT: "بینک ڈپازٹ",
+  BANK_WITHDRAW: "رقم نکلوانا",
+  TRANSFER_CASH_TO_BANK: "بینک میں نقد رقم منتقل کریں",
+  TRANSFER_BANK_TO_CASH: "بینک کو نقد رقم میں منتقل کریں",
+  BANK_BALANCE: "بینک بیلنس",
+  BALANCE_SHEET: "بیلنس شیٹ",
+  BANK_STATEMENT: "بینک اسٹیٹمنٹ",
+  CUSTOMERS_REPORT: "صارفین کی رپورٹ",
+  SUPPLIERS_REPORT: "سپلائرز کی رپورٹ",
+  STOCK_SUMMARY: "اسٹاک کا خلاصہ"
 
 };
 
@@ -478,7 +498,12 @@ const english = {
   BANK_WITHDRAW: "Bank Withdrawal",
   TRANSFER_CASH_TO_BANK: "Transfer from cash to bank",
   TRANSFER_BANK_TO_CASH: "Transfer from bank to cash",
-  BANK_BALANCE: "Bank Balance"
+  BANK_BALANCE: "Bank Balance",
+  BALANCE_SHEET: "Balance Sheet",
+  BANK_STATEMENT: "Bank Statement",
+  CUSTOMERS_REPORT: "Customers Report",
+  SUPPLIERS_REPORT: "Suppliers Report",
+  STOCK_SUMMARY: "Stock Summary"
 };
 
 export const getTranslation = (label, language) => {
