@@ -20,7 +20,7 @@ const urdu = {
     "سائن اپ پر کلک کرکے ، آپ ہماری شرائط ، ڈیٹا پالیسی سے اتفاق کرتے ہیں",
   SIGN_UP: "سائن اپ",
   SIGN_IN: "سائن ان",
-  RESEND_CODE: "کوڈ پھر سے بھیجو",
+  RESEND_CODE: "توثیقی کوڈ آپ کے فراہم کردہ ای میل پتے پر بھیج دیا گیا ہے ، اگر آپ کو توثیقی کوڈ نہیں ملا ہے تو دوبارہ بھیجنے کے لئے یہاں کلک کریں",
   VERFICATION: "تصدیق",
   USER_NAME: "صارف کا نام",
   NAME: "نام",
@@ -254,7 +254,7 @@ const english = {
   POLICY: "By clicking Sign Up, you agree to our Terms, Data Policy ",
   SIGN_UP: "Sign Up",
   SIGN_IN: "Sign in",
-  RESEND_CODE: "Resend Code",
+  RESEND_CODE: "Verification code has been sent to your provided email address, If you haven't received the verification code click here to send again",
   VERFICATION: "Verification",
   USER_NAME: "User Name",
 

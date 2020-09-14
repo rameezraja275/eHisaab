@@ -80,62 +80,62 @@ const Purchase = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <React.Fragment>
-          <SearchBar onChange={onSearch} {...props} />
+          <React.Fragment>
+            <SearchBar onChange={onSearch} {...props} />
 
-          <OptionsAction
-            status={options}
-            close={showOptions}
-            title="TRANSACTIONS"
-            onSelect={() => props.navigation.navigate("ListTransactions")}
-          />
-
-          <FlatList
-            ListEmptyComponent={<EmptyList message="Nothing to Show." />}
-            data={state.filteredData}
-            keyExtractor={(item) => item.id.toString()}
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={reload} />
-            }
-            renderItem={({ item }) =>
-              item.is_service == constants.PRODUCT && (
-                <TouchableOpacity
-                  style={{ flex: 1 }}
-                  onPress={() => {
-                    props.addItemToPurchase(item);
-                  }}
-                >
-                  <View style={styles.ListItem}>
-                    <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                      {item.product_name}
-                    </Text>
-                    <View style={{ flex: 0.4 }}>
-                      <Text style={{ fontFamily: "PrimaryFont" }}>
-                        {getTranslation("PRICE", props.language) +
-                          " : " +
-                          FormatPrice(item.product_cost_price)}
-                      </Text>
-                      <Text style={{ fontFamily: "PrimaryFont" }}>
-                        {getTranslation("STOCK", props.language) +
-                          " : " +
-                          item.current_stock}{" "}
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              )
-            }
-          />
-
-          {totalItem > 0 && (
-            <FloatingButton
-              onClick={() => props.navigation.navigate("Details")}
-              title={`TOTAL_ITEM`}
-              value={`${totalItem} = ${FormatPrice(totalPrice)}`}
+            <OptionsAction
+              status={options}
+              close={showOptions}
+              title="PURCHASE_RETURN"
+              onSelect={() => props.navigation.navigate("ListTransactions")}
             />
-          )}
-        </React.Fragment>
-      )}
+
+            <FlatList
+              ListEmptyComponent={<EmptyList message="Nothing to Show." />}
+              data={state.filteredData}
+              keyExtractor={(item) => item.id.toString()}
+              refreshControl={
+                <RefreshControl refreshing={false} onRefresh={reload} />
+              }
+              renderItem={({ item }) =>
+                item.is_service == constants.PRODUCT && (
+                  <TouchableOpacity
+                    style={{ flex: 1 }}
+                    onPress={() => {
+                      props.addItemToPurchase(item);
+                    }}
+                  >
+                    <View style={styles.ListItem}>
+                      <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
+                        {item.product_name}
+                      </Text>
+                      <View style={{ flex: 0.4 }}>
+                        <Text style={{ fontFamily: "PrimaryFont" }}>
+                          {getTranslation("PRICE", props.language) +
+                            " : " +
+                            FormatPrice(item.product_cost_price)}
+                        </Text>
+                        <Text style={{ fontFamily: "PrimaryFont" }}>
+                          {getTranslation("STOCK", props.language) +
+                            " : " +
+                            item.current_stock}{" "}
+                        </Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )
+              }
+            />
+
+            {totalItem > 0 && (
+              <FloatingButton
+                onClick={() => props.navigation.navigate("Details")}
+                title={`TOTAL_ITEM`}
+                value={`${totalItem} = ${FormatPrice(totalPrice)}`}
+              />
+            )}
+          </React.Fragment>
+        )}
     </View>
   );
 };

@@ -19,14 +19,14 @@ const Sliderbar = (props) => {
   const Items =
     user.user_level != constants.ADMIN_LEVEL_USER
       ? items.filter((item) => {
-          if (item.key != "ReportsScreen") {
-            return item;
-          }
-        })
+        if (item.key != "ReportsScreen") {
+          return item;
+        }
+      })
       : items;
 
   return (
-    <View style={{ width: "100%", height: "100%" }}>
+    <ScrollView style={{ width: "100%", height: "100%" }}>
       <View style={styles.headerContainer}>
         <View style={styles.bgContainer}>
           <View style={{ flex: 1, justifyContent: "flex-end" }}>
@@ -60,15 +60,15 @@ const Sliderbar = (props) => {
         </View>
       </View>
 
-      <ScrollView>
-        <View style={{ paddingTop: 10 }}>
-          <DrawerNavigatorItems
-            items={Items}
-            {...rest}
-            drawerStyle={{ color: "#c6cbef" }}
-          />
-        </View>
-      </ScrollView>
+      {/* <ScrollView> */}
+      <View style={{ paddingTop: 10 }}>
+        <DrawerNavigatorItems
+          items={Items}
+          {...rest}
+          drawerStyle={{ color: "#c6cbef" }}
+        />
+      </View>
+      {/* </ScrollView> */}
 
       <View
         style={{
@@ -82,7 +82,7 @@ const Sliderbar = (props) => {
           source={images.logo_horizontal_trans}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

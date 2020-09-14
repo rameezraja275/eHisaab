@@ -132,7 +132,7 @@ const Sale = (props) => {
             <OptionsAction
               status={options}
               close={showOptions}
-              title="TRANSACTIONS"
+              title="SALE_RETURN"
               onSelect={() => props.navigation.navigate("ListTransactions")}
             />
 
@@ -196,8 +196,7 @@ const Sale = (props) => {
                       {item.current_stock &&
                         item.is_service == constants.PRODUCT && (
                           <Text style={{ fontFamily: "PrimaryFont" }}>
-                            {`${getTranslation("STOCK", props.language)} : ${
-                              item.current_stock
+                            {`${getTranslation("STOCK", props.language)} : ${item.current_stock
                               }`}{" "}
                           </Text>
                         )}

@@ -96,6 +96,7 @@ const Drawer = createDrawerNavigator(
     //     ),
     //   },
     // },
+
     ExpenseScreen: {
       screen: Expense_StackNavigator,
       navigationOptions: {
@@ -111,7 +112,7 @@ const Drawer = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: <DrawerLable title="BANKS" />,
         drawerIcon: ({ tintColor }) => (
-          <Icon name="barschart" size={20} color={tintColor} />
+          <Icon name="bank" size={20} color={tintColor} />
         ),
       },
     },
@@ -125,6 +126,7 @@ const Drawer = createDrawerNavigator(
         ),
       },
     },
+
     Settings: {
       screen: Settings_StackNavigator,
       navigationOptions: {

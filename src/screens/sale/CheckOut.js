@@ -23,7 +23,7 @@ const CheckOut = (props) => {
   const [formData, setFormData] = useState({
     date: new Date(),
     paid_amount: null,
-    customer_id: null,
+    customer_id: 0,
     narration: null,
   });
 
@@ -31,12 +31,12 @@ const CheckOut = (props) => {
 
   const onSubmit = () => {
     const { paid_amount, customer_id, date } = formData;
+    console.log("onsub", customer_id)
     if (paid_amount == null || paid_amount == "" || date == null) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else if (
       (paid_amount != props.cartStatus.totalPrice - props.discount &&
-        customer_id == null) ||
-      customer_id == "" || customer_id == 0
+        customer_id == 0)
     ) {
       ShowFlash("PAID_TOTAL_AMOUNT_SHOULD_EQUAL", "danger", props.language);
     } else {
@@ -63,6 +63,8 @@ const CheckOut = (props) => {
         : setFormData({ ...formData, paid_amount: "" });
     }
   }, [formData.customer_id]);
+
+  console.log("bahar", formData.customer_id)
 
 
   return (
@@ -110,7 +112,7 @@ const CheckOut = (props) => {
                 value={formData.customer_id}
                 type="customer_name"
                 onChange={(text) =>
-                  setFormData({ ...formData, customer_id: text })
+                  setFormData({ ...formData, customer_id: text == null ? 0 : text })
                 }
               />
               <TextInput

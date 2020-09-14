@@ -71,34 +71,38 @@ const Verification = ({
   return loading.status ? (
     <Loader size={10} />
   ) : (
-    <DismissKeyboard>
-      <KeyboardAvoidingView
-        behavior={Platform.Os == "ios" ? "padding" : "height"}
-        style={styles.container}
-      >
-        <View>
-          <TextInput
-            style={{ flex: 1 }}
-            value={code}
-            onChange={setCode}
-            placeholder="VERFICATION_CODE"
-            required
-            keyboardType={"number-pad"}
-            maxLength={5}
-          />
-        </View>
-        <View>
-          <TouchableOpacity style={{ alignItems: "flex-end", marginBottom: 5 }}>
-            <Text onPress={resendCode} style={{ color: colors.darkColor }}>
-              {" "}
-              {getTranslation("RESEND_CODE", language)}{" "}
-            </Text>
-          </TouchableOpacity>
-          <Button style={styles.Button} title="Verify" onClick={Verify} />
-        </View>
-      </KeyboardAvoidingView>
-    </DismissKeyboard>
-  );
+      <DismissKeyboard>
+        <KeyboardAvoidingView
+          behavior={Platform.Os == "ios" ? "padding" : "height"}
+          style={styles.container}
+        >
+          <View>
+            <TextInput
+              style={{ flex: 1 }}
+              value={code}
+              onChange={setCode}
+              placeholder="VERFICATION_CODE"
+              required
+              keyboardType={"number-pad"}
+              maxLength={5}
+            />
+          </View>
+          <View>
+
+            {/* <Text style={{ color: colors.darkColor }}>
+              {getTranslation("CODE_SENT", language)}
+            </Text> */}
+
+            <TouchableOpacity onPress={resendCode} style={{ alignItems: "flex-end", marginBottom: 5 }}>
+              <Text style={{ color: colors.darkColor }}>
+                {getTranslation("RESEND_CODE", language)}
+              </Text>
+            </TouchableOpacity>
+            <Button style={styles.Button} title="Verify" onClick={Verify} />
+          </View>
+        </KeyboardAvoidingView>
+      </DismissKeyboard>
+    );
 };
 
 const styles = StyleSheet.create({
