@@ -370,7 +370,6 @@ export function bankTransactionCreate(body) {
             type: ACTION.LOADING,
         });
 
-        // console.log("kholay ", data)
         axios
             .post(`${API.BASE_URL}${API.ADD_BANK_TRANSACTION}`, data, {
                 headers,

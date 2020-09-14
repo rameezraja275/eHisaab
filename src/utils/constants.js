@@ -38,6 +38,9 @@ export default {
   AMOUNT_RECEVIED: 0,
   AMOUNT_GAVE: 1,
 
-  DEPOSIT: "1",
-  WITHDRAW: "2"
+  CASH_TO_BANK: "1",
+  BANK_TO_CASH: "2",
+  DEPOSIT: "3",
+  WITHDRAW: "4"
+
 };

@@ -50,47 +50,47 @@ const ExpenseCategories = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <React.Fragment>
-          <SearchBar {...props} onChange={onSearch} />
-          <OptionsAction
-            status={options}
-            close={showOptions}
-            title="TRANSACTIONS"
-            onSelect={() => props.navigation.navigate("ListTransactions")}
-          />
-          <FlatList
-            ListEmptyComponent={<EmptyList message="No Categories" />}
-            data={state.filteredData}
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={reload} />
-            }
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <ListItemContainer
-                onClick={() =>
-                  props.navigation.navigate("ViewCategoryTransactions", {
-                    expenseCategory: item,
-                  })
-                }
-              >
-                <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                  {item.expense_name}
-                </Text>
-                <View style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {FormatPrice(item.Expense)}
+          <React.Fragment>
+            <SearchBar {...props} onChange={onSearch} />
+            <OptionsAction
+              status={options}
+              close={showOptions}
+              title="EXPENSE_TRANSACTIONS"
+              onSelect={() => props.navigation.navigate("ListTransactions")}
+            />
+            <FlatList
+              ListEmptyComponent={<EmptyList message="No Categories" />}
+              data={state.filteredData}
+              refreshControl={
+                <RefreshControl refreshing={false} onRefresh={reload} />
+              }
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <ListItemContainer
+                  onClick={() =>
+                    props.navigation.navigate("ViewCategoryTransactions", {
+                      expenseCategory: item,
+                    })
+                  }
+                >
+                  <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
+                    {item.expense_name}
                   </Text>
-                </View>
-              </ListItemContainer>
-            )}
-          />
+                  <View style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {FormatPrice(item.Expense)}
+                    </Text>
+                  </View>
+                </ListItemContainer>
+              )}
+            />
 
-          <FloatingButton
-            onClick={() => props.navigation.navigate("AddExpenseCategories")}
-            icon="plus"
-          />
-        </React.Fragment>
-      )}
+            <FloatingButton
+              onClick={() => props.navigation.navigate("AddExpenseCategories")}
+              icon="plus"
+            />
+          </React.Fragment>
+        )}
     </View>
   );
 };

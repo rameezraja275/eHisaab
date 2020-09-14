@@ -26,22 +26,18 @@ const Bill = (props) => {
         </style> </head> <body>
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
-            ${
-        bussiness.logo
+            ${bussiness.logo
             ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
             : `<div></div>`
         } 
             <div><h4 class="title"> Cash Book </h4>
-            <strong>${ date}</strong></div> </div> 
+            <strong>${date}</strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
-                    <p class="comapnyname"> ${
-        bussiness.name ? bussiness.name : ""
-        } </p> <p> Address: ${
-        bussiness.address ? bussiness.address : ""
+                    <p class="comapnyname"> ${bussiness.name ? bussiness.name : ""
+        } </p> <p> Address: ${bussiness.address ? bussiness.address : ""
         } </p>
-                    <p> Phone: ${
-        bussiness.phone ? bussiness.phone : ""
+                    <p> Phone: ${bussiness.phone ? bussiness.phone : ""
         } </p></div> 
                     </div>
                     <hr class="mb-25"/>
@@ -54,11 +50,9 @@ const Bill = (props) => {
 
                         <tr> 
                             <th>Opening Balance</th> 
-                            <th> ${
-        cashbook.opening_cash < 0 ? "(" : ""
+                            <th> ${cashbook.opening_cash < 0 ? "(" : ""
         } ${FormatPrice(cashbook.opening_cash)} 
-                                ${
-        cashbook.opening_cash < 0 ? ")" : ""}
+                                ${cashbook.opening_cash < 0 ? ")" : ""}
                             </th> 
                             <th>${"-"}</th>  
                         </tr>
@@ -72,6 +66,12 @@ const Bill = (props) => {
                         <tr> 
                             <th>Receipt</th> 
                             <th>${FormatPrice(cashbook.receipt)}</th> 
+                            <th>${"-"}</th>  
+                        </tr>
+
+                        <tr> 
+                            <th>Bank Withdraw</th> 
+                            <th>${FormatPrice(cashbook.bank_withdrawal)}</th> 
                             <th>${"-"}</th>  
                         </tr>
 
@@ -92,6 +92,13 @@ const Bill = (props) => {
                             <th>${"-"}</th> 
                             <th>${FormatPrice(cashbook.payment)}</th>  
                         </tr>
+
+
+                        <tr> 
+                            <th>Bank Deposit</th> 
+                            <th>${"-"}</th> 
+                            <th>${FormatPrice(cashbook.bank_deposit)}</th>  
+                        </tr>
                 </table>
                 
                 <div class="flex-fe mb-20"> 
@@ -111,10 +118,8 @@ const Bill = (props) => {
             
                     <div class="flex mb-5">
                         <span class="flex1"> <strong>Closing Balance : </strong>  </span>
-                        <span> <strong> ${
-        closingBalance < 0 ? "(" : ""
-        }  ${FormatPrice(closingBalance)} ${
-        closingBalance < 0 ? ")" : ""
+                        <span> <strong> ${closingBalance < 0 ? "(" : ""
+        }  ${FormatPrice(closingBalance)} ${closingBalance < 0 ? ")" : ""
         }</strong>  </span>
                     </div>
                 </div>    

@@ -45,8 +45,6 @@ const Banks = (props) => {
     getBank(0);
   };
 
-  console.log("fuisdyfmh", banks)
-
   return (
     <View style={styles.MainContainer}>
       {props.loading.status ? (
@@ -57,7 +55,7 @@ const Banks = (props) => {
             <OptionsAction
               status={options}
               close={showOptions}
-              title="TRANSACTIONS"
+              title="BANK_TRANSACTIONS"
               onSelect={() => props.navigation.navigate("ListTransactions")}
             />
             <FlatList

@@ -472,8 +472,12 @@ const english = {
   TRANSACTION_TYPE: "Transaction Type",
   WITHDRAW: "Withdraw",
   DEPOSIT: "Deposit",
+  REDUCE_BANK: "Reduce bank balance",
+  INCREASE_BANK: "Increase bank balance",
   BANK_DEPOSIT: "Bank Deposit",
-  BANK_WITHDRAW: "Bank Withdrawal"
+  BANK_WITHDRAW: "Bank Withdrawal",
+  TRANSFER_CASH_TO_BANK: "Transfer from cash to bank",
+  TRANSFER_BANK_TO_CASH: "Transfer from bank to cash"
 };
 
 export const getTranslation = (label, language) => {

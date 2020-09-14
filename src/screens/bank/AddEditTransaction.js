@@ -108,12 +108,20 @@ const AddEditBankTransaction = (props) => {
 
   const transaction_types = [
     {
+      id: constants.CASH_TO_BANK,
+      transaction_type: getTranslation("TRANSFER_CASH_TO_BANK", props.language),
+    },
+    {
+      id: constants.BANK_TO_CASH,
+      transaction_type: getTranslation("TRANSFER_BANK_TO_CASH", props.language),
+    },
+    {
       id: constants.WITHDRAW,
-      transaction_type: getTranslation("WITHDRAW", props.language),
+      transaction_type: getTranslation("REDUCE_BANK", props.language),
     },
     {
       id: constants.DEPOSIT,
-      transaction_type: getTranslation("DEPOSIT", props.language),
+      transaction_type: getTranslation("INCREASE_BANK", props.language),
     },
   ];
 
