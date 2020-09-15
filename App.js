@@ -20,9 +20,7 @@ const App = () => {
         PrimaryFont: require("./assets/font/Avenir-Light.ttf"),
       });
       setFontStatus(true);
-    } catch (e) {
-
-    }
+    } catch (e) { }
   };
 
   useEffect(() => {

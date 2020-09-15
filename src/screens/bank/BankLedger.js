@@ -59,14 +59,16 @@ const BankLedger = (props) => {
       return getTranslation("TRANSFER_BANK_TO_CASH", props.language)
     } else if (type == constants.WITHDRAW) {
       return getTranslation("REDUCE_BANK", props.language)
-    } else {
+    } else if (type == constants.DEPOSIT) {
       return getTranslation("INCREASE_BANK", props.language)
+    } else {
+      return getTranslation("OPENING_BALANCE", props.language)
     }
 
   }
 
   const getAmount = (dr, cr, type) => {
-    if (type == constants.CASH_TO_BANK || type == constants.DEPOSIT) {
+    if (type == constants.CASH_TO_BANK || type == constants.DEPOSIT || type == -1) {
       return dr
     }
     return cr
@@ -78,7 +80,7 @@ const BankLedger = (props) => {
       <View style={styles.MainContainer}>
         <View style={styles.infobox}>
           <InfoCard title="ACCOUNT_NUMBER" value={bank.account_no} />
-          <InfoCard title="BALANCE" value={FormatPrice(bank.current_balance)} />
+          <InfoCard title="BALANCE" value={FormatPrice(bank.current_balance)} color={bank.current_balance > 0 ? colors.success : colors.danger} />
           <ActionCard
             toggleFilter={() => setOverlay(true)}
             date={

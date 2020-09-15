@@ -54,7 +54,7 @@ const AddEditBankTransaction = (props) => {
   useEffect(() => {
 
     props.banks.map((bank) => {
-      console.log(bank)
+      // console.log(bank)
       if (bank.id == formData.bank_id) {
         setBankBalance(bank.current_balance)
       }

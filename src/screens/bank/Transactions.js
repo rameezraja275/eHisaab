@@ -66,7 +66,8 @@ const BankTransactions = (props) => {
   };
 
   const getAmount = (dr, cr, type) => {
-    if (type == constants.CASH_TO_BANK || type == constants.DEPOSIT) {
+
+    if (type == constants.CASH_TO_BANK || type == constants.DEPOSIT || type == -1) {
       return dr
     }
     return cr
@@ -79,8 +80,10 @@ const BankTransactions = (props) => {
       return getTranslation("TRANSFER_BANK_TO_CASH", props.language)
     } else if (type == constants.WITHDRAW) {
       return getTranslation("REDUCE_BANK", props.language)
-    } else {
+    } else if (type == constants.DEPOSIT) {
       return getTranslation("INCREASE_BANK", props.language)
+    } else {
+      return getTranslation("OPENING_BALANCE", props.language)
     }
 
   }

@@ -64,7 +64,7 @@ const CheckOut = (props) => {
     }
   }, [formData.customer_id]);
 
-  console.log("bahar", formData.customer_id)
+  // console.log("bahar", formData.customer_id)
 
 
   return (
