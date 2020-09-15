@@ -62,30 +62,6 @@ const Reports = ({ language, navigation }) => {
           {getTranslation("BALANCE_SHEET", language)}{" "}
         </Text>
       </ListItemContainer>
-
-      <ListItemContainer onClick={() => { }} commingSoon={true}>
-        <Text style={styles.title}>
-          {getTranslation("BANK_STATEMENT", language)}{" "}
-        </Text>
-      </ListItemContainer>
-
-      <ListItemContainer onClick={() => { }} commingSoon={true}>
-        <Text style={styles.title}>
-          {getTranslation("CUSTOMERS_REPORT", language)}{" "}
-        </Text>
-      </ListItemContainer>
-
-      <ListItemContainer onClick={() => { }} commingSoon={true}>
-        <Text style={styles.title}>
-          {getTranslation("SUPPLIERS_REPORT", language)}{" "}
-        </Text>
-      </ListItemContainer>
-
-      <ListItemContainer onClick={() => { }} commingSoon={true}>
-        <Text style={styles.title}>
-          {getTranslation("STOCK_SUMMARY", language)}{" "}
-        </Text>
-      </ListItemContainer>
     </ScrollView>
   );
 };

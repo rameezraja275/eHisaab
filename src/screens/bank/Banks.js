@@ -9,6 +9,7 @@ import { FormatPrice, FormatDate } from "../../utils/helper";
 import OptionsAction from "../../Components/Options";
 import EmptyList from "../../Components/EmptyList";
 import ListItemContainer from "../../Components/ListItemContainer";
+import colors from '../../utils/colors'
 
 const Banks = (props) => {
   const { getBank, banks } = props;
@@ -77,7 +78,7 @@ const Banks = (props) => {
                     {item.bank_name}
                   </Text>
                   <View style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                    <Text style={{ fontFamily: "PrimaryFont", color: item.current_balance > 0 ? colors.success : colors.danger }}>
                       {FormatPrice(item.current_balance)}
                     </Text>
                   </View>

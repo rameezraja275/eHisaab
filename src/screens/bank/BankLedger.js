@@ -65,6 +65,13 @@ const BankLedger = (props) => {
 
   }
 
+  const getAmount = (dr, cr, type) => {
+    if (type == constants.CASH_TO_BANK || type == constants.DEPOSIT) {
+      return dr
+    }
+    return cr
+  }
+
   return props.loading.status ? (
     <Loader size={10} />
   ) : (
@@ -135,7 +142,7 @@ const BankLedger = (props) => {
                   <Text style={[styles.col, { flex: 0.5 }]}>
                     {getTypeString(item.transaction_type)}
                   </Text>
-                  <Text style={styles.col}>{FormatPrice(item.transaction_type == constants.WITHDRAW ? item.cr : item.dr)}</Text>
+                  <Text style={styles.col}>{FormatPrice(getAmount(item.dr, item.cr, item.transaction_type))}</Text>
                 </View>
               );
             }}
