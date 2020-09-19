@@ -66,6 +66,8 @@ const DayBook = (props) => {
     payments,
     receipts,
     expense,
+    bank_deposit,
+    bank_withdrawal
   } = transaction;
 
   const styles = getStyles({ language, URDU });
@@ -118,6 +120,9 @@ const DayBook = (props) => {
           {renderRow("SALE_CREDIT", sale_credit)}
           {renderRow("SALE_DISCOUNT", sale_discount)}
           {renderRow("SALE_TOTAL", sale_total)}
+          <View style={styles.line}></View>
+          {renderRow("BANK_WITHDRAW", bank_withdrawal)}
+          {renderRow("BANK_DEPOSIT", bank_deposit)}
           <View style={styles.line}></View>
           {renderRow("PAYMENTS", payments)}
           {renderRow("RECEIPTS", receipts)}

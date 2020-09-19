@@ -42,6 +42,7 @@ const Details = (props) => {
   };
 
   useEffect(() => {
+
     props.navigation.setParams({
       showOptions: showOptions,
     });
@@ -93,8 +94,8 @@ const Details = (props) => {
               {getTranslation("ADD_DISCOUNT", props.language)}
             </Text>
           ) : (
-            <Icon name="times" size={20} color={colors.darkColor} />
-          )}
+              <Icon name="times" size={20} color={colors.darkColor} />
+            )}
         </TouchableWithoutFeedback>
         {discountStatus && (
           <View style={{ width: "50%" }}>

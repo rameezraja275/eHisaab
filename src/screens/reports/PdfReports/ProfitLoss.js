@@ -18,6 +18,7 @@ const Bill = (props) => {
         gross_profit,
         net_profit,
         expense_sale_discount,
+        receipt
     } = profitNlossStatement
 
     const BillHTML = `<html lang="en"> <head> <meta charset="UTF-8">
@@ -87,6 +88,11 @@ const Bill = (props) => {
                             <th>${FormatPrice(expense_sale_discount)}</th>  
                         </tr>
                    
+                        <tr> 
+                            <th>Receipt</th> 
+                            <th>${ FormatPrice( receipt ) } </th>  
+                        </tr>
+
                         <tr> 
                             <th>Net Profit</th> 
                             <th>${ net_profit < 0 ? "(" : ""} ${FormatPrice(net_profit)}   ${net_profit < 0 ? ")" : ""} </th>  

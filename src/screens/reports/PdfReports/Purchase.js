@@ -11,8 +11,6 @@ const Bill = (props) => {
 
     const { purchaseReport, bussiness, navigation } = props
     const { date, total_purchase, total_discount, total_paid } = navigation.state.params
-    // console.log(purchaseReport)
-    // console.log(navigation.state.params)
 
     let htmlTable = "";
     for (let i = 0; i < purchaseReport.length; i++) {

@@ -127,10 +127,11 @@ export function signin(body) {
       type: ACTION.LOADING,
     });
     const language = getState().common.language;
-
+    console.log("yoo")
     axios
       .post(`${API.BASE_URL}${API.LOGIN_URL}`, body, { headers })
       .then(async (res) => {
+        console.log("yoo res")
         // await AsyncStorage.setItem('token',res.data.data.token)
         // const token = await AsyncStorage.getItem('token');
         const token = res.data.data.token;
@@ -176,7 +177,7 @@ export function signin(body) {
         navigation(userStatus, dispatch);
       })
       .catch((err) => {
-        // console.log(err)
+        console.log("yoo", err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

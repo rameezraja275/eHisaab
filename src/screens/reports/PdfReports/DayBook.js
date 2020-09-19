@@ -23,6 +23,8 @@ const Bill = (props) => {
         payments,
         receipts,
         expense,
+        bank_deposit,
+        bank_withdrawal
     } = daybook
 
     const BillHTML = `<html lang="en"> <head> <meta charset="UTF-8">
@@ -37,22 +39,18 @@ const Bill = (props) => {
         </style> </head> <body>
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
-            ${
-        bussiness.logo
+            ${bussiness.logo
             ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
             : `<div></div>`
         } 
             <div><h4 class="title"> Day Book </h4>
-            <strong>${ date}</strong></div> </div> 
+            <strong>${date}</strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
-                    <p class="comapnyname"> ${
-        bussiness.name ? bussiness.name : ""
-        } </p> <p> Address: ${
-        bussiness.address ? bussiness.address : ""
+                    <p class="comapnyname"> ${bussiness.name ? bussiness.name : ""
+        } </p> <p> Address: ${bussiness.address ? bussiness.address : ""
         } </p>
-                    <p> Phone: ${
-        bussiness.phone ? bussiness.phone : ""
+                    <p> Phone: ${bussiness.phone ? bussiness.phone : ""
         } </p></div> 
                     </div>
                     <hr class="mb-25"/>
@@ -108,14 +106,24 @@ const Bill = (props) => {
                         </tr>
 
                         <tr> 
-                            <th>Payments</th> 
-                            <th>${FormatPrice(payments)}</th>  
+                            <th>Bank Withdrawal</th> 
+                            <th>${FormatPrice(bank_withdrawal)}</th>  
                         </tr>
 
                         <tr> 
-                            <th>Receipts</th> 
-                            <th>${FormatPrice(receipts)}</th>  
+                            <th>Bank Deposit</th> 
+                            <th>${FormatPrice(bank_deposit)}</th>  
                         </tr>
+
+                        <tr> 
+                        <th>Payments</th> 
+                        <th>${FormatPrice(payments)}</th>  
+                    </tr>
+
+                    <tr> 
+                        <th>Receipts</th> 
+                        <th>${FormatPrice(receipts)}</th>  
+                    </tr>
 
                         <tr> 
                             <th>Expenses</th> 

@@ -134,7 +134,6 @@ export function addBank(body) {
 
 export function updateBank(body) {
     return (dispatch, getState) => {
-        // console.log(body)
         const headers = {
             "Content-Type": "application/json",
         };
@@ -293,15 +292,12 @@ export function getBankLedger(
         });
 
         let date = filter.date.toISOString().split("T")[0];
-        console.log(`${API.BASE_URL}${API.GET_BANK_TRANSACTION}?token=${token}&bank_id=${bankId}&transaction_date=${date}&filter_type=${filter.filter_type}`)
-
         axios
             .get(
                 `${API.BASE_URL}${API.GET_BANK_TRANSACTION}?token=${token}&bank_id=${bankId}&transaction_date=${date}&filter_type=${filter.filter_type}`,
                 { headers }
             )
             .then((res) => {
-                console.log(bankId)
                 dispatch({
                     payload: {
                         status: false,
@@ -392,8 +388,6 @@ export function bankTransactionCreate(body) {
                 });
             })
             .catch((err) => {
-
-                console.log(err)
                 if (err.response) {
                     ShowFlash(err.response.data.message, "danger", language);
                 } else {

@@ -225,7 +225,6 @@ export function customerGet(customerId) {
     });
 
     let url = `${API.BASE_URL}${API.CUSTOMER_GET_URL}?token=${token}&customer_id=${customerId}`;
-
     axios
       .get(url, { headers })
       .then((res) => {
@@ -434,8 +433,7 @@ export function loanModify(body) {
     const data = {
       token,
       receipt_id: body.id,
-      date: `${body.date.getFullYear()}-${
-        body.date.getMonth() + 1
+      date: `${body.date.getFullYear()}-${body.date.getMonth() + 1
         }-${body.date.getDate()}`,
       customer_id: body.customer_id,
       narration: body.narration,
@@ -525,8 +523,7 @@ export function loanCreate(body) {
     const data = {
       token,
       loan_id: body.id,
-      date: `${body.date.getFullYear()}-${
-        body.date.getMonth() + 1
+      date: `${body.date.getFullYear()}-${body.date.getMonth() + 1
         }-${body.date.getDate()}`,
       customer_id: body.customer_id,
       narration: body.narration,

@@ -54,7 +54,6 @@ const AddEditBankTransaction = (props) => {
   useEffect(() => {
 
     props.banks.map((bank) => {
-      // console.log(bank)
       if (bank.id == formData.bank_id) {
         setBankBalance(bank.current_balance)
       }
@@ -99,7 +98,6 @@ const AddEditBankTransaction = (props) => {
     );
   };
 
-  // console.log("dara", formData)
 
   const onSubmit = () => {
     const { bank_id, amount, transaction_date, transaction_type } = formData;

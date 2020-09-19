@@ -80,6 +80,7 @@ const ProfitAndLossReport = (props) => {
     gross_profit,
     net_profit,
     expense_sale_discount,
+    receipt
   } = transaction;
 
   return loading.status ? (
@@ -134,6 +135,8 @@ const ProfitAndLossReport = (props) => {
           {renderRow("GROSS_PROFIT", gross_profit, true)}
           {renderRow("EXPENSES", expense)}
           {renderRow("SALE_DISCOUNT", expense_sale_discount)}
+          <View style={styles.line}></View>
+          {renderRow("RECEIPT", receipt)}
           <View style={styles.line}></View>
           {renderRow("NET_PROFIT", net_profit, true)}
         </ScrollView>

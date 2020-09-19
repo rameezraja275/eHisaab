@@ -60,6 +60,6 @@
     "babel-preset-expo": "8.0.0"
   },
   "private": true,
-  "name": "eHisaab",
-  "version": "1.3.0"
+  "name": "ehisaab",
+  "version": "1.3.1"
 }

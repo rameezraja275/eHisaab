@@ -31,7 +31,6 @@ const CheckOut = (props) => {
 
   const onSubmit = () => {
     const { paid_amount, customer_id, date } = formData;
-    console.log("onsub", customer_id)
     if (paid_amount == null || paid_amount == "" || date == null) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else if (
@@ -45,6 +44,7 @@ const CheckOut = (props) => {
   };
 
   useEffect(() => {
+    props.customerGet();
     const { date, paid_amount, customer_id, narration } = props.saleData;
     setFormData({
       date,
@@ -63,8 +63,6 @@ const CheckOut = (props) => {
         : setFormData({ ...formData, paid_amount: "" });
     }
   }, [formData.customer_id]);
-
-  // console.log("bahar", formData.customer_id)
 
 
   return (
