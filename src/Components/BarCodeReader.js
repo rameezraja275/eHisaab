@@ -1,83 +1,51 @@
-// import React from 'react';
-// import {
-//     Text,
-//     View,
-//     StyleSheet,
-//     Alert,
-//     TouchableOpacity,
-//     Image
-// } from 'react-native';
-// import Camera from 'react-native-camera';
-// const BarcodeScan = () => {
-//     // constructor(props) {
-//     //     // super(props);
-//     //     // this.handleTourch = this.handleTourch.bind(this);
-//     //     this.state = {
-//     //         torchOn: false
-//     //     }
-//     // }
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import Overlay from "./Overlay";
 
-//     // const [ torchOn, setTorch ] = useState(false)
+export default function App() {
+    const [hasPermission, setHasPermission] = useState(null);
+    const [data, setData] = useState("Scaning");
 
-//     const onBarCodeRead = (e) => {
-//         Alert.alert("Barcode value is" + e.data, "Barcode type is" + e.type);
-//     }
+    useEffect(() => {
+        (async () => {
+            const { status } = await BarCodeScanner.requestPermissionsAsync();
+            setHasPermission(status === 'granted');
+        })();
+    }, []);
 
-//     // const handleTourch = (value) => {
-//     //     if (value === true) {
-//     //         setTorch(false)
-//     //     } else {
-//     //         setTorch(true)
-//     //     }
-//     // }
-//     // render() {
-//     return (
-//         <View style={styles.container}>
-//             <Camera
-//                 style={styles.preview}
-//                 // torchMode={this.state.torchOn ? Camera.constants.TorchMode.on : Camera.constants.TorchMode.off}
-//                 onBarCodeRead={onBarCodeRead}
-//                 // ref={cam => this.camera = cam}
-//                 aspect={Camera.constants.Aspect.fill}
-//             >
-//                 <Text style={{
-//                     backgroundColor: 'white'
-//                 }}>SCANNER</Text>
-//             </Camera>
-//             {/* <View style={styles.bottomOverlay}>
-//                     <TouchableOpacity onPress={() => handleTourch(torchOn)}>
-//                         <Image style={styles.cameraIcon}
-//                             source={torchOn === true ? require('../../images/flasher_on.png') : require('../../images/flasher_off.png')} />
-//                     </TouchableOpacity>
-//                 </View> */}
-//         </View>
-//     )
-//     // }
-// }
+    const handleBarCodeScanned = ({ type, data }) => {
+        setData(`Bar code with type ${type} and data ${data} has been scanned!`);
+    };
 
-// export default BarcodeScan
+    if (hasPermission === null) {
+        return <Text>Requesting for camera permission</Text>;
+    }
+    if (hasPermission === false) {
+        return <Text>No access to camera</Text>;
+    }
+
+    return (
 
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         flexDirection: 'row',
-//     },
-//     preview: {
-//         flex: 1,
-//         justifyContent: 'flex-end',
-//         alignItems: 'center'
-//     },
-//     cameraIcon: {
-//         margin: 5,
-//         height: 40,
-//         width: 40
-//     },
-//     bottomOverlay: {
-//         position: "absolute",
-//         width: "100%",
-//         flex: 20,
-//         flexDirection: "row",
-//         justifyContent: "space-between"
-//     },
-// });
+        <Overlay
+            backDropClose={true}
+        >
+            <View style={{
+                // overflow: 'hidden',
+                width: 260,
+                height: 260,
+            }}>
+                <BarCodeScanner
+                    onBarCodeScanned={handleBarCodeScanned}
+                    style={{ flex: 1 }}
+
+                />
+                <Text> {data} </Text>
+            </View>
+        </Overlay>
+
+
+    );
+}
+

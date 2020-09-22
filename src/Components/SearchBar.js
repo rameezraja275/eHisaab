@@ -5,7 +5,6 @@ import Icon from "react-native-vector-icons/AntDesign";
 import colors from "../utils/colors";
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/language";
-import BarCodeReader from './BarCodeReader'
 
 const SearchBar = ({ value, onChange, toggleFilter, icon, language }) => {
   return (
@@ -39,7 +38,9 @@ const SearchBar = ({ value, onChange, toggleFilter, icon, language }) => {
           backgroundColor: colors.white,
         }}
       >
-        {/* <BarCodeReader /> */}
+
+
+
         {toggleFilter && (
           <Icon
             name={icon ? icon : "filter"}

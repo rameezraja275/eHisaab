@@ -24,6 +24,7 @@ import { FormatPrice } from "../../utils/helper";
 import OptionsAction from "../../Components/Options";
 import { showAlert } from "../../utils/helper";
 import { getTranslation } from "../../utils/language";
+import BarCodeReader from '../../Components/BarCodeReader'
 
 const Details = (props) => {
   const [discountStatus, setDiscount] = useState(false);
@@ -53,6 +54,8 @@ const Details = (props) => {
       style={styles.MainContainer}
       behavior={Platform.Os == "ios" ? "padding" : "height"}
     >
+
+      <BarCodeReader />
       <OptionsAction
         status={options}
         close={showOptions}

@@ -1,5 +1,5 @@
 Arguments: 
-  /home/rameez/.nvm/versions/node/v10.22.0/bin/node /usr/bin/yarn add react-native@0.63.2 react@16.13.1
+  /home/rameez/.nvm/versions/node/v10.22.0/bin/node /usr/bin/yarn add react-native-barcodescanner
 
 PATH: 
   /home/rameez/.nvm/versions/node/v10.22.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/rameez/Android/Sdk/emulator:/home/rameez/Android/Sdk/tools:/home/rameez/Android/Sdk/tools/bin:/home/rameez/Android/Sdk/platform-tools
@@ -14,15 +14,15 @@ Platform:
   linux x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:56:26)
+  Error: read ECONNRESET
+      at TLSWrap.onStreamRead (internal/stream_base_commons.js:111:27)
 
 npm manifest: 
   {
     "scripts": {
       "clear": "expo r -c",
       "start": "react-native start",
-      "android": "react-native run-android",
+      "android": "react-native run-android --verbose",
       "ios": "react-native run-ios",
       "web": "expo start --web",
       "build": "expo build:android",
@@ -35,22 +35,13 @@ npm manifest:
       "upgrade": "react-native upgrade"
     },
     "dependencies": {
-      "expo": "38.0.8",
-      "expo-splash-screen": "^0.5.0",
-      "expo-updates": "~0.2.10",
-      "react": "~16.11.0",
-      "react-dom": "16.13.1",
-      "react-native": "~0.62.2",
-      "react-native-gesture-handler": "~1.6.0",
-      "react-native-reanimated": "~1.9.0",
-      "react-native-screens": "~2.9.0",
-      "react-native-unimodules": "~0.10.1",
-      "react-native-web": "0.12.2",
       "@react-native-community/datetimepicker": "2.4.0",
       "@react-native-community/masked-view": "0.1.10",
       "@react-native-community/picker": "1.6.0",
       "@use-expo/font": "2.0.0",
       "axios": "0.19.2",
+      "expo": "38.0.8",
+      "expo-barcode-scanner": "^9.0.0",
       "expo-cli": "3.22.3",
       "expo-font": "8.2.2",
       "expo-image-picker": "8.4.0",
@@ -58,10 +49,20 @@ npm manifest:
       "expo-print": "9.0.1",
       "expo-secure-store": "9.0.1",
       "expo-sharing": "8.2.1",
+      "expo-splash-screen": "^0.5.0",
+      "expo-updates": "~0.2.10",
+      "react": "~16.11.0",
+      "react-dom": "16.13.1",
+      "react-native": "~0.62.2",
       "react-native-elements": "1.2.7",
       "react-native-flash-message": "0.1.15",
+      "react-native-gesture-handler": "~1.6.0",
+      "react-native-reanimated": "~1.9.0",
       "react-native-safe-area-context": "3.0.7",
+      "react-native-screens": "~2.9.0",
+      "react-native-unimodules": "~0.10.1",
       "react-native-vector-icons": "6.6.0",
+      "react-native-web": "0.12.2",
       "react-native-webview": "9.4.0",
       "react-navigation": "4.0.10",
       "react-navigation-drawer": "2.3.3",
@@ -75,13 +76,13 @@ npm manifest:
     "devDependencies": {
       "@babel/core": "7.0.0",
       "babel-jest": "~25.2.6",
+      "babel-preset-expo": "8.0.0",
       "jest": "~25.2.6",
-      "react-test-renderer": "~16.11.0",
-      "babel-preset-expo": "8.0.0"
+      "react-test-renderer": "~16.11.0"
     },
     "private": true,
-    "name": "eHisaab",
-    "version": "1.2.2"
+    "name": "ehisaab",
+    "version": "1.3.1"
   }
 
 yarn manifest: 
@@ -6391,6 +6392,13 @@ Lockfile:
       md5-file "^3.2.3"
       path-browserify "^1.0.0"
       url-parse "^1.4.4"
+  
+  expo-barcode-scanner@^9.0.0:
+    version "9.0.0"
+    resolved "https://registry.yarnpkg.com/expo-barcode-scanner/-/expo-barcode-scanner-9.0.0.tgz#6d071ca36560a496bcc9406abf11ce1d574cab23"
+    integrity sha512-CxyQyn3EQ4+mXn6swBg4acF9uQazPd9Odlb9TOgcpTV6cDo8pxKFwB5m1H00909ea7DOTEYgPhDgEUphsCrenA==
+    dependencies:
+      lodash "^4.6.0"
   
   expo-cli@3.22.3:
     version "3.22.3"
