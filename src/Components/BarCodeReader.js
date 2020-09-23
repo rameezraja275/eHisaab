@@ -5,7 +5,7 @@ const { width, height } = Dimensions.get('window');
 
 const Bar_Code_Scanner = ({ onScan, size }) => {
     const [hasPermission, setHasPermission] = useState(null);
-
+    const [scanned, setScanned] = useState(false)
     useEffect(() => {
         (async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -15,13 +15,12 @@ const Bar_Code_Scanner = ({ onScan, size }) => {
     }, []);
 
     const delay = (time) => {
-        return new Promise(function (resolve, reject) {
-            setTimeout(() => resolve(), time);
-        });
+        setTimeout(() => setScanned(false), time);
     }
 
     const handleBarCodeScanned = async ({ type, data }) => {
-        // await delay(1000)
+        setScanned(true)
+        delay(1000)
         Vibration.vibrate()
         onScan(data)
     };
@@ -34,7 +33,7 @@ const Bar_Code_Scanner = ({ onScan, size }) => {
             width: size == "sm" ? 250 : width,
         }}>
             <BarCodeScanner
-                onBarCodeScanned={handleBarCodeScanned}
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
                 style={{ flex: 1 }}
             >
                 <View style={styles.layerTop} />

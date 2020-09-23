@@ -154,13 +154,13 @@ const AddEditProduct = (props) => {
                       setFormData({ ...formData, code: text })
                     }
                     keyboardType={"number-pad"}
-                    placeholder="CODE"
+                    placeholder="BAR_CODE"
                     required
                   />
                 </View>
                 <TouchableOpacity onPress={() => { showBarCode(true) }}  >
                   <Icon
-                    name={"barcode"}
+                    name={"scan1"}
                     size={30}
                   // color={colors.darkColor}
 

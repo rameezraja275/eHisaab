@@ -42,7 +42,7 @@ const SearchBar = ({ value, onChange, toggleFilter, icon, language, barCode, onB
 
         {barCode && (
           <Icon
-            name={"barcode"}
+            name={"scan1"}
             size={25}
             color={colors.darkColor}
             onPress={onBarSelect}
