@@ -25,6 +25,7 @@ export function productCreate(body) {
             ? "0"
             : body.opening_stock,
       is_service: body.is_service,
+      code: body.code
     };
 
     const products = [...store.product.products];

@@ -25,6 +25,8 @@ import OptionsAction from "../../Components/Options";
 import { showAlert } from "../../utils/helper";
 import { getTranslation } from "../../utils/language";
 import BarCodeReader from '../../Components/BarCodeReader'
+import { addItemToSale } from "../../store/actions/sale";
+import { ShowFlash } from "../../utils/helper";
 
 const Details = (props) => {
   const [discountStatus, setDiscount] = useState(false);
@@ -49,13 +51,26 @@ const Details = (props) => {
     });
   }, []);
 
+  const { barcode } = props.navigation.state.params
+
+  const onScan = (code) => {
+    const item = props.products.find((item) =>
+      item.code == code
+    );
+
+    item ? props.addItemToSale(item) : ShowFlash("NO_PRODUCT_FOUND", "danger", props.language);
+
+    console.log(item)
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
       behavior={Platform.Os == "ios" ? "padding" : "height"}
     >
-
-      <BarCodeReader />
+      {
+        barcode && <BarCodeReader onScan={onScan} />
+      }
       <OptionsAction
         status={options}
         close={showOptions}
@@ -170,6 +185,7 @@ const mapStateToProps = ({ product, common, sale }) => {
     discount: sale.discount,
     saleData: sale.saleData,
     language: common.language,
+    products: product.products,
   };
 };
 
@@ -178,4 +194,5 @@ export default connect(mapStateToProps, {
   updateItemFromSale,
   addDiscountSale,
   saleDelete,
+  addItemToSale
 })(Details);

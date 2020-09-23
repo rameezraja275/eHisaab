@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
+import { Text, View, Vibration, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import Overlay from "./Overlay";
 
-export default function App() {
+const Bar_Code_Scanner = ({ onScan }) => {
     const [hasPermission, setHasPermission] = useState(null);
-    const [data, setData] = useState("Scaning");
 
     useEffect(() => {
         (async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
+
     }, []);
 
-    const handleBarCodeScanned = ({ type, data }) => {
-        setData(`Bar code with type ${type} and data ${data} has been scanned!`);
+    const delay = (time) => {
+        return new Promise(function (resolve, reject) {
+            setTimeout(() => resolve(), time);
+        });
+    }
+
+    const handleBarCodeScanned = async ({ type, data }) => {
+        // await delay(1000)
+        Vibration.vibrate()
+        onScan(data)
     };
 
     if (hasPermission === null) {
@@ -26,26 +33,21 @@ export default function App() {
     }
 
     return (
-
-
-        <Overlay
-            backDropClose={true}
-        >
-            <View style={{
-                // overflow: 'hidden',
-                width: 260,
-                height: 260,
-            }}>
-                <BarCodeScanner
-                    onBarCodeScanned={handleBarCodeScanned}
-                    style={{ flex: 1 }}
-
-                />
+        <View style={{
+            // overflow: 'hidden',
+            width: 260,
+            height: 260,
+            flexDirection: "row",
+        }}>
+            <BarCodeScanner
+                onBarCodeScanned={handleBarCodeScanned}
+                style={{ flex: 1 }}
+            />
+            {/* <View>
                 <Text> {data} </Text>
-            </View>
-        </Overlay>
-
-
+            </View> */}
+        </View>
     );
 }
 
+export default Bar_Code_Scanner

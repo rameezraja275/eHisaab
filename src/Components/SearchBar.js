@@ -6,7 +6,7 @@ import colors from "../utils/colors";
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/language";
 
-const SearchBar = ({ value, onChange, toggleFilter, icon, language }) => {
+const SearchBar = ({ value, onChange, toggleFilter, icon, language, barCode, onBarSelect }) => {
   return (
     <View style={styles.Wrapper}>
       <View style={styles.SearchBar}>
@@ -31,14 +31,23 @@ const SearchBar = ({ value, onChange, toggleFilter, icon, language }) => {
       </View>
       <View
         style={{
-          flex: 0.2,
+          flex: 0.3,
           alignContent: "center",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-around",
           backgroundColor: colors.white,
+          flexDirection: "row",
         }}
       >
 
+        {barCode && (
+          <Icon
+            name={"barcode"}
+            size={25}
+            color={colors.darkColor}
+            onPress={onBarSelect}
+          />
+        )}
 
 
         {toggleFilter && (
@@ -50,6 +59,7 @@ const SearchBar = ({ value, onChange, toggleFilter, icon, language }) => {
           />
         )}
       </View>
+
     </View>
   );
 };

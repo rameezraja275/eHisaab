@@ -127,6 +127,8 @@ const Sale = (props) => {
                 props.navigation.navigate("AddNonInventoryItem")
               }
               icon="plus"
+              barCode={true}
+              onBarSelect={() => props.navigation.navigate("Details", { barcode: true })}
             />
 
             <OptionsAction
@@ -208,7 +210,7 @@ const Sale = (props) => {
 
             {totalItem > 0 && (
               <FloatingButton
-                onClick={() => props.navigation.navigate("Details")}
+                onClick={() => props.navigation.navigate("Details", { barcode: false })}
                 title={`TOTAL_ITEM`}
                 value={`${totalItem} = ${FormatPrice(totalPrice)}`}
               />

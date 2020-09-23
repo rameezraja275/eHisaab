@@ -16,6 +16,10 @@ import Loader from "../../Components/Loader";
 import constants from "../../utils/constants";
 import { getTranslation } from "../../utils/language";
 import Picker from "../../Components/Picker";
+import Icon from "react-native-vector-icons/AntDesign";
+import BarCodeScanner from "../../Components/BarCodeReader";
+import Overlay from "../../Components/Overlay";
+import { TouchableOpacity } from "react-native";
 
 const AddEditProduct = (props) => {
   const [formData, setFormData] = useState({
@@ -25,7 +29,10 @@ const AddEditProduct = (props) => {
     product_cost_price: null,
     opening_stock: null,
     is_service: null,
+    code: null
   });
+
+  const [barcode, showBarCode] = useState(false)
 
   const FormType =
     props.navigation.state.routeName == "EditProduct" ? "edit" : "add";
@@ -43,6 +50,7 @@ const AddEditProduct = (props) => {
       product_sale_price,
       product_cost_price,
       is_service,
+      code
     } = formData;
 
     product_sale_price = Number(product_sale_price);
@@ -70,6 +78,7 @@ const AddEditProduct = (props) => {
         product_cost_price: null,
         opening_stock: null,
         is_service: null,
+        code: null
       });
     }
   };
@@ -93,69 +102,98 @@ const AddEditProduct = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <ScrollView
-          style={{ flex: 1 }}
-          keyboardDismissMode={"on-drag"}
-          keyboardShouldPersistTaps={"handled"}
-        >
-          <View style={styles.Form}>
-            <TextInput
-              value={formData.product_name}
-              onChange={(text) =>
-                setFormData({ ...formData, product_name: text })
-              }
-              placeholder="NAME"
-              required
-              autoCapitalize="sentences"
-            />
-            <Picker
-              placeholder="TYPE"
-              options={type}
-              value={formData.is_service}
-              type="is_service"
-              required
-              onChange={(text) =>
-                setFormData({ ...formData, is_service: text })
-              }
-            />
-            <TextInput
-              value={formData.product_cost_price}
-              onChange={(text) =>
-                setFormData({ ...formData, product_cost_price: text })
-              }
-              keyboardType={"number-pad"}
-              placeholder="PURCHAE_PRICE"
-              required
-            />
-            <TextInput
-              value={formData.product_sale_price}
-              onChange={(text) =>
-                setFormData({ ...formData, product_sale_price: text })
-              }
-              keyboardType={"number-pad"}
-              placeholder="SALE_PRICE"
-              required
-            />
-
-            {formData.is_service == constants.PRODUCT && (
+          <ScrollView
+            style={{ flex: 1 }}
+            keyboardDismissMode={"on-drag"}
+            keyboardShouldPersistTaps={"handled"}
+          >
+            <View style={styles.Form}>
               <TextInput
-                keyboardType={"number-pad"}
-                placeholder="OPENING_STOCK"
-                value={formData.opening_stock}
-                disabled={FormType == "edit" ? true : false}
+                value={formData.product_name}
                 onChange={(text) =>
-                  setFormData({ ...formData, opening_stock: text })
+                  setFormData({ ...formData, product_name: text })
+                }
+                placeholder="NAME"
+                required
+                autoCapitalize="sentences"
+              />
+              <Picker
+                placeholder="TYPE"
+                options={type}
+                value={formData.is_service}
+                type="is_service"
+                required
+                onChange={(text) =>
+                  setFormData({ ...formData, is_service: text })
                 }
               />
-            )}
-          </View>
-          <View style={styles.Button}>
-            <View style={{ flex: 1 }}>
-              <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+              <TextInput
+                value={formData.product_cost_price}
+                onChange={(text) =>
+                  setFormData({ ...formData, product_cost_price: text })
+                }
+                keyboardType={"number-pad"}
+                placeholder="PURCHAE_PRICE"
+                required
+              />
+              <TextInput
+                value={formData.product_sale_price}
+                onChange={(text) =>
+                  setFormData({ ...formData, product_sale_price: text })
+                }
+                keyboardType={"number-pad"}
+                placeholder="SALE_PRICE"
+                required
+              />
+
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <View style={{ flex: 0.9 }}>
+                  <TextInput
+                    value={formData.code}
+                    onChange={(text) =>
+                      setFormData({ ...formData, code: text })
+                    }
+                    keyboardType={"number-pad"}
+                    placeholder="CODE"
+                    required
+                  />
+                </View>
+                <TouchableOpacity onPress={() => { showBarCode(true) }}  >
+                  <Icon
+                    name={"barcode"}
+                    size={30}
+                  // color={colors.darkColor}
+
+                  />
+                </TouchableOpacity>
+
+              </View>
+              {barcode && <Overlay
+                toggleFilter={() => { showBarCode(!barcode) }}
+                title="FILTER">
+                <BarCodeScanner onScan={(text) => { setFormData({ ...formData, code: text }) }} />
+              </Overlay>}
+
+
+              {formData.is_service == constants.PRODUCT && (
+                <TextInput
+                  keyboardType={"number-pad"}
+                  placeholder="OPENING_STOCK"
+                  value={formData.opening_stock}
+                  disabled={FormType == "edit" ? true : false}
+                  onChange={(text) =>
+                    setFormData({ ...formData, opening_stock: text })
+                  }
+                />
+              )}
             </View>
-          </View>
-        </ScrollView>
-      )}
+            <View style={styles.Button}>
+              <View style={{ flex: 1 }}>
+                <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+              </View>
+            </View>
+          </ScrollView>
+        )}
     </KeyboardAvoidingView>
   );
 };
