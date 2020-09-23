@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Vibration, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+const { width, height } = Dimensions.get('window');
 
-const Bar_Code_Scanner = ({ onScan }) => {
+const Bar_Code_Scanner = ({ onScan, size }) => {
     const [hasPermission, setHasPermission] = useState(null);
 
     useEffect(() => {
@@ -25,29 +26,61 @@ const Bar_Code_Scanner = ({ onScan }) => {
         onScan(data)
     };
 
-    if (hasPermission === null) {
-        return <Text>Requesting for camera permission</Text>;
-    }
-    if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
-    }
 
     return (
         <View style={{
-            // overflow: 'hidden',
-            width: 260,
-            height: 260,
-            flexDirection: "row",
+            alignContent: "flex-start",
+            height: size == "sm" ? 250 : height,
+            width: size == "sm" ? 250 : width,
         }}>
             <BarCodeScanner
                 onBarCodeScanned={handleBarCodeScanned}
                 style={{ flex: 1 }}
-            />
+            >
+                <View style={styles.layerTop} />
+                <View style={styles.layerCenter}>
+                    <View style={styles.layerLeft} />
+                    <View style={styles.focused} />
+                    <View style={styles.layerRight} />
+                </View>
+                <View style={styles.layerBottom} />
+            </BarCodeScanner>
             {/* <View>
                 <Text> {data} </Text>
             </View> */}
         </View>
     );
 }
+
+const opacity = 'rgba(0, 0, 0, .3)';
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+    layerTop: {
+        flex: 2,
+        backgroundColor: opacity
+    },
+    layerCenter: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    layerLeft: {
+        flex: 1,
+        backgroundColor: opacity
+    },
+    focused: {
+        flex: 10
+    },
+    layerRight: {
+        flex: 1,
+        backgroundColor: opacity
+    },
+    layerBottom: {
+        flex: 2,
+        backgroundColor: opacity
+    },
+});
 
 export default Bar_Code_Scanner

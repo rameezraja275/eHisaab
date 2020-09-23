@@ -170,10 +170,9 @@ const AddEditProduct = (props) => {
               </View>
               {barcode && <Overlay
                 toggleFilter={() => { showBarCode(!barcode) }}
-                title="FILTER">
-                <BarCodeScanner onScan={(text) => { setFormData({ ...formData, code: text }) }} />
+                title="BARCODE_READER">
+                <BarCodeScanner onScan={(text) => { setFormData({ ...formData, code: text }) }} size="sm" />
               </Overlay>}
-
 
               {formData.is_service == constants.PRODUCT && (
                 <TextInput

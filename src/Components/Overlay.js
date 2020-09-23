@@ -18,7 +18,7 @@ const CustomOverlay = ({
       height="auto"
       overlayBackgroundColor={colors.lightColor}
       windowBackgroundColor="rgba(0, 0, 0, .5)"
-      onBackdropPress={backDropClose ? () => {} : toggleFilter}
+      onBackdropPress={backDropClose ? () => { } : toggleFilter}
       isVisible
     >
       <View style={styles.Overlay}>

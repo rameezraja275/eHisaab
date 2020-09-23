@@ -69,7 +69,7 @@ const Details = (props) => {
       behavior={Platform.Os == "ios" ? "padding" : "height"}
     >
       {
-        barcode && <BarCodeReader onScan={onScan} />
+        barcode && <View style={{ height: 200, justifyContent: "center" }}><BarCodeReader onScan={onScan} /></View>
       }
       <OptionsAction
         status={options}
