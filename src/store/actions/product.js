@@ -25,7 +25,7 @@ export function productCreate(body) {
             ? "0"
             : body.opening_stock,
       is_service: body.is_service,
-      code: body.code
+      code: body.product_code
     };
 
     const products = [...store.product.products];
@@ -96,6 +96,7 @@ export function productModify(body) {
             ? "0"
             : body.opening_stock,
       is_service: body.is_service,
+      code: body.product_code
     };
 
     dispatch({
@@ -248,6 +249,7 @@ export function productGet(productId) {
           type: ACTION.LOADING,
         });
 
+        console.log("products", res.data.data)
         dispatch({
           payload: res.data.data,
           type: ACTION.PRODUCT_GET_SUCCESS,

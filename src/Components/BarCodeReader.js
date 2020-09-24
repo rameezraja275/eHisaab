@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Vibration, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import RNBeep from 'react-native-a-beep';
 const { width, height } = Dimensions.get('window');
 
 const Bar_Code_Scanner = ({ onScan, size }) => {
@@ -11,16 +12,17 @@ const Bar_Code_Scanner = ({ onScan, size }) => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
-
     }, []);
 
     const delay = (time) => {
-        setTimeout(() => setScanned(false), time);
+        const clockId = setTimeout(() => setScanned(false), time);
+        clearTimeout(clockId)
     }
 
     const handleBarCodeScanned = async ({ type, data }) => {
         setScanned(true)
         delay(1000)
+        RNBeep.beep()
         Vibration.vibrate()
         onScan(data)
     };

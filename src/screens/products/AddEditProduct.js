@@ -29,7 +29,7 @@ const AddEditProduct = (props) => {
     product_cost_price: null,
     opening_stock: null,
     is_service: null,
-    code: null
+    product_code: null
   });
 
   const [barcode, showBarCode] = useState(false)
@@ -50,7 +50,7 @@ const AddEditProduct = (props) => {
       product_sale_price,
       product_cost_price,
       is_service,
-      code
+      product_code
     } = formData;
 
     product_sale_price = Number(product_sale_price);
@@ -78,7 +78,7 @@ const AddEditProduct = (props) => {
         product_cost_price: null,
         opening_stock: null,
         is_service: null,
-        code: null
+        product_code: null
       });
     }
   };
@@ -149,9 +149,9 @@ const AddEditProduct = (props) => {
               <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <View style={{ flex: 0.9 }}>
                   <TextInput
-                    value={formData.code}
+                    value={formData.product_code}
                     onChange={(text) =>
-                      setFormData({ ...formData, code: text })
+                      setFormData({ ...formData, product_code: text })
                     }
                     keyboardType={"number-pad"}
                     placeholder="BAR_CODE"
@@ -171,7 +171,7 @@ const AddEditProduct = (props) => {
               {barcode && <Overlay
                 toggleFilter={() => { showBarCode(!barcode) }}
                 title="BARCODE_READER">
-                <BarCodeScanner onScan={(text) => { setFormData({ ...formData, code: text }) }} size="sm" />
+                <BarCodeScanner onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
               </Overlay>}
 
               {formData.is_service == constants.PRODUCT && (

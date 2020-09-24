@@ -55,12 +55,11 @@ const Details = (props) => {
 
   const onScan = (code) => {
     const item = props.products.find((item) =>
-      item.code == code
+      item.product_code == code
     );
 
     item ? props.addItemToSale(item) : ShowFlash("NO_PRODUCT_FOUND", "danger", props.language);
 
-    console.log(item)
   };
 
   return (
