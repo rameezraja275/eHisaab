@@ -1,5 +1,5 @@
 export default {
-  VERSION: "1.3.2",
+  VERSION: "1.3.3",
   APP_NAME: "eHisaab",
   OFFICE_ADDRESS: "Top Floor ZS Plaza Jutial Gilgit",
   POWERED_BY: "Pine Technologies (Pvt) Ltd",

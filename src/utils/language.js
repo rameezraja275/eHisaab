@@ -251,7 +251,11 @@ const urdu = {
   BANK_STATEMENT: "بینک اسٹیٹمنٹ",
   CUSTOMERS_REPORT: "صارفین کی رپورٹ",
   SUPPLIERS_REPORT: "سپلائرز کی رپورٹ",
-  STOCK_SUMMARY: "اسٹاک کا خلاصہ"
+  STOCK_SUMMARY: "اسٹاک کا خلاصہ",
+
+  BARCODE_READER: "بارکوڈ ریڈر",
+  BAR_CODE: "بارکوڈ",
+  NO_PRODUCT_FOUND: "کوئی مصنوعہ نہیں ملا"
 
 };
 
@@ -501,7 +505,11 @@ const english = {
   BANK_STATEMENT: "Bank Statement",
   CUSTOMERS_REPORT: "Customers Report",
   SUPPLIERS_REPORT: "Suppliers Report",
-  STOCK_SUMMARY: "Stock Summary"
+  STOCK_SUMMARY: "Stock Summary",
+
+  BARCODE_READER: "Barcode reader",
+  BAR_CODE: "Barcode",
+  NO_PRODUCT_FOUND: "No product found"
 };
 
 export const getTranslation = (label, language) => {
