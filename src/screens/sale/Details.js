@@ -27,6 +27,7 @@ import { getTranslation } from "../../utils/language";
 import BarCodeReader from '../../Components/BarCodeReader'
 import { addItemToSale } from "../../store/actions/sale";
 import { ShowFlash } from "../../utils/helper";
+import Loader from "../../Components/Loader";
 
 const Details = (props) => {
   const [discountStatus, setDiscount] = useState(false);
@@ -63,100 +64,109 @@ const Details = (props) => {
   };
   const [scanned, setScanned] = useState(false)
   return (
-    <KeyboardAvoidingView
-      style={styles.MainContainer}
-      behavior={Platform.Os == "ios" ? "padding" : "height"}
-    >
-      {
-        barcode && <View style={{ height: 200, justifyContent: "center" }}><BarCodeReader scanned={scanned} setScanned={setScanned} onScan={onScan} /></View>
-      }
-      <OptionsAction
-        status={options}
-        close={showOptions}
-        title="DELETE"
-        onSelect={onDelete}
-        danger={true}
-      />
+    <View style={styles.MainContainer}>
+      {props.loading.status ? (
+        <Loader size={10} />
+      ) : (
 
-      <FlatList
-        style={{ flex: 1, backgroundColor: colors.lightColor }}
-        data={props.cart}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <CheckOutListItem
-            item={{ ...item, price: item.product_sale_price }}
-            onDel={() => props.delItemFromSale(item)}
-            onSubmit={props.updateItemFromSale}
-          />
-        )}
-      />
+          <KeyboardAvoidingView
+            style={styles.MainContainer}
+            behavior={Platform.Os == "ios" ? "padding" : "height"}
+          >
 
-      <View
-        style={{
-          padding: 15,
-          backgroundColor: colors.lightColor,
-          alignItems: "flex-start",
-        }}
-      >
-        <TouchableWithoutFeedback onPress={() => setDiscount(!discountStatus)}>
-          {!discountStatus ? (
-            <Text
+            {
+              barcode && <View style={{ height: 200, justifyContent: "center" }}><BarCodeReader scanned={scanned} setScanned={setScanned} onScan={onScan} /></View>
+            }
+            <OptionsAction
+              status={options}
+              close={showOptions}
+              title="DELETE"
+              onSelect={onDelete}
+              danger={true}
+            />
+
+            <FlatList
+              style={{ flex: 1, backgroundColor: colors.lightColor }}
+              data={props.cart}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <CheckOutListItem
+                  item={{ ...item, price: item.product_sale_price }}
+                  onDel={() => props.delItemFromSale(item)}
+                  onSubmit={props.updateItemFromSale}
+                />
+              )}
+            />
+
+            <View
               style={{
-                color: colors.primaryColor,
-                fontSize: 20,
-                padding: 5,
-                fontFamily: "PrimaryFont",
+                padding: 15,
+                backgroundColor: colors.lightColor,
+                alignItems: "flex-start",
               }}
             >
-              {getTranslation("ADD_DISCOUNT", props.language)}
-            </Text>
-          ) : (
-              <Icon name="times" size={20} color={colors.darkColor} />
-            )}
-        </TouchableWithoutFeedback>
-        {discountStatus && (
-          <View style={{ width: "50%" }}>
-            <TextInput
-              value={props.discount}
-              onChange={(text) => {
-                props.addDiscountSale(text);
-              }}
-              placeholder="DISCOUNT"
-              keyboardType={"number-pad"}
-            />
-          </View>
-        )}
-        {props.discount > 0 && (
-          <Text
-            style={{ fontSize: 13, marginLeft: 5, fontFamily: "PrimaryFont" }}
-          >
-            {getTranslation("DISCOUNT", props.language) +
-              " : " +
-              FormatPrice(props.discount)}
-          </Text>
-        )}
-        <Text
-          style={{ fontSize: 13, marginLeft: 5, fontFamily: "PrimaryFont" }}
-        >
-          {getTranslation("TOTAL", props.language) +
-            " : " +
-            FormatPrice(totalPrice)}
-        </Text>
-        <Text
-          style={{ fontSize: 20, marginLeft: 5, fontFamily: "PrimaryFont" }}
-        >
-          {getTranslation("NET_TOTAL", props.language) +
-            " : " +
-            FormatPrice(totalPrice - props.discount)}
-        </Text>
-      </View>
+              <TouchableWithoutFeedback onPress={() => setDiscount(!discountStatus)}>
+                {!discountStatus ? (
+                  <Text
+                    style={{
+                      color: colors.primaryColor,
+                      fontSize: 20,
+                      padding: 5,
+                      fontFamily: "PrimaryFont",
+                    }}
+                  >
+                    {getTranslation("ADD_DISCOUNT", props.language)}
+                  </Text>
+                ) : (
+                    <Icon name="times" size={20} color={colors.darkColor} />
+                  )}
+              </TouchableWithoutFeedback>
+              {discountStatus && (
+                <View style={{ width: "50%" }}>
+                  <TextInput
+                    value={props.discount}
+                    onChange={(text) => {
+                      props.addDiscountSale(text);
+                    }}
+                    placeholder="DISCOUNT"
+                    keyboardType={"number-pad"}
+                  />
+                </View>
+              )}
+              {props.discount > 0 && (
+                <Text
+                  style={{ fontSize: 13, marginLeft: 5, fontFamily: "PrimaryFont" }}
+                >
+                  {getTranslation("DISCOUNT", props.language) +
+                    " : " +
+                    FormatPrice(props.discount)}
+                </Text>
+              )}
+              <Text
+                style={{ fontSize: 13, marginLeft: 5, fontFamily: "PrimaryFont" }}
+              >
+                {getTranslation("TOTAL", props.language) +
+                  " : " +
+                  FormatPrice(totalPrice)}
+              </Text>
+              <Text
+                style={{ fontSize: 20, marginLeft: 5, fontFamily: "PrimaryFont" }}
+              >
+                {getTranslation("NET_TOTAL", props.language) +
+                  " : " +
+                  FormatPrice(totalPrice - props.discount)}
+              </Text>
+            </View>
 
-      <FloatingButton
-        onClick={() => props.navigation.navigate("CheckOut")}
-        icon="shoppingcart"
-        disabled={totalItem == 0 ? true : false}
-      />
-    </KeyboardAvoidingView>
+            <FloatingButton
+              onClick={() => props.navigation.navigate("CheckOut")}
+              icon="shoppingcart"
+              disabled={totalItem == 0 ? true : false}
+            />
+          </KeyboardAvoidingView>
+
+        )}
+    </View>
   );
 };
 
