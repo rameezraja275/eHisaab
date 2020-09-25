@@ -4,9 +4,9 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import RNBeep from 'react-native-a-beep';
 const { width, height } = Dimensions.get('window');
 
-const Bar_Code_Scanner = ({ onScan, size }) => {
+const Bar_Code_Scanner = ({ onScan, size, scanned, setScanned }) => {
     const [hasPermission, setHasPermission] = useState(null);
-    const [scanned, setScanned] = useState(false)
+
     useEffect(() => {
         (async () => {
             const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -16,12 +16,11 @@ const Bar_Code_Scanner = ({ onScan, size }) => {
 
     const delay = (time) => {
         const clockId = setTimeout(() => setScanned(false), time);
-        clearTimeout(clockId)
     }
 
     const handleBarCodeScanned = async ({ type, data }) => {
         setScanned(true)
-        delay(1000)
+        delay(700)
         RNBeep.beep()
         Vibration.vibrate()
         onScan(data)

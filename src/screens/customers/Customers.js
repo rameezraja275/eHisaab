@@ -26,7 +26,7 @@ const Customer = (props) => {
   });
 
   useEffect(() => {
-    customerGet(0);
+    // customerGet(0);
     // props.navigation.setParams({
     //   showOptions: showOptions,
     // });

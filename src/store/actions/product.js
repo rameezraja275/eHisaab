@@ -249,7 +249,6 @@ export function productGet(productId) {
           type: ACTION.LOADING,
         });
 
-        console.log("products", res.data.data)
         dispatch({
           payload: res.data.data,
           type: ACTION.PRODUCT_GET_SUCCESS,

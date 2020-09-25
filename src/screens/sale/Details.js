@@ -61,14 +61,14 @@ const Details = (props) => {
     item ? props.addItemToSale(item) : ShowFlash("NO_PRODUCT_FOUND", "danger", props.language);
 
   };
-
+  const [scanned, setScanned] = useState(false)
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
       behavior={Platform.Os == "ios" ? "padding" : "height"}
     >
       {
-        barcode && <View style={{ height: 200, justifyContent: "center" }}><BarCodeReader onScan={onScan} /></View>
+        barcode && <View style={{ height: 200, justifyContent: "center" }}><BarCodeReader scanned={scanned} setScanned={setScanned} onScan={onScan} /></View>
       }
       <OptionsAction
         status={options}

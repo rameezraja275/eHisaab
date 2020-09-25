@@ -93,7 +93,7 @@ const AddEditProduct = (props) => {
       is_service: getTranslation("SERVICE", props.language),
     },
   ];
-
+  const [scanned, setScanned] = useState(false)
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
@@ -169,9 +169,9 @@ const AddEditProduct = (props) => {
 
               </View>
               {barcode && <Overlay
-                toggleFilter={() => { showBarCode(!barcode) }}
+                toggleFilter={() => { scanned ? undefined : showBarCode(!barcode) }}
                 title="BARCODE_READER">
-                <BarCodeScanner onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
+                <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
               </Overlay>}
 
               {formData.is_service == constants.PRODUCT && (

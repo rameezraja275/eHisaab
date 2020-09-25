@@ -424,6 +424,7 @@ export function saleDelete(id) {
           type: ACTION.LOADING,
         });
         dispatch(productGet(0));
+        dispatch(customerGet(0));
         dispatch({
           type: ACTION.RESET_SALE_CART,
           payload: [],

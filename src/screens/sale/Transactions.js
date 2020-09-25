@@ -42,7 +42,7 @@ const SaleTransactions = (props) => {
 
   const navigate = (item) => {
     getSaleTransactions(item.id);
-    props.navigation.navigate("SaleReturn");
+    props.navigation.navigate("SaleReturn", { barcode: false });
   };
 
   useEffect(() => {
@@ -72,75 +72,75 @@ const SaleTransactions = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <React.Fragment>
-          <SearchBar
-            {...props}
-            onChange={onSearch}
-            toggleFilter={() => setState({ ...state, showOverlay: true })}
-          />
+          <React.Fragment>
+            <SearchBar
+              {...props}
+              onChange={onSearch}
+              toggleFilter={() => setState({ ...state, showOverlay: true })}
+            />
 
-          {state.showOverlay && (
-            <Overlay
-              toggleFilter={() => setState({ ...state, showOverlay: false })}
-              title="FILTER"
-            >
-              <Filters
-                data={filter}
-                setDate={(text) => {
-                  setFilter({ ...filter, date: text });
-                }}
-                onSubmit={() => {
-                  setState({ ...state, showOverlay: false });
-                  getSaleTransactions(0, filter);
-                }}
-                setType={(text) => setFilter({ ...filter, filter_type: text })}
-              />
-            </Overlay>
-          )}
-
-          <FlatList
-            ListEmptyComponent={<EmptyList message="No Transactions." />}
-            data={state.filteredData}
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={reload} />
-            }
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <ListItemContainer onClick={() => navigate(item)}>
-                <View style={{ flex: 0.6 }}>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {item.customer_name}
-                  </Text>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {FormatDate(item.sale_date)}
-                  </Text>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {item.narration}
-                  </Text>
-                </View>
-
-                <View style={{ flex: 0.4 }}>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {getTranslation("AMOUNT", props.language) +
-                      " : " +
-                      FormatPrice(item.sale_amount)}
-                  </Text>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {getTranslation("DISCOUNT", props.language) +
-                      " : " +
-                      FormatPrice(item.sale_discount)}
-                  </Text>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {getTranslation("PAID", props.language) +
-                      " : " +
-                      FormatPrice(item.paid_amount)}
-                  </Text>
-                </View>
-              </ListItemContainer>
+            {state.showOverlay && (
+              <Overlay
+                toggleFilter={() => setState({ ...state, showOverlay: false })}
+                title="FILTER"
+              >
+                <Filters
+                  data={filter}
+                  setDate={(text) => {
+                    setFilter({ ...filter, date: text });
+                  }}
+                  onSubmit={() => {
+                    setState({ ...state, showOverlay: false });
+                    getSaleTransactions(0, filter);
+                  }}
+                  setType={(text) => setFilter({ ...filter, filter_type: text })}
+                />
+              </Overlay>
             )}
-          />
-        </React.Fragment>
-      )}
+
+            <FlatList
+              ListEmptyComponent={<EmptyList message="No Transactions." />}
+              data={state.filteredData}
+              refreshControl={
+                <RefreshControl refreshing={false} onRefresh={reload} />
+              }
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <ListItemContainer onClick={() => navigate(item)}>
+                  <View style={{ flex: 0.6 }}>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {item.customer_name}
+                    </Text>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {FormatDate(item.sale_date)}
+                    </Text>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {item.narration}
+                    </Text>
+                  </View>
+
+                  <View style={{ flex: 0.4 }}>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {getTranslation("AMOUNT", props.language) +
+                        " : " +
+                        FormatPrice(item.sale_amount)}
+                    </Text>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {getTranslation("DISCOUNT", props.language) +
+                        " : " +
+                        FormatPrice(item.sale_discount)}
+                    </Text>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {getTranslation("PAID", props.language) +
+                        " : " +
+                        FormatPrice(item.paid_amount)}
+                    </Text>
+                  </View>
+                </ListItemContainer>
+              )}
+            />
+          </React.Fragment>
+        )}
     </View>
   );
 };

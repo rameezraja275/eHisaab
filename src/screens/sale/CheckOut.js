@@ -44,7 +44,7 @@ const CheckOut = (props) => {
   };
 
   useEffect(() => {
-    props.customerGet();
+    // props.customerGet();
     const { date, paid_amount, customer_id, narration } = props.saleData;
     setFormData({
       date,
