@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "430639232961",
+    "firebase_url": "https://ehisaab-fac32.firebaseio.com",
+    "project_id": "ehisaab-fac32",
+    "storage_bucket": "ehisaab-fac32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430639232961:android:a426831992b511b0072140",
+        "android_client_info": {
+          "package_name": "com.pinetechnologies.ehisaab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430639232961-nvohh5se8o3a168vadd92s14kmcsgifa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjeEFY48KVkvxXDos5rPin3cBa61u4nac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430639232961-nvohh5se8o3a168vadd92s14kmcsgifa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
