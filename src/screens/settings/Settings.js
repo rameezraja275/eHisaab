@@ -209,6 +209,13 @@ const Setting = (props) => {
             " : " +
             constants.VERSION}{" "}
         </Text>
+
+        <Text style={{ fontSize: 13, fontFamily: "PrimaryFont", marginVertical: 5, color: "#01796F" }}>
+          {"Powered by " + constants.POWERED_BY}
+        </Text>
+        <Text style={{ fontSize: 13, fontFamily: "PrimaryFont", color: "#60443D" }}>
+          {"ZS Plaza Jutial, Gilgit, Pakistan"}
+        </Text>
       </View>
     </ScrollView>
   );

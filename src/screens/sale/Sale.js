@@ -27,7 +27,7 @@ import constants from "../../utils/constants";
 import { newUserMessages } from "../../utils/newUserMessage";
 import RadioButtons from "../../Components/RadioButtons";
 import { setIndexForSaleList } from '../../store/actions/user'
-
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 const Sale = (props) => {
   const {
@@ -113,6 +113,15 @@ const Sale = (props) => {
     setState({ ...state, showOverlay: false });
     removeNotifications();
   };
+
+  const [hasPermission, setHasPermission] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
 
   return (
     <View style={styles.MainContainer}>

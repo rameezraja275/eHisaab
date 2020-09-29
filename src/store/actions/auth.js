@@ -128,12 +128,13 @@ export function signin(body) {
       },
       type: ACTION.LOADING,
     });
+
     const language = getState().common.language;
+
     axios
       .post(`${API.BASE_URL}${API.LOGIN_URL}`, body, { headers })
       .then(async (res) => {
-        // await AsyncStorage.setItem('token',res.data.data.token)
-        // const token = await AsyncStorage.getItem('token');
+
         const token = res.data.data.token;
         const userStatus = res.data.data.user.status;
         const bussiness = res.data.data.business;
@@ -143,10 +144,6 @@ export function signin(body) {
           ...bussiness,
           logo: bussiness.logo == "" ? null : bussiness.logo,
         };
-
-        // await AsyncStorage.setItem('user', JSON.stringify(user))
-        // await AsyncStorage.setItem('bussiness', JSON.stringify(data))
-        // const business = JSON.parse( await AsyncStorage.getItem('bussiness') )
 
         token &&
           dispatch({

@@ -12,6 +12,7 @@ const Quotation = (props) => {
   const { saleCart, cartStatus, discount, saleData } = saleDetails;
   const [customer, setCusomer] = useState(null);
 
+
   useEffect(() => {
     if (saleData.customer_id) {
       const customer = customers.find(
@@ -57,30 +58,23 @@ const Quotation = (props) => {
         </style> </head> <body>
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
-            ${
-    bussiness.logo
+            ${bussiness.logo
       ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
       : `<div></div>`
     } 
     } <h4 class="title"> Quotation </h4> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
-                    <p class="comapnyname"> ${
-    bussiness.name ? bussiness.name : ""
-    } </p> <p> Adress: ${
-    bussiness.address ? bussiness.address : ""
+                    <p class="comapnyname"> ${bussiness.name ? bussiness.name : ""
+    } </p> <p> Adress: ${bussiness.address ? bussiness.address : ""
     } </p>
-                    <p> Phone: ${
-    bussiness.phone ? bussiness.phone : ""
+                    <p> Phone: ${bussiness.phone ? bussiness.phone : ""
     } </p></div> 
-                    <div> <p> Date: ${saleData.date.toDateString()} </p> <p> Customer: ${
-    customer ? customer.customer_name : ""
+                    <div> <p> Date: ${saleData.date.toDateString()} </p> <p> Customer: ${customer ? customer.customer_name : ""
     }  </p>
-                    <p> Adress: ${
-    customer ? customer.customer_address : ""
+                    <p> Adress: ${customer ? customer.customer_address : ""
     }  </p>
-                    <p> Phone: ${
-    customer ? customer.customer_phone : ""
+                    <p> Phone: ${customer ? customer.customer_phone : ""
     } </p> </div> </div>
                     <hr class="mb-25"/>
                     <table class="mb-20 "> <tr> <th>S#</th> <th>Qty</th> <th>Description</th> <th>Unit Price</th> <th>Total</th> </tr>

@@ -18,10 +18,12 @@ import { ShowFlash } from "../../utils/helper";
 import { getTranslation } from "../../utils/language";
 import images from "../../utils/images";
 import Link from "../../Components/Links";
+import { notifications } from "react-native-firebase-push-notifications"
 
 const SigninScreen = ({ navigation, signin, loading, language }) => {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [fcmToken, setFcmToken] = useState(null)
 
   const DoSignIn = () => {
     if (email == null || password == null || email == "" || password == "") {
@@ -30,9 +32,20 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
       signin({
         email: email,
         password: password,
+        fcm_token: fcmToken
       });
     }
   };
+
+  useEffect(() => {
+    getToken()
+  })
+
+  const getToken = async () => {
+    const token = await notifications.getToken()
+    setFcmToken(token)
+    return
+  }
 
   return loading.status ? (
     <Loader size={10} />

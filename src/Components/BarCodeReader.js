@@ -5,14 +5,6 @@ import RNBeep from 'react-native-a-beep';
 const { width, height } = Dimensions.get('window');
 
 const Bar_Code_Scanner = ({ onScan, size, scanned, setScanned }) => {
-    const [hasPermission, setHasPermission] = useState(null);
-
-    useEffect(() => {
-        (async () => {
-            const { status } = await BarCodeScanner.requestPermissionsAsync();
-            setHasPermission(status === 'granted');
-        })();
-    }, []);
 
     const delay = (time) => {
         const clockId = setTimeout(() => setScanned(false), time);
