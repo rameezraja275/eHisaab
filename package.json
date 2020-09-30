@@ -35,6 +35,7 @@
     "react-dom": "16.13.1",
     "react-native": "~0.62.2",
     "react-native-a-beep": "^1.0.6",
+    "react-native-autocomplete-input": "^4.2.0",
     "react-native-elements": "1.2.7",
     "react-native-firebase-push-notifications": "^0.0.8",
     "react-native-flash-message": "0.1.15",
@@ -64,5 +65,5 @@
   },
   "private": true,
   "name": "ehisaab",
-  "version": "1.3.3"
+  "version": "1.4.1"
 }
