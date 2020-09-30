@@ -1,7 +1,7 @@
 export default {
   VERSION: "1.4.1",
   APP_NAME: "eHisaab",
-  OFFICE_ADDRESS: "Top Floor ZS Plaza Jutial Gilgit",
+  OFFICE_ADDRESS: "ZS Plaza Jutial, Gilgit, Pakistan",
   POWERED_BY: "Pine Technologies (Pvt) Ltd",
   CUSTOMER_CARE_NUMBER: "+923489913964",
   CUSTOMER_CARE_EMAIL: "ehisaab@pine-technologies.com",
