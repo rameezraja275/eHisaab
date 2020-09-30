@@ -32,7 +32,7 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
       signin({
         email: email,
         password: password,
-        fcm_token: fcmToken
+        device_token: fcmToken
       });
     }
   };
