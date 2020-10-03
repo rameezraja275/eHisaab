@@ -132,10 +132,21 @@ const Suppliers = (props) => {
                       })
                     }
                   >
-                    <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                      {item.supplier_name}
-                    </Text>
-                    <View style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
+
+                    <View style={{ flex: 0.7 }}>
+                      <Text style={{ fontFamily: "PrimaryFont", fontSize: 17 }}>
+                        {item.supplier_name}
+                      </Text>
+                      <Text style={{ fontFamily: "PrimaryFont" }}>
+                        {item.supplier_address}
+                      </Text>
+                      <Text style={{ fontFamily: "PrimaryFont" }}>
+                        {item.supplier_phone}
+                      </Text>
+                    </View>
+
+
+                    <View style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
                       <Text style={{ color: color, fontFamily: "PrimaryFont" }}>
                         {FormatPrice(item.current_balance)}
                       </Text>

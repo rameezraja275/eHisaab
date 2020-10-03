@@ -6,9 +6,5 @@ export const newUserMessages = [
   {
     notification_text:
       "eHisaab is a complete POS Mobile App. eHisaab automates all your business transactions. With eHisaab you can manage Sale, Purchase, Expenses, Invoices, Reporting, Inventory, Open Sale and much more."
-  },
-  {
-    notification_text:
-      "eHisaab is totally free with ads. and charges 500Rs/Month for ads free version"
-  },
+  }
 ];

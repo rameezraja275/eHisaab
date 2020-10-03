@@ -18,6 +18,7 @@
     "@react-native-community/datetimepicker": "2.4.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/picker": "1.6.0",
+    "@react-navigation/stack": "^5.9.2",
     "@use-expo/font": "2.0.0",
     "axios": "0.19.2",
     "expo": "38.0.8",
@@ -65,5 +66,5 @@
   },
   "private": true,
   "name": "ehisaab",
-  "version": "1.4.1"
+  "version": "1.4.2"
 }

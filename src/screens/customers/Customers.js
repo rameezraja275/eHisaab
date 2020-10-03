@@ -129,10 +129,19 @@ const Customer = (props) => {
                       })
                     }
                   >
-                    <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                      {item.customer_name}
-                    </Text>
-                    <View style={{ flex: 0.4 }}>
+                    <View style={{ flex: 0.7 }}>
+                      <Text style={{ fontFamily: "PrimaryFont", fontSize: 17 }}>
+                        {item.customer_name}
+                      </Text>
+                      <Text style={{ fontFamily: "PrimaryFont" }}>
+                        {item.customer_address}
+                      </Text>
+                      <Text style={{ fontFamily: "PrimaryFont" }}>
+                        {item.customer_phone}
+                      </Text>
+                    </View>
+
+                    <View style={{ flex: 0.3 }}>
                       <Text style={{ color: color, fontFamily: "PrimaryFont" }}>
                         {FormatPrice(item.current_balance)}
                       </Text>
