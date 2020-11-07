@@ -8,7 +8,8 @@ const initialState = {
   token: "",
   newUser: false,
   notifications: [],
-  index: 0
+  index: 0,
+  token_expiry: ""
 };
 
 const userReducer = (state = initialState, { payload, type }) => {
@@ -17,6 +18,11 @@ const userReducer = (state = initialState, { payload, type }) => {
       return {
         ...state,
         userStatus: payload,
+      };
+    case ACTION.TOKEN_EXPIRY:
+      return {
+        ...state,
+        token_expiry: payload,
       };
     case ACTION.TOKEN:
       return {

@@ -134,7 +134,7 @@ export function signin(body) {
     axios
       .post(`${API.BASE_URL}${API.LOGIN_URL}`, body, { headers })
       .then(async (res) => {
-
+        const token_expiry = res.data.data.token_expiry
         const token = res.data.data.token;
         const userStatus = res.data.data.user.status;
         const bussiness = res.data.data.business;
@@ -144,6 +144,16 @@ export function signin(body) {
           ...bussiness,
           logo: bussiness.logo == "" ? null : bussiness.logo,
         };
+
+        dispatch({
+          type: ACTION.TOKEN_EXPIRY,
+          payload: token_expiry,
+        });
+
+        dispatch({
+          type: ACTION.USER_STATUS,
+          payload: userStatus
+        });
 
         token &&
           dispatch({
@@ -374,45 +384,74 @@ export const ValidateToken = () => {
 
     const store = getState();
     const token = store.user.token;
+    const token_expiry = store.user.token_expiry
+    const user_status = store.user.userStatus
 
     const body = {
       token,
     };
 
+    const exp = new Date(token_expiry)
     if (token) {
-      axios
-        .post(`${API.BASE_URL}${API.VALIDATE_TOKEN}`, body, { headers })
-        .then(async (res) => {
-          const response = res.data.data;
-          token &&
-            dispatch({
-              type: ACTION.TOKEN,
-              payload: token,
-            });
 
-          dispatch({
-            type: ACTION.USER_STATUS,
-            payload: response[3],
-          });
 
-          dispatch({
-            type: ACTION.NOTIFICATIONS,
-            payload: response.notifications,
-          });
 
-          navigation(response[3], dispatch);
-        })
-        .catch((err) => {
-          // dispatch({
-          //   type: ACTION.TOKEN_STATUS,
-          //   payload: false,
-          // });
-          // dispatch({
-          //   payload: null,
-          //   type: ACTION.RESET_STATE,
-          // });
-          navigate("Auth");
-        });
+      if (Date.now() <= exp.getTime()) {
+
+        // const response = res.data.data;
+        // token &&
+        //   dispatch({
+        //     type: ACTION.TOKEN,
+        //     payload: token,
+        //   });
+
+        // dispatch({
+        //   type: ACTION.USER_STATUS,
+        //   payload: response[3],
+        // });
+
+        // dispatch({
+        //   type: ACTION.NOTIFICATIONS,
+        //   payload: response.notifications,
+        // });
+
+        navigation(user_status, dispatch);
+      } else {
+        navigate("Auth");
+      }
+      // axios
+      //   .post(`${API.BASE_URL}${API.VALIDATE_TOKEN}`, body, { headers })
+      //   .then(async (res) => {
+      //     const response = res.data.data;
+      //     token &&
+      //       dispatch({
+      //         type: ACTION.TOKEN,
+      //         payload: token,
+      //       });
+
+      //     dispatch({
+      //       type: ACTION.USER_STATUS,
+      //       payload: response[3],
+      //     });
+
+      //     dispatch({
+      //       type: ACTION.NOTIFICATIONS,
+      //       payload: response.notifications,
+      //     });
+
+      //     navigation(response[3], dispatch);
+      //   })
+      //   .catch((err) => {
+      //     // dispatch({
+      //     //   type: ACTION.TOKEN_STATUS,
+      //     //   payload: false,
+      //     // });
+      //     // dispatch({
+      //     //   payload: null,
+      //     //   type: ACTION.RESET_STATE,
+      //     // });
+      //     navigate("Auth");
+      //   });
     } else {
       navigate("Auth");
     }
