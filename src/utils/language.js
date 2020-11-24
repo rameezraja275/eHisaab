@@ -255,7 +255,12 @@ const urdu = {
 
   BARCODE_READER: "بارکوڈ ریڈر",
   BAR_CODE: "بارکوڈ",
-  NO_PRODUCT_FOUND: "کوئی مصنوعہ نہیں ملا"
+  NO_PRODUCT_FOUND: "کوئی مصنوعہ نہیں ملا",
+
+  MYSTORE: "میرا آن لائن اسٹور",
+  MAKEBUSSINESSONLINE: "ای حساب کے ذریعہ اپنے کاروبار کو آن لائن بنائیں",
+  YOURSTORE: "آپ کا آن لائن اسٹور",
+  COMINGSOON: "جلد آرہا ہے"
 
 };
 
@@ -509,7 +514,11 @@ const english = {
 
   BARCODE_READER: "Barcode reader",
   BAR_CODE: "Barcode",
-  NO_PRODUCT_FOUND: "No product found"
+  NO_PRODUCT_FOUND: "No product found",
+  MYSTORE: "My Online Store",
+  MAKEBUSSINESSONLINE: "Take your business online with eHisaab",
+  YOURSTORE: "Your Online Store is",
+  COMINGSOON: "COMING SOON"
 };
 
 export const getTranslation = (label, language) => {

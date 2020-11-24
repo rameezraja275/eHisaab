@@ -12,6 +12,7 @@ import Suppliers_StackNavigator from "./supplier/Navigation";
 import Expense_StackNavigator from "./expense/Navigation";
 import Icon from "react-native-vector-icons/AntDesign";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import Material from 'react-native-vector-icons/MaterialCommunityIcons'
 import color from "../utils/colors";
 import Settings_StackNavigator from "./settings/Navigation";
 import Employee_StackNavigator from "./employees/Navigation";
@@ -20,6 +21,7 @@ import Reports_StackNavigator from "./reports/Navigation";
 import Receipt_StackNavigator from "./receipts/Navigation";
 import Payments_StackNavigator from "./payments/Navigation";
 import Bank_StackNavigator from './bank/Navigation'
+import OnlineStore_StackNavigator from './onlineStore/index'
 
 const Drawer = createDrawerNavigator(
   {
@@ -96,6 +98,16 @@ const Drawer = createDrawerNavigator(
     //     ),
     //   },
     // },
+
+    MyOnlineStore: {
+      screen: OnlineStore_StackNavigator,
+      navigationOptions: {
+        drawerLabel: <DrawerLable title="MYSTORE" />,
+        drawerIcon: ({ tintColor }) => (
+          <Material name="store" size={20} color={tintColor} />
+        ),
+      }
+    },
 
     ExpenseScreen: {
       screen: Expense_StackNavigator,

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+<script src="http://localhost:8097"></script>
 import { Provider } from "react-redux";
 import AppContainer from "./src/screens";
 import configureStore from "./src/store/store";
