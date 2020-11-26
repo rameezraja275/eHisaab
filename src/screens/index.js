@@ -21,7 +21,7 @@ import Reports_StackNavigator from "./reports/Navigation";
 import Receipt_StackNavigator from "./receipts/Navigation";
 import Payments_StackNavigator from "./payments/Navigation";
 import Bank_StackNavigator from './bank/Navigation'
-import OnlineStore_StackNavigator from './onlineStore/index'
+import OnlineStore_StackNavigator from './onlineStore/Navigation'
 
 const Drawer = createDrawerNavigator(
   {
