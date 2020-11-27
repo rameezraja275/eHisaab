@@ -20,11 +20,13 @@ const Bussiness = (props) => {
   const [formData, setFormData] = useState({
     id: null,
     name: null,
+    storeName: null,
     phone: null,
     address: null,
     logo: null,
     user_id: null,
     opening_cash: null,
+    narration: null
   });
 
   useEffect(() => {
@@ -35,8 +37,8 @@ const Bussiness = (props) => {
 
 
   const onSubmit = () => {
-    const { name } = formData;
-    if (name == null || name == "") {
+    const { name, storeName } = formData;
+    if (name == null || name == "" || storeName == "" || storeName == null) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else {
       props.businessModify(formData);
@@ -64,6 +66,14 @@ const Bussiness = (props) => {
                 required
                 autoCapitalize="words"
               />
+              <TextInput
+                value={formData.storeName}
+                onChange={(text) => setFormData({ ...formData, storeName: text })}
+                placeholder="STORE_NAME"
+                required
+                noSpace
+                autoCapitalize="words"
+              />
 
               <TextInput
                 value={formData.phone}
@@ -84,6 +94,14 @@ const Bussiness = (props) => {
                   setFormData({ ...formData, opening_cash: text })
                 }
                 placeholder="OPENING_CASH"
+              />
+
+              <TextInput
+                value={formData.narration}
+                onChange={(text) => setFormData({ ...formData, narration: text })}
+                placeholder="DESCRIPTION"
+                autoCapitalize="sentences"
+                maxLength={150}
               />
 
               <ImagerPicker

@@ -69,9 +69,8 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
             source={images.icon_transparent}
           />
         </View>
-        <View>
+        <View style={{ height: 130 }}>
           <TextInput
-            style={{ flex: 1 }}
             value={email}
             onChange={setEmail}
             placeholder="EMAIL"
@@ -79,7 +78,6 @@ const SigninScreen = ({ navigation, signin, loading, language }) => {
             required
           />
           <TextInput
-            style={{ flex: 1 }}
             value={password}
             onChange={setPassword}
             placeholder="PASSWORD"

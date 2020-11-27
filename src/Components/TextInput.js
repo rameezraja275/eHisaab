@@ -12,7 +12,8 @@ const Input = (props) => {
     borderWidth: focus ? 1 : 0.5,
     borderRadius: 5,
     marginVertical: 10,
-    // height: 42,
+    flex: 1,
+    height: 42,
   };
 
   const TextFieldStyles = {
@@ -59,7 +60,7 @@ const Input = (props) => {
     const cleanNumber =
       props.keyboardType == "number-pad"
         ? userInput.replace(/[^0-9]/g, "")
-        : userInput;
+        : props.noSpace ? userInput.replace(/\s/g, '') : userInput;
     props.onChange(cleanNumber);
   };
 

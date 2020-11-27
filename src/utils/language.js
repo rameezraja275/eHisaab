@@ -518,7 +518,13 @@ const english = {
   MYSTORE: "My Online Store",
   MAKEBUSSINESSONLINE: "Take your business online with eHisaab",
   YOURSTORE: "Your Online Store is",
-  COMINGSOON: "COMING SOON"
+  COMINGSOON: "COMING SOON",
+
+  STORE: "Store",
+  EDIT_BUSSINESS_INFO: "Edit Bussiness info",
+  ADD_PRODUCTS_STORE: "Add products to store",
+  ADD_TO_STORE: "Add to store",
+  DISPLAY_IN_STORE: "Display in online store"
 };
 
 export const getTranslation = (label, language) => {

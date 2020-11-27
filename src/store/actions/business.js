@@ -24,6 +24,8 @@ export function businessModify(body) {
       logo: body.logo,
       id: body.id,
       opening_cash: body.opening_cash,
+      narration: body.narration,
+      storeName: body.storeName
     };
 
     dispatch({
@@ -33,6 +35,9 @@ export function businessModify(body) {
       },
       type: ACTION.LOADING,
     });
+
+    console.log(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`)
+
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
       .then(async (res) => {

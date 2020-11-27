@@ -25,7 +25,10 @@ export function productCreate(body) {
             ? "0"
             : body.opening_stock,
       is_service: body.is_service,
-      code: body.product_code
+      code: body.product_code,
+      narration: body.narration,
+      isInStore: "1",
+      product_image: "data:image/png;base64," + body.product_image
     };
 
     const products = [...store.product.products];
@@ -37,6 +40,8 @@ export function productCreate(body) {
       },
       type: ACTION.LOADING,
     });
+
+    console.log(data)
 
     axios
       .post(`${API.BASE_URL}${API.PRODUCT_CREATE_URL}`, data, { headers })
@@ -58,6 +63,7 @@ export function productCreate(body) {
         ShowFlash("ADD_SUCCESS", "success", language);
       })
       .catch((err) => {
+        console.log(err.response)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
@@ -96,7 +102,9 @@ export function productModify(body) {
             ? "0"
             : body.opening_stock,
       is_service: body.is_service,
-      code: body.product_code
+      code: body.product_code,
+      narration: body.narration,
+      product_image: body.product_image
     };
 
     dispatch({

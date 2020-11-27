@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   Image,
+  ScrollView,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
@@ -86,9 +87,15 @@ const SignupScreen = ({
             source={images.logo_vertical}
           />
         </View> */}
-          <View>
-            {/* <Picker placeholder="Country" options={countryList} value={ country } type="value"
+          {/* <View> */}
+          {/* <Picker placeholder="Country" options={countryList} value={ country } type="value"
                             	onChange={ (text) => setCountry(text) } required/> */}
+
+          <ScrollView
+            style={{ flex: 1 }}
+            keyboardDismissMode={"on-drag"}
+            keyboardShouldPersistTaps={"handled"}
+          >
             <TextInput
               style={{ flex: 1 }}
               value={email}
@@ -126,10 +133,12 @@ const SignupScreen = ({
                 language={language}
               />
             </View>
-          </View>
-          <View>
-            <Button style={styles.Button} title="SIGN_UP" onClick={DoSignUp} />
-          </View>
+            {/* </View> */}
+            <View>
+              <Button style={styles.Button} title="SIGN_UP" onClick={DoSignUp} />
+            </View>
+
+          </ScrollView>
         </KeyboardAvoidingView>
       </DismissKeyboard>
     );

@@ -9,6 +9,7 @@ import {
 import { connect } from "react-redux";
 import { productCreate, productModify } from "../../store/actions/product";
 import Button from "../../Components/Button";
+import { CheckBox } from 'react-native-elements';
 import TextInput from "../../Components/TextInput";
 import { ShowFlash } from "../../utils/helper";
 import colors from "../../utils/colors";
@@ -20,6 +21,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import BarCodeScanner from "../../Components/BarCodeReader";
 import Overlay from "../../Components/Overlay";
 import { TouchableOpacity } from "react-native";
+import ImagerPicker from "../../Components/ImagePicker";
 
 const AddEditProduct = (props) => {
   const [formData, setFormData] = useState({
@@ -29,7 +31,10 @@ const AddEditProduct = (props) => {
     product_cost_price: null,
     opening_stock: null,
     is_service: null,
-    product_code: null
+    product_code: null,
+    narration: null,
+    is_instore: false,
+    product_image: null
   });
 
   const [barcode, showBarCode] = useState(false)
@@ -50,7 +55,9 @@ const AddEditProduct = (props) => {
       product_sale_price,
       product_cost_price,
       is_service,
-      product_code
+      is_instore,
+      product_code,
+      narration
     } = formData;
 
     product_sale_price = Number(product_sale_price);
@@ -78,7 +85,10 @@ const AddEditProduct = (props) => {
         product_cost_price: null,
         opening_stock: null,
         is_service: null,
-        product_code: null
+        product_code: null,
+        is_instore: false,
+        narration: null,
+        product_image: null
       });
     }
   };
@@ -127,6 +137,8 @@ const AddEditProduct = (props) => {
                   setFormData({ ...formData, is_service: text })
                 }
               />
+
+
               <TextInput
                 value={formData.product_cost_price}
                 onChange={(text) =>
@@ -136,15 +148,27 @@ const AddEditProduct = (props) => {
                 placeholder="PURCHAE_PRICE"
                 required
               />
-              <TextInput
-                value={formData.product_sale_price}
-                onChange={(text) =>
-                  setFormData({ ...formData, product_sale_price: text })
-                }
-                keyboardType={"number-pad"}
-                placeholder="SALE_PRICE"
-                required
-              />
+
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
+                <TextInput
+                  value={formData.product_sale_price}
+                  onChange={(text) =>
+                    setFormData({ ...formData, product_sale_price: text })
+                  }
+                  keyboardType={"number-pad"}
+                  placeholder="SALE_PRICE"
+                  required
+                />
+
+                <CheckBox
+                  title={getTranslation("DISPLAY_IN_STORE", props.language)}
+                  checked={formData.is_instore == "0" ? false : true}
+                  checkedColor={colors.darkColor}
+                  iconRight
+                  onPress={() => setFormData({ ...formData, is_instore: formData.is_instore === "0" ? "1" : "0" })}
+                />
+              </View>
+
 
               <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <View style={{ flex: 0.9 }}>
@@ -174,6 +198,16 @@ const AddEditProduct = (props) => {
                 <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
               </Overlay>}
 
+
+
+              <TextInput
+                value={formData.narration}
+                onChange={(text) => setFormData({ ...formData, narration: text })}
+                placeholder="DESCRIPTION"
+                autoCapitalize="sentences"
+                maxLength={150}
+              />
+
               {formData.is_service == constants.PRODUCT && (
                 <TextInput
                   keyboardType={"number-pad"}
@@ -185,6 +219,14 @@ const AddEditProduct = (props) => {
                   }
                 />
               )}
+
+              <ImagerPicker
+                onChangeImage={(image) =>
+                  setFormData({ ...formData, product_image: image.base64 })
+                }
+                placeholder="IMAGE"
+                image={formData.product_image}
+              />
             </View>
             <View style={styles.Button}>
               <View style={{ flex: 1 }}>
