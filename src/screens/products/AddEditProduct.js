@@ -179,7 +179,6 @@ const AddEditProduct = (props) => {
                     }
                     keyboardType={"number-pad"}
                     placeholder="BAR_CODE"
-                    required
                   />
                 </View>
                 <TouchableOpacity onPress={() => { showBarCode(true) }}  >
@@ -198,16 +197,6 @@ const AddEditProduct = (props) => {
                 <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
               </Overlay>}
 
-
-
-              <TextInput
-                value={formData.narration}
-                onChange={(text) => setFormData({ ...formData, narration: text })}
-                placeholder="DESCRIPTION"
-                autoCapitalize="sentences"
-                maxLength={150}
-              />
-
               {formData.is_service == constants.PRODUCT && (
                 <TextInput
                   keyboardType={"number-pad"}
@@ -220,13 +209,22 @@ const AddEditProduct = (props) => {
                 />
               )}
 
-              <ImagerPicker
+              {formData.is_instore == "1" && <TextInput
+                value={formData.narration}
+                onChange={(text) => setFormData({ ...formData, narration: text })}
+                placeholder="DESCRIPTION"
+                autoCapitalize="sentences"
+                maxLength={150}
+              />}
+
+
+              {formData.is_instore == "1" && <ImagerPicker
                 onChangeImage={(image) =>
                   setFormData({ ...formData, product_image: image.base64 })
                 }
                 placeholder="IMAGE"
                 image={formData.product_image}
-              />
+              />}
             </View>
             <View style={styles.Button}>
               <View style={{ flex: 1 }}>

@@ -139,6 +139,7 @@ export function signin(body) {
         const userStatus = res.data.data.user.status;
         const bussiness = res.data.data.business;
         const user = res.data.data.user;
+        const categories = res.data.data.categories
 
         const business = {
           ...bussiness,
@@ -166,6 +167,11 @@ export function signin(body) {
             type: ACTION.BUSINESS_GET_SUCCESS,
             payload: business,
           });
+
+        dispatch({
+          payload: categories,
+          type: ACTION.BUSINESS_GET_CATEGORIES
+        })
 
         user &&
           dispatch({

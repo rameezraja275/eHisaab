@@ -6,6 +6,8 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
+
+import Picker from "../../Components/Picker";
 import { connect } from "react-redux";
 import { businessModify } from "../../store/actions/business";
 import Button from "../../Components/Button";
@@ -21,6 +23,7 @@ const Bussiness = (props) => {
     id: null,
     name: null,
     storeName: null,
+    categoryId: null,
     phone: null,
     address: null,
     logo: null,
@@ -37,8 +40,8 @@ const Bussiness = (props) => {
 
 
   const onSubmit = () => {
-    const { name, storeName } = formData;
-    if (name == null || name == "" || storeName == "" || storeName == null) {
+    const { name, storeName, categoryId } = formData;
+    if (name == null || name == "" || storeName == "" || categoryId == "" || categoryId == null || storeName == null) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else {
       props.businessModify(formData);
@@ -65,6 +68,7 @@ const Bussiness = (props) => {
                 placeholder="NAME"
                 required
                 autoCapitalize="words"
+                maxLength={40}
               />
               <TextInput
                 value={formData.storeName}
@@ -72,7 +76,19 @@ const Bussiness = (props) => {
                 placeholder="STORE_NAME"
                 required
                 noSpace
+                maxLength={20}
                 autoCapitalize="words"
+              />
+
+              <Picker
+                placeholder="CATEGORY"
+                options={props.categories}
+                value={formData.categoryId}
+                required
+                type="name"
+                onChange={(text) =>
+                  setFormData({ ...formData, categoryId: text == null ? 0 : text })
+                }
               />
 
               <TextInput
@@ -80,12 +96,14 @@ const Bussiness = (props) => {
                 onChange={(text) => setFormData({ ...formData, phone: text })}
                 placeholder="PHONE_NUMBER"
                 keyboardType={"phone-pad"}
+                maxLength={11}
               />
 
               <TextInput
                 value={formData.address}
                 onChange={(text) => setFormData({ ...formData, address: text })}
                 placeholder="ADDRESS"
+                maxLength={60}
               />
               <TextInput
                 keyboardType={"number-pad"}
@@ -151,6 +169,7 @@ const mapStateToProps = ({ common, bussiness }) => {
     loading: common.loading,
     bussiness: bussiness.bussiness,
     language: common.language,
+    categories: bussiness.categories
   };
 };
 

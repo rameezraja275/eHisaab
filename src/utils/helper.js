@@ -85,8 +85,7 @@ export const FormatDate = (date, splitOn = " ") => {
     "Nov",
     "Dec",
   ];
-  const formatedDate = `${DateObj.getDate()}-${
-    months[DateObj.getMonth()]
+  const formatedDate = `${DateObj.getDate()}-${months[DateObj.getMonth()]
     }-${DateObj.getFullYear().toString().substr(-2)}`;
 
   return formatedDate;
@@ -173,3 +172,8 @@ export const sms = (phone, message) => {
     })
     .catch((err) => { });
 };
+
+export const valididateBase64 = (str) => {
+  var pattern = new RegExp(/[A-Za-z+/=]/);
+  return !!pattern.test(str);
+}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { View, StyleSheet, FlatList, RefreshControl, Image, Dimensions } from 'react-native'
+import route from '../../store/api'
 import colors from "../../utils/colors";
 import { connect } from "react-redux";
 import { getStoreProducts } from '../../store/actions/store'
@@ -11,7 +12,7 @@ import { FormatPrice } from "../../utils/helper";
 import FloatingButton from "../../Components/FloatingButton";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading }) => {
+const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories }) => {
 
     useEffect(() => {
         getStoreProducts(0)
@@ -21,7 +22,15 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
         getStoreProducts(0)
     };
 
-    console.log("bussines", bussiness)
+    const getCategory = (id) => {
+        if (id != 0) {
+            let cat = categories.find((cat) => cat.id == id)
+            return cat.name
+        }
+        return ""
+    }
+
+    console.log("bussines", storeProducts)
 
     return (
         <View style={styles.MainContainer}>
@@ -31,35 +40,38 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                     <React.Fragment>
                         <View style={styles.header}>
                             <View style={{ flex: 1, alignItems: "center" }}>
-                                <Avatar
-                                    rounded
-                                    size="large"
-                                    source={{
-                                        uri:
-                                            "data:image/png;base64," + bussiness.logo,
-                                    }}
-                                />
+                                <TouchableOpacity onPress={() => { navigation.navigate("BussinessEdit") }} >
+                                    <Avatar
+                                        rounded
+                                        size="large"
+                                        source={{
+                                            uri:
+                                                "data:image/png;base64," + bussiness.logo,
+                                        }}
+                                    />
+                                </TouchableOpacity>
+
                             </View>
 
                             <View style={{ flex: 2 }}>
                                 {
                                     bussiness.storeName == null ?
                                         <TouchableOpacity onPress={() => { navigation.navigate("BussinessEdit") }} >
-                                            <Text h4>{"Click here to Set StoreName"} </Text>
+                                            <Text h4>{"Click here to Set Store name"} </Text>
                                         </TouchableOpacity>
                                         :
                                         <Text h4>{bussiness.storeName} </Text>
                                 }
-                                <View style={{ paddingVertical: 10, }} >
-                                    <Text>{bussiness.narration} </Text>
-                                    <Text>{bussiness.phone} </Text>
-                                    <Text>{bussiness.address} </Text>
+                                <View >
+                                    <Text style={{ paddingVertical: 10, }} >{bussiness.narration} </Text>
+                                    <View style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", marginRight: 20 }} >
+                                        <Text>{bussiness.phone} </Text>
+                                        <Text>{getCategory(bussiness.categoryId)} </Text>
+                                    </View>
+                                    <Text style={{ paddingBottom: 10, }}  >{bussiness.address} </Text>
                                 </View>
                                 <Button title={"EDIT_BUSSINESS_INFO"} onClick={() => { navigation.navigate("BussinessEdit") }} sm={true} />
                             </View>
-
-
-
                         </View>
 
                         <Divider style={{ backgroundColor: colors.darkColor }} />
@@ -75,8 +87,8 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                     <React.Fragment>
                                         <View style={styles.item}>
                                             <Image
-                                                source={{ uri: "data:image/png;base64," + bussiness.logo }}
-                                                style={{ width: 100, height: 100 }}
+                                                source={{ uri: route.IMAGE_URL + item.product_image }}
+                                                style={{ width: 100, height: 100, marginRight: 15 }}
                                             />
                                             <View style={{ flex: 1 }} >
                                                 <Text style={{ fontSize: 20 }}>{item.product_name}</Text>
@@ -129,7 +141,8 @@ const mapStateToProps = ({ common, bussiness, store }) => {
         loading: common.loading,
         bussiness: bussiness.bussiness,
         language: common.language,
-        storeProducts: store.products
+        storeProducts: store.products,
+        categories: bussiness.categories
     };
 };
 

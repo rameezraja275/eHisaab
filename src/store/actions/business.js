@@ -25,7 +25,8 @@ export function businessModify(body) {
       id: body.id,
       opening_cash: body.opening_cash,
       narration: body.narration,
-      storeName: body.storeName
+      storeName: body.storeName,
+      categoryId: body.categoryId
     };
 
     dispatch({
@@ -35,8 +36,6 @@ export function businessModify(body) {
       },
       type: ACTION.LOADING,
     });
-
-    console.log(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`)
 
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
@@ -81,27 +80,29 @@ export function businessModify(body) {
   };
 }
 
-// export function businessGet(body) {
+// export function getBusinessCategories() {
 //   return dispatch => {
 //     const headers = {
 //       "Content-Type": "application/json"
 //     };
-//     const {token,businessId} = body;
+
+//     const token = store.user.token;
+
 //     axios
-//       .get(`${API.BASE_URL}${API.BUSINESS_GET_URL}?token=${token}&business_id=${businessId}`, { headers })
+//       .get(`${API.BASE_URL}${API.BUSINESS_GET_CATEGORIES}?token=${token}`, { headers })
 //       .then(res => {
-//           dispatch({
-//               payload: res.data,
-//               type: ACTION.BUSINESS_GET_SUCCESS
-//           })
+//         dispatch({
+//           payload: res.data,
+//           type: ACTION.BUSINESS_GET_CATEGORIES
+//         })
 //       })
 //       .catch(err => {
-//         if(err.response){
-//           ShowFlash( err.response.data.message ,"danger");
-//           }else{
-//           ShowFlash( "Uh Oh, Something Went Wrong" ,"danger");
-//          }
-//          dispatch({
+//         if (err.response) {
+//           ShowFlash(err.response.data.message, "danger");
+//         } else {
+//           ShowFlash("Uh Oh, Something Went Wrong", "danger");
+//         }
+//         dispatch({
 //           payload: {
 //             status: false,
 //             type: "add"

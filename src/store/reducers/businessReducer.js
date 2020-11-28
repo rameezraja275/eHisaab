@@ -9,6 +9,7 @@ const initialState = {
     user_id: null,
     id: null,
   },
+  categories: []
 };
 
 const businessReducer = (state = initialState, { payload, type }) => {
@@ -18,6 +19,11 @@ const businessReducer = (state = initialState, { payload, type }) => {
         ...state,
         bussiness: payload,
       };
+    case ACTION.BUSINESS_GET_CATEGORIES:
+      return {
+        ...state,
+        categories: payload
+      }
     default:
       return state;
   }

@@ -3,10 +3,10 @@ import { Text, Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import colors from "../utils/colors";
+import route from '../store/api'
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/language";
-
-import { ShowFlash } from "../../src/utils/helper";
+import { ShowFlash, valididateBase64 } from "../../src/utils/helper";
 
 const ImageLoader = (props) => {
   const { image, onChangeImage, placeholder, language } = props;
@@ -21,7 +21,7 @@ const ImageLoader = (props) => {
         allowsEditing: false,
         aspect: [4, 4],
         base64: true,
-        quality: 0.1
+        quality: 0.3
       });
       if (!result.cancelled) {
         let imageLength =
@@ -66,6 +66,11 @@ const ImageLoader = (props) => {
     },
   });
 
+  console.log(route.IMAGE_URL + image)
+
+  const imageURL = route.IMAGE_URL + image
+  const imageBase64 = "data:image/png;base64," + image
+
   return (
     <View style={styles.pickerWrapper}>
       <TouchableOpacity onPress={pickImage} style={{ height: image ? 0 : 48 }}>
@@ -78,7 +83,7 @@ const ImageLoader = (props) => {
         <View style={styles.image}>
           <TouchableOpacity onPress={pickImage}>
             <Image
-              source={{ uri: "data:image/png;base64," + image }}
+              source={{ uri: valididateBase64(image) ? imageBase64 : imageURL }}
               style={{ width: 100, height: 100 }}
             />
           </TouchableOpacity>

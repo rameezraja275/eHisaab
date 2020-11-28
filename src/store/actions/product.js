@@ -27,7 +27,7 @@ export function productCreate(body) {
       is_service: body.is_service,
       code: body.product_code,
       narration: body.narration,
-      isInStore: "1",
+      isInStore: body.is_instore,
       product_image: "data:image/png;base64," + body.product_image
     };
 
@@ -104,7 +104,8 @@ export function productModify(body) {
       is_service: body.is_service,
       code: body.product_code,
       narration: body.narration,
-      product_image: body.product_image
+      isInStore: body.is_instore,
+      product_image: "data:image/png;base64," + body.product_image
     };
 
     dispatch({

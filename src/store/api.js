@@ -3,6 +3,7 @@ export default API = {
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v1/api/",
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v3/api/",
   BASE_URL: "http://192.168.43.252/bizsolAPI/api/",
+  IMAGE_URL: "http://192.168.43.252/bizsolAPI/images/",
 
   SIGNUP_URL: "user/signup.php",
   LOGIN_URL: "user/login.php",
@@ -70,6 +71,7 @@ export default API = {
   EMPLOYEE_DELETE_LEDGER_URL: "employee/delete_ledger.php",
 
   BUSINESS_MODIFY_URL: "business/modify.php",
+  BUSINESS_GET_CATEGORIES: "business/get_category.php",
 
   EMPLOYEE_SALARIES_PROCESS: "employee/salary_process.php",
   VERIFY_USER: "user/verify.php",
