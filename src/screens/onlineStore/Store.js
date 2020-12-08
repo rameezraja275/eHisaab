@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { View, StyleSheet, FlatList, RefreshControl, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, FlatList, RefreshControl, Image } from 'react-native'
 import route from '../../store/api'
 import colors from "../../utils/colors";
+import * as Sharing from "expo-sharing";
 import { connect } from "react-redux";
 import { getStoreProducts } from '../../store/actions/store'
 import Loader from "../../Components/Loader";
@@ -11,8 +12,10 @@ import EmptyList from "../../Components/EmptyList";
 import { FormatPrice } from "../../utils/helper";
 import FloatingButton from "../../Components/FloatingButton";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ShowFlash, shareText } from "../../utils/helper";
+import api from '../../store/api'
 
-const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories }) => {
+const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories, language }) => {
 
     useEffect(() => {
         getStoreProducts(0)
@@ -30,8 +33,6 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
         return ""
     }
 
-    console.log("bussines", storeProducts)
-
     return (
         <View style={styles.MainContainer}>
             {loading.status ? (
@@ -39,7 +40,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
             ) : (
                     <React.Fragment>
                         <View style={styles.header}>
-                            <View style={{ flex: 1, alignItems: "center" }}>
+                            <View style={{ flexDirection: "row", alignItems: 'center', marginVertical: 10 }}>
                                 <TouchableOpacity onPress={() => { navigation.navigate("BussinessEdit") }} >
                                     <Avatar
                                         rounded
@@ -50,31 +51,36 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                         }}
                                     />
                                 </TouchableOpacity>
-
+                                <View style={{ marginLeft: 10 }}>
+                                    {
+                                        bussiness.storeName == null ?
+                                            <TouchableOpacity onPress={() => { navigation.navigate("BussinessEdit") }} >
+                                                <Text h4>{"Add Store Name"} </Text>
+                                            </TouchableOpacity>
+                                            :
+                                            <Text numberOfLines={1} ellipsizeMode='tail' h4>{bussiness.storeName}</Text>
+                                    }
+                                    <Text>{bussiness.phone} </Text>
+                                    <Text>{getCategory(bussiness.categoryId)} </Text>
+                                </View>
                             </View>
 
-                            <View style={{ flex: 2 }}>
-                                {
-                                    bussiness.storeName == null ?
-                                        <TouchableOpacity onPress={() => { navigation.navigate("BussinessEdit") }} >
-                                            <Text h4>{"Click here to Set Store name"} </Text>
-                                        </TouchableOpacity>
-                                        :
-                                        <Text h4>{bussiness.storeName} </Text>
-                                }
+                            <View >
+
                                 <View >
-                                    <Text style={{ paddingVertical: 10, }} >{bussiness.narration} </Text>
-                                    <View style={{ display: "flex", justifyContent: "space-between", flexDirection: "row", marginRight: 20 }} >
-                                        <Text>{bussiness.phone} </Text>
-                                        <Text>{getCategory(bussiness.categoryId)} </Text>
-                                    </View>
+                                    <Text style={{ paddingBottom: 10, }} >{bussiness.narration} </Text>
                                     <Text style={{ paddingBottom: 10, }}  >{bussiness.address} </Text>
                                 </View>
+                                <View style={{ marginVertical: 5 }} >
+                                    <Button title={"ORDERS"} onClick={() => { navigation.navigate("Orders") }} sm={true} />
+
+                                </View>
                                 <Button title={"EDIT_BUSSINESS_INFO"} onClick={() => { navigation.navigate("BussinessEdit") }} sm={true} />
+
                             </View>
                         </View>
 
-                        <Divider style={{ backgroundColor: colors.darkColor }} />
+                        <Divider style={{ backgroundColor: colors.darkColor, }} />
 
                         <View style={{ flex: 1 }}>
                             <FlatList
@@ -92,8 +98,9 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                             />
                                             <View style={{ flex: 1 }} >
                                                 <Text style={{ fontSize: 20 }}>{item.product_name}</Text>
-                                                <Text style={{ marginVertical: 5, fontSize: 13 }} >{item.narration} </Text>
                                                 <Text style={{ fontSize: 13 }} >{FormatPrice(item.product_sale_price)}</Text>
+                                                <Text style={{ fontSize: 13 }}>{item.current_stock}</Text>
+                                                <Text style={{ marginVertical: 5, fontSize: 13 }} >{item.narration} </Text>
                                             </View>
 
                                         </View>
@@ -105,6 +112,13 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                 }
                             />
                         </View>
+
+
+                        { bussiness.storeName != null && <FloatingButton
+                            onClick={() => { shareText("https://stores.ehisaan.com/rajagarments") }}
+                            icon="sharealt"
+                            bottomPosition={80}
+                        />}
 
                         <FloatingButton
                             onClick={() => { navigation.navigate("StoreAddProducts") }}
@@ -119,14 +133,11 @@ const styles = StyleSheet.create({
     MainContainer: {
         flex: 1,
         backgroundColor: colors.lightColor,
-        padding: 5
+        // padding: 5,
     },
     header: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        marginBottom: 20
+        padding: 10,
+        // marginBottom: 20,
     },
     item: {
         margin: 10,

@@ -56,6 +56,7 @@ export function getSaleTransactions(
             sale_amount,
             invoice_id
           } = res.data.data[0];
+          console.log(res.data.data[1])
           const { products } = res.data.data[1];
           dispatch({
             type: ACTION.ADD_ITEM_SALE_CART,
@@ -127,7 +128,19 @@ export function addSaleData(data) {
   };
 }
 
-export function makeSale(data) {
+export function addTotalPrice(totalPrice) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: ACTION.SALE_CART_STATUS,
+      payload: {
+        totalPrice,
+        totalItem: 0,
+      },
+    });
+  }
+}
+
+export function makeSale(data, totalAmount = undefined) {
   return (dispatch, getState) => {
     const headers = {
       "Content-Type": "application/json",
@@ -152,7 +165,7 @@ export function makeSale(data) {
       narration,
       products: saleCart,
       discount,
-      amount: cartStatus.totalPrice,
+      amount: totalAmount ? totalAmount : cartStatus.totalPrice,
     };
 
     dispatch({

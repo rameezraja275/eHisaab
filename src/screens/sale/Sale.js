@@ -18,7 +18,7 @@ import Loader from "../../Components/Loader";
 import { productGet, getNonInventoryItems } from "../../store/actions/product";
 import colors from "../../utils/colors";
 import OptionsAction from "../../Components/Options";
-import { FormatPrice } from "../../utils/helper";
+import { FormatPrice, showAlert } from "../../utils/helper";
 import EmptyList from "../../Components/EmptyList";
 import { getTranslation } from "../../utils/language";
 import Notifications from "../../Components/Notifications";
@@ -42,13 +42,13 @@ const Sale = (props) => {
     getNonInventoryItems,
   } = props;
   // const [selectedIndex, setIndexForSaleList] = useState(0);
-  const { selectedIndex, setIndexForSaleList } = props
+  // const { selectedIndex, setIndexForSaleList } = props
 
   let products;
   products = productsData;
-  if (selectedIndex == 1) {
-    products = nonInventoryItems;
-  }
+  // if (selectedIndex == 1) {
+  //   products = nonInventoryItems;
+  // }
   const [options, showOptions] = useState(false);
 
   const [state, setState] = useState({
@@ -81,7 +81,8 @@ const Sale = (props) => {
   };
 
   const reload = () => {
-    selectedIndex == 1 ? getNonInventoryItems() : productGet(0);
+    // selectedIndex == 1 ? getNonInventoryItems() : productGet(0);
+    productGet(0)
     resetCart();
   };
 
@@ -123,6 +124,18 @@ const Sale = (props) => {
     })();
   }, []);
 
+  const checkOut = () => {
+    if (totalItem > 0) {
+      props.navigation.navigate("Details", { barcode: false })
+    } else {
+      showAlert("NON_INVENTORY_SALE_ALRET", navidateToCheckOut, props.language, "NON_INVENTORY_SALE")
+    }
+  }
+
+  const navidateToCheckOut = () => {
+    props.navigation.navigate("CheckOut", { isOpenSale: true })
+  }
+
   return (
     <View style={styles.MainContainer}>
       {props.loading.status ? (
@@ -131,11 +144,6 @@ const Sale = (props) => {
           <React.Fragment>
             <SearchBar
               onChange={onSearch}
-              {...props}
-              toggleFilter={() =>
-                props.navigation.navigate("AddNonInventoryItem")
-              }
-              icon="plus"
               barCode={true}
               onBarSelect={() => props.navigation.navigate("Details", { barcode: true })}
             />
@@ -172,12 +180,12 @@ const Sale = (props) => {
                 />
               </Overlay>
             )}
-
+            {/* 
             <RadioButtons
               selectedIndex={selectedIndex}
               setIndexForSaleList={setIndexForSaleList}
               language={props.language}
-            />
+            /> */}
 
             <FlatList
               ListEmptyComponent={<EmptyList message="No Products." />}
@@ -190,7 +198,7 @@ const Sale = (props) => {
                 <TouchableOpacity
                   style={{ flex: 1 }}
                   onPress={() => {
-                    props.addItemToSale(item, selectedIndex == 1 ? true : false);
+                    props.addItemToSale(item, false);
                   }}
                 >
                   <View style={styles.ListItem}>
@@ -217,13 +225,21 @@ const Sale = (props) => {
               )}
             />
 
-            {totalItem > 0 && (
-              <FloatingButton
-                onClick={() => props.navigation.navigate("Details", { barcode: false })}
-                title={`TOTAL_ITEM`}
-                value={`${totalItem} = ${FormatPrice(totalPrice)}`}
-              />
-            )}
+
+            {/* <FloatingButton
+              onClick={() => props.navigation.navigate("Details", { barcode: false })}
+              title={`TOTAL_ITEM`}
+              bottomPosition={80}
+              value={`${totalItem} = ${FormatPrice(totalPrice)}`}
+              secondary={true}
+            /> */}
+
+            <FloatingButton
+              onClick={checkOut}
+              title={`TOTAL_ITEM`}
+              value={`${totalItem} = ${FormatPrice(totalPrice)}`}
+            />
+
           </React.Fragment>
         )}
     </View>

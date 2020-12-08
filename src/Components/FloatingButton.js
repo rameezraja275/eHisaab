@@ -12,10 +12,14 @@ const FloatingButton = ({
   icon,
   language,
   value,
+  bottomPosition,
+  secondary
 }) => {
   const styles = StyleSheet.create({
     button: {
-      backgroundColor: colors.primaryColor,
+      backgroundColor: secondary ? colors.lightColor : colors.primaryColor,
+      borderColor: colors.lightGrey,
+      borderWidth: secondary ? 1 : 0,
       padding: 15,
       borderRadius: 60,
       flexDirection: "row",
@@ -26,7 +30,9 @@ const FloatingButton = ({
       height: 60,
     },
     buttonText: {
-      color: colors.white,
+      // color: colors.white,
+      color: secondary ? colors.darkColor : colors.white,
+      fontFamily: "PrimaryFont"
     },
     Button: {
       paddingRight: title ? 10 : 0,
@@ -34,7 +40,7 @@ const FloatingButton = ({
       height: 100,
       position: "absolute",
       right: 0,
-      bottom: 0,
+      bottom: bottomPosition ? bottomPosition : 0,
       justifyContent: "center",
       alignItems: "center",
     },
@@ -45,7 +51,7 @@ const FloatingButton = ({
       <TouchableOpacity onPress={onClick} disabled={disabled}>
         <View style={styles.button}>
           {title && (
-            <Text style={{ color: colors.white, fontFamily: "PrimaryFont" }}>
+            <Text style={styles.buttonText}>
               {`${getTranslation(title, language)} ${value}`}
             </Text>
           )}

@@ -1,5 +1,5 @@
 import { showMessage } from "react-native-flash-message";
-import { Alert } from "react-native";
+import { Alert, Share } from "react-native";
 import { getTranslation } from "../utils/language";
 import { Platform, Linking } from "react-native";
 import constants from "../utils/constants";
@@ -17,7 +17,7 @@ export const ShowFlash = (messageBody, type, language = constants.ENGLISH) => {
   });
 };
 
-export const showAlert = (message, cb, language) => {
+export const showAlert = (message, cb, language, confrimButtonText = "OK") => {
   Alert.alert(
     getTranslation("CONFIRM", language),
     getTranslation(message, language),
@@ -26,7 +26,7 @@ export const showAlert = (message, cb, language) => {
         text: getTranslation("CANCEL", language),
         style: "cancel",
       },
-      { text: getTranslation("OK", language), onPress: cb },
+      { text: getTranslation(confrimButtonText, language), onPress: cb },
     ],
     { cancelable: false }
   );
@@ -177,3 +177,22 @@ export const valididateBase64 = (str) => {
   var pattern = new RegExp(/[A-Za-z+/=]/);
   return !!pattern.test(str);
 }
+
+export const shareText = async (message) => {
+  try {
+    const result = await Share.share({
+      message
+    });
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+      } else {
+        // shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // dismissed
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};

@@ -22,6 +22,7 @@ import reportsReducer from "./reducers/reportsReducer";
 import nonInventoryReducer from "./reducers/nonInventoryReducer";
 import storeReducer from './reducers/storeReducer'
 import BankReducer from './reducers/bankReducer'
+import ordersReducer from './reducers/orderReducer'
 import { AsyncStorage } from "react-native";
 import createSecureStorage from "../utils/secureStorage";
 
@@ -54,7 +55,8 @@ const configureStore = () => {
     reports: reportsReducer,
     nonInventoryItems: nonInventoryReducer,
     bank: BankReducer,
-    store: storeReducer
+    store: storeReducer,
+    orders: ordersReducer
   });
 
   const store = createStore(rootReducer, applyMiddleware(thunk));

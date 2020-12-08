@@ -6,6 +6,8 @@ import Store from "./Store";
 import HeaderTitle from "../../Components/HeaderTitle";
 import AddProducts from "./AddProducts";
 import Bussiness from '../../screens/settings/Bussiness'
+import Orders from './Orders'
+import OrderDetails from './OrderDetails'
 
 const Store_StackNavigator = createStackNavigator({
   Store: {
@@ -33,6 +35,28 @@ const Store_StackNavigator = createStackNavigator({
     screen: Bussiness,
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="BUSINESS" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  Orders: {
+    screen: Orders,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="ORDERS" />,
+
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
+  OrderDetails: {
+    screen: OrderDetails,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="ORDERS" />,
 
       headerStyle: {
         backgroundColor: colors.darkColor,

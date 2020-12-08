@@ -159,7 +159,7 @@ const Details = (props) => {
             </View>
 
             <FloatingButton
-              onClick={() => props.navigation.navigate("CheckOut")}
+              onClick={() => props.navigation.navigate("CheckOut", { isOpenSale: false })}
               icon="shoppingcart"
               disabled={totalItem == 0 ? true : false}
             />
@@ -194,7 +194,6 @@ const mapStateToProps = ({ product, common, sale }) => {
     discount: sale.discount,
     saleData: sale.saleData,
     language: common.language,
-    products: product.products,
   };
 };
 

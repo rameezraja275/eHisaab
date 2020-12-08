@@ -150,15 +150,18 @@ const AddEditProduct = (props) => {
               />
 
               <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
-                <TextInput
-                  value={formData.product_sale_price}
-                  onChange={(text) =>
-                    setFormData({ ...formData, product_sale_price: text })
-                  }
-                  keyboardType={"number-pad"}
-                  placeholder="SALE_PRICE"
-                  required
-                />
+                <View style={{ flex: 1 }}>
+                  <TextInput
+                    value={formData.product_sale_price}
+                    onChange={(text) =>
+                      setFormData({ ...formData, product_sale_price: text })
+                    }
+                    keyboardType={"number-pad"}
+                    placeholder="SALE_PRICE"
+                    required
+                  />
+                </View>
+
 
                 <CheckBox
                   title={getTranslation("DISPLAY_IN_STORE", props.language)}

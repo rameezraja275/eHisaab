@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { supplierGet } from "../../store/actions/supplier";
-import { makePurchase } from "../../store/actions/purchase";
+import { makePurchase, addTotalPrice } from "../../store/actions/purchase";
 import Button from "../../Components/Button";
 import TextInput from "../../Components/TextInput";
 import { ShowFlash } from "../../utils/helper";
@@ -27,6 +27,8 @@ const CheckOut = (props) => {
     narration: null,
   });
 
+  const { isOpenPurchase } = props.navigation.state.params
+
   const onSubmit = () => {
     const { date, paid_amount, supplier_id } = formData;
     if (
@@ -34,7 +36,8 @@ const CheckOut = (props) => {
       paid_amount == null ||
       paid_amount == "" ||
       supplier_id == null ||
-      supplier_id == ""
+      supplier_id == "" ||
+      props.cartStatus.totalPrice == 0
     ) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else {
@@ -61,69 +64,78 @@ const CheckOut = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <ScrollView
-          style={{ flex: 1 }}
-          keyboardDismissMode={"on-drag"}
-          keyboardShouldPersistTaps={"handled"}
-        >
-          <View style={styles.infobox}>
-            <InfoCard
-              title="TOTAL_AMOUNT"
-              value={FormatPrice(props.cartStatus.totalPrice)}
-            />
-            {props.discount > 0 && (
-              <InfoCard title="DISCOUNT" value={FormatPrice(props.discount)} />
-            )}
-            {props.discount > 0 && (
+          <ScrollView
+            style={{ flex: 1 }}
+            keyboardDismissMode={"on-drag"}
+            keyboardShouldPersistTaps={"handled"}
+          >
+            <View style={styles.infobox}>
               <InfoCard
-                title="NET_AMOUNT"
-                value={FormatPrice(
-                  props.cartStatus.totalPrice - props.discount
-                )}
+                title="TOTAL_AMOUNT"
+                value={FormatPrice(props.cartStatus.totalPrice)}
               />
-            )}
-          </View>
-          <View style={styles.Form}>
-            <DatePicker
-              placeholder="DATE"
-              required
-              date={formData.date}
-              setDate={(text) => setFormData({ ...formData, date: text })}
-            />
-            <Picker
-              placeholder="SUPPLIER"
-              options={props.suppliers}
-              value={formData.supplier_id}
-              type="supplier_name"
-              onChange={(text) =>
-                setFormData({ ...formData, supplier_id: text })
-              }
-              required
-            />
-            <TextInput
-              value={formData.paid_amount}
-              onChange={(text) =>
-                setFormData({ ...formData, paid_amount: text })
-              }
-              keyboardType={"number-pad"}
-              placeholder="AMOUNT_PAID"
-              required
-            />
-
-            <TextInput
-              value={formData.narration}
-              onChange={(text) => setFormData({ ...formData, narration: text })}
-              placeholder="DESCRIPTION"
-              autoCapitalize="sentences"
-            />
-          </View>
-          <View style={styles.Button}>
-            <View style={{ flex: 1 }}>
-              <Button title={"PURCHASE"} onClick={onSubmit} />
+              {props.discount > 0 && (
+                <InfoCard title="DISCOUNT" value={FormatPrice(props.discount)} />
+              )}
+              {props.discount > 0 && (
+                <InfoCard
+                  title="NET_AMOUNT"
+                  value={FormatPrice(
+                    props.cartStatus.totalPrice - props.discount
+                  )}
+                />
+              )}
             </View>
-          </View>
-        </ScrollView>
-      )}
+            <View style={styles.Form}>
+              <DatePicker
+                placeholder="DATE"
+                required
+                date={formData.date}
+                setDate={(text) => setFormData({ ...formData, date: text })}
+              />
+              <Picker
+                placeholder="SUPPLIER"
+                options={props.suppliers}
+                value={formData.supplier_id}
+                type="supplier_name"
+                onChange={(text) =>
+                  setFormData({ ...formData, supplier_id: text })
+                }
+                required
+              />
+              {
+                isOpenPurchase && <TextInput
+                  value={props.cartStatus.totalPrice}
+                  onChange={props.addTotalPrice}
+                  keyboardType={"number-pad"}
+                  placeholder="TOTAL_AMOUNT"
+                  required
+                />
+              }
+              <TextInput
+                value={formData.paid_amount}
+                onChange={(text) =>
+                  setFormData({ ...formData, paid_amount: text })
+                }
+                keyboardType={"number-pad"}
+                placeholder="AMOUNT_PAID"
+                required
+              />
+
+              <TextInput
+                value={formData.narration}
+                onChange={(text) => setFormData({ ...formData, narration: text })}
+                placeholder="DESCRIPTION"
+                autoCapitalize="sentences"
+              />
+            </View>
+            <View style={styles.Button}>
+              <View style={{ flex: 1 }}>
+                <Button title={"PURCHASE"} onClick={onSubmit} />
+              </View>
+            </View>
+          </ScrollView>
+        )}
     </KeyboardAvoidingView>
   );
 };
@@ -163,6 +175,6 @@ const mapStateToProps = ({ common, supplier, purchase }) => {
   };
 };
 
-export default connect(mapStateToProps, { makePurchase, supplierGet })(
+export default connect(mapStateToProps, { makePurchase, supplierGet, addTotalPrice })(
   CheckOut
 );

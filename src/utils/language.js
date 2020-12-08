@@ -260,7 +260,24 @@ const urdu = {
   MYSTORE: "میرا آن لائن اسٹور",
   MAKEBUSSINESSONLINE: "ای حساب کے ذریعہ اپنے کاروبار کو آن لائن بنائیں",
   YOURSTORE: "آپ کا آن لائن اسٹور",
-  COMINGSOON: "جلد آرہا ہے"
+  COMINGSOON: "جلد آرہا ہے",
+
+  STORE: "اسٹور",
+  EDIT_BUSSINESS_INFO: "کاروبار کی معلومات میں ترمیم کریں",
+  ADD_PRODUCTS_STORE: "ذخیرہ کرنے کے لئے مصنوعات شامل کریں",
+  ADD_TO_STORE: "اسٹور میں شامل کریں",
+  DISPLAY_IN_STORE: "آن لائن اسٹور میں دکھائیں",
+  OPEN_SALE: "اوپن سیل",
+  STORE_NAME: "اسٹور کا نام",
+  CATEGORY: "قسم",
+  ORDERS: "احکامات",
+  REJECT_ORDER: "حکم مسترد کریں",
+  ACCEPT_ORDER: "آرڈر قبول کریں",
+
+  "NON_INVENTORY_SALE_ALRET": "ٹوکری میں کوئی اشیاء نہیں۔ اس فروخت سے انوینٹری نہیں بدلے گی",
+  "NON_INVENTORY_SALE": "غیر انوینٹری فروخت",
+  "NON_INVENTORY_PURCHASE_ALRET": "ٹوکری میں کوئی اشیاء نہیں۔ اس خریداری سے انوینٹری تبدیل نہیں ہوگی",
+  "NON_INVENTORY_PURCHASE": "غیر انوینٹری خریداری"
 
 };
 
@@ -268,7 +285,7 @@ const english = {
   PRICE: "Price",
   STOCK: "Stock",
   EMPTY_LIST: "No Data",
-  TOTAL_ITEM: "Total Item(s)",
+  TOTAL_ITEM: "Item(s)",
   SEARCH: "Search",
 
   VERFICATION_CODE: "Verification Code",
@@ -524,7 +541,17 @@ const english = {
   EDIT_BUSSINESS_INFO: "Edit Bussiness info",
   ADD_PRODUCTS_STORE: "Add products to store",
   ADD_TO_STORE: "Add to store",
-  DISPLAY_IN_STORE: "Display in online store"
+  DISPLAY_IN_STORE: "Display in online store",
+  OPEN_SALE: "Open Sale",
+  STORE_NAME: "Store name",
+  CATEGORY: "Category",
+  ORDERS: "Orders",
+  REJECT_ORDER: "Reject order",
+  ACCEPT_ORDER: "Accept order",
+  "NON_INVENTORY_SALE_ALRET": "No items in cart. This sale will not change inventory",
+  "NON_INVENTORY_SALE": "Non Inventory Sale",
+  "NON_INVENTORY_PURCHASE_ALRET": "No items in cart. This purchase will not change inventory",
+  "NON_INVENTORY_PURCHASE": "Non Inventory Purchase"
 };
 
 export const getTranslation = (label, language) => {

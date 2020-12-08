@@ -88,6 +88,18 @@ export function deletePurchase(id) {
   };
 }
 
+export function addTotalPrice(totalPrice) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: ACTION.PURCHASE_CART_STATUS,
+      payload: {
+        totalPrice: totalPrice,
+        totalItem: 0,
+      },
+    });
+  }
+}
+
 export function getPurchaseTransactions(
   id,
   filter = {

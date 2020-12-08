@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { customerGet } from "../../store/actions/customer";
-import { makeSale, addSaleData } from "../../store/actions/sale";
+import { makeSale, addSaleData, addTotalPrice } from "../../store/actions/sale";
 import Button from "../../Components/Button";
 import TextInput from "../../Components/TextInput";
 import { ShowFlash } from "../../utils/helper";
@@ -28,10 +28,11 @@ const CheckOut = (props) => {
   });
 
   const editAble = props.saleData.sale_id ? true : false;
+  const { isOpenSale } = props.navigation.state.params
 
   const onSubmit = () => {
     const { paid_amount, customer_id, date } = formData;
-    if (paid_amount == null || paid_amount == "" || date == null) {
+    if (paid_amount == null || paid_amount == "" || date == null || props.cartStatus.totalPrice == 0) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else if (
       (paid_amount != props.cartStatus.totalPrice - props.discount &&
@@ -44,7 +45,6 @@ const CheckOut = (props) => {
   };
 
   useEffect(() => {
-    // props.customerGet();
     const { date, paid_amount, customer_id, narration } = props.saleData;
     setFormData({
       date,
@@ -64,6 +64,11 @@ const CheckOut = (props) => {
     }
   }, [formData.customer_id]);
 
+  const setTotalPrice = (price) => {
+    props.addTotalPrice(price)
+  }
+
+  console.log("totla proce", props.cartStatus.totalPrice)
 
   return (
     <KeyboardAvoidingView
@@ -113,6 +118,17 @@ const CheckOut = (props) => {
                   setFormData({ ...formData, customer_id: text == null ? 0 : text })
                 }
               />
+              {
+                isOpenSale && <TextInput
+                  value={props.cartStatus.totalPrice}
+                  onChange={(text) =>
+                    setTotalPrice(text)
+                  }
+                  keyboardType={"number-pad"}
+                  placeholder="TOTAL_AMOUNT"
+                  required
+                />
+              }
               <TextInput
                 value={formData.paid_amount}
                 onChange={(text) =>
@@ -199,10 +215,11 @@ const mapStateToProps = ({ common, customer, sale }) => {
     cartStatus: sale.cartStatus,
     discount: sale.discount,
     saleData: sale.saleData,
+    saleCart: sale.saleCart,
     language: common.language,
   };
 };
 
-export default connect(mapStateToProps, { makeSale, customerGet, addSaleData })(
+export default connect(mapStateToProps, { makeSale, customerGet, addSaleData, addTotalPrice })(
   CheckOut
 );

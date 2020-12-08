@@ -94,8 +94,8 @@ const Details = (props) => {
               {getTranslation("ADD_DISCOUNT", props.language)}
             </Text>
           ) : (
-            <Icon name="times" size={20} color={colors.darkColor} />
-          )}
+              <Icon name="times" size={20} color={colors.darkColor} />
+            )}
         </TouchableWithoutFeedback>
         {discountStatus && (
           <View style={{ width: "50%", marginBottom: 5 }}>

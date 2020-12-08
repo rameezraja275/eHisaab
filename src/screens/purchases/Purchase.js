@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BackHandler } from "react-native";
 import { connect } from "react-redux";
-import { addItemToPurchase, resetCart } from "../../store/actions/purchase";
+import { addItemToPurchase, resetCart, addTotalPrice } from "../../store/actions/purchase";
 import {
   StyleSheet,
   View,
@@ -16,7 +16,7 @@ import Loader from "../../Components/Loader";
 import { productGet } from "../../store/actions/product";
 import colors from "../../utils/colors";
 import OptionsAction from "../../Components/Options";
-import { FormatPrice } from "../../utils/helper";
+import { FormatPrice, showAlert } from "../../utils/helper";
 import EmptyList from "../../Components/EmptyList";
 import { getTranslation } from "../../utils/language";
 import constants from "../../utils/constants";
@@ -75,6 +75,19 @@ const Purchase = (props) => {
   }, []);
 
   const { totalItem, totalPrice } = props.cartStatus;
+
+  const checkOut = () => {
+    if (totalItem > 0) {
+      props.navigation.navigate("Details")
+    } else {
+      showAlert("NON_INVENTORY_PURCHASE_ALRET", navidateToCheckOut, props.language, "NON_INVENTORY_PURCHASE")
+    }
+  }
+
+  const navidateToCheckOut = () => {
+    props.navigation.navigate("CheckOut", { isOpenPurchase: true })
+  }
+
   return (
     <View style={styles.MainContainer}>
       {props.loading.status ? (
@@ -127,13 +140,11 @@ const Purchase = (props) => {
               }
             />
 
-            {totalItem > 0 && (
-              <FloatingButton
-                onClick={() => props.navigation.navigate("Details")}
-                title={`TOTAL_ITEM`}
-                value={`${totalItem} = ${FormatPrice(totalPrice)}`}
-              />
-            )}
+            <FloatingButton
+              onClick={checkOut}
+              title={`TOTAL_ITEM`}
+              value={`${totalItem} = ${FormatPrice(totalPrice)}`}
+            />
           </React.Fragment>
         )}
     </View>

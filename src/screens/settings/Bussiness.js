@@ -129,6 +129,7 @@ const Bussiness = (props) => {
                 placeholder="LOGO"
                 image={formData.logo}
               />
+
             </View>
             <View style={styles.Button}>
               <View style={{ flex: 1 }}>
