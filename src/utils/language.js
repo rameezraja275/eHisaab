@@ -548,10 +548,17 @@ const english = {
   ORDERS: "Orders",
   REJECT_ORDER: "Reject order",
   ACCEPT_ORDER: "Accept order",
-  "NON_INVENTORY_SALE_ALRET": "No items in cart. This sale will not change inventory",
-  "NON_INVENTORY_SALE": "Non Inventory Sale",
-  "NON_INVENTORY_PURCHASE_ALRET": "No items in cart. This purchase will not change inventory",
-  "NON_INVENTORY_PURCHASE": "Non Inventory Purchase"
+  NON_INVENTORY_SALE_ALRET: "No items in cart. This sale will not change inventory",
+  NON_INVENTORY_SALE: "Non Inventory Sale",
+  NON_INVENTORY_PURCHASE_ALRET: "No items in cart. This purchase will not change inventory",
+  NON_INVENTORY_PURCHASE: "Non Inventory Purchase",
+
+  DASHBOARD: "Dashboard",
+  BANKBALANCE: "Bank Balance",
+  BESTSALEINGPRODUCTS: "Best selling products",
+  CASHINHAND: "Cash in hand",
+  RECEIVABLE: "Receivable",
+  PAYABLES: "Payables"
 };
 
 export const getTranslation = (label, language) => {

@@ -34,7 +34,7 @@ const OrderDetails = (props) => {
         showAlert(
             "REJECT_ORDER",
             () => {
-                props.orderModify({ id, status: 2 });
+                props.orderModify({ id, status: constants.REJECT });
             },
             language
         );
@@ -44,7 +44,7 @@ const OrderDetails = (props) => {
         showAlert(
             "ACCEPT_ORDER",
             () => {
-                props.orderModify({ id, status: 1 });
+                props.orderModify({ id, status: constants.ACCEPT });
             },
             language
         );
@@ -62,9 +62,9 @@ const OrderDetails = (props) => {
                     <InfoCard title="ADDRESS" value={order.buyer_adress} />
                     {order.status == "1" && <InfoCard title="PHONE" value={order.buyer_phone} />}
                     <ActionCard
-                        orderAccept={order.status == "3" ? onAccept : undefined}
-                        orderReject={order.status == "3" ? onReject : undefined}
-                        phoneNumber={order.status == "1" ? order.buyer_phone : undefined}
+                        orderAccept={order.status == constants.PENDDING ? onAccept : undefined}
+                        orderReject={order.status == constants.PENDDING ? onReject : undefined}
+                        phoneNumber={order.status == constants.ACCEPT ? order.buyer_phone : undefined}
                         messageText={""}
                     />
                 </View>

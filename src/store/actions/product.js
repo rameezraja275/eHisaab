@@ -27,8 +27,8 @@ export function productCreate(body) {
       is_service: body.is_service,
       code: body.product_code,
       narration: body.narration,
-      isInStore: body.is_instore,
-      product_image: "data:image/png;base64," + body.product_image
+      is_in_store: body.is_in_store,
+      product_image: "data:image/png;base64," + body.image_url
     };
 
     const products = [...store.product.products];
@@ -41,11 +41,12 @@ export function productCreate(body) {
       type: ACTION.LOADING,
     });
 
-    console.log(data)
+    console.log("images       i  upla", body.product_image)
 
     axios
       .post(`${API.BASE_URL}${API.PRODUCT_CREATE_URL}`, data, { headers })
       .then((res) => {
+        console.log("dadfhasudhfbuasdnfausd fu")
         products.unshift(res.data.data[0]);
         dispatch({
           payload: products,
@@ -104,8 +105,8 @@ export function productModify(body) {
       is_service: body.is_service,
       code: body.product_code,
       narration: body.narration,
-      isInStore: body.is_instore,
-      product_image: "data:image/png;base64," + body.product_image
+      is_in_store: body.is_in_store,
+      product_image: "data:image/png;base64," + body.image_url
     };
 
     dispatch({

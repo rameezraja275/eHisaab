@@ -33,8 +33,8 @@ const AddEditProduct = (props) => {
     is_service: null,
     product_code: null,
     narration: null,
-    is_instore: false,
-    product_image: null
+    is_in_store: false,
+    image_url: null
   });
 
   const [barcode, showBarCode] = useState(false)
@@ -55,7 +55,7 @@ const AddEditProduct = (props) => {
       product_sale_price,
       product_cost_price,
       is_service,
-      is_instore,
+      is_in_store,
       product_code,
       narration
     } = formData;
@@ -86,9 +86,9 @@ const AddEditProduct = (props) => {
         opening_stock: null,
         is_service: null,
         product_code: null,
-        is_instore: false,
+        is_in_store: false,
         narration: null,
-        product_image: null
+        image_url: null
       });
     }
   };
@@ -104,6 +104,8 @@ const AddEditProduct = (props) => {
     },
   ];
   const [scanned, setScanned] = useState(false)
+
+  console.log(formData)
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
@@ -138,6 +140,12 @@ const AddEditProduct = (props) => {
                 }
               />
 
+              {barcode && <Overlay
+                toggleFilter={() => { scanned ? undefined : showBarCode(!barcode) }}
+                title="BARCODE_READER">
+                <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
+              </Overlay>}
+
 
               <TextInput
                 value={formData.product_cost_price}
@@ -165,10 +173,10 @@ const AddEditProduct = (props) => {
 
                 <CheckBox
                   title={getTranslation("DISPLAY_IN_STORE", props.language)}
-                  checked={formData.is_instore == "0" ? false : true}
+                  checked={formData.is_in_store == "0" ? false : true}
                   checkedColor={colors.darkColor}
                   iconRight
-                  onPress={() => setFormData({ ...formData, is_instore: formData.is_instore === "0" ? "1" : "0" })}
+                  onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "1" : "0" })}
                 />
               </View>
 
@@ -194,11 +202,7 @@ const AddEditProduct = (props) => {
                 </TouchableOpacity>
 
               </View>
-              {barcode && <Overlay
-                toggleFilter={() => { scanned ? undefined : showBarCode(!barcode) }}
-                title="BARCODE_READER">
-                <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
-              </Overlay>}
+
 
               {formData.is_service == constants.PRODUCT && (
                 <TextInput
@@ -212,7 +216,7 @@ const AddEditProduct = (props) => {
                 />
               )}
 
-              {formData.is_instore == "1" && <TextInput
+              {formData.is_in_store == "1" && <TextInput
                 value={formData.narration}
                 onChange={(text) => setFormData({ ...formData, narration: text })}
                 placeholder="DESCRIPTION"
@@ -221,12 +225,12 @@ const AddEditProduct = (props) => {
               />}
 
 
-              {formData.is_instore == "1" && <ImagerPicker
+              {formData.is_in_store == "1" && <ImagerPicker
                 onChangeImage={(image) =>
-                  setFormData({ ...formData, product_image: image.base64 })
+                  setFormData({ ...formData, image_url: image.base64 })
                 }
                 placeholder="IMAGE"
-                image={formData.product_image}
+                image={formData.image_url}
               />}
             </View>
             <View style={styles.Button}>

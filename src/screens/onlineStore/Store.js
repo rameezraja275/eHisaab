@@ -25,13 +25,19 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
         getStoreProducts(0)
     };
 
+
     const getCategory = (id) => {
         if (id != 0) {
+            console.log(categories)
+            console.log(id)
+
             let cat = categories.find((cat) => cat.id == id)
             return cat.name
         }
         return ""
     }
+
+    console.log("ascdfasd", bussiness)
 
     return (
         <View style={styles.MainContainer}>
@@ -53,15 +59,15 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                 </TouchableOpacity>
                                 <View style={{ marginLeft: 10 }}>
                                     {
-                                        bussiness.storeName == null ?
+                                        bussiness.store_name == null ?
                                             <TouchableOpacity onPress={() => { navigation.navigate("BussinessEdit") }} >
                                                 <Text h4>{"Add Store Name"} </Text>
                                             </TouchableOpacity>
                                             :
-                                            <Text numberOfLines={1} ellipsizeMode='tail' h4>{bussiness.storeName}</Text>
+                                            <Text numberOfLines={1} ellipsizeMode='tail' h4>{bussiness.store_name}</Text>
                                     }
                                     <Text>{bussiness.phone} </Text>
-                                    <Text>{getCategory(bussiness.categoryId)} </Text>
+                                    <Text>{getCategory(bussiness.category_id)} </Text>
                                 </View>
                             </View>
 
@@ -75,7 +81,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                     <Button title={"ORDERS"} onClick={() => { navigation.navigate("Orders") }} sm={true} />
 
                                 </View>
-                                <Button title={"EDIT_BUSSINESS_INFO"} onClick={() => { navigation.navigate("BussinessEdit") }} sm={true} />
+                                <Button type="secondary" title={"EDIT_BUSSINESS_INFO"} onClick={() => { navigation.navigate("BussinessEdit") }} sm={true} />
 
                             </View>
                         </View>
@@ -93,7 +99,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                     <React.Fragment>
                                         <View style={styles.item}>
                                             <Image
-                                                source={{ uri: route.IMAGE_URL + item.product_image }}
+                                                source={{ uri: route.IMAGE_URL + item.image_url }}
                                                 style={{ width: 100, height: 100, marginRight: 15 }}
                                             />
                                             <View style={{ flex: 1 }} >
@@ -114,8 +120,8 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                         </View>
 
 
-                        { bussiness.storeName != null && <FloatingButton
-                            onClick={() => { shareText("https://stores.ehisaan.com/rajagarments") }}
+                        { bussiness.store_name != null && <FloatingButton
+                            onClick={() => { shareText(`https://stores.ehisaan.com/${bussiness.store_name}`) }}
                             icon="sharealt"
                             bottomPosition={80}
                         />}

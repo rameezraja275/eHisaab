@@ -41,6 +41,10 @@ export default {
   CASH_TO_BANK: "1",
   BANK_TO_CASH: "2",
   DEPOSIT: "3",
-  WITHDRAW: "4"
+  WITHDRAW: "4",
+
+  ACCEPT: "1",
+  REJECT: "2",
+  PENDDING: "3"
 
 };

@@ -22,8 +22,8 @@ const Bussiness = (props) => {
   const [formData, setFormData] = useState({
     id: null,
     name: null,
-    storeName: null,
-    categoryId: null,
+    store_name: null,
+    category_id: null,
     phone: null,
     address: null,
     logo: null,
@@ -40,8 +40,8 @@ const Bussiness = (props) => {
 
 
   const onSubmit = () => {
-    const { name, storeName, categoryId } = formData;
-    if (name == null || name == "" || storeName == "" || categoryId == "" || categoryId == null || storeName == null) {
+    const { name, store_name, category_id } = formData;
+    if (name == null || name == "" || store_name == "" || category_id == "" || category_id == null || store_name == null) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else {
       props.businessModify(formData);
@@ -71,23 +71,23 @@ const Bussiness = (props) => {
                 maxLength={40}
               />
               <TextInput
-                value={formData.storeName}
-                onChange={(text) => setFormData({ ...formData, storeName: text })}
+                value={formData.store_name}
+                onChange={(text) => setFormData({ ...formData, store_name: text })}
                 placeholder="STORE_NAME"
                 required
                 noSpace
                 maxLength={20}
-                autoCapitalize="words"
+                autoCapitalize="none"
               />
 
               <Picker
                 placeholder="CATEGORY"
                 options={props.categories}
-                value={formData.categoryId}
+                value={formData.category_id}
                 required
                 type="name"
                 onChange={(text) =>
-                  setFormData({ ...formData, categoryId: text == null ? 0 : text })
+                  setFormData({ ...formData, category_id: text == null ? 0 : text })
                 }
               />
 

@@ -26,7 +26,7 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
     const filterOnlinePro = () => {
         const onlineProducts = []
         products.map((pro, index) => {
-            if (pro.is_instore === "1")
+            if (pro.is_in_store === "1")
                 onlineProducts.push(pro.id)
         })
         return onlineProducts
@@ -42,11 +42,13 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
         console.log(index)
         products[index] = {
             ...item,
-            is_instore: value === "0" ? "1" : "0"
+            is_in_store: value === "0" ? "1" : "0"
         };
 
         rerender(!juggaadd)
     }
+
+    console.log("dfasdjhi", products)
 
     return (
         <View style={styles.MainContainer}>
@@ -65,10 +67,10 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
                                 <View style={styles.item}>
                                     <CheckBox
                                         title={item.product_name}
-                                        checked={item.is_instore == "0" ? false : true}
+                                        checked={item.is_in_store == "0" ? false : true}
                                         checkedColor={colors.darkColor}
                                         iconRight
-                                        onPress={() => onSelect(item.id, item.is_instore, item)}
+                                        onPress={() => onSelect(item.id, item.is_in_store, item)}
                                     />
                                 </View>
                             )}

@@ -134,6 +134,8 @@ export function signin(body) {
     axios
       .post(`${API.BASE_URL}${API.LOGIN_URL}`, body, { headers })
       .then(async (res) => {
+
+        console.log("rads", res.data.data)
         const token_expiry = res.data.data.token_expiry
         const token = res.data.data.token;
         const userStatus = res.data.data.user.status;

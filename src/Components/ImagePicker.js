@@ -66,10 +66,8 @@ const ImageLoader = (props) => {
     },
   });
 
-  console.log(route.IMAGE_URL + image)
-
   const imageURL = route.IMAGE_URL + image
-  const imageBase64 = "data:image/png;base64," + image
+  const imageBase64 = "data:image/png;base64," + image;
 
   return (
     <View style={styles.pickerWrapper}>

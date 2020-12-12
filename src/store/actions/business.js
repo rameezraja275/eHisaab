@@ -11,7 +11,6 @@ export function businessModify(body) {
       "Content-Type": "application/json",
     };
 
-
     const store = getState();
     const token = store.user.token;
     const language = store.common.language;
@@ -25,8 +24,8 @@ export function businessModify(body) {
       id: body.id,
       opening_cash: body.opening_cash,
       narration: body.narration,
-      storeName: body.storeName,
-      categoryId: body.categoryId
+      store_name: body.store_name,
+      category_id: body.category_id
     };
 
     dispatch({
@@ -40,6 +39,7 @@ export function businessModify(body) {
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
       .then(async (res) => {
+        console.log(res)
         // await AsyncStorage.setItem('bussiness', JSON.stringify(data))
         // const business = JSON.parse( await AsyncStorage.getItem('bussiness') )
 
@@ -63,6 +63,7 @@ export function businessModify(body) {
         setTimeout(() => navigate("Business"), 2000);
       })
       .catch((err) => {
+        console.log(err)
 
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);

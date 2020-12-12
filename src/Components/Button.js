@@ -13,20 +13,22 @@ const Button = ({
   icon,
   title,
   language,
-  sm,
+  sm
 }) => {
   const styles = StyleSheet.create({
     button: {
-      backgroundColor: type == "danger" ? colors.danger : colors.primaryColor,
+      backgroundColor: type == "danger" ? colors.danger : type == "secondary" ? colors.lightColor : colors.primaryColor,
       padding: sm ? 8 : 14,
       borderRadius: radius ? radius : 5,
       flexDirection: "row",
       alignItems: "center",
       alignContent: "center",
       justifyContent: "center",
+      borderWidth: 1,
+      borderColor: type == "secondary" ? colors.darkColor : colors.primaryColor,
     },
     buttonText: {
-      color: colors.white,
+      color: type == "secondary" ? colors.black : colors.white,
       fontFamily: "PrimaryFont",
     },
   });
@@ -42,7 +44,7 @@ const Button = ({
           <Icon
             name={icon}
             size={15}
-            color={colors.lightColor}
+            color={type == "secondary" ? colors.black : colors.lightColor}
             style={{ marginHorizontal: 10 }}
           />
         )}

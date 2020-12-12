@@ -16,6 +16,7 @@ import Material from 'react-native-vector-icons/MaterialCommunityIcons'
 import color from "../utils/colors";
 import Settings_StackNavigator from "./settings/Navigation";
 import Employee_StackNavigator from "./employees/Navigation";
+import Dashboard_StackNavigator from "./dashboard/Navigation";
 import DrawerLable from "../Components/DraweLabel";
 import Reports_StackNavigator from "./reports/Navigation";
 import Receipt_StackNavigator from "./receipts/Navigation";
@@ -41,6 +42,15 @@ const Drawer = createDrawerNavigator(
         drawerLabel: <DrawerLable title="PURCHASES" />,
         drawerIcon: ({ tintColor }) => (
           <Icon name="shoppingcart" size={20} color={tintColor} />
+        ),
+      },
+    },
+    DashboardScreen: {
+      screen: Dashboard_StackNavigator,
+      navigationOptions: {
+        drawerLabel: <DrawerLable title="DASHBOARD" />,
+        drawerIcon: ({ tintColor }) => (
+          <Icon name="dashboard" size={20} color={tintColor} />
         ),
       },
     },

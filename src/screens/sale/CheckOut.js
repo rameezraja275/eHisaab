@@ -149,6 +149,7 @@ const CheckOut = (props) => {
               <View style={{ flex: 1 }}>
                 <Button
                   title={"NEW_CUSTOMER"}
+                  type={"secondary"}
                   icon="plus"
                   onClick={() => props.navigation.navigate("AddCustomer")}
                 />
@@ -160,6 +161,7 @@ const CheckOut = (props) => {
             <View style={{ flex: 1, margin: 15 }}>
               <Button
                 title={"GENRATE_QUOTATION"}
+                type={"secondary"}
                 onClick={() => {
                   props.navigation.navigate("Quotation");
                 }}
@@ -173,6 +175,7 @@ const CheckOut = (props) => {
                   onClick={() => {
                     props.navigation.navigate("Bill", { duplicate: true });
                   }}
+                  type={"secondary"}
                   icon="pdffile1"
                 />
               </View>
