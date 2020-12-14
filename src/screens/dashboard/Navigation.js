@@ -12,7 +12,6 @@ const Dashboard_StackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: <HeaderTitle title="DASHBOARD" />,
       headerLeft: () => <HamBurger navigationProps={navigation} />,
-      headerRight: () => <HeaderOptions navigationProps={navigation} />,
       headerStyle: {
         backgroundColor: colors.darkColor,
       },

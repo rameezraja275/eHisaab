@@ -2,8 +2,8 @@ export default API = {
   // BASE_URL: "https://ehisaab.pine-technologies.com/api/",
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v1/api/",
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v3/api/",
-  BASE_URL: "http://192.168.43.16/bizsolAPI/api/",
-  IMAGE_URL: "http://192.168.43.16/bizsolAPI/images/",
+  BASE_URL: "http://192.168.43.252/bizsolAPI/api/",
+  IMAGE_URL: "http://192.168.43.252/bizsolAPI/images/",
   STORE_BASE_URL: "http://stores.ehisaab.com/",
 
   SIGNUP_URL: "user/signup.php",
@@ -121,6 +121,8 @@ export default API = {
   ORDER_DETAILS_GET: "order/getDetails.php",
   ORDER_MODIFY_URL: "order/modify.php",
 
-  DASHBOARD: "dashboard/payables.php",
-
+  TOP_PRODUCTS: "statistics/top_products.php",
+  TOTAL_BANK_BALANCE: "statistics/total_bank_balance.php",
+  TOTAL_PAYABLE: "statistics/total_payable_amount.php",
+  TOTAL_RECEIVEABLE: "statistics/total_receiveable_amount.php"
 };

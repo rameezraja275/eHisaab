@@ -20,11 +20,13 @@ import receiptReducer from "./reducers/receiptReducer";
 import employeeReducer from "./reducers/employeeReducer";
 import reportsReducer from "./reducers/reportsReducer";
 import nonInventoryReducer from "./reducers/nonInventoryReducer";
+import dashboardReducer from './reducers/dashboard'
 import storeReducer from './reducers/storeReducer'
 import BankReducer from './reducers/bankReducer'
 import ordersReducer from './reducers/orderReducer'
 import { AsyncStorage } from "react-native";
 import createSecureStorage from "../utils/secureStorage";
+
 
 const configureStore = () => {
   const secureStorage = createSecureStorage();
@@ -56,7 +58,8 @@ const configureStore = () => {
     nonInventoryItems: nonInventoryReducer,
     bank: BankReducer,
     store: storeReducer,
-    orders: ordersReducer
+    orders: ordersReducer,
+    dashboard: dashboardReducer
   });
 
   const store = createStore(rootReducer, applyMiddleware(thunk));
