@@ -37,11 +37,12 @@ const Bussiness = (props) => {
       ...bussiness,
     });
   }, []);
-
+  console.log(bussiness)
 
   const onSubmit = () => {
+
     const { name, store_name, category_id } = formData;
-    if (name == null || name == "" || store_name == "" || category_id == "" || category_id == null || store_name == null) {
+    if (name == null || name == "" || category_id == "" || category_id == null) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else {
       props.businessModify(formData);
@@ -70,16 +71,6 @@ const Bussiness = (props) => {
                 autoCapitalize="words"
                 maxLength={40}
               />
-              <TextInput
-                value={formData.store_name}
-                onChange={(text) => setFormData({ ...formData, store_name: text })}
-                placeholder="STORE_NAME"
-                required
-                noSpace
-                maxLength={20}
-                autoCapitalize="none"
-              />
-
               <Picker
                 placeholder="CATEGORY"
                 options={props.categories}
@@ -90,7 +81,14 @@ const Bussiness = (props) => {
                   setFormData({ ...formData, category_id: text == null ? 0 : text })
                 }
               />
-
+              <TextInput
+                value={formData.store_name}
+                onChange={(text) => setFormData({ ...formData, store_name: text })}
+                placeholder="STORE_NAME"
+                noSpace
+                maxLength={20}
+                autoCapitalize="none"
+              />
               <TextInput
                 value={formData.phone}
                 onChange={(text) => setFormData({ ...formData, phone: text })}

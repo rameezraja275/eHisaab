@@ -41,7 +41,7 @@ export function productCreate(body) {
       type: ACTION.LOADING,
     });
 
-    console.log("images       i  upla", body.product_image)
+    console.log("images       i  upla", data)
 
     axios
       .post(`${API.BASE_URL}${API.PRODUCT_CREATE_URL}`, data, { headers })

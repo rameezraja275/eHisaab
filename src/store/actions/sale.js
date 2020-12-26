@@ -380,6 +380,7 @@ export function addItemToSale(item, is_noninventory = false) {
           totalItem: updatedCart.length,
         },
       });
+      ShowFlash("ADDED_TO_CART", "success", language);
     } else if (
       is_noninventory ||
       Number(cartitem.current_stock) >= Number(cartitem.qty)
@@ -400,6 +401,7 @@ export function addItemToSale(item, is_noninventory = false) {
           totalItem: updatedCart.length,
         },
       });
+      ShowFlash("ADDED_TO_CART", "success", language);
     } else {
       ShowFlash("STOCK_NOT_AVALIABLE", "danger", language);
     }

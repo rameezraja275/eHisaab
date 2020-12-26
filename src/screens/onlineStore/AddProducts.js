@@ -79,11 +79,11 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
                             }
                         />
 
-                        <FloatingButton
+                        { products.lenght > 0 && <FloatingButton
                             onClick={onSubmit}
                             title={`ADD_TO_STORE`}
                             value={""}
-                        />
+                        />}
                     </React.Fragment>)}
 
         </View>

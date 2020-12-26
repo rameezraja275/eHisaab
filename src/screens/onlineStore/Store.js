@@ -13,6 +13,7 @@ import { FormatPrice } from "../../utils/helper";
 import FloatingButton from "../../Components/FloatingButton";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ShowFlash, shareText } from "../../utils/helper";
+import images from '../../utils/images';
 import api from '../../store/api'
 
 const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories, language }) => {
@@ -28,16 +29,13 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
 
     const getCategory = (id) => {
         if (id != 0) {
-            console.log(categories)
-            console.log(id)
-
             let cat = categories.find((cat) => cat.id == id)
-            return cat.name
+            if (cat) {
+                return cat.name
+            }
         }
         return ""
     }
-
-    console.log("ascdfasd", bussiness)
 
     return (
         <View style={styles.MainContainer}>
@@ -99,7 +97,8 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                     <React.Fragment>
                                         <View style={styles.item}>
                                             <Image
-                                                source={{ uri: route.IMAGE_URL + item.image_url }}
+                                                // source={{ uri: route.IMAGE_URL + item.image_url }}
+                                                source={item.image_url ? { uri: route.IMAGE_URL + item.image_url } : images.default_image}
                                                 style={{ width: 100, height: 100, marginRight: 15 }}
                                             />
                                             <View style={{ flex: 1 }} >

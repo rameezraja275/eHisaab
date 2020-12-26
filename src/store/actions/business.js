@@ -36,6 +36,8 @@ export function businessModify(body) {
       type: ACTION.LOADING,
     });
 
+    console.log(data)
+
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
       .then(async (res) => {

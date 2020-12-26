@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from "react-native";
 import colors from "../utils/colors";
 import Icon from "react-native-vector-icons/AntDesign";
 import { connect } from "react-redux";
@@ -45,6 +45,18 @@ const FloatingButton = ({
       alignItems: "center",
     },
   });
+
+  const [x, setX] = useState(0)
+  const [y, setY] = useState(0)
+
+  function getRandXY() {
+    setX(getRandInt(0, Dimensions.get('window').width - 100))
+    setY(getRandInt(0, Dimensions.get('window').height - 100))
+  }
+
+  function getRandInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
   return (
     <View style={styles.Button}>

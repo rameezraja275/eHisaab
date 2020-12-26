@@ -8,4 +8,5 @@ export default {
   splash: require("../../assets/splashScreen.png"),
   // pine_logo: require("../../assets/pinelogo.png"),
   powered_by: require("../../assets/powerdBy.png"),
+  default_image: require("../../assets/default.jpg"),
 };

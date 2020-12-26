@@ -558,7 +558,8 @@ const english = {
   BESTSALEINGPRODUCTS: "Best selling products",
   CASHINHAND: "Cash in hand",
   RECEIVABLE: "Receivable",
-  PAYABLES: "Payables"
+  PAYABLES: "Payables",
+  ADDED_TO_CART: "Added to cart"
 };
 
 export const getTranslation = (label, language) => {
