@@ -41,8 +41,6 @@ export function productCreate(body) {
       type: ACTION.LOADING,
     });
 
-    console.log("images       i  upla", data)
-
     axios
       .post(`${API.BASE_URL}${API.PRODUCT_CREATE_URL}`, data, { headers })
       .then((res) => {
@@ -106,7 +104,8 @@ export function productModify(body) {
       code: body.product_code,
       narration: body.narration,
       is_in_store: body.is_in_store,
-      product_image: "data:image/png;base64," + body.image_url
+      product_image: "data:image/png;base64," + body.image_url,
+      product_image_existing: body.product_image_exist
     };
 
     dispatch({
@@ -116,6 +115,8 @@ export function productModify(body) {
       },
       type: ACTION.LOADING,
     });
+
+    console.log("da", data)
 
     axios
       .post(`${API.BASE_URL}${API.PRODUCT_MODIFY_URL}`, data, { headers })
@@ -162,7 +163,7 @@ export function productModify(body) {
   };
 }
 
-export function productDelete(id) {
+export function productDelete(id, image_url) {
   return (dispatch, getState) => {
     const headers = {
       "Content-Type": "application/json",
@@ -174,6 +175,7 @@ export function productDelete(id) {
     const data = {
       token,
       product_id: id,
+      product_image_existing: image_url
     };
 
     dispatch({

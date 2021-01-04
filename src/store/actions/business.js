@@ -20,12 +20,14 @@ export function businessModify(body) {
       name: body.name,
       phone: body.phone,
       address: body.address,
-      logo: body.logo,
+      // logo: body.logo,
+      logo: body.logo ? "data:image/png;base64," + body.logo : null,
       id: body.id,
       opening_cash: body.opening_cash,
       narration: body.narration,
       store_name: body.store_name,
-      category_id: body.category_id
+      category_id: body.category_id,
+      logo_existing: body.logo_existing
     };
 
     dispatch({
@@ -36,12 +38,10 @@ export function businessModify(body) {
       type: ACTION.LOADING,
     });
 
-    console.log(data)
-
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
       .then(async (res) => {
-        console.log(res)
+        console.log("byusines ", res)
         // await AsyncStorage.setItem('bussiness', JSON.stringify(data))
         // const business = JSON.parse( await AsyncStorage.getItem('bussiness') )
 
@@ -50,7 +50,7 @@ export function businessModify(body) {
         business &&
           dispatch({
             type: ACTION.BUSINESS_GET_SUCCESS,
-            payload: business,
+            payload: { ...business, logo: res.data.data },
           });
 
         dispatch({

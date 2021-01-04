@@ -51,7 +51,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                         size="large"
                                         source={{
                                             uri:
-                                                "data:image/png;base64," + bussiness.logo,
+                                                api.IMAGE_URL + bussiness.logo,
                                         }}
                                     />
                                 </TouchableOpacity>

@@ -29,12 +29,13 @@ const Bussiness = (props) => {
     logo: null,
     user_id: null,
     opening_cash: null,
-    narration: null
+    narration: null,
+    logo_existing: null
   });
 
   useEffect(() => {
     setFormData({
-      ...bussiness,
+      ...bussiness, logo_existing: bussiness.logo,
     });
   }, []);
   console.log(bussiness)

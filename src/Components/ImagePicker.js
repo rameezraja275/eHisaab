@@ -69,6 +69,8 @@ const ImageLoader = (props) => {
   const imageURL = route.IMAGE_URL + image
   const imageBase64 = "data:image/png;base64," + image;
 
+  console.log(valididateBase64(image), imageURL)
+
   return (
     <View style={styles.pickerWrapper}>
       <TouchableOpacity onPress={pickImage} style={{ height: image ? 0 : 48 }}>

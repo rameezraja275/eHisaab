@@ -48,7 +48,7 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
         rerender(!juggaadd)
     }
 
-    console.log("dfasdjhi", products)
+    console.log("dfasdjhi", products.lenght)
 
     return (
         <View style={styles.MainContainer}>
@@ -79,11 +79,11 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
                             }
                         />
 
-                        { products.lenght > 0 && <FloatingButton
+                        <FloatingButton
                             onClick={onSubmit}
                             title={`ADD_TO_STORE`}
                             value={""}
-                        />}
+                        />
                     </React.Fragment>)}
 
         </View>

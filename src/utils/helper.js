@@ -174,7 +174,7 @@ export const sms = (phone, message) => {
 };
 
 export const valididateBase64 = (str) => {
-  var pattern = new RegExp(/[A-Za-z+/=]/);
+  var pattern = new RegExp(/^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/);
   return !!pattern.test(str);
 }
 

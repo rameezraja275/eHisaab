@@ -35,7 +35,7 @@ const ViewProduct = (props) => {
     showAlert(
       "YOU_SURE",
       () => {
-        props.productDelete(product.id);
+        props.productDelete(product.id, product.image_url);
       },
       props.language
     );
@@ -68,100 +68,100 @@ const ViewProduct = (props) => {
   return props.loading.status ? (
     <Loader size={10} />
   ) : (
-    <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
-        <InfoCard
-          title="SALE_PRICE"
-          value={FormatPrice(product.product_sale_price)}
-        />
-        <InfoCard
-          title="COST_PRICE"
-          value={FormatPrice(product.product_cost_price)}
-        />
-        <InfoCard title="TOTAL_STOCK" value={product.current_stock} />
-        <InfoCard
-          title="COST_VALUE"
-          value={FormatPrice(
-            product.current_stock * product.product_cost_price
-          )}
-        />
-        <InfoCard
-          title="SALE_VALUE"
-          value={FormatPrice(
-            product.current_stock * product.product_sale_price
-          )}
-        />
-      </View>
-
-      <OptionsAction
-        status={options}
-        close={showOptions}
-        title="DELETE"
-        onSelect={onDelete}
-        danger={true}
-      />
-
-      <View style={styles.table}>
-        <View style={styles.head}>
-          <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
-            {getTranslation("DATE", props.language)}
-          </Text>
-          <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
-            {getTranslation("DESCRIPTION", props.language)}
-          </Text>
-          <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
-            {getTranslation("QTY", props.language)}
-          </Text>
-          <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
-            {getTranslation("PRICE", props.language)}
-          </Text>
+      <View style={styles.MainContainer}>
+        <View style={styles.infobox}>
+          <InfoCard
+            title="SALE_PRICE"
+            value={FormatPrice(product.product_sale_price)}
+          />
+          <InfoCard
+            title="COST_PRICE"
+            value={FormatPrice(product.product_cost_price)}
+          />
+          <InfoCard title="TOTAL_STOCK" value={product.current_stock} />
+          <InfoCard
+            title="COST_VALUE"
+            value={FormatPrice(
+              product.current_stock * product.product_cost_price
+            )}
+          />
+          <InfoCard
+            title="SALE_VALUE"
+            value={FormatPrice(
+              product.current_stock * product.product_sale_price
+            )}
+          />
         </View>
 
-        <FlatList
-          ListEmptyComponent={<EmptyList message="No Transactions." />}
-          onEndReached={() => {
-            setLimit({ ...limit, start: limit.start + 20 });
-          }}
-          onEndReachedThreshold={0}
-          data={Transaction}
-          keyExtractor={(item) => item.id}
-          refreshControl={
-            <RefreshControl refreshing={false} onRefresh={reload} />
-          }
-          renderItem={({ item }) => {
-            const { qty_in } = item;
-            const stockOut = qty_in == 0 ? true : false;
-            return (
-              <View style={styles.item}>
-                <Text style={styles.col}>{FormatDate(item.Date)}</Text>
-                <Text style={[styles.col, { flex: 0.4 }]}>
-                  {item.narration}
-                </Text>
-                <Text
-                  style={[
-                    styles.col,
-                    { color: stockOut ? colors.danger : colors.success },
-                  ]}
-                >
-                  {stockOut ? item.qty_out : item.qty_in}
-                </Text>
-                <Text style={styles.col}>
-                  {stockOut
-                    ? FormatPrice(item.product_sale_price)
-                    : FormatPrice(item.product_cost_price)}
-                </Text>
-              </View>
-            );
-          }}
+        <OptionsAction
+          status={options}
+          close={showOptions}
+          title="DELETE"
+          onSelect={onDelete}
+          danger={true}
+        />
+
+        <View style={styles.table}>
+          <View style={styles.head}>
+            <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
+              {getTranslation("DATE", props.language)}
+            </Text>
+            <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
+              {getTranslation("DESCRIPTION", props.language)}
+            </Text>
+            <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
+              {getTranslation("QTY", props.language)}
+            </Text>
+            <Text style={{ flex: 0.3, fontFamily: "PrimaryFont" }}>
+              {getTranslation("PRICE", props.language)}
+            </Text>
+          </View>
+
+          <FlatList
+            ListEmptyComponent={<EmptyList message="No Transactions." />}
+            onEndReached={() => {
+              setLimit({ ...limit, start: limit.start + 20 });
+            }}
+            onEndReachedThreshold={0}
+            data={Transaction}
+            keyExtractor={(item) => item.id}
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={reload} />
+            }
+            renderItem={({ item }) => {
+              const { qty_in } = item;
+              const stockOut = qty_in == 0 ? true : false;
+              return (
+                <View style={styles.item}>
+                  <Text style={styles.col}>{FormatDate(item.Date)}</Text>
+                  <Text style={[styles.col, { flex: 0.4 }]}>
+                    {item.narration}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.col,
+                      { color: stockOut ? colors.danger : colors.success },
+                    ]}
+                  >
+                    {stockOut ? item.qty_out : item.qty_in}
+                  </Text>
+                  <Text style={styles.col}>
+                    {stockOut
+                      ? FormatPrice(item.product_sale_price)
+                      : FormatPrice(item.product_cost_price)}
+                  </Text>
+                </View>
+              );
+            }}
+          />
+        </View>
+
+        <FloatingButton
+          onClick={() => props.navigation.navigate("EditProduct", { product })}
+          icon="edit"
         />
       </View>
-
-      <FloatingButton
-        onClick={() => props.navigation.navigate("EditProduct", { product })}
-        icon="edit"
-      />
-    </View>
-  );
+    );
 };
 
 const getStyles = ({ language, URDU }) =>

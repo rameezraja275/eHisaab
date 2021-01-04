@@ -13,6 +13,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import color from "../utils/colors";
 import constants from "../utils/constants";
 import images from "../utils/images";
+import api from '../store/api'
 const Sliderbar = (props) => {
   const { bussiness, user, items, ...rest } = props;
 
@@ -25,6 +26,8 @@ const Sliderbar = (props) => {
       })
       : items;
 
+  console.log("logo", api.IMAGE_URL + bussiness.logo)
+
   return (
     <ScrollView style={{ width: "100%", height: "100%" }}>
       <View style={styles.headerContainer}>
@@ -33,7 +36,7 @@ const Sliderbar = (props) => {
             {bussiness.logo != "" && (
               <Image
                 style={{ width: 70, height: 70 }}
-                source={{ uri: "data:image/png;base64," + bussiness.logo }}
+                source={{ uri: api.IMAGE_URL + bussiness.logo }}
               />
             )}
             <Text style={styles.headerText}>{bussiness.name}</Text>

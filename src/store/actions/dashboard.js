@@ -69,7 +69,6 @@ export function getTotalBankBalance() {
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log(res.data.data)
                 dispatch({
                     payload: {
                         data: res.data.data,

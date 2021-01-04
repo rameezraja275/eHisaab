@@ -1,72 +1,77 @@
-import React from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import colors from "../utils/colors";
-import Icon from "react-native-vector-icons/FontAwesome";
-import IconFA from "react-native-vector-icons/FontAwesome5";
-import IconE from "react-native-vector-icons/Entypo";
-import IconM from "react-native-vector-icons/MaterialIcons";
+import React from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import IconFA from 'react-native-vector-icons/FontAwesome5';
+import IconE from 'react-native-vector-icons/Entypo';
+import IconM from 'react-native-vector-icons/MaterialIcons';
+import colors from '../utils/colors';
 
-import { sms, call } from "../utils/helper";
+import { sms, call } from '../utils/helper';
 
-const Card = (props) => {
-  return props.phoneNumber || props.toggleFilter || props.orderAccept || props.orderReject ? (
+const Card = ({
+  phoneNumber, toggleFilter, orderAccept,
+  orderReject, date, openAdjustAmount, messageText, pdfexport, navigation, pdfInfo,
+}) => (phoneNumber || toggleFilter || orderAccept || orderReject ? (
+  <View
+    style={{
+      paddingTop: 15,
+      paddingHorizontal: 15,
+      justifyContent: 'flex-end',
+    }}
+  >
     <View
       style={{
-        paddingTop: 15,
-        paddingHorizontal: 15,
-        justifyContent: "flex-end",
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       }}
     >
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
 
-        {props.toggleFilter && (
+      {toggleFilter && (
+        <TouchableOpacity
+          style={{
+            marginRight: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+          onPress={toggleFilter}
+        >
+          {date ? (
+            <Text style={{ color: 'white', fontFamily: 'PrimaryFont' }}>
+              {date}
+            </Text>
+          ) : (
+              <View />
+            )}
+          <Icon
+            style={{ margin: 10, color: colors.white }}
+            name="filter"
+            size={20}
+          />
+        </TouchableOpacity>
+      )}
+
+      <View style={{ flexDirection: 'row' }}>
+        {openAdjustAmount && (
           <TouchableOpacity
             style={{
               marginRight: 10,
-              flexDirection: "row",
-              alignItems: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
-            onPress={props.toggleFilter}
-          >
-            {props.date ? (
-              <Text style={{ color: "white", fontFamily: "PrimaryFont" }}>
-                {props.date}
-              </Text>
-            ) : (
-                <View></View>
-              )}
-            <Icon
-              style={{ margin: 10, color: colors.white }}
-              name="filter"
-              size={20}
-            />
-          </TouchableOpacity>
-        )}
-
-        <View style={{ flexDirection: "row" }}>
-          {props.openAdjustAmount && <TouchableOpacity
-            style={{
-              marginRight: 10,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-            onPress={props.openAdjustAmount}
+            onPress={openAdjustAmount}
           >
             <Icon
               style={{ margin: 10, color: colors.white }}
               name="credit-card"
               size={20}
             />
-          </TouchableOpacity>}
-          {props.phoneNumber ? (<>
+          </TouchableOpacity>
+        )}
+        {phoneNumber ? (
+          <>
             <TouchableOpacity
-              onPress={() => call(props.phoneNumber)}
+              onPress={() => call(phoneNumber)}
               style={{ marginRight: 10 }}
             >
               <Icon
@@ -77,60 +82,59 @@ const Card = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => sms(props.phoneNumber, props.messageText)}
+              onPress={() => sms(phoneNumber, messageText)}
             >
               <Icon
                 style={{ margin: 10, color: colors.white }}
                 name="envelope"
                 size={20}
               />
-            </TouchableOpacity></>
-          ) : (
-              <View></View>
-            )}
-        </View>
+            </TouchableOpacity>
+          </>
+        ) : (
+            <View />
+          )}
+      </View>
 
-        {props.pdfexport && <TouchableOpacity
-          onPress={() => props.navigation.navigate(props.pdfInfo.screen, { ...props.pdfInfo })}
+      {pdfexport && (
+        <TouchableOpacity
+          onPress={() => navigation.navigate(pdfInfo.screen, { ...pdfInfo })}
         >
           <IconFA
             style={{ margin: 10, color: colors.white }}
             name="file-export"
             size={20}
           />
-        </TouchableOpacity>}
+        </TouchableOpacity>
+      )}
 
-        <View style={{ flexDirection: 'row' }} >
-          {props.orderAccept != undefined && <TouchableOpacity
-            onPress={props.orderAccept}
+      {orderAccept !== undefined && (
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={orderAccept}
           >
             <IconM
               style={{ marginVertical: 10, marginHorizontal: 20, color: colors.success }}
               name="done"
               size={20}
             />
-          </TouchableOpacity>}
-
-          {props.orderReject != undefined && <TouchableOpacity
-            onPress={props.orderReject}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={orderReject}
           >
             <IconE
               style={{ marginVertical: 10, marginHorizontal: 20, color: colors.danger }}
               name="cross"
               size={20}
             />
-          </TouchableOpacity>}
+          </TouchableOpacity>
         </View>
+      )}
 
-
-
-      </View>
     </View>
-  ) : (
-      <View></View>
-    );
-
-
-};
+  </View>
+) : (
+    <View />
+  ));
 
 export default Card;

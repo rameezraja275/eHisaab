@@ -34,7 +34,8 @@ const AddEditProduct = (props) => {
     product_code: null,
     narration: null,
     is_in_store: false,
-    image_url: null
+    image_url: null,
+    product_image_exist: null
   });
 
   const [barcode, showBarCode] = useState(false)
@@ -46,6 +47,7 @@ const AddEditProduct = (props) => {
     FormType == "edit" &&
       setFormData({
         ...props.navigation.state.params.product,
+        product_image_exist: props.navigation.state.params.product.image_url
       });
   }, []);
 
@@ -157,29 +159,15 @@ const AddEditProduct = (props) => {
                 required
               />
 
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
-                <View style={{ flex: 1 }}>
-                  <TextInput
-                    value={formData.product_sale_price}
-                    onChange={(text) =>
-                      setFormData({ ...formData, product_sale_price: text })
-                    }
-                    keyboardType={"number-pad"}
-                    placeholder="SALE_PRICE"
-                    required
-                  />
-                </View>
-
-
-                <CheckBox
-                  title={getTranslation("DISPLAY_IN_STORE", props.language)}
-                  checked={formData.is_in_store == "0" ? false : true}
-                  checkedColor={colors.darkColor}
-                  iconRight
-                  onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "1" : "0" })}
-                />
-              </View>
-
+              <TextInput
+                value={formData.product_sale_price}
+                onChange={(text) =>
+                  setFormData({ ...formData, product_sale_price: text })
+                }
+                keyboardType={"number-pad"}
+                placeholder="SALE_PRICE"
+                required
+              />
 
               <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                 <View style={{ flex: 0.9 }}>
@@ -204,17 +192,33 @@ const AddEditProduct = (props) => {
               </View>
 
 
-              {formData.is_service == constants.PRODUCT && (
-                <TextInput
-                  keyboardType={"number-pad"}
-                  placeholder="OPENING_STOCK"
-                  value={formData.opening_stock}
-                  disabled={FormType == "edit" ? true : false}
-                  onChange={(text) =>
-                    setFormData({ ...formData, opening_stock: text })
-                  }
+
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
+                <CheckBox
+                  title={getTranslation("DISPLAY_IN_STORE", props.language)}
+                  checked={formData.is_in_store == "0" ? false : true}
+                  checkedColor={colors.darkColor}
+                  iconRight
+                  onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "1" : "0" })}
                 />
-              )}
+
+                <View style={{ flex: 1 }}>
+                  {formData.is_service == constants.PRODUCT && (
+                    <TextInput
+                      keyboardType={"number-pad"}
+                      placeholder="OPENING_STOCK"
+                      value={formData.opening_stock}
+                      disabled={FormType == "edit" ? true : false}
+                      onChange={(text) =>
+                        setFormData({ ...formData, opening_stock: text })
+                      }
+                    />
+                  )}
+                </View>
+              </View>
+
+
+
 
               {formData.is_in_store == "1" && <TextInput
                 value={formData.narration}

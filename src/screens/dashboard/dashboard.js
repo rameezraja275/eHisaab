@@ -52,16 +52,16 @@ const Dashboard = ({ loading, cashbook, getCashBook, getTopProducts, topProducts
         }>
             <View style={styles.card} >
                 <Text style={styles.title}>{getTranslation("BANKBALANCE")}</Text>
-                {totalBankBalance.loading ? <Loader size={10} /> : <Text style={styles.title} >{FormatPrice(totalBankBalance.data.total_bank_balance)}</Text>}
+                {totalBankBalance.loading ? <Loader size={10} /> : <Text style={styles.title} >{FormatPrice(totalBankBalance.data)}</Text>}
             </View>
             <View style={styles.row} >
                 <View style={[styles.card, styles.col]} >
                     <Text style={styles.title}>{getTranslation("RECEIVABLE")}</Text>
-                    {totalReceiveable.loading ? <Loader size={10} /> : <Text style={styles.title} >{FormatPrice(totalReceiveable.data.total_receivable_amount)}</Text>}
+                    {totalReceiveable.loading ? <Loader size={10} /> : <Text style={styles.title} >{FormatPrice(totalReceiveable.data)}</Text>}
                 </View>
                 <View style={[styles.card, styles.col]}  >
                     <Text style={styles.title}> {getTranslation("PAYABLES")}</Text>
-                    {totalPayable.loading ? <Loader size={10} /> : <Text style={[styles.title, styles.textRed]} >{FormatPrice(totalPayable.data.total_payable_amount)}</Text>}
+                    {totalPayable.loading ? <Loader size={10} /> : <Text style={[styles.title, styles.textRed]} >{FormatPrice(totalPayable.data)}</Text>}
                 </View>
             </View>
             <View style={[styles.card, styles.col]} >
