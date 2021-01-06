@@ -85,7 +85,8 @@ const Purchase = (props) => {
   }
 
   const navidateToCheckOut = () => {
-    props.navigation.navigate("CheckOut", { isOpenPurchase: true })
+    props.navigation.navigate("Details")
+    // props.navigation.navigate("CheckOut", { isOpenPurchase: true })
   }
 
   return (

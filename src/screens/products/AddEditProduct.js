@@ -107,7 +107,6 @@ const AddEditProduct = (props) => {
   ];
   const [scanned, setScanned] = useState(false)
 
-  console.log(formData)
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}

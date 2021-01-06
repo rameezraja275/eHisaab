@@ -23,7 +23,6 @@ export function getTopProducts(month) {
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log(res.data.data)
                 dispatch({
                     payload: {
                         data: res.data.data,
@@ -114,7 +113,6 @@ export function getTotalPayable() {
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log(res.data.data)
                 dispatch({
                     payload: {
                         data: res.data.data,
@@ -160,7 +158,6 @@ export function getTotalReceiveable() {
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log(res.data.data)
                 dispatch({
                     payload: {
                         data: res.data.data,

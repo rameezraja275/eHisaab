@@ -25,7 +25,6 @@ const Orders = ({ navigation, getOrders, loading, language, orders }) => {
         getOrders(0)
     }, [])
 
-    console.log("orders", orders)
 
     return (
         <View style={styles.MainContainer}>
@@ -40,7 +39,6 @@ const Orders = ({ navigation, getOrders, loading, language, orders }) => {
                         }
                         keyExtractor={(item) => item.id}
                         renderItem={({ item }) => {
-                            console.log("date", item.order_date)
                             return (
                                 <ListItemContainer
                                     onClick={() =>

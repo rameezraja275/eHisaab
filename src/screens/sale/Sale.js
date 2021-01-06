@@ -133,7 +133,8 @@ const Sale = (props) => {
   }
 
   const navidateToCheckOut = () => {
-    props.navigation.navigate("CheckOut", { isOpenSale: true })
+    props.navigation.navigate("Details", { barcode: false })
+    // props.navigation.navigate("CheckOut", { isOpenSale: true })
   }
 
   return (

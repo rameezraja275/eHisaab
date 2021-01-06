@@ -30,7 +30,6 @@ const Dashboard = ({ loading, cashbook, getCashBook, getTopProducts, topProducts
         getCashBook(today);
     }
 
-    console.log("total", totalBankBalance.data.loading)
 
     const {
         opening_cash,

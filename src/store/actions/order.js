@@ -24,11 +24,9 @@ export function getOrders(
         });
 
         let url = `${API.BASE_URL}${API.ORDER_GET}?token=${token}&order_id=${id}`;
-        console.log("url", url)
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log("res", res.data.data)
                 dispatch({
                     payload: {
                         status: false,
@@ -81,7 +79,6 @@ export function getOrderDetails(
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log("res", res.data.data)
                 dispatch({
                     payload: {
                         status: false,

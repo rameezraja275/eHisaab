@@ -131,13 +131,13 @@ export const rateApp = () => {
   if (Platform.OS != "ios") {
     // GOOGLE_PACKAGE_NAME
     Linking.openURL(`market://details?id=${constants.PLAY_STORE_LINK}`).catch((err) =>
-      ShowFlash("Google Play Store not avalible", "danger")
+      ShowFlash("GOOGLE_STORE_NOT_AVALIABLE", "danger")
     );
   } else {
     Linking.openURL(
       // APPLE_STORE_ID
       `itms://itunes.apple.com/in/app/apple-store/${"expo"}`
-    ).catch((err) => ShowFlash("App Store not avalible", "danger"));
+    ).catch((err) => ShowFlash("APP_STORE_NOT_AVALIABLE", "danger"));
   }
 };
 

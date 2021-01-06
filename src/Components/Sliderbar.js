@@ -26,7 +26,6 @@ const Sliderbar = (props) => {
       })
       : items;
 
-  console.log("logo", api.IMAGE_URL + bussiness.logo)
 
   return (
     <ScrollView style={{ width: "100%", height: "100%" }}>

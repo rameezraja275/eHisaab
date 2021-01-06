@@ -43,9 +43,11 @@ export function getSaleTransactions(
     let date = filter.date.toISOString().split("T")[0];
 
     const url = `${API.BASE_URL}${API.SALE_GET_URL}?token=${token}&sale_id=${id}&trans_date=${date}&filter_type=${filter.filter_type}`;
+    console.log("url", url)
     axios
       .get(url, { headers })
       .then((res) => {
+
         if (id > 0) {
           const {
             sale_date,
@@ -56,7 +58,6 @@ export function getSaleTransactions(
             sale_amount,
             invoice_id
           } = res.data.data[0];
-          console.log(res.data.data[1])
           const { products } = res.data.data[1];
           dispatch({
             type: ACTION.ADD_ITEM_SALE_CART,
@@ -70,6 +71,8 @@ export function getSaleTransactions(
               totalItem: products.length,
             },
           });
+
+          console.log("data", res.data.data[0])
 
           dispatch({
             type: ACTION.SALE_DEATILS,
@@ -103,6 +106,7 @@ export function getSaleTransactions(
         });
       })
       .catch((err) => {
+        console.log(err.response)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
@@ -282,7 +286,7 @@ export function updateItemFromSale(item) {
         let qty = item.qty;
 
         if (Number(item.qty) > Number(saleCart[i].current_stock)) {
-          ShowFlash("Stock is Not Avalible", "danger");
+          ShowFlash("STOCK_NOT_AVALIABLE", "danger");
           qty = Number(saleCart[i].qty);
         }
 

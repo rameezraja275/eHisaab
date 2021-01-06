@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   KeyboardAvoidingView,
   ScrollView,
   Platform,
-} from "react-native";
-import { connect } from "react-redux";
-import { customerGet } from "../../store/actions/customer";
-import { makeSale, addSaleData, addTotalPrice } from "../../store/actions/sale";
-import Button from "../../Components/Button";
-import TextInput from "../../Components/TextInput";
-import { ShowFlash } from "../../utils/helper";
-import colors from "../../utils/colors";
-import Loader from "../../Components/Loader";
-import Picker from "../../Components/Picker";
-import DatePicker from "../../Components/DatePicker";
-import InfoCard from "../../Components/InfoCard";
-import { FormatPrice, FormatDate } from "../../utils/helper";
+} from 'react-native';
+import { connect } from 'react-redux';
+import { customerGet } from '../../store/actions/customer';
+import { makeSale, addSaleData, addTotalPrice } from '../../store/actions/sale';
+import Button from '../../Components/Button';
+import TextInput from '../../Components/TextInput';
+import { ShowFlash, FormatPrice, FormatDate } from '../../utils/helper';
+import colors from '../../utils/colors';
+import Loader from '../../Components/Loader';
+import Picker from '../../Components/Picker';
+import DatePicker from '../../Components/DatePicker';
+import InfoCard from '../../Components/InfoCard';
 
 const CheckOut = (props) => {
   const [formData, setFormData] = useState({
@@ -27,32 +26,34 @@ const CheckOut = (props) => {
     narration: null,
   });
 
-  const editAble = props.saleData.sale_id ? true : false;
-  const { isOpenSale } = props.navigation.state.params
+  const editAble = !!props.saleData.sale_id;
+  const { isOpenSale } = props.navigation.state.params;
 
   const onSubmit = () => {
     const { paid_amount, customer_id, date } = formData;
-    if (paid_amount == null || paid_amount == "" || date == null || props.cartStatus.totalPrice == 0) {
-      ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
+    if (paid_amount == null || paid_amount == '' || date == null || props.cartStatus.totalPrice == 0) {
+      ShowFlash('ENTER_REQUIRED_FIELDS', 'danger', props.language);
     } else if (
-      (paid_amount != props.cartStatus.totalPrice - props.discount &&
-        customer_id == 0)
+      (paid_amount != props.cartStatus.totalPrice - props.discount
+        && customer_id == 0)
     ) {
-      ShowFlash("PAID_TOTAL_AMOUNT_SHOULD_EQUAL", "danger", props.language);
+      ShowFlash('PAID_TOTAL_AMOUNT_SHOULD_EQUAL', 'danger', props.language);
     } else {
       props.makeSale(formData);
     }
   };
 
   useEffect(() => {
-    const { date, paid_amount, customer_id, narration } = props.saleData;
+    const {
+      date, paid_amount, customer_id, narration,
+    } = props.saleData;
     setFormData({
       date,
       paid_amount,
       customer_id,
       narration,
     });
-  }, []);
+  }, [props.saleData]);
 
   const netAmount = props.cartStatus.totalPrice - props.discount;
 
@@ -60,28 +61,26 @@ const CheckOut = (props) => {
     if (!editAble) {
       formData.customer_id == null
         ? setFormData({ ...formData, paid_amount: netAmount.toString() })
-        : setFormData({ ...formData, paid_amount: "" });
+        : setFormData({ ...formData, paid_amount: '' });
     }
   }, [formData.customer_id]);
 
   const setTotalPrice = (price) => {
-    props.addTotalPrice(price)
-  }
-
-  console.log("totla proce", props.cartStatus.totalPrice)
+    props.addTotalPrice(price);
+  };
 
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
-      behavior={Platform.Os == "ios" ? "padding" : "height"}
+      behavior={Platform.Os == 'ios' ? 'padding' : 'height'}
     >
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
           <ScrollView
             style={{ flex: 1 }}
-            keyboardDismissMode={"on-drag"}
-            keyboardShouldPersistTaps={"handled"}
+            keyboardDismissMode="on-drag"
+            keyboardShouldPersistTaps="handled"
           >
             <View style={styles.infobox}>
               <InfoCard
@@ -95,7 +94,7 @@ const CheckOut = (props) => {
                 <InfoCard
                   title="NET_AMOUNT"
                   value={FormatPrice(
-                    netAmount
+                    netAmount,
                     // props.cartStatus.totalPrice - props.discount
                   )}
                 />
@@ -114,27 +113,23 @@ const CheckOut = (props) => {
                 options={props.customers}
                 value={formData.customer_id}
                 type="customer_name"
-                onChange={(text) =>
-                  setFormData({ ...formData, customer_id: text == null ? 0 : text })
-                }
+                onChange={(text) => setFormData({ ...formData, customer_id: text == null ? 0 : text })}
               />
               {
-                isOpenSale && <TextInput
-                  value={props.cartStatus.totalPrice}
-                  onChange={(text) =>
-                    setTotalPrice(text)
-                  }
-                  keyboardType={"number-pad"}
-                  placeholder="TOTAL_AMOUNT"
-                  required
-                />
+                isOpenSale && (
+                  <TextInput
+                    value={props.cartStatus.totalPrice}
+                    onChange={(text) => setTotalPrice(text)}
+                    keyboardType="number-pad"
+                    placeholder="TOTAL_AMOUNT"
+                    required
+                  />
+                )
               }
               <TextInput
                 value={formData.paid_amount}
-                onChange={(text) =>
-                  setFormData({ ...formData, paid_amount: text })
-                }
-                keyboardType={"number-pad"}
+                onChange={(text) => setFormData({ ...formData, paid_amount: text })}
+                keyboardType="number-pad"
                 placeholder="AMOUNT_PAID"
                 required
               />
@@ -148,22 +143,22 @@ const CheckOut = (props) => {
             <View style={styles.Button}>
               <View style={{ flex: 1 }}>
                 <Button
-                  title={"NEW_CUSTOMER"}
-                  type={"secondary"}
+                  title="NEW_CUSTOMER"
+                  type="secondary"
                   icon="plus"
-                  onClick={() => props.navigation.navigate("AddCustomer")}
+                  onClick={() => props.navigation.navigate('AddCustomer')}
                 />
               </View>
               <View style={{ flex: 1, marginLeft: 10 }}>
-                <Button title={"SALE"} onClick={onSubmit} icon="save" />
+                <Button title="SALE" onClick={onSubmit} icon="save" />
               </View>
             </View>
             <View style={{ flex: 1, margin: 15 }}>
               <Button
-                title={"GENRATE_QUOTATION"}
-                type={"secondary"}
+                title="GENRATE_QUOTATION"
+                type="secondary"
                 onClick={() => {
-                  props.navigation.navigate("Quotation");
+                  props.navigation.navigate('Quotation');
                 }}
                 icon="file1"
               />
@@ -171,11 +166,11 @@ const CheckOut = (props) => {
             {props.saleData.sale_id && (
               <View style={{ flex: 1, marginHorizontal: 15 }}>
                 <Button
-                  title={"GENRATE_BILL"}
+                  title="GENRATE_BILL"
                   onClick={() => {
-                    props.navigation.navigate("Bill", { duplicate: true });
+                    props.navigation.navigate('Bill', { duplicate: true });
                   }}
-                  type={"secondary"}
+                  type="secondary"
                   icon="pdffile1"
                 />
               </View>
@@ -195,7 +190,7 @@ const styles = StyleSheet.create({
     margin: 15,
   },
   Button: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginHorizontal: 15,
   },
   margintop: {
@@ -204,25 +199,25 @@ const styles = StyleSheet.create({
   },
   infobox: {
     backgroundColor: colors.darkColor,
-    borderBottomColor: "grey",
+    borderBottomColor: 'grey',
     borderBottomWidth: 0.5,
     paddingBottom: 15,
     zIndex: -11111,
   },
 });
 
-const mapStateToProps = ({ common, customer, sale }) => {
-  return {
-    loading: common.loading,
-    customers: customer.customers,
-    cartStatus: sale.cartStatus,
-    discount: sale.discount,
-    saleData: sale.saleData,
-    saleCart: sale.saleCart,
-    language: common.language,
-  };
-};
+const mapStateToProps = ({ common, customer, sale }) => ({
+  loading: common.loading,
+  customers: customer.customers,
+  cartStatus: sale.cartStatus,
+  discount: sale.discount,
+  saleData: sale.saleData,
+  saleCart: sale.saleCart,
+  language: common.language,
+});
 
-export default connect(mapStateToProps, { makeSale, customerGet, addSaleData, addTotalPrice })(
-  CheckOut
+export default connect(mapStateToProps, {
+  makeSale, customerGet, addSaleData, addTotalPrice,
+})(
+  CheckOut,
 );

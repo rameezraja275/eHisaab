@@ -3,13 +3,13 @@ const API = {
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v1/api/",
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v3/api/",
 
-  // BASE_URL: "http://192.168.1.103/bizsolAPI/api/",
-  // IMAGE_URL: "http://192.168.1.103/bizsolAPI/",
-  // STORE_BASE_URL: "http://stores.ehisaab.com/",
+  BASE_URL: "http://192.168.43.16/bizsolAPI/api/",
+  IMAGE_URL: "http://192.168.43.16/bizsolAPI/",
+  STORE_BASE_URL: "http://stores.ehisaab.com/",
 
-  BASE_URL: 'http://143.110.190.246/ehisaab/api/',
-  IMAGE_URL: 'http://143.110.190.246/ehisaab/',
-  STORE_BASE_URL: 'http://stores.ehisaab.com/',
+  // BASE_URL: 'http://143.110.190.246/ehisaab/api/',
+  // IMAGE_URL: 'http://143.110.190.246/ehisaab/',
+  // STORE_BASE_URL: 'http://stores.ehisaab.com/',
 
   SIGNUP_URL: 'user/signup.php',
   LOGIN_URL: 'user/login.php',

@@ -135,9 +135,9 @@ const Details = (props) => {
       </View>
 
       <FloatingButton
-        onClick={() => props.navigation.navigate("CheckOut")}
+        onClick={() => props.navigation.navigate("CheckOut", { isOpenPurchase: totalItem == 0 ? true : false })}
         icon="shoppingcart"
-        disabled={totalItem == 0 ? true : false}
+      // disabled={totalItem == 0 ? true : false}
       />
     </KeyboardAvoidingView>
   );

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import {
   StyleSheet,
   View,
@@ -7,17 +7,17 @@ import {
   FlatList,
   TouchableOpacity,
   RefreshControl,
-} from "react-native";
-import SearchBar from "../../Components/SearchBar";
-import Loader from "../../Components/Loader";
-import { getSaleTransactions, resetCart } from "../../store/actions/sale";
-import { FormatPrice, FormatDate } from "../../utils/helper";
-import colors from "../../utils/colors";
-import Overlay from "../../Components/Overlay";
-import Filters from "../../Components/TransactionsFilter";
-import EmptyList from "../../Components/EmptyList";
-import { getTranslation } from "../../utils/language";
-import ListItemContainer from "../../Components/ListItemContainer";
+} from 'react-native';
+import SearchBar from '../../Components/SearchBar';
+import Loader from '../../Components/Loader';
+import { getSaleTransactions, resetCart } from '../../store/actions/sale';
+import { FormatPrice, FormatDate } from '../../utils/helper';
+import colors from '../../utils/colors';
+import Overlay from '../../Components/Overlay';
+import Filters from '../../Components/TransactionsFilter';
+import EmptyList from '../../Components/EmptyList';
+import { getTranslation } from '../../utils/language';
+import ListItemContainer from '../../Components/ListItemContainer';
 
 const SaleTransactions = (props) => {
   const { getSaleTransactions, Transactions, resetCart } = props;
@@ -25,24 +25,31 @@ const SaleTransactions = (props) => {
     filteredData: [],
   });
 
-  const [filter, setFilter] = useState({ date: new Date(), filter_type: "1" });
+  const [filter, setFilter] = useState({ date: new Date(), filter_type: '1' });
 
   const resetSaleCart = () => {
     resetCart();
-    props.navigation.navigate("List");
+    props.navigation.navigate('List');
   };
 
   useEffect(() => {
     getSaleTransactions(0, filter);
 
     props.navigation.setParams({
-      resetSaleCart: resetSaleCart,
+      resetSaleCart,
     });
   }, []);
 
   const navigate = (item) => {
+    console.log(item)
     getSaleTransactions(item.id);
-    props.navigation.navigate("SaleReturn", { barcode: false });
+    if (item.sale_type == "2") {
+      props.navigation.navigate('SaleReturn', { barcode: false });
+    } else {
+      props.navigation.navigate('SaleReturn', { barcode: false });
+      // props.navigation.navigate("CheckOut", { isOpenSale: true })
+    }
+
   };
 
   useEffect(() => {
@@ -54,7 +61,7 @@ const SaleTransactions = (props) => {
 
   const onSearch = (text) => {
     const filteredData = Transactions.filter((item) => {
-      let tempName = item.customer_name ? item.customer_name : "";
+      const tempName = item.customer_name ? item.customer_name : '';
       return tempName.toLowerCase().includes(text.toLowerCase());
     });
     setState({
@@ -72,7 +79,7 @@ const SaleTransactions = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-          <React.Fragment>
+          <>
             <SearchBar
               {...props}
               onChange={onSearch}
@@ -108,38 +115,35 @@ const SaleTransactions = (props) => {
               renderItem={({ item }) => (
                 <ListItemContainer onClick={() => navigate(item)}>
                   <View style={{ flex: 0.6 }}>
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                    <Text style={{ fontFamily: 'PrimaryFont' }}>
                       {item.customer_name}
                     </Text>
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                    <Text style={{ fontFamily: 'PrimaryFont' }}>
                       {FormatDate(item.sale_date)}
                     </Text>
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                    <Text style={{ fontFamily: 'PrimaryFont' }}>
                       {item.narration}
                     </Text>
                   </View>
 
                   <View style={{ flex: 0.4 }}>
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
-                      {getTranslation("AMOUNT", props.language) +
-                        " : " +
-                        FormatPrice(item.sale_amount)}
+                    <Text style={{ fontFamily: 'PrimaryFont' }}>
+                      {`${getTranslation('AMOUNT', props.language)
+                        } : ${FormatPrice(item.sale_amount)}`}
                     </Text>
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
-                      {getTranslation("DISCOUNT", props.language) +
-                        " : " +
-                        FormatPrice(item.sale_discount)}
+                    <Text style={{ fontFamily: 'PrimaryFont' }}>
+                      {`${getTranslation('DISCOUNT', props.language)
+                        } : ${FormatPrice(item.sale_discount)}`}
                     </Text>
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
-                      {getTranslation("PAID", props.language) +
-                        " : " +
-                        FormatPrice(item.paid_amount)}
+                    <Text style={{ fontFamily: 'PrimaryFont' }}>
+                      {`${getTranslation('PAID', props.language)
+                        } : ${FormatPrice(item.paid_amount)}`}
                     </Text>
                   </View>
                 </ListItemContainer>
               )}
             />
-          </React.Fragment>
+          </>
         )}
     </View>
   );
@@ -151,19 +155,17 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
-const mapStateToProps = ({ sale, common }) => {
-  return {
-    loading: common.loading,
-    Transactions: sale.Transactions,
-    language: common.language,
-  };
-};
+const mapStateToProps = ({ sale, common }) => ({
+  loading: common.loading,
+  Transactions: sale.Transactions,
+  language: common.language,
+});
 
 export default connect(mapStateToProps, { getSaleTransactions, resetCart })(
-  SaleTransactions
+  SaleTransactions,
 );

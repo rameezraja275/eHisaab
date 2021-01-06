@@ -39,7 +39,6 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
 
     const onSelect = (id, value, item) => {
         const index = products.findIndex((pro) => pro.id === id);
-        console.log(index)
         products[index] = {
             ...item,
             is_in_store: value === "0" ? "1" : "0"
@@ -48,7 +47,6 @@ const AddProduct = ({ loading, productGet, products, addProductsToStore }) => {
         rerender(!juggaadd)
     }
 
-    console.log("dfasdjhi", products.lenght)
 
     return (
         <View style={styles.MainContainer}>

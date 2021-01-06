@@ -54,7 +54,7 @@ const CheckOut = (props) => {
       supplier_id,
       narration,
     });
-  }, []);
+  }, [props.purchaseData]);
 
   return (
     <KeyboardAvoidingView

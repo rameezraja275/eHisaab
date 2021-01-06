@@ -38,7 +38,6 @@ const Bussiness = (props) => {
       ...bussiness, logo_existing: bussiness.logo,
     });
   }, []);
-  console.log(bussiness)
 
   const onSubmit = () => {
 

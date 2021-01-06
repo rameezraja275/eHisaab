@@ -41,7 +41,6 @@ export function businessModify(body) {
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
       .then(async (res) => {
-        console.log("byusines ", res)
         // await AsyncStorage.setItem('bussiness', JSON.stringify(data))
         // const business = JSON.parse( await AsyncStorage.getItem('bussiness') )
 
@@ -65,7 +64,6 @@ export function businessModify(body) {
         setTimeout(() => navigate("Business"), 2000);
       })
       .catch((err) => {
-        console.log(err)
 
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);

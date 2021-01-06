@@ -7,8 +7,6 @@ import constants from "../../utils/constants";
 
 export function getStoreProducts(productId) {
     return (dispatch, getState) => {
-
-        console.log("aspi ")
         const headers = {
             "Content-Type": "application/json",
         };
@@ -27,7 +25,6 @@ export function getStoreProducts(productId) {
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log("res", res.data.data)
                 dispatch({
                     payload: {
                         status: false,
@@ -42,7 +39,6 @@ export function getStoreProducts(productId) {
                 });
             })
             .catch((err) => {
-                console.log("err", err)
                 if (err.response) {
                     ShowFlash(err.response.data.message, "danger", language);
                 } else {
