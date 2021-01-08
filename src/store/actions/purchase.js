@@ -258,6 +258,7 @@ export function makePurchase(data) {
         }, 1000);
       })
       .catch((err) => {
+        console.log(err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

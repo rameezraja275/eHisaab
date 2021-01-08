@@ -64,8 +64,7 @@ const Bill = (props) => {
         </style> </head> <body>
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
-            ${
-    bussiness.logo
+            ${bussiness.logo
       ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
       : `<div></div>`
     } 
@@ -73,25 +72,19 @@ const Bill = (props) => {
             <strong>Invoice # ${saleData.invoice_id} </strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
-                    <p class="comapnyname"> ${
-    bussiness.name ? bussiness.name : ""
-    } </p> <p> Address: ${
-    bussiness.address ? bussiness.address : ""
+                    <p class="comapnyname"> ${bussiness.name ? bussiness.name : ""
+    } </p> <p> Address: ${bussiness.address ? bussiness.address : ""
     } </p>
-                    <p> Phone: ${
-    bussiness.phone ? bussiness.phone : ""
+                    <p> Phone: ${bussiness.phone ? bussiness.phone : ""
     } </p></div> 
-                    <div> <p> Date: ${saleData.date.toDateString()} </p> <p> Customer: ${
-    customer ? customer.customer_name : ""
+                    <div> <p> Date: ${saleData.date.toDateString()} </p> <p> Customer: ${customer ? customer.customer_name : ""
     }  </p>
-                    <p> Address: ${
-    customer ? customer.customer_address : ""
+                    <p> Address: ${customer ? customer.customer_address : ""
     }  </p>
-                    <p> Phone: ${
-    customer ? customer.customer_phone : ""
+                    <p> Phone: ${customer ? customer.customer_phone : ""
     } </p> </div> </div>
                     <hr class="mb-25"/>
-                    <table class="mb-20 "> <tr> <th>S#</th> <th>Qty</th> <th>Description</th> <th>Unit Price</th> <th>Total</th> </tr>
+                    ${htmlTable && '<table class="mb-20 "> <tr> <th>S#</th> <th>Qty</th> <th>Description</th> <th>Unit Price</th> <th>Total</th> </tr>'}
                     ${htmlTable}
                 </table>
             <div class="flex-fe mb-20"> 
@@ -106,8 +99,7 @@ const Bill = (props) => {
                    
                     <div class="flex mb-5">
                         <span class="flex1"> Discount :  </span> 
-                        <span> ${
-    discount ? FormatPrice(discount) : "0 Rs"
+                        <span> ${discount ? FormatPrice(discount) : "0 Rs"
     } </span> 
                     </div> 
                     <div class="flex mb-5">
@@ -122,20 +114,15 @@ const Bill = (props) => {
                     <div class="flex mb-5">
                         <span class="flex1"> Remaining Amount :  </span>
 
-                        <span> ${
-    remainingAmount < 0 ? "(" : ""
-    }  ${FormatPrice(remainingAmount)} ${
-    remainingAmount < 0 ? ")" : ""
+                        <span> ${remainingAmount < 0 ? "(" : ""
+    }  ${FormatPrice(remainingAmount)} ${remainingAmount < 0 ? ")" : ""
     } </span>
                     </div>
-                    ${
-    !duplicate
+                    ${!duplicate
       ? `<div class="flex mb-5">
                         <span class="flex1"> Previous Balance :  </span>
-                        <span> <strong> ${
-      previousBalance > 0 ? "(" : ""
-      }  ${FormatPrice(previousBalance)} ${
-      previousBalance > 0 ? ")" : ""
+                        <span> <strong> ${previousBalance > 0 ? "(" : ""
+      }  ${FormatPrice(previousBalance)} ${previousBalance > 0 ? ")" : ""
       }</strong>  </span>
                     </div>`
       : ""
@@ -144,10 +131,8 @@ const Bill = (props) => {
                     <hr />
                     <div class="flex mb-5">
                         <span class="flex1"> <strong>Current Balance : </strong>  </span>
-                        <span> <strong> ${
-    currentBalance > 0 ? "(" : ""
-    }  ${FormatPrice(currentBalance)} ${
-    currentBalance > 0 ? ")" : ""
+                        <span> <strong> ${currentBalance > 0 ? "(" : ""
+    }  ${FormatPrice(currentBalance)} ${currentBalance > 0 ? ")" : ""
     }</strong>  </span>
                     </div>
                 </div>    

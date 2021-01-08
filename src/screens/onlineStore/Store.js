@@ -37,6 +37,8 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
         return ""
     }
 
+    console.log(storeProducts)
+
     return (
         <View style={styles.MainContainer}>
             {loading.status ? (

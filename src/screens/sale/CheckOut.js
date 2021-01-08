@@ -94,8 +94,7 @@ const CheckOut = (props) => {
                 <InfoCard
                   title="NET_AMOUNT"
                   value={FormatPrice(
-                    netAmount,
-                    // props.cartStatus.totalPrice - props.discount
+                    netAmount
                   )}
                 />
               )}

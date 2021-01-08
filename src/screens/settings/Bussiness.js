@@ -49,6 +49,8 @@ const Bussiness = (props) => {
     }
   };
 
+  console.log(formData)
+
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
