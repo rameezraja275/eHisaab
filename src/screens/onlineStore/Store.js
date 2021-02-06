@@ -94,7 +94,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                 refreshControl={
                                     <RefreshControl refreshing={false} onRefresh={reload} />
                                 }
-                                keyExtractor={(item) => item.id}
+                                keyExtractor={(item) => item.product_id}
                                 renderItem={({ item }) => (
                                     <React.Fragment>
                                         <View style={styles.item}>
@@ -122,7 +122,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
 
 
                         { bussiness.store_name != null && <FloatingButton
-                            onClick={() => { shareText(`https://stores.ehisaan.com/${bussiness.store_name}`) }}
+                            onClick={() => { shareText(`${api.STORE_BASE_URL}${bussiness.store_name}`) }}
                             icon="sharealt"
                             bottomPosition={80}
                         />}

@@ -41,8 +41,6 @@ export function productCreate(body) {
       type: ACTION.LOADING,
     });
 
-    console.log("this is it", data)
-
     axios
       .post(`${API.BASE_URL}${API.PRODUCT_CREATE_URL}`, data, { headers })
       .then((res) => {
@@ -104,7 +102,7 @@ export function productModify(body) {
       code: body.product_code,
       narration: body.narration,
       is_in_store: body.is_in_store,
-      product_image: body.image_url ? "data:image/png;base64," + body.image_url : body.image_url,
+      product_image: body.image_url,
       product_image_existing: body.product_image_exist
     };
 

@@ -279,6 +279,17 @@ const urdu = {
   NON_INVENTORY_PURCHASE_ALRET: 'ٹوکری میں کوئی اشیاء نہیں۔ اس خریداری سے انوینٹری تبدیل نہیں ہوگی',
   NON_INVENTORY_PURCHASE: 'غیر انوینٹری خریداری',
 
+  DASHBOARD: 'ڈیش بورڈ',
+  BANKBALANCE: 'بینک بیلنس',
+  BESTSALEINGPRODUCTS: 'بہترین فروخت ہونے والی مصنوعات',
+  CASHINHAND: 'نقد',
+  PAYABLES: 'ادائیگی',
+  ADDED_TO_CART: 'ٹوکری میں شامل',
+  GOOGLE_STORE_NOT_AVALIABLE: "گوگل پلے اسٹور دستیاب نہیں ہے",
+  APP_STORE_NOT_AVALIABLE: "ایپ اسٹور دستیاب نہیں ہے",
+  IMAGE: "تصویر",
+  ONLINE_STORE_NAME: ""
+
 };
 
 const english = {
@@ -560,7 +571,9 @@ const english = {
   PAYABLES: 'Payables',
   ADDED_TO_CART: 'Added to cart',
   GOOGLE_STORE_NOT_AVALIABLE: "Google Play Store not Available",
-  APP_STORE_NOT_AVALIABLE: "App store not Available"
+  APP_STORE_NOT_AVALIABLE: "App store not Available",
+  IMAGE: "Image",
+  ONLINE_STORE_NAME: "Online store name"
 };
 
 export const getTranslation = (label, language) => {

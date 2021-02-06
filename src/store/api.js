@@ -7,9 +7,9 @@ const API = {
   // IMAGE_URL: "http://192.168.43.16/bizsolAPI/",
   // STORE_BASE_URL: "http://stores.ehisaab.com/",
 
-  BASE_URL: 'http://143.110.190.246/ehisaab/api/',
-  IMAGE_URL: 'http://143.110.190.246/ehisaab/',
-  STORE_BASE_URL: 'http://stores.ehisaab.com/',
+  BASE_URL: 'https://ehisaab.app/ehisaab/api/',
+  IMAGE_URL: 'https://ehisaab.app/ehisaab/',
+  STORE_BASE_URL: 'https://ehisaab.app/store/',
 
   SIGNUP_URL: 'user/signup.php',
   LOGIN_URL: 'user/login.php',

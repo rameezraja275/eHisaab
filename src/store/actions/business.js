@@ -21,7 +21,7 @@ export function businessModify(body) {
       phone: body.phone,
       address: body.address,
       // logo: body.logo,
-      logo: body.logo ? "data:image/png;base64," + body.logo : null,
+      logo: body.logo,
       id: body.id,
       opening_cash: body.opening_cash,
       narration: body.narration,
@@ -37,6 +37,8 @@ export function businessModify(body) {
       },
       type: ACTION.LOADING,
     });
+
+    console.log("data to post", `${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`)
 
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })

@@ -6,12 +6,14 @@ import { getTranslation } from "../utils/language";
 
 const Input = (props) => {
   const [focus, setFocus] = useState(false);
+  const { subheading } = props;
 
   const container = {
     borderColor: focus ? colors.darkColor : colors.grey,
     borderWidth: focus ? 1 : 0.5,
     borderRadius: 5,
-    marginVertical: 10,
+    marginBottom: subheading ? 0 : 10,
+    marginTop: 10,
     // flex: 1,
     height: 42,
   };
@@ -65,28 +67,33 @@ const Input = (props) => {
   };
 
   return (
-    <View style={container}>
-      <Text style={labelStyle}>
-        {getTranslation(props.placeholder, props.language) + " "}
-        {props.required && (
-          <Text style={{ color: colors.danger, fontFamily: "PrimaryFont" }}>
-            {" "}
+    <View>
+      <View style={container}>
+        <Text style={labelStyle}>
+          {getTranslation(props.placeholder, props.language) + " "}
+          {props.required && (
+            <Text style={{ color: colors.danger, fontFamily: "PrimaryFont" }}>
+              {" "}
             *{" "}
-          </Text>
-        )}
-      </Text>
-      <TextInput
-        style={TextFieldStyles}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(props.value ? true : false)}
-        onChangeText={onChange}
-        value={props.value}
-        keyboardType={props.keyboardType}
-        secureTextEntry={props.secureTextEntry}
-        autoCapitalize={props.autoCapitalize}
-        editable={props.disabled ? false : true}
-        maxLength={props.maxLength}
-      />
+            </Text>
+          )}
+        </Text>
+        <TextInput
+          style={TextFieldStyles}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(props.value ? true : false)}
+          onChangeText={onChange}
+          value={props.value}
+          keyboardType={props.keyboardType}
+          secureTextEntry={props.secureTextEntry}
+          autoCapitalize={props.autoCapitalize}
+          editable={props.disabled ? false : true}
+          maxLength={props.maxLength}
+        />
+      </View>
+      { subheading && <Text style={{ fontFamily: "PrimaryFont", marginBottom: 10, textAlign: "right" }}>
+        {subheading}
+      </Text>}
     </View>
   );
 };

@@ -147,6 +147,7 @@ export function signin(body) {
           logo: bussiness.logo == "" ? null : bussiness.logo,
         };
 
+        console.log("business login", business)
         dispatch({
           type: ACTION.TOKEN_EXPIRY,
           payload: token_expiry,
@@ -191,6 +192,7 @@ export function signin(body) {
         navigation(userStatus, dispatch);
       })
       .catch((err) => {
+        console.log("err", err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-
+import Divider from '../../Components/Divider';
 import Picker from "../../Components/Picker";
 import { connect } from "react-redux";
 import { businessModify } from "../../store/actions/business";
@@ -16,6 +16,7 @@ import { ShowFlash } from "../../utils/helper";
 import colors from "../../utils/colors";
 import Loader from "../../Components/Loader";
 import ImagerPicker from "../../Components/ImagePicker";
+import api from '../../store/api'
 
 const Bussiness = (props) => {
   const { bussiness } = props;
@@ -42,7 +43,7 @@ const Bussiness = (props) => {
   const onSubmit = () => {
 
     const { name, store_name, category_id } = formData;
-    if (name == null || name == "" || category_id == "" || category_id == null) {
+    if (name == null || name == "" || category_id == "" || category_id == null || category_id == 0) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     } else {
       props.businessModify(formData);
@@ -73,24 +74,6 @@ const Bussiness = (props) => {
                 autoCapitalize="words"
                 maxLength={40}
               />
-              <Picker
-                placeholder="CATEGORY"
-                options={props.categories}
-                value={formData.category_id}
-                required
-                type="name"
-                onChange={(text) =>
-                  setFormData({ ...formData, category_id: text == null ? 0 : text })
-                }
-              />
-              <TextInput
-                value={formData.store_name}
-                onChange={(text) => setFormData({ ...formData, store_name: text })}
-                placeholder="STORE_NAME"
-                noSpace
-                maxLength={20}
-                autoCapitalize="none"
-              />
               <TextInput
                 value={formData.phone}
                 onChange={(text) => setFormData({ ...formData, phone: text })}
@@ -113,15 +96,6 @@ const Bussiness = (props) => {
                 }
                 placeholder="OPENING_CASH"
               />
-
-              <TextInput
-                value={formData.narration}
-                onChange={(text) => setFormData({ ...formData, narration: text })}
-                placeholder="DESCRIPTION"
-                autoCapitalize="sentences"
-                maxLength={150}
-              />
-
               <ImagerPicker
                 onChangeImage={(logo) =>
                   setFormData({ ...formData, logo: logo.base64 })
@@ -129,6 +103,36 @@ const Bussiness = (props) => {
                 placeholder="LOGO"
                 image={formData.logo}
               />
+
+              <Divider text="Online Store Setting" />
+
+              <TextInput
+                value={formData.store_name}
+                onChange={(text) => setFormData({ ...formData, store_name: text })}
+                placeholder="ONLINE_STORE_NAME"
+                noSpace
+                maxLength={20}
+                autoCapitalize="none"
+                subheading={`${api.STORE_BASE_URL}${formData.store_name}`}
+              />
+              <Picker
+                placeholder="CATEGORY"
+                options={props.categories}
+                value={formData.category_id}
+                required
+                type="name"
+                onChange={(text) =>
+                  setFormData({ ...formData, category_id: text == null ? 0 : text })
+                }
+              />
+              <TextInput
+                value={formData.narration}
+                onChange={(text) => setFormData({ ...formData, narration: text })}
+                placeholder="DESCRIPTION"
+                autoCapitalize="sentences" STORE_BASE_URL
+                maxLength={150}
+              />
+
 
             </View>
             <View style={styles.Button}>

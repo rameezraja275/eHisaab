@@ -33,7 +33,7 @@ const AddEditProduct = (props) => {
     is_service: null,
     product_code: null,
     narration: null,
-    is_in_store: false,
+    is_in_store: "0",
     image_url: null,
     product_image_exist: null
   });
@@ -50,6 +50,8 @@ const AddEditProduct = (props) => {
         product_image_exist: props.navigation.state.params.product.image_url
       });
   }, []);
+
+  console.log("asd", formData)
 
   const onSubmit = () => {
     let {

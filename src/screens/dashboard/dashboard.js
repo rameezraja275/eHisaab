@@ -8,7 +8,7 @@ import { getTopProducts, getTotalBankBalance, getTotalPayable, getTotalReceiveab
 import Loader from '../../Components/Loader'
 import { FormatPrice } from '../../utils/helper';
 
-const Dashboard = ({ loading, cashbook, getCashBook, getTopProducts, topProducts, getTotalBankBalance, totalBankBalance, getTotalPayable, totalPayable, getTotalReceiveable, totalReceiveable }) => {
+const Dashboard = ({ language, loading, cashbook, getCashBook, getTopProducts, topProducts, getTotalBankBalance, totalBankBalance, getTotalPayable, totalPayable, getTotalReceiveable, totalReceiveable }) => {
 
     const today = {
         date: new Date()
@@ -50,16 +50,16 @@ const Dashboard = ({ loading, cashbook, getCashBook, getTopProducts, topProducts
             <RefreshControl refreshing={false} onRefresh={reload} />
         }>
             <View style={styles.card} >
-                <Text style={styles.title}>{getTranslation("BANKBALANCE")}</Text>
+                <Text style={styles.title}>{getTranslation("BANKBALANCE", language)}</Text>
                 {totalBankBalance.loading ? <Loader size={10} /> : <Text style={styles.title} >{FormatPrice(totalBankBalance.data)}</Text>}
             </View>
             <View style={styles.row} >
                 <View style={[styles.card, styles.col]} >
-                    <Text style={styles.title}>{getTranslation("RECEIVABLE")}</Text>
+                    <Text style={styles.title}>{getTranslation("RECEIVABLE", language)}</Text>
                     {totalReceiveable.loading ? <Loader size={10} /> : <Text style={styles.title} >{FormatPrice(totalReceiveable.data)}</Text>}
                 </View>
                 <View style={[styles.card, styles.col]}  >
-                    <Text style={styles.title}> {getTranslation("PAYABLES")}</Text>
+                    <Text style={styles.title}> {getTranslation("PAYABLES", language)}</Text>
                     {totalPayable.loading ? <Loader size={10} /> : <Text style={[styles.title, styles.textRed]} >{FormatPrice(totalPayable.data)}</Text>}
                 </View>
             </View>
@@ -67,8 +67,8 @@ const Dashboard = ({ loading, cashbook, getCashBook, getTopProducts, topProducts
 
                 {/* <View style={styles.line} /> */}
                 <View style={[styles.row, styles.justifyContentSB, styles.alignItemCenter]} >
-                    <Text style={styles.title}>{getTranslation("BESTSALEINGPRODUCTS")}</Text>
-                    <Text style={styles.subTitle}>{getTranslation("QTY")} </Text>
+                    <Text style={styles.title}>{getTranslation("BESTSALEINGPRODUCTS", language)}</Text>
+                    <Text style={styles.subTitle}>{getTranslation("QTY", language)} </Text>
                 </View>
                 <View style={styles.line} />
                 {topProducts.loading ? <Loader size={10} /> : <View >
@@ -81,7 +81,7 @@ const Dashboard = ({ loading, cashbook, getCashBook, getTopProducts, topProducts
                 </View>}
             </View>
             <View style={styles.card} >
-                <Text style={styles.title}>{getTranslation("CASHINHAND")}</Text>
+                <Text style={styles.title}>{getTranslation("CASHINHAND", language)}</Text>
                 {loading.status ? <Loader size={10} /> : <Text style={[styles.title]} >{FormatPrice(cashinHand)}</Text>}
             </View>
         </ScrollView >
@@ -145,6 +145,7 @@ const mapStateToProps = ({ user, dashboard, reports, common }) => {
         totalReceiveable: dashboard.totalReceiveable,
         cashbook: reports.cashbook,
         loading: common.loading,
+        language: common.language,
     };
 };
 
