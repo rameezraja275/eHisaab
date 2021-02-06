@@ -5,6 +5,7 @@ import { FormatPrice, FormatDate } from "../../utils/helper";
 import { resetCart } from "../../store/actions/sale";
 import constants from "../../utils/constants";
 import Loader from "../../Components/Loader";
+import api from '../../store/api'
 
 const Bill = (props) => {
   const { bussiness, customers, receipt } = props;
@@ -34,31 +35,24 @@ const Bill = (props) => {
         </style> </head> <body>
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
-            ${
-    bussiness.logo
-      ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
+            ${bussiness.logo
+      ? `<img src="${api.IMAGE_URL + bussiness.logo}" width=100 height=100 />`
       : `<div></div>`
     } 
             <div><h4 class="title"> Receipt </h4>
             <strong>Receipt # ${receipt.receipt_counter} </strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
-                    <p class="comapnyname"> ${
-    bussiness.name ? bussiness.name : ""
-    } </p> <p> Address: ${
-    bussiness.address ? bussiness.address : ""
+                    <p class="comapnyname"> ${bussiness.name ? bussiness.name : ""
+    } </p> <p> Address: ${bussiness.address ? bussiness.address : ""
     } </p>
-                    <p> Phone: ${
-    bussiness.phone ? bussiness.phone : ""
+                    <p> Phone: ${bussiness.phone ? bussiness.phone : ""
     } </p></div> 
-                    <div> <p> Date: ${receipt.date.toDateString()} </p> <p> Customer: ${
-    customer ? customer.customer_name : ""
+                    <div> <p> Date: ${receipt.date.toDateString()} </p> <p> Customer: ${customer ? customer.customer_name : ""
     }  </p>
-                    <p> Address: ${
-    customer ? customer.customer_address : ""
+                    <p> Address: ${customer ? customer.customer_address : ""
     }  </p>
-                    <p> Phone: ${
-    customer ? customer.customer_phone : ""
+                    <p> Phone: ${customer ? customer.customer_phone : ""
     } </p> </div> </div>
                     <hr class="mb-25"/>
             <div class="flex-fe mb-20"> 
@@ -66,14 +60,11 @@ const Bill = (props) => {
                 <p> This is Computer Generated Invoice No Signature Required. </p>
                 </div>
                 <div class="width40"> 
-                    ${
-    !duplicate
+                    ${!duplicate
       ? `<div class="flex mb-5">
                         <span class="flex1"> Balance :  </span>
-                        <span>  ${
-      receipt.previousBalance > 0 ? "(" : ""
-      }  ${FormatPrice(receipt.previousBalance)} ${
-      receipt.previousBalance > 0 ? ")" : ""
+                        <span>  ${receipt.previousBalance > 0 ? "(" : ""
+      }  ${FormatPrice(receipt.previousBalance)} ${receipt.previousBalance > 0 ? ")" : ""
       }  </span>
                     </div>`
       : ""
@@ -87,10 +78,8 @@ const Bill = (props) => {
                     <hr />
                     <div class="flex mb-5">
                         <span class="flex1"> <strong>Current Balance : </strong>  </span>
-                        <span> <strong> ${
-    currentBalance > 0 ? "(" : ""
-    }  ${FormatPrice(currentBalance)} ${
-    currentBalance > 0 ? ")" : ""
+                        <span> <strong> ${currentBalance > 0 ? "(" : ""
+    }  ${FormatPrice(currentBalance)} ${currentBalance > 0 ? ")" : ""
     }</strong>  </span>
                     </div>
                 </div>    

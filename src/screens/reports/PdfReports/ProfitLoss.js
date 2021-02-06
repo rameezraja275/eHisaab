@@ -6,6 +6,7 @@ import { FormatPrice, FormatDate } from "../../../utils/helper";
 import { resetCart } from "../../../store/actions/sale";
 import constants from "../../../utils/constants";
 import Loader from "../../../Components/Loader";
+import api from '../../../store/api'
 
 const Bill = (props) => {
 
@@ -33,22 +34,18 @@ const Bill = (props) => {
         </style> </head> <body>
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
-            ${
-        bussiness.logo
-            ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
+            ${bussiness.logo
+            ? `<img src="${api.IMAGE_URL + bussiness.logo}" width=100 height=100 />`
             : `<div></div>`
         } 
             <div><h4 class="title"> Profit Loss Statement </h4>
-            <strong>${ date}</strong></div> </div> 
+            <strong>${date}</strong></div> </div> 
             <hr class="mb-20"/>
             <div class="flex-sb mb-20"> <div>
-                    <p class="comapnyname"> ${
-        bussiness.name ? bussiness.name : ""
-        } </p> <p> Address: ${
-        bussiness.address ? bussiness.address : ""
+                    <p class="comapnyname"> ${bussiness.name ? bussiness.name : ""
+        } </p> <p> Address: ${bussiness.address ? bussiness.address : ""
         } </p>
-                    <p> Phone: ${
-        bussiness.phone ? bussiness.phone : ""
+                    <p> Phone: ${bussiness.phone ? bussiness.phone : ""
         } </p></div> 
                     </div>
                     <hr class="mb-25"/>
@@ -72,7 +69,7 @@ const Bill = (props) => {
 
                         <tr> 
                             <th>Gross Profit</th> 
-                            <th>${ gross_profit < 0 ? "(" : ""} ${FormatPrice(gross_profit)}   ${gross_profit < 0 ? ")" : ""}</th> 
+                            <th>${gross_profit < 0 ? "(" : ""} ${FormatPrice(gross_profit)}   ${gross_profit < 0 ? ")" : ""}</th> 
                               
                         </tr>
 
@@ -90,12 +87,12 @@ const Bill = (props) => {
                    
                         <tr> 
                             <th>Receipt</th> 
-                            <th>${ FormatPrice( receipt ) } </th>  
+                            <th>${FormatPrice(receipt)} </th>  
                         </tr>
 
                         <tr> 
                             <th>Net Profit</th> 
-                            <th>${ net_profit < 0 ? "(" : ""} ${FormatPrice(net_profit)}   ${net_profit < 0 ? ")" : ""} </th>  
+                            <th>${net_profit < 0 ? "(" : ""} ${FormatPrice(net_profit)}   ${net_profit < 0 ? ")" : ""} </th>  
                         </tr>
 
                 </table>

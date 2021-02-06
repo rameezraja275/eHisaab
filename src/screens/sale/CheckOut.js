@@ -113,7 +113,7 @@ const CheckOut = (props) => {
                 value={formData.customer_id}
                 type="customer_name"
                 onChange={(text) => setFormData({ ...formData, customer_id: text == null ? 0 : text })}
-              />totalPrice
+              />
               {
                 isOpenSale && (
                   <TextInput

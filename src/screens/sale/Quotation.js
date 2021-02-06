@@ -6,6 +6,7 @@ import { FormatPrice, FormatDate } from "../../utils/helper";
 import { resetCart } from "../../store/actions/sale";
 
 import constants from "../../utils/constants";
+import api from '../../store/api'
 
 const Quotation = (props) => {
   const { saleDetails, bussiness, customers, navigation } = props;
@@ -59,7 +60,7 @@ const Quotation = (props) => {
              <div class="page"> 
             <div class="flex-sb header mb-20"> 
             ${bussiness.logo
-      ? `<img src="data:image/png;base64,${bussiness.logo}" width=100 height=100 />`
+      ? `<img src="${api.IMAGE_URL + bussiness.logo}" width=100 height=100 />`
       : `<div></div>`
     } 
     } <h4 class="title"> Quotation </h4> </div> 

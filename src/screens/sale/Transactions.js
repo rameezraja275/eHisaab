@@ -41,7 +41,6 @@ const SaleTransactions = (props) => {
   }, []);
 
   const navigate = (item) => {
-    console.log(item)
     getSaleTransactions(item.id);
     if (item.sale_type == "2") {
       props.navigation.navigate('SaleReturn', { barcode: false });

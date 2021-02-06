@@ -57,11 +57,11 @@ const Reports = ({ language, navigation }) => {
         </Text>
       </ListItemContainer>
 
-      <ListItemContainer onClick={() => { }} commingSoon={true}>
+      {/* <ListItemContainer onClick={() => { }} commingSoon={true}>
         <Text style={styles.title}>
           {getTranslation("BALANCE_SHEET", language)}{" "}
         </Text>
-      </ListItemContainer>
+      </ListItemContainer> */}
     </ScrollView>
   );
 };
