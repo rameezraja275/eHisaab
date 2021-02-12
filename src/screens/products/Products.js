@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Overlay from "../../Components/Overlay";
-import { StyleSheet, View, Text, FlatList, RefreshControl } from "react-native";
+import { StyleSheet, View, Text, FlatList, RefreshControl, ScrollView } from "react-native";
 import SearchBar from "../../Components/SearchBar";
 import Loader from "../../Components/Loader";
 import { productGet } from "../../store/actions/product";
@@ -14,6 +14,7 @@ import ListItemContainer from "../../Components/ListItemContainer";
 import constants from "../../utils/constants";
 import FloatingInfoCard from "../../Components/FloatingInfoCard";
 import colors from "../../utils/colors";
+import { Avatar, Badge, Icon, withBadge } from 'react-native-elements'
 
 const Product = (props) => {
   const { productGet, products } = props;
@@ -34,7 +35,7 @@ const Product = (props) => {
     });
   }, [products]);
 
-  useEffect(() => {}, [state.filteredData]);
+  useEffect(() => { }, [state.filteredData]);
 
   useEffect(() => {
     let data = products;
@@ -108,84 +109,104 @@ const Product = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-        <React.Fragment>
-          <SearchBar
-            {...props}
-            onChange={onSearch}
-            toggleFilter={() => setState({ ...state, showOverlay: true })}
-          />
+          <React.Fragment>
+            <SearchBar
+              {...props}
+              onChange={onSearch}
+              toggleFilter={() => setState({ ...state, showOverlay: true })}
+            />
 
-          {state.showOverlay && (
-            <Overlay
-              toggleFilter={() => setState({ ...state, showOverlay: false })}
-              title="FILTER"
-            >
-              <Filters
-                onPress={(text) => {
-                  setState({ ...state, showOverlay: false, filterType: text });
-                }}
-                filterType={state.filterType}
-                onChange={(text) => {
-                  setState({ ...state, StockfilterValue: text });
-                }}
-                setValue={filterMinimunStock}
-                StockfilterValue={state.StockfilterValue}
-              />
-            </Overlay>
-          )}
-
-          <FlatList
-            data={state.filteredData}
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={reload} />
-            }
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <ListItemContainer
-                onClick={() =>
-                  props.navigation.navigate("ViewProduct", { product: item })
-                }
+            {state.showOverlay && (
+              <Overlay
+                toggleFilter={() => setState({ ...state, showOverlay: false })}
+                title="FILTER"
               >
-                <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                  {item.product_name}
-                </Text>
-                <View style={{ flex: 0.4 }}>
-                  <Text style={{ fontFamily: "PrimaryFont" }}>
-                    {getTranslation("SALE_PRICE", props.language) +
-                      " : " +
-                      FormatPrice(item.product_sale_price)}
-                  </Text>
-                  {item.is_service == constants.PRODUCT && (
-                    <Text style={{ fontFamily: "PrimaryFont" }}>
-                      {getTranslation("STOCK", props.language) +
-                        " : " +
-                        item.current_stock}{" "}
-                    </Text>
-                  )}
-                </View>
-              </ListItemContainer>
+                <Filters
+                  onPress={(text) => {
+                    setState({ ...state, showOverlay: false, filterType: text });
+                  }}
+                  filterType={state.filterType}
+                  onChange={(text) => {
+                    setState({ ...state, StockfilterValue: text });
+                  }}
+                  setValue={filterMinimunStock}
+                  StockfilterValue={state.StockfilterValue}
+                />
+              </Overlay>
             )}
-            ListEmptyComponent={
-              <EmptyList message="Nothing to Show, Please Reload or Add Data" />
-            }
-          />
-          <FloatingInfoCard
-            title="COST_VALUE"
-            value={totalStockCostValue}
-            color={colors.darkColor}
-            position="top"
-          />
-          <FloatingInfoCard
-            title="SALE_VALUE"
-            value={totalStockSaleValue}
-            color={colors.darkColor}
-          />
-          <FloatingButton
-            onClick={() => props.navigation.navigate("AddProduct")}
-            icon="plus"
-          />
-        </React.Fragment>
-      )}
+
+            <ScrollView horizontal={true}  >
+              {/* <Badge onPress={() => props.navigation.navigate("AddProduct")} size="large" value={`+ Add Product`} color={colors.darkColor} badgeStyle={{
+                padding: 15,
+                margin: 10,
+                backgroundColor: colors.darkColor
+              }} /> */}
+              <Badge size="large" value={`Sale Price : ${totalStockSaleValue} Rs`} badgeStyle={{
+                padding: 15,
+                margin: 10,
+                backgroundColor: colors.darkColor
+              }} />
+              <Badge size="large" value={`Cost Price : ${totalStockCostValue} Rs`} badgeStyle={{
+                padding: 15,
+                margin: 10,
+                backgroundColor: colors.darkColor
+              }} />
+            </ScrollView>
+
+
+            <FlatList
+              data={state.filteredData}
+              refreshControl={
+                <RefreshControl refreshing={false} onRefresh={reload} />
+              }
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <ListItemContainer
+                  onClick={() =>
+                    props.navigation.navigate("ViewProduct", { product: item })
+                  }
+                >
+                  <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
+                    {item.product_name}
+                  </Text>
+                  <View style={{ flex: 0.4 }}>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {getTranslation("SALE_PRICE", props.language) +
+                        " : " +
+                        FormatPrice(item.product_sale_price)}
+                    </Text>
+                    {item.is_service == constants.PRODUCT && (
+                      <Text style={{ fontFamily: "PrimaryFont" }}>
+                        {getTranslation("STOCK", props.language) +
+                          " : " +
+                          item.current_stock}{" "}
+                      </Text>
+                    )}
+                  </View>
+                </ListItemContainer>
+              )}
+              ListEmptyComponent={
+                <EmptyList message="Nothing to Show, Please Reload or Add Data" />
+              }
+            />
+            {/* <FloatingInfoCard
+              title="COST_VALUE"
+              value={totalStockCostValue}
+              color={colors.darkColor}
+              position="top"
+            />
+            <FloatingInfoCard
+              title="SALE_VALUE"
+              value={totalStockSaleValue}
+              color={colors.darkColor}
+            /> */}
+            <FloatingButton
+              onClick={() => props.navigation.navigate("AddProduct")}
+              icon="plus"
+            />
+
+          </React.Fragment>
+        )}
     </View>
   );
 };
@@ -193,6 +214,7 @@ const Product = (props) => {
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
+    backgroundColor: colors.lightColor
   },
 });
 

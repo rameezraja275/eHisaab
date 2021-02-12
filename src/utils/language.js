@@ -288,7 +288,10 @@ const urdu = {
   GOOGLE_STORE_NOT_AVALIABLE: "گوگل پلے اسٹور دستیاب نہیں ہے",
   APP_STORE_NOT_AVALIABLE: "ایپ اسٹور دستیاب نہیں ہے",
   IMAGE: "تصویر",
-  ONLINE_STORE_NAME: ""
+  ONLINE_STORE_NAME: "",
+  OPEN_IMAGE_PICKER: "تصویری گیلری",
+  OPEN_CAMERA: "کیمرا کھلا",
+  SELECT: "منتخب کریں"
 
 };
 
@@ -573,7 +576,10 @@ const english = {
   GOOGLE_STORE_NOT_AVALIABLE: "Google Play Store not Available",
   APP_STORE_NOT_AVALIABLE: "App store not Available",
   IMAGE: "Image",
-  ONLINE_STORE_NAME: "Online store name"
+  ONLINE_STORE_NAME: "Online store name",
+  OPEN_IMAGE_PICKER: "Open Gallery",
+  OPEN_CAMERA: "Open Camera",
+  SELECT: "Select"
 };
 
 export const getTranslation = (label, language) => {
