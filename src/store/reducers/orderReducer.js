@@ -2,7 +2,8 @@ import ACTION from "../types";
 
 const initialState = {
     orders: [],
-    orderDetails: []
+    orderDetails: [],
+    totalUnreadOrder: null
 };
 
 const ordersReducer = (state = initialState, { payload, type }) => {
@@ -16,6 +17,11 @@ const ordersReducer = (state = initialState, { payload, type }) => {
             return {
                 ...state,
                 orderDetails: payload
+            }
+        case ACTION.UNREAD_ORDERS_COUNT:
+            return {
+                ...state,
+                totalUnreadOrder: payload
             }
         default:
             return state;

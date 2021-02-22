@@ -16,7 +16,7 @@ import { ShowFlash, shareText } from "../../utils/helper";
 import images from '../../utils/images';
 import api from '../../store/api'
 
-const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories, language }) => {
+const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories, language, totalUnreadOrder }) => {
 
     useEffect(() => {
         getStoreProducts(0)
@@ -36,9 +36,6 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
         }
         return ""
     }
-
-    console.log(storeProducts)
-
     return (
         <View style={styles.MainContainer}>
             {loading.status ? (
@@ -64,7 +61,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                                 <Text h4>{"Add Store Name"} </Text>
                                             </TouchableOpacity>
                                             :
-                                            <Text numberOfLines={1} ellipsizeMode='tail' h4>{bussiness.store_name}</Text>
+                                            <Text numberOfLines={1} ellipsizeMode='tail' h4>{`${bussiness.store_name}`}</Text>
                                     }
                                     <Text>{bussiness.phone} </Text>
                                     <Text>{getCategory(bussiness.category_id)} </Text>
@@ -78,7 +75,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                     <Text style={{ paddingBottom: 10, }}  >{bussiness.address} </Text>
                                 </View>
                                 <View style={{ marginVertical: 5 }} >
-                                    <Button title={"ORDERS"} onClick={() => { navigation.navigate("Orders") }} sm={true} />
+                                    <Button badgeValue={totalUnreadOrder} title={`ORDERS`} onClick={() => { navigation.navigate("Orders") }} sm={true} />
 
                                 </View>
                                 <Button type="secondary" title={"EDIT_BUSSINESS_INFO"} onClick={() => { navigation.navigate("BussinessEdit") }} sm={true} />
@@ -154,13 +151,14 @@ const styles = StyleSheet.create({
 
 });
 
-const mapStateToProps = ({ common, bussiness, store }) => {
+const mapStateToProps = ({ common, bussiness, store, orders }) => {
     return {
         loading: common.loading,
         bussiness: bussiness.bussiness,
         language: common.language,
         storeProducts: store.products,
-        categories: bussiness.categories
+        categories: bussiness.categories,
+        totalUnreadOrder: orders.totalUnreadOrder
     };
 };
 

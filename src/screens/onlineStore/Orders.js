@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Overlay from "../../Components/Overlay";
 import { StyleSheet, View, Text, FlatList, RefreshControl } from "react-native";
 import SearchBar from "../../Components/SearchBar";
-
+import usePrevious from "../../utils/previousState";
 import Loader from "../../Components/Loader";
 import { getOrders } from "../../store/actions/order";
 import FloatingButton from "../../Components/FloatingButton";
@@ -17,14 +17,29 @@ import FloatingInfoCard from "../../Components/FloatingInfoCard";
 
 const Orders = ({ navigation, getOrders, loading, language, orders }) => {
 
+    const [limit, setLimit] = useState({
+        start: 0,
+        end: 20,
+    });
+
     const reload = () => {
-        getOrders(0)
+        const defaultLimit = {
+            start: 0,
+            end: 20,
+        };
+        setLimit(defaultLimit);
+        getOrders(0, defaultLimit)
     }
 
     useEffect(() => {
-        getOrders(0)
+        getOrders(0, limit)
     }, [])
-
+    const prevStart = usePrevious(limit.start);
+    useEffect(() => {
+        if (limit.start == prevStart) {
+            getOrders(0, limit)
+        }
+    }, [limit]);
 
     return (
         <View style={styles.MainContainer}>
@@ -38,6 +53,11 @@ const Orders = ({ navigation, getOrders, loading, language, orders }) => {
                             <RefreshControl refreshing={false} onRefresh={reload} />
                         }
                         keyExtractor={(item) => item.id}
+                        onEndReached={() => {
+                            console.log("here")
+                            setLimit({ ...limit, start: limit.start + 20 });
+                        }}
+                        onEndReachedThreshold={0.5}
                         renderItem={({ item }) => {
                             return (
                                 <ListItemContainer

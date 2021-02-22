@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import SliderBar from "../Components/Sliderbar";
@@ -28,7 +29,7 @@ const Drawer = createDrawerNavigator(
   {
     SaleScreen: {
       screen: Sale_StackNavigator,
-
+      contentComponent: <Text> This is it </Text>,
       navigationOptions: {
         drawerLabel: <DrawerLable title="SALE" />,
         drawerIcon: ({ tintColor }) => (

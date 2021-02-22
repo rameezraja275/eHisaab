@@ -3,17 +3,19 @@ import { connect } from "react-redux";
 // import NetInfo from "@react-native-community/netinfo";
 import { ValidateToken } from "../store/actions/auth";
 import { getLanguage } from "../store/actions/common";
+import { getUnreadOrderCount } from '../store/actions/order'
 import { View, Text, Image, StyleSheet } from "react-native";
 import { productGet } from "../store/actions/product";
 import images from "../utils/images";
 import { ShowFlash } from "../utils/helper";
 import colors from "../utils/colors";
 
-const SplashScreen = ({ ValidateToken, language, getLanguage }) => {
+const SplashScreen = ({ ValidateToken, language, getLanguage, getUnreadOrderCount }) => {
   useEffect(() => {
     // checkInternetConnection();
     getLanguage();
     ValidateToken();
+    getUnreadOrderCount();
   }, []);
 
   // const checkInternetConnection = () => {
@@ -67,4 +69,5 @@ export default connect(mapStateToProps, {
   ValidateToken,
   productGet,
   getLanguage,
+  getUnreadOrderCount
 })(SplashScreen);

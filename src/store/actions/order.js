@@ -5,16 +5,21 @@ import { ShowFlash } from "../../utils/helper";
 import { navigate } from "../../utils/navigationRef";
 
 export function getOrders(
-    id
+    id,
+    limit
 ) {
     return (dispatch, getState) => {
         const headers = {
             "Content-Type": "application/json",
         };
 
+
         const token = getState().user.token;
         const language = getState().common.language;
 
+
+        const { start, end } = limit;
+        const orders = start == 0 ? [] : getState().orders.orders
         dispatch({
             payload: {
                 status: true,
@@ -23,10 +28,11 @@ export function getOrders(
             type: ACTION.LOADING,
         });
 
-        let url = `${API.BASE_URL}${API.ORDER_GET}?token=${token}&order_id=${id}`;
+        let url = `${API.BASE_URL}${API.ORDER_GET}?token=${token}&order_id=${id}&limit=${end}&offset=${start}`;
         axios
             .get(url, { headers })
             .then((res) => {
+                console.log("api res")
                 dispatch({
                     payload: {
                         status: false,
@@ -35,7 +41,7 @@ export function getOrders(
                     type: ACTION.LOADING,
                 });
                 dispatch({
-                    payload: res.data.data,
+                    payload: [...orders, ...res.data.data],
                     type: ACTION.ORDER_GET,
                 });
             })
@@ -162,6 +168,37 @@ export function orderModify(body) {
                     },
                     type: ACTION.LOADING,
                 });
+            });
+    };
+}
+// GET_UNREAD_ORDER_COUNT
+// /var/www/html/ehisaab/api/order/get_unread_orders.php
+
+export function getUnreadOrderCount() {
+    return (dispatch, getState) => {
+        const headers = {
+            "Content-Type": "application/json",
+        };
+
+        const token = getState().user.token;
+
+        let url = `${API.BASE_URL}${API.GET_UNREAD_ORDER_COUNT}?token=${token}`;
+        console.log(url)
+        axios
+            .get(url, { headers })
+            .then((res) => {
+
+                dispatch({
+                    payload: res.data.data > 0 ? res.data.data : null,
+                    type: ACTION.UNREAD_ORDERS_COUNT,
+                });
+            })
+            .catch((err) => {
+                if (err.response) {
+                    ShowFlash(err.response.data.message, "danger", language);
+                } else {
+                    ShowFlash("SERVER_ERROR", "danger", language);
+                }
             });
     };
 }

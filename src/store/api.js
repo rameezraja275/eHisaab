@@ -129,6 +129,8 @@ const API = {
   TOTAL_BANK_BALANCE: 'statistics/total_bank_balance.php',
   TOTAL_PAYABLE: 'statistics/total_payable_amount.php',
   TOTAL_RECEIVEABLE: 'statistics/total_receiveable_amount.php',
+
+  GET_UNREAD_ORDER_COUNT: "order/get_unread_orders.php"
 };
 
 export default API;

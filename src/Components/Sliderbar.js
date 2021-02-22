@@ -6,16 +6,19 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  SafeAreaView
 } from "react-native";
 import { connect } from "react-redux";
-import { DrawerNavigatorItems } from "react-navigation-drawer";
+import { DrawerNavigatorItems, DrawerItems } from "react-navigation-drawer";
 import Icon from "react-native-vector-icons/AntDesign";
 import color from "../utils/colors";
 import constants from "../utils/constants";
 import images from "../utils/images";
 import api from '../store/api'
+import { Badge } from 'react-native-elements'
+
 const Sliderbar = (props) => {
-  const { bussiness, user, items, ...rest } = props;
+  const { bussiness, user, items, totalUnreadOrder, ...rest } = props;
 
   const Items =
     user.user_level != constants.ADMIN_LEVEL_USER
@@ -63,13 +66,20 @@ const Sliderbar = (props) => {
       </View>
 
       {/* <ScrollView> */}
-      <View style={{ paddingTop: 10 }}>
-        <DrawerNavigatorItems
+      <SafeAreaView style={{ paddingTop: 10 }}>
+        <DrawerItems items={Items} {...props} getLabel={(scene) => {
+          console.log("thisis ", scene)
+          return <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            {props.getLabel(scene)}
+            {scene.route.routeName === "MyOnlineStore" && totalUnreadOrder && <Badge status="error" value={totalUnreadOrder} textStyle={{ margin: 8 }} />}
+          </View>
+        }} />
+        {/* <DrawerNavigatorItems
           items={Items}
           {...rest}
           drawerStyle={{ color: "#c6cbef" }}
-        />
-      </View>
+        /> */}
+      </SafeAreaView>
       {/* </ScrollView> */}
 
       <View
@@ -108,10 +118,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ bussiness, user }) => {
+const mapStateToProps = ({ bussiness, user, orders }) => {
   return {
     bussiness: bussiness.bussiness,
     user: user.currentUser,
+    totalUnreadOrder: orders.totalUnreadOrder
   };
 };
 

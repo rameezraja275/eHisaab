@@ -4,6 +4,7 @@ import colors from "../utils/colors";
 import Icon from "react-native-vector-icons/AntDesign";
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/language";
+import { Badge } from 'react-native-elements'
 
 const Button = ({
   type,
@@ -13,7 +14,8 @@ const Button = ({
   icon,
   title,
   language,
-  sm
+  sm,
+  badgeValue
 }) => {
   const styles = StyleSheet.create({
     button: {
@@ -40,6 +42,7 @@ const Button = ({
       disabled={disabled}
     >
       <View style={styles.button}>
+        {badgeValue && <View style={{ position: "absolute", right: 0, top: -10 }} ><Badge status="error" value={badgeValue} textStyle={{ margin: 5 }} /></View>}
         {icon && (
           <Icon
             name={icon}
@@ -54,6 +57,7 @@ const Button = ({
             {getTranslation(title, language)}
           </Text>
         )}
+
       </View>
     </TouchableOpacity>
   );
