@@ -5,7 +5,10 @@ import { ShowFlash } from "../../utils/helper";
 import { navigate } from "../../utils/navigationRef";
 import constants from "../../utils/constants";
 
-export function getStoreProducts(productId) {
+export function getStoreProducts(productId, limit = {
+    start: 0,
+    end: 20
+}) {
     return (dispatch, getState) => {
         const headers = {
             "Content-Type": "application/json",
@@ -20,8 +23,11 @@ export function getStoreProducts(productId) {
             type: ACTION.LOADING,
         });
 
-        let url = `${API.BASE_URL}${API.STORE_PRODUCT_GET_URL}?token=${token}&product_id=${productId}`;
+        const { start, end } = limit;
+        const storeProducts = start == 0 ? [] : getState().store.products
 
+        let url = `${API.BASE_URL}${API.STORE_PRODUCT_GET_URL}?token=${token}&product_id=${productId}&limit=${end}&offset=${start}`;
+        console.log(url)
         axios
             .get(url, { headers })
             .then((res) => {
@@ -33,8 +39,20 @@ export function getStoreProducts(productId) {
                     type: ACTION.LOADING,
                 });
 
+                if (res.data.data.length == 0) {
+                    dispatch({
+                        type: ACTION.IS_LOADMORE,
+                        payload: false
+                    })
+                } else {
+                    dispatch({
+                        type: ACTION.IS_LOADMORE,
+                        payload: true
+                    })
+                }
+
                 dispatch({
-                    payload: res.data.data,
+                    payload: [...storeProducts, ...res.data.data],
                     type: ACTION.STORE_PRODUCT_GET_SUCCESS,
                 });
             })
@@ -88,7 +106,7 @@ export function addProductsToStore(products) {
                     type: ACTION.LOADING,
                 });
 
-                dispatch(getStoreProducts())
+                dispatch(getStoreProducts(0))
 
                 ShowFlash("ADD_SUCCESS", "success", language);
             })

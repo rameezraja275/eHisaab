@@ -3,9 +3,9 @@ import React, { useEffect, useRef } from "react";
 function usePrevious(value) {
   const ref = useRef();
   useEffect(() => {
-    ref.state = value;
+    ref.current = value;
   });
-  return ref.state;
+  return ref.current;
 }
 
 export default usePrevious;

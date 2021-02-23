@@ -15,7 +15,7 @@ import colors from "../../utils/colors";
 import FloatingInfoCard from "../../Components/FloatingInfoCard";
 
 
-const Orders = ({ navigation, getOrders, loading, language, orders }) => {
+const Orders = ({ navigation, getOrders, loading, language, orders, isLoadMore }) => {
 
     const [limit, setLimit] = useState({
         start: 0,
@@ -34,10 +34,11 @@ const Orders = ({ navigation, getOrders, loading, language, orders }) => {
     useEffect(() => {
         getOrders(0, limit)
     }, [])
+
     const prevStart = usePrevious(limit.start);
     useEffect(() => {
-        if (limit.start == prevStart) {
-            getOrders(0, limit)
+        if (limit.start != prevStart) {
+            isLoadMore && getOrders(0, limit)
         }
     }, [limit]);
 
@@ -54,10 +55,9 @@ const Orders = ({ navigation, getOrders, loading, language, orders }) => {
                         }
                         keyExtractor={(item) => item.id}
                         onEndReached={() => {
-                            console.log("here")
                             setLimit({ ...limit, start: limit.start + 20 });
                         }}
-                        onEndReachedThreshold={0.5}
+                        onEndReachedThreshold={0.1}
                         renderItem={({ item }) => {
                             return (
                                 <ListItemContainer
@@ -68,6 +68,7 @@ const Orders = ({ navigation, getOrders, loading, language, orders }) => {
                                             color: "black",
                                         })
                                     }
+                                    isBorder={item.read_status == "0" ? false : true}
                                 >
                                     <View style={{ flex: 0.7 }}>
                                         <Text style={{ fontFamily: "PrimaryFont", fontSize: 17 }}>
@@ -104,7 +105,8 @@ const mapStateToProps = ({ common, orders }) => {
     return {
         loading: common.loading,
         language: common.language,
-        orders: orders.orders
+        orders: orders.orders,
+        isLoadMore: orders.isLoadMore,
     };
 };
 

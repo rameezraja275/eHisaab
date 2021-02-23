@@ -6,7 +6,10 @@ import { navigate } from "../../utils/navigationRef";
 
 export function getOrders(
     id,
-    limit
+    limit = {
+        start: 0,
+        end: 20,
+    }
 ) {
     return (dispatch, getState) => {
         const headers = {
@@ -40,6 +43,17 @@ export function getOrders(
                     },
                     type: ACTION.LOADING,
                 });
+                if (res.data.data.length == 0) {
+                    dispatch({
+                        type: ACTION.ORDER_LOAD_MORE,
+                        payload: false
+                    })
+                } else {
+                    dispatch({
+                        type: ACTION.ORDER_LOAD_MORE,
+                        payload: true
+                    })
+                }
                 dispatch({
                     payload: [...orders, ...res.data.data],
                     type: ACTION.ORDER_GET,
@@ -136,6 +150,8 @@ export function orderModify(body) {
             type: ACTION.LOADING,
         });
 
+        console.log(`${API.BASE_URL}${API.ORDER_MODIFY_URL}`, data)
+
         axios
             .post(`${API.BASE_URL}${API.ORDER_MODIFY_URL}`, data, { headers })
             .then((res) => {
@@ -156,6 +172,7 @@ export function orderModify(body) {
                 }, 1000);
             })
             .catch((err) => {
+                console.log("err", err)
                 if (err.response) {
                     ShowFlash(err.response.data.message, "danger", language);
                 } else {

@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import { businessModify } from "../../store/actions/business";
 import Button from "../../Components/Button";
 import TextInput from "../../Components/TextInput";
-import { ShowFlash } from "../../utils/helper";
+import { ShowFlash, validateAlphaNumaric } from "../../utils/helper";
 import colors from "../../utils/colors";
 import Loader from "../../Components/Loader";
 import ImagerPicker from "../../Components/ImagePicker";
@@ -50,7 +50,11 @@ const Bussiness = (props) => {
     }
   };
 
-  console.log(formData)
+  const validateStoreName = (text) => {
+    if (validateAlphaNumaric(text)) {
+      setFormData({ ...formData, store_name: text })
+    }
+  }
 
   return (
     <KeyboardAvoidingView
@@ -108,7 +112,7 @@ const Bussiness = (props) => {
 
               <TextInput
                 value={formData.store_name}
-                onChange={(text) => setFormData({ ...formData, store_name: text })}
+                onChange={validateStoreName}
                 placeholder="ONLINE_STORE_NAME"
                 noSpace
                 maxLength={20}

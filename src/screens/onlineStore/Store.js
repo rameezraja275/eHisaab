@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, FlatList, RefreshControl, Image } from 'react-native'
 import route from '../../store/api'
 import colors from "../../utils/colors";
@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { getStoreProducts } from '../../store/actions/store'
 import Loader from "../../Components/Loader";
 import { Avatar, Text, Divider } from 'react-native-elements';
+import usePrevious from "../../utils/previousState";
 import Button from '../../Components/Button';
 import EmptyList from "../../Components/EmptyList";
 import { FormatPrice } from "../../utils/helper";
@@ -16,16 +17,24 @@ import { ShowFlash, shareText } from "../../utils/helper";
 import images from '../../utils/images';
 import api from '../../store/api'
 
-const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories, language, totalUnreadOrder }) => {
+const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories, language, totalUnreadOrder, isLoadMore }) => {
+
+    const [limit, setLimit] = useState({
+        start: 0,
+        end: 6,
+    });
 
     useEffect(() => {
-        getStoreProducts(0)
+        getStoreProducts(0, limit)
     }, [])
 
     const reload = () => {
-        getStoreProducts(0)
+        setLimit({
+            start: 0,
+            end: 6,
+        })
+        getStoreProducts(0, limit)
     };
-
 
     const getCategory = (id) => {
         if (id != 0) {
@@ -36,6 +45,16 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
         }
         return ""
     }
+
+    const prevStart = usePrevious(limit.start);
+    useEffect(() => {
+        console.log("pagination", limit.start, prevStart)
+        if (limit.start != prevStart) {
+            console.log("calling api")
+            isLoadMore && getStoreProducts(0, limit)
+        }
+    }, [limit]);
+
     return (
         <View style={styles.MainContainer}>
             {loading.status ? (
@@ -92,6 +111,11 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                     <RefreshControl refreshing={false} onRefresh={reload} />
                                 }
                                 keyExtractor={(item) => item.product_id}
+                                onEndReached={() => {
+                                    console.log("this si ")
+                                    setLimit({ ...limit, start: limit.start + 6 });
+                                }}
+                                onEndReachedThreshold={0.2}
                                 renderItem={({ item }) => (
                                     <React.Fragment>
                                         <View style={styles.item}>
@@ -157,6 +181,7 @@ const mapStateToProps = ({ common, bussiness, store, orders }) => {
         bussiness: bussiness.bussiness,
         language: common.language,
         storeProducts: store.products,
+        isLoadMore: store.isLoadMore,
         categories: bussiness.categories,
         totalUnreadOrder: orders.totalUnreadOrder
     };

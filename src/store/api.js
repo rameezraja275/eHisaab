@@ -3,8 +3,8 @@ const API = {
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v1/api/",
   // BASE_URL: "https://www.pine-technologies.com/ehisaab/v3/api/",
 
-  // BASE_URL: "http://192.168.43.16/bizsolAPI/api/",
-  // IMAGE_URL: "http://192.168.43.16/bizsolAPI/",
+  // BASE_URL: "http://192.168.43.252/bizsolAPI/api/",
+  // IMAGE_URL: "http://192.168.43.252/bizsolAPI/",
   // STORE_BASE_URL: "http://stores.ehisaab.com/",
 
   BASE_URL: 'https://ehisaab.app/ehisaab/api/',

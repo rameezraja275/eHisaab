@@ -3,7 +3,8 @@ import ACTION from "../types";
 const initialState = {
     orders: [],
     orderDetails: [],
-    totalUnreadOrder: null
+    totalUnreadOrder: null,
+    isLoadMore: true
 };
 
 const ordersReducer = (state = initialState, { payload, type }) => {
@@ -22,6 +23,11 @@ const ordersReducer = (state = initialState, { payload, type }) => {
             return {
                 ...state,
                 totalUnreadOrder: payload
+            }
+        case ACTION.ORDER_LOAD_MORE:
+            return {
+                ...state,
+                isLoadMore: payload
             }
         default:
             return state;

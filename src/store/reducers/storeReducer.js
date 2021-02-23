@@ -2,6 +2,7 @@ import ACTION from "../types";
 
 const initialState = {
     products: [],
+    isLoadMore: true
 };
 
 const productReducer = (state = initialState, { payload, type }) => {
@@ -10,6 +11,11 @@ const productReducer = (state = initialState, { payload, type }) => {
             return {
                 ...state,
                 products: payload,
+            };
+        case ACTION.IS_LOADMORE:
+            return {
+                ...state,
+                isLoadMore: payload,
             };
         default:
             return state;

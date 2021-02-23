@@ -2,9 +2,15 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import colors from "../utils/colors";
 
-const ListItemContainer = ({ children, onClick, commingSoon }) => {
+const ListItemContainer = ({ children, onClick, commingSoon, isBorder }) => {
+
+  const borderStyle = {
+    borderStartColor: colors.darkColor,
+    borderStartWidth: isBorder ? 5 : 0
+  }
+
   return (
-    <TouchableOpacity style={{ flex: 1 }} onPress={onClick}>
+    <TouchableOpacity style={[{ flex: 1 }, borderStyle]} onPress={onClick}>
       <View style={styles.ListItem}>{children}
         {commingSoon && <Text style={styles.tag}>Comming Soon</Text>}
       </View>
