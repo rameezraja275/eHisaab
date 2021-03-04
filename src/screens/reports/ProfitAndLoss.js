@@ -134,7 +134,7 @@ const ProfitAndLossReport = (props) => {
           <View style={styles.line}></View>
           {renderRow("GROSS_PROFIT", gross_profit, true)}
           {renderRow("EXPENSES", expense)}
-          {renderRow("SALE_DISCOUNT", expense_sale_discount)}
+          {/* {renderRow("SALE_DISCOUNT", expense_sale_discount)} */}
           <View style={styles.line}></View>
           {renderRow("RECEIPT", receipt)}
           <View style={styles.line}></View>
