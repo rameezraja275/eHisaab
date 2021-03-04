@@ -579,7 +579,14 @@ const english = {
   ONLINE_STORE_NAME: "Online store name",
   OPEN_IMAGE_PICKER: "Open Gallery",
   OPEN_CAMERA: "Open Camera",
-  SELECT: "Select"
+  SELECT: "Select",
+
+  COMPLETE: "Complete",
+  DISPATCH: "Dispatch",
+  DISPATCH_ORDER: 'Dispatch order',
+  COMPLETE_ORDER: "Complete order",
+  PENDING: "Pending",
+  ACCEPTED: "Accepted"
 };
 
 export const getTranslation = (label, language) => {

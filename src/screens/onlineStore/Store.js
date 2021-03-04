@@ -16,12 +16,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ShowFlash, shareText } from "../../utils/helper";
 import images from '../../utils/images';
 import api from '../../store/api'
+import { color } from 'react-native-reanimated';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading, categories, language, totalUnreadOrder, isLoadMore }) => {
 
     const [limit, setLimit] = useState({
         start: 0,
-        end: 6,
+        end: 20,
     });
 
     useEffect(() => {
@@ -31,9 +33,12 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
     const reload = () => {
         setLimit({
             start: 0,
-            end: 6,
+            end: 20,
         })
-        getStoreProducts(0, limit)
+        getStoreProducts(0, {
+            start: 0,
+            end: 20,
+        })
     };
 
     const getCategory = (id) => {
@@ -112,12 +117,11 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                 }
                                 keyExtractor={(item) => item.product_id}
                                 onEndReached={() => {
-                                    console.log("this si ")
-                                    setLimit({ ...limit, start: limit.start + 6 });
+                                    setLimit({ ...limit, start: limit.start + 20 });
                                 }}
                                 onEndReachedThreshold={0.2}
-                                renderItem={({ item }) => (
-                                    <React.Fragment>
+                                renderItem={({ item }) => {
+                                    return <React.Fragment>
                                         <View style={styles.item}>
                                             <Image
                                                 // source={{ uri: route.IMAGE_URL + item.image_url }}
@@ -128,13 +132,14 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
                                                 <Text style={{ fontSize: 20 }}>{item.product_name}</Text>
                                                 <Text style={{ fontSize: 13 }} >{FormatPrice(item.product_sale_price)}</Text>
                                                 <Text style={{ fontSize: 13 }}>{item.current_stock}</Text>
-                                                <Text style={{ marginVertical: 5, fontSize: 13 }} >{item.narration} </Text>
+                                                <Text style={{ fontSize: 15, color: item.is_in_store == 2 ? colors.warning : colors.success }}>{item.is_in_store == 2 ? "Pending" : "Active"}</Text>
+
                                             </View>
 
                                         </View>
                                         <Divider style={{ backgroundColor: colors.borderColor }} />
                                     </React.Fragment>
-                                )}
+                                }}
                                 ListEmptyComponent={
                                     <EmptyList message="Nothing to Show, Please Reload or Add Data" />
                                 }

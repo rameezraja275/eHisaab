@@ -24,6 +24,7 @@ const OrderDetails = (props) => {
 
     useEffect(() => {
         props.getOrderDetails(id);
+
     }, [id]);
 
     const reload = () => {
@@ -50,6 +51,26 @@ const OrderDetails = (props) => {
         );
     };
 
+    const onComplete = () => {
+        showAlert(
+            "COMPLETE_ORDER",
+            () => {
+                props.orderModify({ id, status: constants.COMPLETED });
+            },
+            language
+        );
+    }
+
+    const onDispatch = () => {
+        showAlert(
+            "DISPATCH_ORDER",
+            () => {
+                props.orderModify({ id, status: constants.DISPATCH });
+            },
+            language
+        );
+    }
+
     return props.loading.status ? (
         <Loader size={10} />
     ) : (
@@ -62,9 +83,11 @@ const OrderDetails = (props) => {
                     <InfoCard title="ADDRESS" value={order.buyer_adress} />
                     {order.status == "1" && <InfoCard title="PHONE" value={order.buyer_phone} />}
                     <ActionCard
+                        orderDispatch={order.status == constants.ACCEPT ? onDispatch : undefined}
+                        orderComplete={order.status == constants.DISPATCH ? onComplete : undefined}
                         orderAccept={order.status == constants.PENDDING ? onAccept : undefined}
                         orderReject={order.status == constants.PENDDING ? onReject : undefined}
-                        phoneNumber={order.status == constants.ACCEPT ? order.buyer_phone : undefined}
+                        phoneNumber={order.status != constants.PENDDING ? order.buyer_phone : undefined}
                         messageText={""}
                     />
                 </View>

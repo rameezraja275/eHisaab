@@ -47,7 +47,7 @@ export function getSaleTransactions(
     axios
       .get(url, { headers })
       .then((res) => {
-
+        console.log("Dakle", res.data)
         if (id > 0) {
           const {
             sale_date,

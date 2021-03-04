@@ -45,6 +45,8 @@ export default {
 
   ACCEPT: "1",
   REJECT: "2",
-  PENDDING: "3"
+  PENDDING: "3",
+  DISPATCH: "4",
+  COMPLETED: "5"
 
 };

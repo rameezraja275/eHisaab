@@ -136,17 +136,13 @@ const Product = (props) => {
             )}
 
             <ScrollView horizontal={true}  >
-              {/* <Badge onPress={() => props.navigation.navigate("AddProduct")} size="large" value={`+ Add Product`} color={colors.darkColor} badgeStyle={{
-                padding: 15,
-                margin: 10,
-                backgroundColor: colors.darkColor
-              }} /> */}
-              <Badge size="large" value={`Sale Price : ${totalStockSaleValue} Rs`} badgeStyle={{
+
+              <Badge size="large" value={`Total Sale Price : ${totalStockSaleValue} Rs`} badgeStyle={{
                 padding: 15,
                 margin: 10,
                 backgroundColor: colors.darkColor
               }} />
-              <Badge size="large" value={`Cost Price : ${totalStockCostValue} Rs`} badgeStyle={{
+              <Badge size="large" value={`Total Cost Price : ${totalStockCostValue} Rs`} badgeStyle={{
                 padding: 15,
                 margin: 10,
                 backgroundColor: colors.darkColor
@@ -189,7 +185,7 @@ const Product = (props) => {
                 <EmptyList message="Nothing to Show, Please Reload or Add Data" />
               }
             />
-            {/* <FloatingInfoCard
+            <FloatingInfoCard
               title="COST_VALUE"
               value={totalStockCostValue}
               color={colors.darkColor}
@@ -199,7 +195,7 @@ const Product = (props) => {
               title="SALE_VALUE"
               value={totalStockSaleValue}
               color={colors.darkColor}
-            /> */}
+            />
             <FloatingButton
               onClick={() => props.navigation.navigate("AddProduct")}
               icon="plus"

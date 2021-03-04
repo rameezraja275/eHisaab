@@ -68,7 +68,6 @@ const Sliderbar = (props) => {
       {/* <ScrollView> */}
       <SafeAreaView style={{ paddingTop: 10 }}>
         <DrawerItems items={Items} {...props} getLabel={(scene) => {
-          console.log("thisis ", scene)
           return <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
             {props.getLabel(scene)}
             {scene.route.routeName === "MyOnlineStore" && totalUnreadOrder && <Badge status="error" value={totalUnreadOrder} textStyle={{ margin: 8 }} />}

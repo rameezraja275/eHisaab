@@ -5,13 +5,14 @@ import IconFA from 'react-native-vector-icons/FontAwesome5';
 import IconE from 'react-native-vector-icons/Entypo';
 import IconM from 'react-native-vector-icons/MaterialIcons';
 import colors from '../utils/colors';
+import Button from './Button'
 
 import { sms, call } from '../utils/helper';
 
 const Card = ({
   phoneNumber, toggleFilter, orderAccept,
-  orderReject, date, openAdjustAmount, messageText, pdfexport, navigation, pdfInfo,
-}) => (phoneNumber || toggleFilter || orderAccept || orderReject ? (
+  orderReject, date, openAdjustAmount, messageText, pdfexport, navigation, pdfInfo, orderDispatch, orderComplete
+}) => (phoneNumber || toggleFilter || orderAccept || orderReject || orderDispatch || orderComplete ? (
   <View
     style={{
       paddingTop: 15,
@@ -128,6 +129,18 @@ const Card = ({
               size={20}
             />
           </TouchableOpacity>
+        </View>
+      )}
+
+      {orderDispatch !== undefined && (
+        <View style={{ flexDirection: 'row' }}>
+          <Button title={"DISPATCH"} onClick={orderDispatch} sm={true} />
+        </View>
+      )}
+
+      {orderComplete !== undefined && (
+        <View style={{ flexDirection: 'row' }}>
+          <Button title={"COMPLETE"} onClick={orderComplete} sm={true} />
         </View>
       )}
 

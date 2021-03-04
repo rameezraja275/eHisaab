@@ -143,11 +143,11 @@ const AddEditProduct = (props) => {
                 }
               />
 
-              {barcode && <Overlay
+              {barcode ? <Overlay
                 toggleFilter={() => { scanned ? undefined : showBarCode(!barcode) }}
                 title="BARCODE_READER">
                 <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
-              </Overlay>}
+              </Overlay> : <View />}
 
 
               <TextInput
@@ -200,11 +200,11 @@ const AddEditProduct = (props) => {
                   checked={formData.is_in_store == "0" ? false : true}
                   checkedColor={colors.darkColor}
                   iconRight
-                  onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "1" : "0" })}
+                  onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "2" : "0" })}
                 />
 
                 <View style={{ flex: 1 }}>
-                  {formData.is_service == constants.PRODUCT && (
+                  {formData.is_service == constants.PRODUCT ? (
                     <TextInput
                       keyboardType={"number-pad"}
                       placeholder="OPENING_STOCK"
@@ -214,29 +214,30 @@ const AddEditProduct = (props) => {
                         setFormData({ ...formData, opening_stock: text })
                       }
                     />
-                  )}
+                  ) : <View />}
                 </View>
               </View>
 
 
 
 
-              {formData.is_in_store == "1" && <TextInput
+              {formData.is_in_store != "0" ? <TextInput
                 value={formData.narration}
                 onChange={(text) => setFormData({ ...formData, narration: text })}
                 placeholder="DESCRIPTION"
                 autoCapitalize="sentences"
                 maxLength={150}
-              />}
+              /> : <View />}
 
 
-              {formData.is_in_store == "1" && <ImagerPicker
-                onChangeImage={(image) =>
-                  setFormData({ ...formData, image_url: image.base64 })
-                }
-                placeholder="IMAGE"
-                image={formData.image_url}
-              />}
+              {formData.is_in_store != "0" ?
+                <ImagerPicker
+                  onChangeImage={(image) =>
+                    setFormData({ ...formData, image_url: image.base64 })
+                  }
+                  placeholder="IMAGE"
+                  image={formData.image_url}
+                /> : <View />}
             </View>
             <View style={styles.Button}>
               <View style={{ flex: 1 }}>

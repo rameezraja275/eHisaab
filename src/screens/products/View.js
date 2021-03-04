@@ -1,4 +1,3 @@
-/*Example to open a screen out of the Navigation Drawer*/
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Text, RefreshControl, FlatList } from "react-native";

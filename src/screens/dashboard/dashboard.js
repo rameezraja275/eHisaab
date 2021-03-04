@@ -15,7 +15,7 @@ const Dashboard = ({ language, loading, cashbook, getCashBook, getTopProducts, t
     }
 
     useEffect(() => {
-        getTopProducts(9);
+        getTopProducts(today.date.getUTCMonth() + 1);
         getTotalBankBalance();
         getTotalPayable();
         getTotalReceiveable();

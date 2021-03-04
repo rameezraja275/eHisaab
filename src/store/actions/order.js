@@ -9,7 +9,9 @@ export function getOrders(
     limit = {
         start: 0,
         end: 20,
-    }
+    },
+    orderStatus,
+    searchKey
 ) {
     return (dispatch, getState) => {
         const headers = {
@@ -31,11 +33,12 @@ export function getOrders(
             type: ACTION.LOADING,
         });
 
-        let url = `${API.BASE_URL}${API.ORDER_GET}?token=${token}&order_id=${id}&limit=${end}&offset=${start}`;
+        let url = `${API.BASE_URL}${API.ORDER_GET}?token=${token}&order_id=${id}&limit=${end}&offset=${start}&orderStatus=${orderStatus}&searchKey=${searchKey}`;
+        console.log(url)
         axios
             .get(url, { headers })
             .then((res) => {
-                console.log("api res")
+                console.log(res.data)
                 dispatch({
                     payload: {
                         status: false,
@@ -110,6 +113,7 @@ export function getOrderDetails(
                     payload: res.data.data,
                     type: ACTION.ORDER_DETAILS_GET,
                 });
+                dispatch(changeOrderReadStatus(id))
             })
             .catch((err) => {
                 if (err.response) {
@@ -150,8 +154,6 @@ export function orderModify(body) {
             type: ACTION.LOADING,
         });
 
-        console.log(`${API.BASE_URL}${API.ORDER_MODIFY_URL}`, data)
-
         axios
             .post(`${API.BASE_URL}${API.ORDER_MODIFY_URL}`, data, { headers })
             .then((res) => {
@@ -172,7 +174,6 @@ export function orderModify(body) {
                 }, 1000);
             })
             .catch((err) => {
-                console.log("err", err)
                 if (err.response) {
                     ShowFlash(err.response.data.message, "danger", language);
                 } else {
@@ -200,7 +201,6 @@ export function getUnreadOrderCount() {
         const token = getState().user.token;
 
         let url = `${API.BASE_URL}${API.GET_UNREAD_ORDER_COUNT}?token=${token}`;
-        console.log(url)
         axios
             .get(url, { headers })
             .then((res) => {
@@ -217,5 +217,30 @@ export function getUnreadOrderCount() {
                     ShowFlash("SERVER_ERROR", "danger", language);
                 }
             });
+    };
+}
+
+export function changeOrderReadStatus(id) {
+    return (dispatch, getState) => {
+        const orders = getState().orders.orders
+        const totalUnreadOrder = Number(getState().orders.totalUnreadOrder)
+        const index = orders.findIndex(order => order.id == id)
+        const order = orders[index]
+        orders[index] = { ...order, read_status: 1 }
+        dispatch({
+            payload: [...orders],
+            type: ACTION.ORDER_GET,
+        });
+
+        if (totalUnreadOrder) {
+            if (totalUnreadOrder != 0) {
+                const unread = totalUnreadOrder - 1
+                dispatch({
+                    payload: Number(unread) > 0 ? unread : null,
+                    type: ACTION.UNREAD_ORDERS_COUNT,
+                });
+            }
+        }
+
     };
 }

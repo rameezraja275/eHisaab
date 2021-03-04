@@ -108,7 +108,7 @@ const ImageLoader = (props) => {
         </Text>
       </TouchableOpacity>
 
-      {image && (
+      {image ? (
         <View style={styles.image}>
           <TouchableOpacity onPress={() => setOverlay(!showOverlay)}>
             <Image
@@ -117,9 +117,9 @@ const ImageLoader = (props) => {
             />
           </TouchableOpacity>
         </View>
-      )}
+      ) : <View />}
 
-      {showOverlay && (
+      {showOverlay ? (
         <Overlay
           toggleFilter={() => setOverlay(!showOverlay)}
           title="SELECT"
@@ -139,7 +139,7 @@ const ImageLoader = (props) => {
             </TouchableOpacity>
           </View>
         </Overlay>
-      )}
+      ) : <View />}
     </View>
   );
 };

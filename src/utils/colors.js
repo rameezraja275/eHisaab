@@ -20,7 +20,7 @@
 export default {
   darkColor: "#3e8aad",
   // darkColor: "red",
-  primaryColor: "#78D1FA",
+  primaryColor: "#62aed1", //"78D1FA"
   lightColor: "#FAFCFF",
 
   borderColor: "#e3e3e3", // light border
@@ -28,6 +28,7 @@ export default {
 
   danger: "#ff4040", //"#b37f7f",
   success: "#41d16d", //"#7fb38f",
+  warning: '#ffb74d',
 
   white: "#ffffff",
   black: "#03302a",
