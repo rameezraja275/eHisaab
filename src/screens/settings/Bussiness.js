@@ -16,7 +16,9 @@ import { ShowFlash, validateAlphaNumaric } from "../../utils/helper";
 import colors from "../../utils/colors";
 import Loader from "../../Components/Loader";
 import ImagerPicker from "../../Components/ImagePicker";
+import { CheckBox } from 'react-native-elements';
 import api from '../../store/api'
+import { getTranslation } from "../../utils/language";
 
 const Bussiness = (props) => {
   const { bussiness } = props;
@@ -31,7 +33,8 @@ const Bussiness = (props) => {
     user_id: null,
     opening_cash: null,
     narration: null,
-    logo_existing: null
+    logo_existing: null,
+    is_store: "0"
   });
 
   useEffect(() => {
@@ -42,10 +45,11 @@ const Bussiness = (props) => {
 
   const onSubmit = () => {
 
-    const { name, store_name, category_id } = formData;
-    if (name == null || name == "" || category_id == "" || category_id == null || category_id == 0) {
+    const { name, store_name, category_id, is_store } = formData;
+    if (name == null || name == "" || (is_store == "1" && store_name == null || category_id == "" || category_id == null || category_id == 0)) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
-    } else {
+    }
+    else {
       props.businessModify(formData);
     }
   };
@@ -108,35 +112,44 @@ const Bussiness = (props) => {
                 image={formData.logo}
               />
 
-              <Divider text="Online Store Setting" />
-
-              <TextInput
-                value={formData.store_name}
-                onChange={validateStoreName}
-                placeholder="ONLINE_STORE_NAME"
-                noSpace
-                maxLength={20}
-                autoCapitalize="none"
-                subheading={`${api.STORE_BASE_URL}${formData.store_name}`}
-              />
-              <Picker
-                placeholder="CATEGORY"
-                options={props.categories}
-                value={formData.category_id}
-                required
-                type="name"
-                onChange={(text) =>
-                  setFormData({ ...formData, category_id: text == null ? 0 : text })
-                }
-              />
-              <TextInput
-                value={formData.narration}
-                onChange={(text) => setFormData({ ...formData, narration: text })}
-                placeholder="DESCRIPTION"
-                autoCapitalize="sentences" STORE_BASE_URL
-                maxLength={150}
+              <CheckBox
+                title={getTranslation("ACTIVATE_STORE", props.language)}
+                checked={formData.is_store == "0" ? false : true}
+                checkedColor={colors.darkColor}
+                iconRight
+                onPress={() => setFormData({ ...formData, is_store: formData.is_store === "0" ? "1" : "0" })}
               />
 
+              {formData.is_store == "1" ? <React.Fragment>
+                <Divider text="Online Store Setting" />
+                <TextInput
+                  value={formData.store_name}
+                  onChange={validateStoreName}
+                  placeholder="ONLINE_STORE_NAME"
+                  noSpace
+                  maxLength={20}
+                  autoCapitalize="none"
+                  subheading={`${api.STORE_BASE_URL}${formData.store_name}`}
+                />
+                <Picker
+                  placeholder="CATEGORY"
+                  options={props.categories}
+                  value={formData.category_id}
+                  required
+                  type="name"
+                  onChange={(text) =>
+                    setFormData({ ...formData, category_id: text == null ? 0 : text })
+                  }
+                />
+                <TextInput
+                  value={formData.narration}
+                  onChange={(text) => setFormData({ ...formData, narration: text })}
+                  placeholder="DESCRIPTION"
+                  autoCapitalize="sentences" STORE_BASE_URL
+                  maxLength={150}
+                />
+              </React.Fragment> : <View />
+              }
 
             </View>
             <View style={styles.Button}>

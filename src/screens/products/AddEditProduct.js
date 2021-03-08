@@ -109,6 +109,14 @@ const AddEditProduct = (props) => {
   ];
   const [scanned, setScanned] = useState(false)
 
+  const { bussiness_is_store } = props
+
+  const showStoreSetting = () => {
+    return bussiness_is_store == "1" && formData.is_in_store != "0"
+  }
+
+  console.log("as", bussiness_is_store)
+
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
@@ -195,13 +203,13 @@ const AddEditProduct = (props) => {
 
 
               <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
-                <CheckBox
+                {bussiness_is_store == "1" ? <CheckBox
                   title={getTranslation("DISPLAY_IN_STORE", props.language)}
                   checked={formData.is_in_store == "0" ? false : true}
                   checkedColor={colors.darkColor}
                   iconRight
                   onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "2" : "0" })}
-                />
+                /> : <View />}
 
                 <View style={{ flex: 1 }}>
                   {formData.is_service == constants.PRODUCT ? (
@@ -221,7 +229,7 @@ const AddEditProduct = (props) => {
 
 
 
-              {formData.is_in_store != "0" ? <TextInput
+              {showStoreSetting() ? <TextInput
                 value={formData.narration}
                 onChange={(text) => setFormData({ ...formData, narration: text })}
                 placeholder="DESCRIPTION"
@@ -230,7 +238,7 @@ const AddEditProduct = (props) => {
               /> : <View />}
 
 
-              {formData.is_in_store != "0" ?
+              {showStoreSetting() ?
                 <ImagerPicker
                   onChangeImage={(image) =>
                     setFormData({ ...formData, image_url: image.base64 })
@@ -269,10 +277,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({ common }) => {
+const mapStateToProps = ({ common, bussiness }) => {
   return {
     loading: common.loading,
     language: common.language,
+    bussiness_is_store: bussiness.bussiness.is_store
   };
 };
 

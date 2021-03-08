@@ -27,7 +27,8 @@ export function businessModify(body) {
       narration: body.narration,
       store_name: body.store_name,
       category_id: body.category_id,
-      logo_existing: body.logo_existing
+      logo_existing: body.logo_existing,
+      is_store: body.is_store
     };
 
     dispatch({
@@ -38,16 +39,16 @@ export function businessModify(body) {
       type: ACTION.LOADING,
     });
 
-    console.log("data to post", `${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`)
-
+    console.log(data)
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
       .then(async (res) => {
         // await AsyncStorage.setItem('bussiness', JSON.stringify(data))
         // const business = JSON.parse( await AsyncStorage.getItem('bussiness') )
-
+        // console.log(res.data)
         const business = data;
 
+        console.log("logo", res.data.data)
         business &&
           dispatch({
             type: ACTION.BUSINESS_GET_SUCCESS,
@@ -66,8 +67,8 @@ export function businessModify(body) {
         setTimeout(() => navigate("Business"), 2000);
       })
       .catch((err) => {
-
         if (err.response) {
+          console.log(err.response.data)
           ShowFlash(err.response.data.message, "danger", language);
         } else {
           ShowFlash("SERVER_ERROR", "danger", language);

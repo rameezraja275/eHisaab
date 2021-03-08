@@ -586,7 +586,9 @@ const english = {
   DISPATCH_ORDER: 'Dispatch order',
   COMPLETE_ORDER: "Complete order",
   PENDING: "Pending",
-  ACCEPTED: "Accepted"
+  ACCEPTED: "Accepted",
+  ACTIVATE_STORE: "Activate your",
+  NOW: "Online Store Now"
 };
 
 export const getTranslation = (label, language) => {

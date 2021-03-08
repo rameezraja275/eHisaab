@@ -8,6 +8,7 @@ const initialState = {
     address: null,
     user_id: null,
     id: null,
+    is_store: null
   },
   categories: []
 };
