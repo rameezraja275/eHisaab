@@ -60,6 +60,8 @@ const Bussiness = (props) => {
     }
   }
 
+  console.log("iamge", formData.logo)
+
   return (
     <KeyboardAvoidingView
       style={styles.MainContainer}
@@ -68,97 +70,97 @@ const Bussiness = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-          <ScrollView
-            style={{ flex: 1 }}
-            keyboardDismissMode={"on-drag"}
-            keyboardShouldPersistTaps={"handled"}
-          >
-            <View style={styles.Form}>
-              <TextInput
-                value={formData.name}
-                onChange={(text) => setFormData({ ...formData, name: text })}
-                placeholder="NAME"
-                required
-                autoCapitalize="words"
-                maxLength={40}
-              />
-              <TextInput
-                value={formData.phone}
-                onChange={(text) => setFormData({ ...formData, phone: text })}
-                placeholder="PHONE_NUMBER"
-                keyboardType={"phone-pad"}
-                maxLength={11}
-              />
+        <ScrollView
+          style={{ flex: 1 }}
+          keyboardDismissMode={"on-drag"}
+          keyboardShouldPersistTaps={"handled"}
+        >
+          <View style={styles.Form}>
+            <TextInput
+              value={formData.name}
+              onChange={(text) => setFormData({ ...formData, name: text })}
+              placeholder="NAME"
+              required
+              autoCapitalize="words"
+              maxLength={40}
+            />
+            <TextInput
+              value={formData.phone}
+              onChange={(text) => setFormData({ ...formData, phone: text })}
+              placeholder="PHONE_NUMBER"
+              keyboardType={"phone-pad"}
+              maxLength={11}
+            />
 
-              <TextInput
-                value={formData.address}
-                onChange={(text) => setFormData({ ...formData, address: text })}
-                placeholder="ADDRESS"
-                maxLength={60}
-              />
-              <TextInput
-                keyboardType={"number-pad"}
-                value={formData.opening_cash}
-                onChange={(text) =>
-                  setFormData({ ...formData, opening_cash: text })
-                }
-                placeholder="OPENING_CASH"
-              />
-              <ImagerPicker
-                onChangeImage={(logo) =>
-                  setFormData({ ...formData, logo: logo.base64 })
-                }
-                placeholder="LOGO"
-                image={formData.logo}
-              />
-
-              <CheckBox
-                title={getTranslation("ACTIVATE_STORE", props.language)}
-                checked={formData.is_store == "0" ? false : true}
-                checkedColor={colors.darkColor}
-                iconRight
-                onPress={() => setFormData({ ...formData, is_store: formData.is_store === "0" ? "1" : "0" })}
-              />
-
-              {formData.is_store == "1" ? <React.Fragment>
-                <Divider text="Online Store Setting" />
-                <TextInput
-                  value={formData.store_name}
-                  onChange={validateStoreName}
-                  placeholder="ONLINE_STORE_NAME"
-                  noSpace
-                  maxLength={20}
-                  autoCapitalize="none"
-                  subheading={`${api.STORE_BASE_URL}${formData.store_name}`}
-                />
-                <Picker
-                  placeholder="CATEGORY"
-                  options={props.categories}
-                  value={formData.category_id}
-                  required
-                  type="name"
-                  onChange={(text) =>
-                    setFormData({ ...formData, category_id: text == null ? 0 : text })
-                  }
-                />
-                <TextInput
-                  value={formData.narration}
-                  onChange={(text) => setFormData({ ...formData, narration: text })}
-                  placeholder="DESCRIPTION"
-                  autoCapitalize="sentences" STORE_BASE_URL
-                  maxLength={150}
-                />
-              </React.Fragment> : <View />
+            <TextInput
+              value={formData.address}
+              onChange={(text) => setFormData({ ...formData, address: text })}
+              placeholder="ADDRESS"
+              maxLength={60}
+            />
+            <TextInput
+              keyboardType={"number-pad"}
+              value={formData.opening_cash}
+              onChange={(text) =>
+                setFormData({ ...formData, opening_cash: text })
               }
+              placeholder="OPENING_CASH"
+            />
+            <ImagerPicker
+              onChangeImage={(logo) =>
+                setFormData({ ...formData, logo: logo.base64 })
+              }
+              placeholder="LOGO"
+              image={formData.logo}
+            />
 
+            <CheckBox
+              title={getTranslation("ACTIVATE_STORE", props.language)}
+              checked={formData.is_store == "0" ? false : true}
+              checkedColor={colors.darkColor}
+              iconRight
+              onPress={() => setFormData({ ...formData, is_store: formData.is_store === "0" ? "1" : "0" })}
+            />
+
+            {formData.is_store == "1" ? <React.Fragment>
+              <Divider text={getTranslation("ONLINE_STORE_SETTING", props.language)} />
+              <TextInput
+                value={formData.store_name}
+                onChange={validateStoreName}
+                placeholder="ONLINE_STORE_NAME"
+                noSpace
+                maxLength={20}
+                autoCapitalize="none"
+                subheading={`${api.STORE_BASE_URL}${formData.store_name}`}
+              />
+              <Picker
+                placeholder="CATEGORY"
+                options={props.categories}
+                value={formData.category_id}
+                required
+                type="name"
+                onChange={(text) =>
+                  setFormData({ ...formData, category_id: text == null ? 0 : text })
+                }
+              />
+              <TextInput
+                value={formData.narration}
+                onChange={(text) => setFormData({ ...formData, narration: text })}
+                placeholder="DESCRIPTION"
+                autoCapitalize="sentences" STORE_BASE_URL
+                maxLength={150}
+              />
+            </React.Fragment> : <View />
+            }
+
+          </View>
+          <View style={styles.Button}>
+            <View style={{ flex: 1 }}>
+              <Button title={"SAVE"} onClick={onSubmit} icon="save" />
             </View>
-            <View style={styles.Button}>
-              <View style={{ flex: 1 }}>
-                <Button title={"SAVE"} onClick={onSubmit} icon="save" />
-              </View>
-            </View>
-          </ScrollView>
-        )}
+          </View>
+        </ScrollView>
+      )}
     </KeyboardAvoidingView>
   );
 };

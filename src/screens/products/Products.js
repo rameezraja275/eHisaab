@@ -109,33 +109,33 @@ const Product = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-          <React.Fragment>
-            <SearchBar
-              {...props}
-              onChange={onSearch}
-              toggleFilter={() => setState({ ...state, showOverlay: true })}
-            />
+        <React.Fragment>
+          <SearchBar
+            {...props}
+            onChange={onSearch}
+            toggleFilter={() => setState({ ...state, showOverlay: true })}
+          />
 
-            {state.showOverlay && (
-              <Overlay
-                toggleFilter={() => setState({ ...state, showOverlay: false })}
-                title="FILTER"
-              >
-                <Filters
-                  onPress={(text) => {
-                    setState({ ...state, showOverlay: false, filterType: text });
-                  }}
-                  filterType={state.filterType}
-                  onChange={(text) => {
-                    setState({ ...state, StockfilterValue: text });
-                  }}
-                  setValue={filterMinimunStock}
-                  StockfilterValue={state.StockfilterValue}
-                />
-              </Overlay>
-            )}
+          {state.showOverlay && (
+            <Overlay
+              toggleFilter={() => setState({ ...state, showOverlay: false })}
+              title="FILTER"
+            >
+              <Filters
+                onPress={(text) => {
+                  setState({ ...state, showOverlay: false, filterType: text });
+                }}
+                filterType={state.filterType}
+                onChange={(text) => {
+                  setState({ ...state, StockfilterValue: text });
+                }}
+                setValue={filterMinimunStock}
+                StockfilterValue={state.StockfilterValue}
+              />
+            </Overlay>
+          )}
 
-            <ScrollView horizontal={true}  >
+          {/* <ScrollView horizontal={true}  >
 
               <Badge size="large" value={`Total Sale Price : ${totalStockSaleValue} Rs`} badgeStyle={{
                 padding: 15,
@@ -147,62 +147,62 @@ const Product = (props) => {
                 margin: 10,
                 backgroundColor: colors.darkColor
               }} />
-            </ScrollView>
+            </ScrollView> */}
 
 
-            <FlatList
-              data={state.filteredData}
-              refreshControl={
-                <RefreshControl refreshing={false} onRefresh={reload} />
-              }
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <ListItemContainer
-                  onClick={() =>
-                    props.navigation.navigate("ViewProduct", { product: item })
-                  }
-                >
-                  <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
-                    {item.product_name}
+          <FlatList
+            data={state.filteredData}
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={reload} />
+            }
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <ListItemContainer
+                onClick={() =>
+                  props.navigation.navigate("ViewProduct", { product: item })
+                }
+              >
+                <Text style={{ flex: 0.6, fontFamily: "PrimaryFont" }}>
+                  {item.product_name}
+                </Text>
+                <View style={{ flex: 0.4 }}>
+                  <Text style={{ fontFamily: "PrimaryFont" }}>
+                    {getTranslation("SALE_PRICE", props.language) +
+                      " : " +
+                      FormatPrice(item.product_sale_price)}
                   </Text>
-                  <View style={{ flex: 0.4 }}>
+                  {item.is_service == constants.PRODUCT && (
                     <Text style={{ fontFamily: "PrimaryFont" }}>
-                      {getTranslation("SALE_PRICE", props.language) +
+                      {getTranslation("STOCK", props.language) +
                         " : " +
-                        FormatPrice(item.product_sale_price)}
+                        item.current_stock}{" "}
                     </Text>
-                    {item.is_service == constants.PRODUCT && (
-                      <Text style={{ fontFamily: "PrimaryFont" }}>
-                        {getTranslation("STOCK", props.language) +
-                          " : " +
-                          item.current_stock}{" "}
-                      </Text>
-                    )}
-                  </View>
-                </ListItemContainer>
-              )}
-              ListEmptyComponent={
-                <EmptyList message="Nothing to Show, Please Reload or Add Data" />
-              }
-            />
-            <FloatingInfoCard
-              title="COST_VALUE"
-              value={totalStockCostValue}
-              color={colors.darkColor}
-              position="top"
-            />
-            <FloatingInfoCard
-              title="SALE_VALUE"
-              value={totalStockSaleValue}
-              color={colors.darkColor}
-            />
-            <FloatingButton
-              onClick={() => props.navigation.navigate("AddProduct")}
-              icon="plus"
-            />
+                  )}
+                </View>
+              </ListItemContainer>
+            )}
+            ListEmptyComponent={
+              <EmptyList message="Nothing to Show, Please Reload or Add Data" />
+            }
+          />
+          <FloatingInfoCard
+            title="COST_VALUE"
+            value={totalStockCostValue}
+            color={colors.darkColor}
+            position="top"
+          />
+          <FloatingInfoCard
+            title="SALE_VALUE"
+            value={totalStockSaleValue}
+            color={colors.darkColor}
+          />
+          <FloatingButton
+            onClick={() => props.navigation.navigate("AddProduct")}
+            icon="plus"
+          />
 
-          </React.Fragment>
-        )}
+        </React.Fragment>
+      )}
     </View>
   );
 };

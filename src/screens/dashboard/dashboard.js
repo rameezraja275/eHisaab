@@ -63,6 +63,10 @@ const Dashboard = ({ language, loading, cashbook, getCashBook, getTopProducts, t
                     {totalPayable.loading ? <Loader size={10} /> : <Text style={[styles.title, styles.textRed]} >{FormatPrice(totalPayable.data)}</Text>}
                 </View>
             </View>
+            <View style={styles.card} >
+                <Text style={styles.title}>{getTranslation("CASHINHAND", language)}</Text>
+                {loading.status ? <Loader size={10} /> : <Text style={[styles.title]} >{FormatPrice(cashinHand)}</Text>}
+            </View>
             <View style={[styles.card, styles.col]} >
 
                 {/* <View style={styles.line} /> */}
@@ -79,10 +83,6 @@ const Dashboard = ({ language, loading, cashbook, getCashBook, getTopProducts, t
                         </View>)
                     }
                 </View>}
-            </View>
-            <View style={styles.card} >
-                <Text style={styles.title}>{getTranslation("CASHINHAND", language)}</Text>
-                {loading.status ? <Loader size={10} /> : <Text style={[styles.title]} >{FormatPrice(cashinHand)}</Text>}
             </View>
         </ScrollView >
     )

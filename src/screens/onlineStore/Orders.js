@@ -15,7 +15,6 @@ import constants from "../../utils/constants";
 import { getTranslation } from "../../utils/language";
 import Filters from './Filters'
 
-
 const Orders = ({ navigation, getOrders, loading, language, orders, isLoadMore }) => {
 
     const [orderStatus, setOrderStatus] = useState(constants.PENDDING)

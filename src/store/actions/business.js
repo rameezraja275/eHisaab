@@ -48,7 +48,7 @@ export function businessModify(body) {
         // console.log(res.data)
         const business = data;
 
-        console.log("logo", res.data.data)
+        console.log("logo", res.data)
         business &&
           dispatch({
             type: ACTION.BUSINESS_GET_SUCCESS,

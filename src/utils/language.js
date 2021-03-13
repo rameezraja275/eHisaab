@@ -291,7 +291,17 @@ const urdu = {
   ONLINE_STORE_NAME: "",
   OPEN_IMAGE_PICKER: "تصویری گیلری",
   OPEN_CAMERA: "کیمرا کھلا",
-  SELECT: "منتخب کریں"
+  SELECT: "منتخب کریں",
+
+  COMPLETE: "مکمل",
+  DISPATCH: "روانہ",
+  DISPATCH_ORDER: 'روانہ',
+  COMPLETE_ORDER: "مکمل",
+  PENDING: "زیر غور",
+  ACCEPTED: "منظورشد",
+  ACTIVATE_STORE: "اپنے آن لائن اسٹور",
+  NOW: " کو چالو کریں",
+  ONLINE_STORE_SETTING: "آن لائن اسٹور کی ترتیب"
 
 };
 
@@ -552,14 +562,14 @@ const english = {
   COMINGSOON: 'COMING SOON',
 
   STORE: 'Store',
-  EDIT_BUSSINESS_INFO: 'Edit Bussiness info',
+  EDIT_BUSSINESS_INFO: 'Edit Bussiness Info',
   ADD_PRODUCTS_STORE: 'Add products to store',
   ADD_TO_STORE: 'Add to store',
   DISPLAY_IN_STORE: 'Display in online store',
   OPEN_SALE: 'Open Sale',
   STORE_NAME: 'Store name',
   CATEGORY: 'Category',
-  ORDERS: 'Orders',
+  ORDERS: 'Online Order(s)',
   REJECT_ORDER: 'Reject order',
   ACCEPT_ORDER: 'Accept order',
   NON_INVENTORY_SALE_ALRET: 'No items in cart. This sale will not change inventory',
@@ -587,8 +597,13 @@ const english = {
   COMPLETE_ORDER: "Complete order",
   PENDING: "Pending",
   ACCEPTED: "Accepted",
-  ACTIVATE_STORE: "Activate your",
-  NOW: "Online Store Now"
+  ACTIVATE_STORE: "Activate your store",
+  NOW: "Online Store Now",
+  ONLINE_STORE_SETTING: "Online Store Setting",
+
+  PRODUCT_NAME: "Product",
+  CUSTOMER_NAME: "Customer",
+  ORDERS_DETAIL: "Online order_DETAI"
 };
 
 export const getTranslation = (label, language) => {

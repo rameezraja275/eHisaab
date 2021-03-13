@@ -74,57 +74,57 @@ const OrderDetails = (props) => {
     return props.loading.status ? (
         <Loader size={10} />
     ) : (
-            <View style={styles.MainContainer}>
-                <View style={styles.infobox}>
-                    <InfoCard
-                        title="NAME"
-                        value={order.buyer_name}
-                    />
-                    <InfoCard title="ADDRESS" value={order.buyer_adress} />
-                    {order.status == "1" && <InfoCard title="PHONE" value={order.buyer_phone} />}
-                    <ActionCard
-                        orderDispatch={order.status == constants.ACCEPT ? onDispatch : undefined}
-                        orderComplete={order.status == constants.DISPATCH ? onComplete : undefined}
-                        orderAccept={order.status == constants.PENDDING ? onAccept : undefined}
-                        orderReject={order.status == constants.PENDDING ? onReject : undefined}
-                        phoneNumber={order.status != constants.PENDDING ? order.buyer_phone : undefined}
-                        messageText={""}
-                    />
-                </View>
-
-                <View style={styles.table}>
-                    <View style={styles.head}>
-                        <Text style={[styles.col, styles.alignText, { flex: 1 }]}>
-                            {getTranslation("NAME", language)}
-                        </Text>
-                        <Text style={[styles.col, styles.alignText, { flex: 1 }]}>
-                            {getTranslation("QTY", language)}
-                        </Text>
-                    </View>
-
-                    <FlatList
-                        ListEmptyComponent={<EmptyList message="No Products." />}
-                        data={props.orderDetails}
-                        keyExtractor={(item) => item.id}
-                        refreshControl={
-                            <RefreshControl refreshing={false} onRefresh={reload} />
-                        }
-                        renderItem={({ item }) => {
-                            return (
-                                <TouchableOpacity style={styles.item} >
-                                    <Text style={[styles.col, { flex: 1 }]}>
-                                        {item.product_name}
-                                    </Text>
-                                    <Text style={[styles.col, { flex: 1 }]}>
-                                        {item.qty}
-                                    </Text>
-                                </TouchableOpacity>
-                            );
-                        }}
-                    />
-                </View>
+        <View style={styles.MainContainer}>
+            <View style={styles.infobox}>
+                <InfoCard
+                    title="CUSTOMER_NAME"
+                    value={order.buyer_name}
+                />
+                <InfoCard title="ADDRESS" value={order.buyer_adress} />
+                {order.status == "1" && <InfoCard title="PHONE" value={order.buyer_phone} />}
+                <ActionCard
+                    orderDispatch={order.status == constants.ACCEPT ? onDispatch : undefined}
+                    orderComplete={order.status == constants.DISPATCH ? onComplete : undefined}
+                    orderAccept={order.status == constants.PENDDING ? onAccept : undefined}
+                    orderReject={order.status == constants.PENDDING ? onReject : undefined}
+                    phoneNumber={order.status != constants.PENDDING ? order.buyer_phone : undefined}
+                    messageText={""}
+                />
             </View>
-        );
+
+            <View style={styles.table}>
+                <View style={styles.head}>
+                    <Text style={[styles.col, styles.alignText, { flex: 4 }]}>
+                        {getTranslation("PRODUCT_NAME", language)}
+                    </Text>
+                    <Text style={[styles.col, styles.alignText, { flex: 1 }]}>
+                        {getTranslation("QTY", language)}
+                    </Text>
+                </View>
+
+                <FlatList
+                    ListEmptyComponent={<EmptyList message="No Products." />}
+                    data={props.orderDetails}
+                    keyExtractor={(item) => item.id}
+                    refreshControl={
+                        <RefreshControl refreshing={false} onRefresh={reload} />
+                    }
+                    renderItem={({ item }) => {
+                        return (
+                            <TouchableOpacity style={styles.item} >
+                                <Text style={[styles.col, { flex: 4 }]}>
+                                    {item.product_name}
+                                </Text>
+                                <Text style={[styles.col, { flex: 1 }]}>
+                                    {item.qty}
+                                </Text>
+                            </TouchableOpacity>
+                        );
+                    }}
+                />
+            </View>
+        </View>
+    );
 };
 
 const getStyles = ({ language, URDU }) =>

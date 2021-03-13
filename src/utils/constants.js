@@ -6,7 +6,7 @@ export default {
   CUSTOMER_CARE_NUMBER: "+923489913964",
   CUSTOMER_CARE_EMAIL: "info@pine-technologies.com",
   PLAY_STORE_LINK: "com.pinetechnologies.ehisaab",
-  EHISAAB_URL: "https:ehisaab.app",
+  EHISAAB_URL: "https://ehisaab.app",
   TERMS_URL: "https://www.pine-technologies.com/ehisaab/terms-of-use",
   PAYMENT_URL: "https://www.pine-technologies.com/ehisaab/payments/",
 

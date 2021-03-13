@@ -56,7 +56,7 @@ const Store_StackNavigator = createStackNavigator({
   OrderDetails: {
     screen: OrderDetails,
     navigationOptions: ({ navigation }) => ({
-      title: <HeaderTitle title="ORDERS" />,
+      title: <HeaderTitle title="ORDERS_DETAIL" />,
 
       headerStyle: {
         backgroundColor: colors.darkColor,

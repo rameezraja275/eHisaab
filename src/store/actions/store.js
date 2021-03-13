@@ -94,6 +94,8 @@ export function addProductsToStore(products) {
             type: ACTION.LOADING,
         });
 
+        console.log("products", products)
+
         axios
             .post(`${API.BASE_URL}${API.STORE_ADD_PRODUCTS}`, data, { headers })
             .then((res) => {
