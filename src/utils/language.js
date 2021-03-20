@@ -119,7 +119,7 @@ const urdu = {
   COST_PRICE: 'لاگت کی قیمت',
 
   ADD_Product_Service: 'پروڈکٹ / سروس شامل کریں',
-  Update_Product_Service: 'پروڈکٹ / سروس کو اپ ڈیٹ کریں',
+  UPDATE_PRODUCT_SERVICE: 'پروڈکٹ / سروس کو اپ ڈیٹ کریں',
   TOTAL_AMOUNT: 'کل رقم',
   DISCOUNT: 'چھوٹ',
   NET_AMOUNT: 'اصل رقم',
@@ -301,7 +301,11 @@ const urdu = {
   ACCEPTED: "منظورشد",
   ACTIVATE_STORE: "اپنے آن لائن اسٹور",
   NOW: " کو چالو کریں",
-  ONLINE_STORE_SETTING: "آن لائن اسٹور کی ترتیب"
+  ONLINE_STORE_SETTING: "آن لائن اسٹور کی ترتیب",
+
+  PRODUCT_NAME: "پروڈکٹ",
+  CUSTOMER_NAME: "صارف",
+  ORDERS_DETAIL: "Online order details"
 
 };
 
@@ -467,7 +471,7 @@ const english = {
   ADD_SUPPLIER: 'Add Supplier',
   UPDATE_SUPPLIER: 'Update Supplier',
 
-  PASSWORD_CPASSWORD_SAME: 'Password and Confirm Password Should be Same',
+  PASSWORD_CPASSWORD_SAME: 'Password donot match',
   ENTER_SECURE_PASSWORD:
     'Password Should contain [1-9] [a-z] and should be 8 letters long',
   SALE_REPORT: 'Sale Report',
@@ -603,7 +607,7 @@ const english = {
 
   PRODUCT_NAME: "Product",
   CUSTOMER_NAME: "Customer",
-  ORDERS_DETAIL: "Online order_DETAI"
+  ORDERS_DETAIL: "Online order details"
 };
 
 export const getTranslation = (label, language) => {

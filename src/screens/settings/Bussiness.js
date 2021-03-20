@@ -46,7 +46,7 @@ const Bussiness = (props) => {
   const onSubmit = () => {
 
     const { name, store_name, category_id, is_store } = formData;
-    if (name == null || name == "" || (is_store == "1" && store_name == null || category_id == "" || category_id == null || category_id == 0)) {
+    if (name == null || name == "" || (is_store == "1" && store_name == null || store_name == "" || category_id == "" || category_id == null || category_id == 0)) {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     }
     else {
@@ -55,7 +55,7 @@ const Bussiness = (props) => {
   };
 
   const validateStoreName = (text) => {
-    if (validateAlphaNumaric(text)) {
+    if (validateAlphaNumaric(text) || text == "") {
       setFormData({ ...formData, store_name: text })
     }
   }

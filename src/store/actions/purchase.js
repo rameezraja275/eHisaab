@@ -360,7 +360,7 @@ export function addItemToPurchase(item) {
   return (dispatch, getState) => {
     const store = getState();
     const { purchaseCart } = store.purchase;
-
+    const language = store.common.language;
     let newItem = null;
 
     const updatedCart = purchaseCart.filter((cartItem) => {
@@ -392,5 +392,6 @@ export function addItemToPurchase(item) {
         totalItem: updatedCart.length,
       },
     });
+    ShowFlash("ADDED_TO_CART", "success", language);
   };
 }
