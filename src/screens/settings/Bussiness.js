@@ -44,12 +44,17 @@ const Bussiness = (props) => {
   }, []);
 
   const onSubmit = () => {
-
+    console.log(formData)
+    console.log(formData.is_store == "1" && store_name == null || store_name == "" || category_id == "" || category_id == null || category_id == 0)
     const { name, store_name, category_id, is_store } = formData;
-    if (name == null || name == "" || (is_store == "1" && store_name == null || store_name == "" || category_id == "" || category_id == null || category_id == 0)) {
+    if (name == null || name == "") {
       ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language);
     }
-    else {
+    else if (is_store == "1") {
+      if (store_name == null || store_name == "" || category_id == "" || category_id == null || category_id == 0) { ShowFlash("ENTER_REQUIRED_FIELDS", "danger", props.language); } else {
+        props.businessModify(formData);
+      }
+    } else {
       props.businessModify(formData);
     }
   };

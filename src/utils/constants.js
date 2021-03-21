@@ -1,5 +1,5 @@
 export default {
-  VERSION: "2.0.0",
+  VERSION: "2.0.1",
   APP_NAME: "eHisaab",
   OFFICE_ADDRESS: "ZS Plaza Jutial, Gilgit, Pakistan",
   POWERED_BY: "Pine Technologies (Pvt) Ltd",
