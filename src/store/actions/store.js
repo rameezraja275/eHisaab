@@ -27,7 +27,7 @@ export function getStoreProducts(productId, limit = {
         const storeProducts = start == 0 ? [] : getState().store.products
 
         let url = `${API.BASE_URL}${API.STORE_PRODUCT_GET_URL}?token=${token}&product_id=${productId}&limit=${end}&offset=${start}`;
-
+        console.log("dayta", url)
         axios
             .get(url, { headers })
             .then((res) => {
@@ -50,7 +50,6 @@ export function getStoreProducts(productId, limit = {
                         payload: true
                     })
                 }
-
                 dispatch({
                     payload: [...storeProducts, ...res.data.data],
                     type: ACTION.STORE_PRODUCT_GET_SUCCESS,
@@ -94,7 +93,6 @@ export function addProductsToStore(products) {
             type: ACTION.LOADING,
         });
 
-        console.log("products", products)
 
         axios
             .post(`${API.BASE_URL}${API.STORE_ADD_PRODUCTS}`, data, { headers })

@@ -35,9 +35,6 @@ const Orders = ({ navigation, getOrders, loading, language, orders, isLoadMore }
         getOrders(0, defaultLimit, orderStatus, searchKey)
     }
 
-
-    console.log(orderStatus)
-
     const prevStart = usePrevious(limit.start);
     useEffect(() => {
         if (limit.start != prevStart) {
@@ -65,7 +62,6 @@ const Orders = ({ navigation, getOrders, loading, language, orders, isLoadMore }
                 end: 20,
             };
             setLimit(defaultLimit);
-            console.log(text)
             getOrders(0, defaultLimit, orderStatus, text)
         }
     }

@@ -52,9 +52,7 @@ const Store = ({ bussiness, navigation, getStoreProducts, storeProducts, loading
 
     const prevStart = usePrevious(limit.start);
     useEffect(() => {
-        console.log("pagination", limit.start, prevStart)
         if (limit.start != prevStart) {
-            console.log("calling api")
             isLoadMore && getStoreProducts(0, limit)
         }
     }, [limit]);

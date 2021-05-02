@@ -43,11 +43,10 @@ export function getSaleTransactions(
     let date = filter.date.toISOString().split("T")[0];
 
     const url = `${API.BASE_URL}${API.SALE_GET_URL}?token=${token}&sale_id=${id}&trans_date=${date}&filter_type=${filter.filter_type}`;
-    console.log("url", url)
+
     axios
       .get(url, { headers })
       .then((res) => {
-        console.log("Dakle", res.data)
         if (id > 0) {
           const {
             sale_date,
@@ -72,7 +71,6 @@ export function getSaleTransactions(
             },
           });
 
-          console.log("data", res.data.data[0])
 
           dispatch({
             type: ACTION.SALE_DEATILS,
@@ -106,7 +104,6 @@ export function getSaleTransactions(
         });
       })
       .catch((err) => {
-        console.log(err.response)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

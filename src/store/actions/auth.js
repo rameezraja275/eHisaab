@@ -130,12 +130,9 @@ export function signin(body) {
     });
 
     const language = getState().common.language;
-
-    console.log("this", `${API.BASE_URL}${API.LOGIN_URL}`, body)
     axios
       .post(`${API.BASE_URL}${API.LOGIN_URL}`, body, { headers })
       .then(async (res) => {
-        console.log("mai hu na")
 
         const token_expiry = res.data.data.token_expiry
         const token = res.data.data.token;
@@ -149,7 +146,6 @@ export function signin(body) {
           logo: bussiness.logo == "" ? null : bussiness.logo,
         };
 
-        console.log("business login", business)
         dispatch({
           type: ACTION.TOKEN_EXPIRY,
           payload: token_expiry,
@@ -194,7 +190,6 @@ export function signin(body) {
         navigation(userStatus, dispatch);
       })
       .catch((err) => {
-        console.log("err", err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

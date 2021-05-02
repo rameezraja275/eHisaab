@@ -44,7 +44,6 @@ export function productCreate(body) {
     axios
       .post(`${API.BASE_URL}${API.PRODUCT_CREATE_URL}`, data, { headers })
       .then((res) => {
-        console.log("ya", res.data)
         products.unshift(res.data.data[0]);
         dispatch({
           payload: products,
@@ -62,7 +61,6 @@ export function productCreate(body) {
         ShowFlash("ADD_SUCCESS", "success", language);
       })
       .catch((err) => {
-        console.log(err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
@@ -266,6 +264,7 @@ export function productGet(productId) {
         });
       })
       .catch((err) => {
+        console.log(err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {

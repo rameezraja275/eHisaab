@@ -39,16 +39,11 @@ export function businessModify(body) {
       type: ACTION.LOADING,
     });
 
-    console.log(data)
     axios
       .post(`${API.BASE_URL}${API.BUSINESS_MODIFY_URL}`, data, { headers })
       .then(async (res) => {
-        // await AsyncStorage.setItem('bussiness', JSON.stringify(data))
-        // const business = JSON.parse( await AsyncStorage.getItem('bussiness') )
-        // console.log(res.data)
         const business = data;
 
-        console.log("logo", res.data)
         business &&
           dispatch({
             type: ACTION.BUSINESS_GET_SUCCESS,
@@ -68,7 +63,6 @@ export function businessModify(body) {
       })
       .catch((err) => {
         if (err.response) {
-          console.log(err.response.data)
           ShowFlash(err.response.data.message, "danger", language);
         } else {
           ShowFlash("SERVER_ERROR", "danger", language);

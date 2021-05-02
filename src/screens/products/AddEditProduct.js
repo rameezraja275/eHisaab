@@ -51,8 +51,6 @@ const AddEditProduct = (props) => {
       });
   }, []);
 
-  console.log("asd", formData)
-
   const onSubmit = () => {
     let {
       product_name,
@@ -115,7 +113,6 @@ const AddEditProduct = (props) => {
     return bussiness_is_store == "1" && formData.is_in_store != "0"
   }
 
-  console.log("as", bussiness_is_store)
 
   return (
     <KeyboardAvoidingView
@@ -125,135 +122,135 @@ const AddEditProduct = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-          <ScrollView
-            style={{ flex: 1 }}
-            keyboardDismissMode={"on-drag"}
-            keyboardShouldPersistTaps={"handled"}
-          >
-            <View style={styles.Form}>
-              <TextInput
-                value={formData.product_name}
-                onChange={(text) =>
-                  setFormData({ ...formData, product_name: text })
-                }
-                placeholder="NAME"
-                required
-                autoCapitalize="sentences"
-              />
-              <Picker
-                placeholder="TYPE"
-                options={type}
-                value={formData.is_service}
-                type="is_service"
-                required
-                onChange={(text) =>
-                  setFormData({ ...formData, is_service: text })
-                }
-              />
+        <ScrollView
+          style={{ flex: 1 }}
+          keyboardDismissMode={"on-drag"}
+          keyboardShouldPersistTaps={"handled"}
+        >
+          <View style={styles.Form}>
+            <TextInput
+              value={formData.product_name}
+              onChange={(text) =>
+                setFormData({ ...formData, product_name: text })
+              }
+              placeholder="NAME"
+              required
+              autoCapitalize="sentences"
+            />
+            <Picker
+              placeholder="TYPE"
+              options={type}
+              value={formData.is_service}
+              type="is_service"
+              required
+              onChange={(text) =>
+                setFormData({ ...formData, is_service: text })
+              }
+            />
 
-              {barcode ? <Overlay
-                toggleFilter={() => { scanned ? undefined : showBarCode(!barcode) }}
-                title="BARCODE_READER">
-                <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
-              </Overlay> : <View />}
+            {barcode ? <Overlay
+              toggleFilter={() => { scanned ? undefined : showBarCode(!barcode) }}
+              title="BARCODE_READER">
+              <BarCodeScanner scanned={scanned} setScanned={setScanned} onScan={(text) => { setFormData({ ...formData, product_code: text }) }} size="sm" />
+            </Overlay> : <View />}
 
 
-              <TextInput
-                value={formData.product_cost_price}
-                onChange={(text) =>
-                  setFormData({ ...formData, product_cost_price: text })
-                }
-                keyboardType={"number-pad"}
-                placeholder="PURCHAE_PRICE"
-                required
-              />
+            <TextInput
+              value={formData.product_cost_price}
+              onChange={(text) =>
+                setFormData({ ...formData, product_cost_price: text })
+              }
+              keyboardType={"number-pad"}
+              placeholder="PURCHAE_PRICE"
+              required
+            />
 
-              <TextInput
-                value={formData.product_sale_price}
-                onChange={(text) =>
-                  setFormData({ ...formData, product_sale_price: text })
-                }
-                keyboardType={"number-pad"}
-                placeholder="SALE_PRICE"
-                required
-              />
+            <TextInput
+              value={formData.product_sale_price}
+              onChange={(text) =>
+                setFormData({ ...formData, product_sale_price: text })
+              }
+              keyboardType={"number-pad"}
+              placeholder="SALE_PRICE"
+              required
+            />
 
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                <View style={{ flex: 0.9 }}>
-                  <TextInput
-                    value={formData.product_code}
-                    onChange={(text) =>
-                      setFormData({ ...formData, product_code: text })
-                    }
-                    keyboardType={"number-pad"}
-                    placeholder="BAR_CODE"
-                  />
-                </View>
-                <TouchableOpacity onPress={() => { showBarCode(true) }}  >
-                  <Icon
-                    name={"scan1"}
-                    size={30}
-                  // color={colors.darkColor}
-
-                  />
-                </TouchableOpacity>
-
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+              <View style={{ flex: 0.9 }}>
+                <TextInput
+                  value={formData.product_code}
+                  onChange={(text) =>
+                    setFormData({ ...formData, product_code: text })
+                  }
+                  keyboardType={"number-pad"}
+                  placeholder="BAR_CODE"
+                />
               </View>
+              <TouchableOpacity onPress={() => { showBarCode(true) }}  >
+                <Icon
+                  name={"scan1"}
+                  size={30}
+                // color={colors.darkColor}
+
+                />
+              </TouchableOpacity>
+
+            </View>
 
 
 
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
-                {bussiness_is_store == "1" ? <CheckBox
-                  title={getTranslation("DISPLAY_IN_STORE", props.language)}
-                  checked={formData.is_in_store == "0" ? false : true}
-                  checkedColor={colors.darkColor}
-                  iconRight
-                  onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "2" : "0" })}
-                /> : <View />}
-
-                <View style={{ flex: 1 }}>
-                  {formData.is_service == constants.PRODUCT ? (
-                    <TextInput
-                      keyboardType={"number-pad"}
-                      placeholder="OPENING_STOCK"
-                      value={formData.opening_stock}
-                      disabled={FormType == "edit" ? true : false}
-                      onChange={(text) =>
-                        setFormData({ ...formData, opening_stock: text })
-                      }
-                    />
-                  ) : <View />}
-                </View>
-              </View>
-
-
-
-
-              {showStoreSetting() ? <TextInput
-                value={formData.narration}
-                onChange={(text) => setFormData({ ...formData, narration: text })}
-                placeholder="DESCRIPTION"
-                autoCapitalize="sentences"
-                maxLength={150}
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
+              {bussiness_is_store == "1" ? <CheckBox
+                title={getTranslation("DISPLAY_IN_STORE", props.language)}
+                checked={formData.is_in_store == "0" ? false : true}
+                checkedColor={colors.darkColor}
+                iconRight
+                onPress={() => setFormData({ ...formData, is_in_store: formData.is_in_store === "0" ? "2" : "0" })}
               /> : <View />}
 
-
-              {showStoreSetting() ?
-                <ImagerPicker
-                  onChangeImage={(image) =>
-                    setFormData({ ...formData, image_url: image.base64 })
-                  }
-                  placeholder="IMAGE"
-                  image={formData.image_url}
-                /> : <View />}
-            </View>
-            <View style={styles.Button}>
               <View style={{ flex: 1 }}>
-                <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+                {formData.is_service == constants.PRODUCT ? (
+                  <TextInput
+                    keyboardType={"number-pad"}
+                    placeholder="OPENING_STOCK"
+                    value={formData.opening_stock}
+                    disabled={FormType == "edit" ? true : false}
+                    onChange={(text) =>
+                      setFormData({ ...formData, opening_stock: text })
+                    }
+                  />
+                ) : <View />}
               </View>
             </View>
-          </ScrollView>
-        )}
+
+
+
+
+            {showStoreSetting() ? <TextInput
+              value={formData.narration}
+              onChange={(text) => setFormData({ ...formData, narration: text })}
+              placeholder="DESCRIPTION"
+              autoCapitalize="sentences"
+              maxLength={150}
+            /> : <View />}
+
+
+            {showStoreSetting() ?
+              <ImagerPicker
+                onChangeImage={(image) =>
+                  setFormData({ ...formData, image_url: image.base64 })
+                }
+                placeholder="IMAGE"
+                image={formData.image_url}
+              /> : <View />}
+          </View>
+          <View style={styles.Button}>
+            <View style={{ flex: 1 }}>
+              <Button title={"SAVE"} onClick={onSubmit} icon="save" />
+            </View>
+          </View>
+        </ScrollView>
+      )}
     </KeyboardAvoidingView>
   );
 };
