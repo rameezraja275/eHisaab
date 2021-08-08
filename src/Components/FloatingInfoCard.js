@@ -16,7 +16,7 @@ const FloatingInfoCard = ({ title, language, value, color, position }) => {
       //   alignContent: "center",
       justifyContent: "center",
       //   width: title ? "auto" : 60,
-      height: 20,
+      // height: 20,
     },
     container: {
       paddingRight: title ? 20 : 0,

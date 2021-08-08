@@ -81,13 +81,13 @@ const Customer = (props) => {
       {props.loading.status ? (
         <Loader size={10} />
       ) : (
-          <React.Fragment>
-            <SearchBar
-              {...props}
-              onChange={onSearch}
-              toggleFilter={() => setState({ ...state, showOverlay: true })}
-            />
-            {/* 
+        <React.Fragment>
+          <SearchBar
+            {...props}
+            onChange={onSearch}
+            toggleFilter={() => setState({ ...state, showOverlay: true })}
+          />
+          {/* 
           <OptionsAction
             status={options}
             close={showOptions}
@@ -95,78 +95,78 @@ const Customer = (props) => {
             onSelect={() => props.navigation.navigate("ReceiptCustomer")}
           /> */}
 
-            {state.showOverlay && (
-              <Overlay
-                toggleFilter={() => setState({ ...state, showOverlay: false })}
-                title="FILTERS"
-              >
-                <Filters
-                  onPress={(text) => {
-                    setState({ ...state, showOverlay: false, filterType: text });
-                  }}
-                  filterType={state.filterType}
-                />
-              </Overlay>
-            )}
+          {state.showOverlay && (
+            <Overlay
+              toggleFilter={() => setState({ ...state, showOverlay: false })}
+              title="FILTERS"
+            >
+              <Filters
+                onPress={(text) => {
+                  setState({ ...state, showOverlay: false, filterType: text });
+                }}
+                filterType={state.filterType}
+              />
+            </Overlay>
+          )}
 
-            <FlatList
-              ListEmptyComponent={<EmptyList message="No Customers." />}
-              data={state.filteredData}
-              refreshControl={
-                <RefreshControl refreshing={false} onRefresh={reload} />
-              }
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => {
-                const color =
-                  item.current_balance >= 0 ? colors.success : colors.danger;
-                return (
-                  <ListItemContainer
-                    onClick={() =>
-                      props.navigation.navigate("ViewCustomer", {
-                        customer: item,
-                        id: item.id,
-                        color: color,
-                      })
-                    }
-                  >
-                    <View style={{ flex: 0.7 }}>
-                      <Text style={{ fontFamily: "PrimaryFont", fontSize: 17 }}>
-                        {item.customer_name}
-                      </Text>
-                      <Text style={{ fontFamily: "PrimaryFont" }}>
-                        {item.customer_address}
-                      </Text>
-                      <Text style={{ fontFamily: "PrimaryFont" }}>
-                        {item.customer_phone}
-                      </Text>
-                    </View>
+          <FlatList
+            ListEmptyComponent={<EmptyList message="No Customers." />}
+            data={state.filteredData}
+            refreshControl={
+              <RefreshControl refreshing={false} onRefresh={reload} />
+            }
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              const color =
+                item.current_balance >= 0 ? colors.success : colors.danger;
+              return (
+                <ListItemContainer
+                  onClick={() =>
+                    props.navigation.navigate("ViewCustomer", {
+                      customer: item,
+                      id: item.id,
+                      color: color,
+                    })
+                  }
+                >
+                  <View style={{ flex: 0.7 }}>
+                    <Text style={{ fontFamily: "PrimaryFont", fontSize: 17 }}>
+                      {item.customer_name}
+                    </Text>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {item.customer_address}
+                    </Text>
+                    <Text style={{ fontFamily: "PrimaryFont" }}>
+                      {item.customer_phone}
+                    </Text>
+                  </View>
 
-                    <View style={{ flex: 0.3 }}>
-                      <Text style={{ color: color, fontFamily: "PrimaryFont" }}>
-                        {FormatPrice(item.current_balance)}
-                      </Text>
-                    </View>
-                  </ListItemContainer>
-                );
-              }}
-            />
-            <FloatingInfoCard
-              title="TOTAL"
-              value={total}
-              color={
-                total == 0
-                  ? colors.darkColor
-                  : total > 0
-                    ? colors.success
-                    : colors.danger
-              }
-            />
-            <FloatingButton
-              onClick={() => props.navigation.navigate("AddCustomer")}
-              icon="plus"
-            />
-          </React.Fragment>
-        )}
+                  <View style={{ flex: 0.3 }}>
+                    <Text style={{ color: color, fontFamily: "PrimaryFont" }}>
+                      {FormatPrice(item.current_balance)}
+                    </Text>
+                  </View>
+                </ListItemContainer>
+              );
+            }}
+          />
+          <FloatingInfoCard
+            title="TOTAL"
+            value={total}
+            color={
+              total == 0
+                ? colors.darkColor
+                : total > 0
+                  ? colors.success
+                  : colors.danger
+            }
+          />
+          <FloatingButton
+            onClick={() => props.navigation.navigate("AddCustomer")}
+            icon="plus"
+          />
+        </React.Fragment>
+      )}
     </View>
   );
 };

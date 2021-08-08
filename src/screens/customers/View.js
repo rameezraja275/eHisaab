@@ -50,118 +50,127 @@ const ViewCustomer = (props) => {
     props.getCustomerTransactionHistory(customer.id, filter);
   };
 
+  const navigateOnLedgerDetailClicked = (item) => {
+    if (item.module_id === "3") {
+      props.navigation.navigate("SaleDetailedReport", { sale: { ...item, sale_date: item.transaction_date, id: item.ref_id } })
+    } else if (item.loan_given == "1") {
+      props.navigation.navigate("EditCustomerLoan", { customer, transaction: item })
+    }
+  }
+
   const Transaction = props.transaction;
 
   return props.loading.status ? (
     <Loader size={10} />
   ) : (
-      <View style={styles.MainContainer}>
-        <View style={styles.infobox}>
-          <InfoCard
-            title="BALANCE"
-            value={FormatPrice(customer.current_balance)}
-            color={color}
-          />
-          <InfoCard title="ADDRESS" value={customer.customer_address} />
-          <InfoCard title="PHONE_NUMBER" value={customer.customer_phone} />
-          <ActionCard
-            openAdjustAmount={() => { props.navigation.navigate("AddCustomerLoan", { customer }) }}
-            messageText={
-              customer.current_balance > 0
-                ?
-                `Hi ${customer.customer_name}, ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
-                `Your payment of ${FormatPrice(customer.current_balance)} is due, Please make a payment.${String.fromCharCode(10)}` +
-                `Thank you. ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
-                `Powered by eHisaab.${String.fromCharCode(10)}` +
-                `Product by Pine Technologies`
-                : "Hello!"
-            }
-            phoneNumber={customer.customer_phone}
-            toggleFilter={() => setOverlay(true)}
-            date={
-              filter.filter_type == "1"
-                ? filter.date.toDateString()
-                : `${filter.date.getMonth() + 1} / ${filter.date.getFullYear()}`
-            }
-          />
-        </View>
-
-        {overlayStatus && (
-          <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
-            <Filters
-              data={filter}
-              setDate={(text) => {
-                setFilter({ ...filter, date: text });
-              }}
-              onSubmit={() => {
-                setOverlay(false);
-                props.getCustomerTransactionHistory(customer.id, filter);
-              }}
-              setType={(text) => setFilter({ ...filter, filter_type: text })}
-            />
-          </Overlay>
-        )}
-
-        <OptionsAction
-          status={options}
-          close={showOptions}
-          title="DELETE"
-          onSelect={onDelete}
-          danger={true}
+    <View style={styles.MainContainer}>
+      <View style={styles.infobox}>
+        <InfoCard
+          title="BALANCE"
+          value={FormatPrice(customer.current_balance)}
+          color={color}
         />
-
-        <View style={styles.table}>
-          <View style={styles.head}>
-            <Text style={[styles.col, styles.alignText]}>
-              {getTranslation("DATE", language)}
-            </Text>
-            <Text style={[styles.col, styles.alignText, { flex: 0.4 }]}>
-              {getTranslation("DESCRIPTION", language)}
-            </Text>
-            <Text style={[styles.col, styles.alignText]}>
-              {getTranslation("BALANCE", language)}
-            </Text>
-          </View>
-
-          <FlatList
-            ListEmptyComponent={<EmptyList message="No Transactions Yet." />}
-            data={Transaction}
-            keyExtractor={(item) => item.id}
-            refreshControl={
-              <RefreshControl refreshing={false} onRefresh={reload} />
-            }
-            renderItem={({ item }) => {
-              const { dr, cr } = item;
-              const Balance = dr == "0" ? (cr == "0" ? 0 : cr) : dr;
-              const color =
-                dr == "0"
-                  ? cr == "0"
-                    ? colors.success
-                    : colors.danger
-                  : colors.success;
-              return (
-                <TouchableOpacity style={styles.item} onPress={() => { item.loan_given == "1" && props.navigation.navigate("EditCustomerLoan", { customer, transaction: item }) }} >
-                  <Text style={styles.col}>
-                    {FormatDate(item.transaction_date)}
-                  </Text>
-                  <Text style={[styles.col, { flex: 0.4 }]}>
-                    {item.narration}
-                  </Text>
-                  <Text style={[styles.col, { color }]}>
-                    {FormatPrice(Balance)}
-                  </Text>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </View>
-
-        <FloatingButton
-          onClick={() => props.navigation.navigate("EditCustomer", { customer })}
-          icon="edit"
+        <InfoCard title="ADDRESS" value={customer.customer_address} />
+        <InfoCard title="PHONE_NUMBER" value={customer.customer_phone} />
+        <ActionCard
+          openAdjustAmount={() => { props.navigation.navigate("AddCustomerLoan", { customer }) }}
+          messageText={
+            customer.current_balance > 0
+              ?
+              `Hi ${customer.customer_name}, ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
+              `Your payment of ${FormatPrice(customer.current_balance)} is due, Please make a payment.${String.fromCharCode(10)}` +
+              `Thank you. ${String.fromCharCode(10)}${String.fromCharCode(10)}` +
+              `Powered by eHisaab.${String.fromCharCode(10)}` +
+              `Product by Pine Technologies`
+              : "Hello!"
+          }
+          phoneNumber={customer.customer_phone}
+          toggleFilter={() => setOverlay(true)}
+          date={
+            filter.filter_type == "1"
+              ? filter.date.toDateString()
+              : `${filter.date.getMonth() + 1} / ${filter.date.getFullYear()}`
+          }
         />
       </View>
-    );
+
+      {overlayStatus && (
+        <Overlay toggleFilter={() => setOverlay(false)} title="FILTERS">
+          <Filters
+            data={filter}
+            setDate={(text) => {
+              setFilter({ ...filter, date: text });
+            }}
+            onSubmit={() => {
+              setOverlay(false);
+              props.getCustomerTransactionHistory(customer.id, filter);
+            }}
+            setType={(text) => setFilter({ ...filter, filter_type: text })}
+          />
+        </Overlay>
+      )}
+
+      <OptionsAction
+        status={options}
+        close={showOptions}
+        title="DELETE"
+        onSelect={onDelete}
+        danger={true}
+      />
+
+      <View style={styles.table}>
+        <View style={styles.head}>
+          <Text style={[styles.col, styles.alignText]}>
+            {getTranslation("DATE", language)}
+          </Text>
+          <Text style={[styles.col, styles.alignText, { flex: 0.4 }]}>
+            {getTranslation("DESCRIPTION", language)}
+          </Text>
+          <Text style={[styles.col, styles.alignText]}>
+            {getTranslation("BALANCE", language)}
+          </Text>
+        </View>
+
+        <FlatList
+          ListEmptyComponent={<EmptyList message="No Transactions Yet." />}
+          data={Transaction}
+          keyExtractor={(item) => item.id}
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={reload} />
+          }
+          renderItem={({ item }) => {
+            const { dr, cr } = item;
+            const Balance = dr == "0" ? (cr == "0" ? 0 : cr) : dr;
+            const color =
+              dr == "0"
+                ? cr == "0"
+                  ? colors.success
+                  : colors.danger
+                : colors.success;
+            return (
+              <TouchableOpacity style={styles.item} onPress={() => { navigateOnLedgerDetailClicked(item) }} >
+                {/* <TouchableOpacity style={styles.item} onPress={() => { item.loan_given == "1" && props.navigation.navigate("EditCustomerLoan", { customer, transaction: item }) }} ></TouchableOpacity> */}
+                <Text style={styles.col}>
+                  {FormatDate(item.transaction_date)}
+                </Text>
+                <Text style={[styles.col, { flex: 0.4 }]}>
+                  {item.narration}
+                </Text>
+                <Text style={[styles.col, { color }]}>
+                  {FormatPrice(Balance)}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </View>
+
+      <FloatingButton
+        onClick={() => props.navigation.navigate("EditCustomer", { customer })}
+        icon="edit"
+      />
+    </View>
+  );
 };
 
 const getStyles = ({ language, URDU }) =>

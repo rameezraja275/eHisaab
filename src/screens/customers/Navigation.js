@@ -7,6 +7,7 @@ import AddEditForm from "./AddEditCustomer";
 import colors from "../../utils/colors";
 import ViewCustomer from "../../screens/customers/View";
 import HeaderOptions from "../../Components/HeaderOptions";
+import SaleDetails from "../reports/SaleDetail";
 // import CustomerReceipt from "./Receipt";
 // import AddEditReceipt from "./AddEditRecepit";
 // import PDFScreen from "./ReceiptPDF";
@@ -93,7 +94,17 @@ const Customers_StackNavigator = createStackNavigator({
       headerTintColor: colors.white,
     }),
   },
+  SaleDetailedReport: {
+    screen: SaleDetails,
+    navigationOptions: ({ navigation }) => ({
+      title: <HeaderTitle title="SALE_DETAIL" />,
 
+      headerStyle: {
+        backgroundColor: colors.darkColor,
+      },
+      headerTintColor: colors.white,
+    }),
+  },
 
 });
 

@@ -12,7 +12,8 @@
     "bundlerelease": "cd android && ./gradlew bundleRelease",
     "runrelease": "react-native run-android --variant=release",
     "clean": "cd android && ./gradlew clean",
-    "upgrade": "react-native upgrade"
+    "upgrade": "react-native upgrade",
+    "debug": "react-native run-android --verbose && yarn run start"
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "2.4.0",
@@ -28,13 +29,13 @@
     "expo-image-picker": "8.4.0",
     "expo-permissions": "9.0.1",
     "expo-print": "9.0.1",
-    "expo-secure-store": "9.0.1",
+    "expo-secure-store": "^10.2.0",
     "expo-sharing": "8.2.1",
     "expo-splash-screen": "^0.5.0",
     "expo-updates": "~0.2.10",
-    "react": "~16.11.0",
+    "react": "17.0.1",
     "react-dom": "16.13.1",
-    "react-native": "~0.62.2",
+    "react-native": "0.64.2",
     "react-native-a-beep": "^1.0.6",
     "react-native-autocomplete-input": "^4.2.0",
     "react-native-elements": "1.2.7",
@@ -73,5 +74,5 @@
   },
   "private": true,
   "name": "ehisaab",
-  "version": "2.0.0"
+  "version": "2.0.2"
 }

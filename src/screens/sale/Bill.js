@@ -147,6 +147,8 @@ const Bill = (props) => {
         </div>
     </body></html>`;
 
+  console.log("bill", BillHTML);
+
   return (<React.Fragment>{props.loading.status ?
     <Loader size={10} /> :
     <PDF html={BillHTML} />}

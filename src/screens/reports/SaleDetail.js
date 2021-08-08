@@ -22,6 +22,7 @@ const SaleDetail = (props) => {
     paid_amount,
     sale_discount,
   } = navigation.state.params.sale;
+
   useEffect(() => {
     saleDetail(id);
   }, []);
@@ -34,13 +35,13 @@ const SaleDetail = (props) => {
     <Loader size={10} />
   ) : (
     <View style={styles.MainContainer}>
-      <View style={styles.infobox}>
+      {saleDetailReport.summary && <View style={styles.infobox}>
         <InfoCard title="NAME" value={customer_name} />
-        <InfoCard title="DATE" value={FormatDate(sale_date)} />
-        <InfoCard title="PRICE" value={FormatPrice(sale_amount)} />
-        <InfoCard title="DISCOUNT" value={FormatPrice(sale_discount)} />
-        <InfoCard title="PAID" value={FormatPrice(paid_amount)} />
-      </View>
+        <InfoCard title="DATE" value={FormatDate(saleDetailReport?.summary?.sale_date)} />
+        <InfoCard title="PRICE" value={FormatPrice(saleDetailReport?.summary?.sale_amount)} />
+        <InfoCard title="DISCOUNT" value={FormatPrice(saleDetailReport?.summary?.sale_discount)} />
+        <InfoCard title="PAID" value={FormatPrice(saleDetailReport?.summary?.paid_amount)} />
+      </View>}
 
       <View style={styles.head}>
         <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
@@ -49,17 +50,17 @@ const SaleDetail = (props) => {
         <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
           {getTranslation("QUANTITY", language)}
         </Text>
-        <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+        {/* <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
           {getTranslation("PURCHASE", language)}
-        </Text>
-        <Text style={{ flex: 0.2, fontFamily: "PrimaryFont" }}>
+        </Text> */}
+        <Text style={{ flex: 0.4, fontFamily: "PrimaryFont" }}>
           {getTranslation("SALE", language)}
         </Text>
       </View>
 
       <FlatList
         ListEmptyComponent={<EmptyList />}
-        data={saleDetailReport}
+        data={saleDetailReport.products}
         keyExtractor={(item) => item.product_id}
         refreshControl={
           <RefreshControl refreshing={false} onRefresh={reload} />
@@ -71,10 +72,10 @@ const SaleDetail = (props) => {
                 {item.product_name}
               </Text>
               <Text style={styles.col}>{item.qty_out}</Text>
-              <Text style={styles.col}>
+              {/* <Text style={styles.col}>
                 {FormatPrice(item.product_cost_price)}
-              </Text>
-              <Text style={styles.col}>
+              </Text> */}
+              <Text style={[styles.col, { flex: 0.4 }]}>
                 {FormatPrice(item.product_sale_price)}
               </Text>
             </View>

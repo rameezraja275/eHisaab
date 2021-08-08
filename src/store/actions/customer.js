@@ -294,7 +294,6 @@ export function getCustomerTransactionHistory(
     });
 
     let date = filter.date.toISOString().split("T")[0];
-
     axios
       .get(
         `${API.BASE_URL}${API.RECEIPT_GET_URL}?token=${token}&customer_id=${customerId}&trans_date=${date}&filter_type=${filter.filter_type}`,

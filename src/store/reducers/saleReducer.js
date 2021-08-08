@@ -35,7 +35,6 @@ const saleReducer = (state = initialState, { payload, type }) => {
         cartStatus: payload,
       };
     case ACTION.SALE_DEATILS:
-      console.log("this si data", payload)
       return {
         ...state,
         saleData: payload,

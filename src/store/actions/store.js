@@ -27,7 +27,6 @@ export function getStoreProducts(productId, limit = {
         const storeProducts = start == 0 ? [] : getState().store.products
 
         let url = `${API.BASE_URL}${API.STORE_PRODUCT_GET_URL}?token=${token}&product_id=${productId}&limit=${end}&offset=${start}`;
-        console.log("dayta", url)
         axios
             .get(url, { headers })
             .then((res) => {

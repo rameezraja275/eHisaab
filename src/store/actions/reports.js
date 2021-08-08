@@ -181,8 +181,7 @@ export function saleDetail(id) {
       type: ACTION.LOADING,
     });
 
-    let url = `${API.BASE_URL}${API.SALE_DETAILS}?token=${token}&sale_id=${id}`;
-
+    let url = `${API.BASE_URL}${API.SALE_DETAILS}?token=${token}&sale_id=${id}&new="new"`;
     axios
       .get(url, { headers })
       .then((res) => {

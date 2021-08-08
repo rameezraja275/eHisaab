@@ -264,7 +264,6 @@ export function productGet(productId) {
         });
       })
       .catch((err) => {
-        console.log(err)
         if (err.response) {
           ShowFlash(err.response.data.message, "danger", language);
         } else {
